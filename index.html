@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!-- Icons Material Desing -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <title>bitvoix.com</title>
+</head>
+
+<body>
+
+    <header class="bg-primary shadow">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="#"><img src="images/logo.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="form-inline mr-auto">
+
+                        <input type="text" class="form-control mr-sm-2" placeholder="Que recherchez-vous?"
+                            aria-label="Que recherchez-vous?">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fas fa-map-marker-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control mr-sm-2" placeholder="Localisation"
+                                aria-label="Localisation" aria-describedby="basic-addon1">
+                        </div>
+
+                        <button class="btn btn-outline-light" type="button" id="button-addon2"><i
+                                class="fas fa-search"></i></button>
+
+
+                    </form>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Catégories
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item active">
+                            <!--Modal: Se connecter-->
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLRForm">Se
+                                Connecter<span class="sr-only">(current)</span></a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+
+        <!--Modal: Se Connecter-->
+        <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog cascading-modal" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!-- Logo bitvoix -->
+                    <div class="text-center bg-primary py-4 shadow">
+                        <img src="images/logo.png" alt="">
+                    </div>
+
+                    <!--Modal cascading tabs-->
+                    <div class="modal-c-tabs">
+
+                        <!-- Nav tabs -->
+
+                        <ul class="nav nav-tabs md-tabs tabs-2 text-primary darken-3 justify-content-center"
+                            role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i
+                                        class="fas fa-user mr-1"></i>
+                                    Se Connecter</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i
+                                        class="fas fa-user-plus mr-1"></i>
+                                    S'inscrire</a>
+                            </li>
+                        </ul>
+
+
+                        <!-- Tab panels -->
+                        <div class="tab-content">
+                            <!--Panel 7-->
+                            <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+
+                                <!--Body-->
+                                <div class="modal-body mb-1">
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-envelope prefix"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" placeholder="Courriel"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-lock prefix"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Mot de passe"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-primary shadow">Se Connecter</button>
+                                    </div>
+
+                                    <p
+                                        class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-4">
+                                        ou connectez vous avec :</p>
+
+                                    <div class="row my-3 d-flex justify-content-center">
+                                        <!--Facebook-->
+                                        <button type="button" class="btn btn-primary btn-rounded mr-3 shadow btn-facebook"><img src="images/icono-facebook.jpg" id="i-facebook">  Facebook</button>
+                                        <!--Twitter-->
+                                        
+                                        <!--Google +-->
+                                        <button type="button" class="btn btn-primary shadow btn-google"><img src="images/icono-google.jpg" id="i-google"> Google</button>
+                                    </div>
+                                </div>
+                                <!--Footer-->
+                                <div class="modal-footer">
+                                    <div class="options text-center text-md-right mt-1">
+                                        <p>Vous n'avez pas de compte ? <a href="#" class="text-primary">S'inscrire</a>
+                                        </p>
+                                        <p><a href="#" class="text-primary">Mot de passe oublié ?</a></p>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary waves-effect ml-auto"
+                                        data-dismiss="modal">Fermer</button>
+                                </div>
+
+                            </div>
+                            <!--/.Panel 7-->
+
+                            <!--Panel 8-->
+                            <div class="tab-pane fade" id="panel8" role="tabpanel">
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-envelope prefix"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" placeholder="Courriel"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-lock prefix"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Mot de passe"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-lock prefix"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Confirmer le mot de passe"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="text-center form-sm mt-2">
+                                        <button class="btn btn-primary shadow">S'inscrire</button>
+                                    </div>
+
+                                    <p
+                                        class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-4">
+                                        ou connectez vous avec :</p>
+
+                                    <div class="row my-3 d-flex justify-content-center">
+                                        <!--Facebook-->
+                                        <button type="button" class="btn btn-primary btn-rounded mr-3 shadow btn-facebook"><img src="images/icono-facebook.jpg" id="i-facebook">  Facebook</button>
+                                        <!--Twitter-->
+                                        
+                                        <!--Google +-->
+                                        <button type="button" class="btn btn-primary shadow btn-google"><img src="images/icono-google.jpg" id="i-google"> Google</button>
+                                    </div>
+
+                                </div>
+                                <!--Footer-->
+                                <div class="modal-footer">
+                                    <div class="options text-right">
+                                        <p class="pt-1">Vous avez déjà un compte ? <a href="#" class="text-primary">Se
+                                                Connecter</a></p>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary waves-effect ml-auto"
+                                        data-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                            <!--/.Panel 8-->
+                        </div>
+
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+
+    </header>
+
+
+    <body>
+
+
+
+        <!-- Icons Services -->
+
+        <div class="container text-center mt-4">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-primary btn-lg rounded-circle"><i
+                            class="fas fa-car"></i></button>
+                    <a href="">AUTOS</a>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-warning btn-lg rounded-circle"><i
+                            class="fas fa-heartbeat"></i></button>
+                    <a href="">SANTE</a>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-success btn-lg rounded-circle"><i
+                            class="fas fa-utensils"></i></button>
+                    <a href="">GASTRONOMIE</a>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-danger btn-lg rounded-circle"><i
+                            class="fas fa-star"></i></button>
+                    <a href="">BEAUTÉ</a>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary btn-lg rounded-circle"><i
+                            class="fas fa-shopping-bag"></i></button>
+                    <a href="">PRODUITS</a>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-warning btn-lg rounded-circle"><i
+                            class="fas fa-plane"></i></button>
+                    <a href="">VOYAGES</a>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-success btn-lg rounded-circle"><i
+                            class="fas fa-home"></i></button>
+                    <a href="">MAISON</a>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-danger btn-lg rounded-circle"><i
+                            class="fas fa-pencil-alt"></i></button>
+                    <a href="">EDUCATION</a>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary btn-lg rounded-circle"><i
+                            class="fas fa-wrench"></i></button>
+                    <a href="">SERVICES</a>
+                </div>
+            </div>
+
+
+            <!-- Cards Services -->
+
+            <div class="row mt-2">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="images/auto.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                                of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </body>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
