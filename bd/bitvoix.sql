@@ -30,49 +30,6 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`categories` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `bitvoix`.`forfaits`
--- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS `bitvoix`.`forfaits` (
---   `idforfait` INT NOT NULL COMMENT 'Id de forfait',
---   `desforfait` VARCHAR(45) NOT NULL COMMENT 'Description de forfait',
---   `Valforfait` INT NOT NULL COMMENT 'Catégories par défaut à afficher à l\'accueille',
---   PRIMARY KEY (`idforfait`))
--- ENGINE = InnoDB;
-
--- http://www.atlas-monde.net/codes-iso/
--- -----------------------------------------------------
--- Table `bitvoix`.`villes`
--- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS `bitvoix`.`pays` (
---   `idPay` INT NOT NULL COMMENT 'Id de Pays',
---   `nomPay` VARCHAR(45) NOT NULL COMMENT 'Nom de pay',
---    PRIMARY KEY (`idPay`))
--- ENGINE = InnoDB;
-
-
--- https://fr.wikipedia.org/wiki/Liste_des_villes_du_Qu%C3%A9bec
--- -----------------------------------------------------
--- Table `bitvoix`.`villes`
--- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS `bitvoix`.`villes` (
---   `idVille` INT NOT NULL AUTO_INCREMENT COMMENT 'Id de ville',
---   `nomVille` VARCHAR(45) NOT NULL COMMENT 'Nom de ville',
---    `idPay`INT NOT NULL COMMENT 'Id de Pays',  
---    PRIMARY KEY (`idVille`),
---    CONSTRAINT `villPay`
---     FOREIGN KEY (`idPay`)
---     REFERENCES `bitvoix`.`pays` (`idPay`)
---    )
--- ENGINE = InnoDB;
-
-
-CREATE TABLE IF NOT EXISTS `bitvoix`.`villes` (
-  `idVille` INT NOT NULL AUTO_INCREMENT COMMENT 'Id de ville',
-  `nomVille` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom de ville',
-   PRIMARY KEY (`idVille`)
-  )
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -87,31 +44,40 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`membres` (
 ENGINE = InnoDB;
 
 
+ 
+CREATE TABLE IF NOT EXISTS `bitvoix`.`adresse` (
+  `idAdr` INT NOT NULL auto_increment COMMENT 'id Adresse',
+  `nroAdr` INT NOT NULL COMMENT 'Numéro civique',
+  `rueAdr` VARCHAR(40) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Rue de Addrese',
+  `desVilAdr` VARCHAR(20) NOT NULL COLLATE utf8_unicode_ci COMMENT 'La ville',
+  `codPosAdr` VARCHAR(6) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Le code postal',
+  PRIMARY KEY (`idAdr`))
+ENGINE = InnoDB;
+
+
 -- -----------------------------------------------------
 -- Table `bitvoix`.`fournisseur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitvoix`.`fournisseur` (
   `idFournisseur` INT NOT NULL auto_increment COMMENT 'code fournisseur',
   `nomFournisseur` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du fournisseur',
-  `adreFournisseur` VARCHAR(80) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Adresse du fournisseur',
+  `idAdr` INT NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Adresse du fournisseur',
   `cellFournisseur` VARCHAR(10) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Numéro de téléphone portable du fournisseur\n',
   `typeSerFournisseur` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Type de service   1 Personalisé  2. Agenda  3. Demande',
-  `codePosFournisseur` VARCHAR(6) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Numero de code postal',
   `idforfait` VARCHAR(1) NULL COLLATE utf8_unicode_ci   COMMENT 'Identifie le type de forfaits : 1. Base 2.Stantard 3.Premium',
   `datInsFournisseur` date NOT NULL COMMENT 'date d\'inscription',
   `datecheFournisseur` date NOT NULL  COMMENT 'date d\'échéance d\'inscription',
   `StatuFournisseur` VARCHAR(1) COLLATE utf8_unicode_ci  NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Status de Fournisseur',
   `longFournisseur` decimal(10,4) NOT NULL  COMMENT 'La Longitud geographique de Fournisseur',
   `latiFournisseur` decimal(10,4) NOT NULL  COMMENT 'La Latitud geographique de Fournisseur',
-  `idVille` INT NOT NULL COMMENT 'Id de ville',
   PRIMARY KEY (`idFournisseur`),
-   CONSTRAINT `fouvil`
-    FOREIGN KEY (`idVille`)
-    REFERENCES `bitvoix`.`villes` (`idVille`))
+   CONSTRAINT `fouadr`
+    FOREIGN KEY (`idAdr`)
+    REFERENCES `bitvoix`.`adresse` (`idAdr`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`fournisseur`
+-- Table `bitvoix`.`facture`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitvoix`.`facture` (
   `idFacture` INT NOT NULL AUTO_INCREMENT COMMENT 'code fournisseur',
@@ -129,7 +95,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`fournisseurService`
+-- Table `bitvoix`.`services`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitvoix`.`services` (
   `idService` INT NOT NULL AUTO_INCREMENT COMMENT 'code du service',
@@ -157,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`services` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`requete`
+-- Table `bitvoix`.`requetes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitvoix`.`requests` (
   `idRequest` INT NOT NULL auto_increment COMMENT 'Id du request',
@@ -181,7 +147,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`reference`
+-- Table `bitvoix`.`references`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitvoix`.`references` (
   `idReference` INT NOT NULL auto_increment COMMENT 'Id du references',
@@ -200,7 +166,9 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`references` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
+-- -----------------------------------------------------
+-- Table `bitvoix`.`connexions`
+-- -----------------------------------------------------
 
 CREATE TABLE `connexion` (
  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT ' Id user',
@@ -250,3 +218,6 @@ show grants for 'bitvoix'@'localhost';
 
 -- revoke all privileges, grant  option  from 'bitvoix'@'localhost';
 -- drop user 'bitvoix'@'localhost';
+
+
+
