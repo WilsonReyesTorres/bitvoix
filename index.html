@@ -85,9 +85,14 @@
             <div class="modal-dialog cascading-modal" role="document">
                 <!--Content-->
                 <div class="modal-content">
-                    <!-- Logo bitvoix -->
-                    <div class="text-center bg-primary py-4 shadow">
+                    <div class="modal-header bg-primary py-4 shadow">
+                        <!-- Logo bitvoix -->
+
                         <img src="images/logo.png" alt="">
+
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span class="text-white" aria-hidden="true">&times;</span>
+                        </button>
                     </div>
 
                     <!--Modal cascading tabs-->
@@ -156,16 +161,6 @@
                                                 src="images/icono-google.jpg" id="i-google"> Google</button>
                                     </div>
                                 </div>
-                                <!--Footer-->
-                                <div class="modal-footer">
-                                    <div class="options text-center text-md-right mt-1">
-                                        <p>Vous n'avez pas de compte ? <a href="#" class="text-primary">S'inscrire</a>
-                                        </p>
-                                        <p><a href="#" class="text-primary">Mot de passe oublié ?</a></p>
-                                    </div>
-                                    <button type="button" class="btn btn-outline-primary waves-effect ml-auto"
-                                        data-dismiss="modal">Fermer</button>
-                                </div>
 
                             </div>
                             <!--/.Panel 7-->
@@ -177,7 +172,25 @@
                                 <div class="modal-body">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"><i
+                                            <span class="input-group-text"><i
+                                                class="fas fa-user mr-1"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" placeholder="Prénom"
+                                            aria-label="Prenom" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i
+                                                class="fas fa-user mr-1"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" placeholder="Nom"
+                                            aria-label="Nom" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i
                                                     class="fas fa-envelope prefix"></i></span>
                                         </div>
                                         <input type="email" class="form-control" placeholder="Courriel"
@@ -186,7 +199,7 @@
 
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1"><i
+                                            <span class="input-group-text"><i
                                                     class="fas fa-lock prefix"></i></span>
                                         </div>
                                         <input type="password" class="form-control" placeholder="Mot de passe"
@@ -216,23 +229,14 @@
                                         <button type="button"
                                             class="btn btn-primary btn-rounded mr-3 shadow btn-facebook"><img
                                                 src="images/icono-facebook.jpg" id="i-facebook"> Facebook</button>
-                                        <!--Twitter-->
 
-                                        <!--Google +-->
+                                        <!--Google-->
                                         <button type="button" class="btn btn-primary shadow btn-google"><img
                                                 src="images/icono-google.jpg" id="i-google"> Google</button>
                                     </div>
 
                                 </div>
-                                <!--Footer Panel-->
-                                <div class="modal-footer">
-                                    <div class="options text-right">
-                                        <p class="pt-1">Vous avez déjà un compte ? <a href="#" class="text-primary">Se
-                                                Connecter</a></p>
-                                    </div>
-                                    <button type="button" class="btn btn-outline-primary waves-effect ml-auto"
-                                        data-dismiss="modal">Fermer</button>
-                                </div>
+
                             </div>
                             <!--/.Panel 8-->
                         </div>
@@ -322,7 +326,7 @@
 
         <!-- Cards Services -->
 
-        
+
 
 
 
