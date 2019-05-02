@@ -28,6 +28,7 @@
     <meta name="google-signin-client_id"
         content="356909246162-iuhl31i67gerbdope1224ug69e44l7pb.apps.googleusercontent.com">
     <script src="js/googleLogin.js"></script>
+    <script src="js/facebookLogin.js"></script>
     <script src="requetes/requetesMembres.js"></script>
     <script src="vues/vuesMembres.js"></script>
 
@@ -192,10 +193,7 @@
 
                                     <div class="row my-3 d-flex justify-content-center">
                                         <!--Facebook-->
-                                        <button type="button"
-                                            class="btn btn-primary btn-rounded mr-3 shadow btn-facebook"><img
-                                                src="images/icono-facebook.jpg" id="i-facebook"> Facebook</button>
-                                        <!--Twitter-->
+                                        <a href="javascript:void(0);" onclick="fbLogin()" id="fbLink"><img src="images/fblogin.png" height="30px" /></a>
 
                                         <!--Google +-->
                                         <div id="gSignIn"></div>

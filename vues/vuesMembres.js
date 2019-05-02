@@ -14,8 +14,7 @@ function menuMembre(membrePrenom) {
 }
 function menuConnexion() {
 	$('#loginDiv').removeClass("dropdown");
-	rep = '<a class="nav-link" href="#" data-toggle="modal" data-target="#modalLRForm">Se'+
-'Connecter<span class="sr-only">(current)</span></a>';
+	rep = '<a class="nav-link" href="#" data-toggle="modal" data-target="#modalLRForm">Se Connecter<span class="sr-only">(current)</span></a>';
 	$('#loginDiv').html(rep);
 }
 

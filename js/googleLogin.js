@@ -3,7 +3,7 @@ function renderButton() {
     gapi.signin2.render('gSignIn', {
         'scope': 'profile email',
         'width': 240,
-        'height': 50,
+        'height': 30,
         'longtitle': false,
         'theme': 'dark',
         'onsuccess': onSuccess,
