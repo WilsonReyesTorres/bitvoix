@@ -17,3 +17,21 @@
     background-color: #3b5998;
     border-color: #3b5998;
 }
+
+/* Cards Services */
+
+#card-services {
+    cursor: pointer;
+    overflow:hidden;
+}
+
+#card-services:hover img {
+    -ms-transform:scale(1.05);
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+}
+
+#card-services img {
+    -webkit-transition:all .4s linear;
+    transition:all .4s linear;
+    }
