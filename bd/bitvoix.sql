@@ -68,17 +68,17 @@ ENGINE = InnoDB;
 -- Table `bitvoix`.`fournisseur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitvoix`.`fournisseur` (
-  `idFournisseur` INT NOT NULL AUTO_INCREMENT COMMENT  'code fournisseur',
+  `idFournisseur` INT NOT NULL AUTO_INCREMENT COMMENT  'ID fournisseur',
   `nomFournisseur` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du fournisseur',
   `idAdrFournisseur` INT NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Adresse du fournisseur',
   `cellFournisseur` VARCHAR(10) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Numéro de téléphone portable du fournisseur\n',
-  `typeSerFournisseur` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Type de service   1 Personalisé  2. Agenda  3. Demande',
+  `typeSerFournisseur` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Type de service 1 Personalisé  2. Agenda  3. Demande',
   `idForfaitFournisseur` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci   COMMENT 'Identifie le type de forfaits : 1. Base 2.Stantard 3.Premium',
   `datInsFournisseur` DATE NOT NULL COMMENT 'date d\'inscription',
-  `datecheFournisseur` DATE NOT NULL  COMMENT 'date d\'échéance d\'inscription',
+  `datEcheFournisseur` DATE NOT NULL  COMMENT 'date d\'échéance d\'inscription',
   `statuFournisseur` VARCHAR(1) COLLATE utf8_unicode_ci  NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Status de Fournisseur',
-  `longFournisseur` DECIMAL(10,4) NOT NULL  COMMENT 'La Longitud geographique de Fournisseur',
-  `latiFournisseur` DECIMAL(10,4) NOT NULL  COMMENT 'La Latitud geographique de Fournisseur',
+  `longFournisseur` DECIMAL(12,6) NOT NULL  COMMENT 'La Longitud geographique de Fournisseur',
+  `latiFournisseur` DECIMAL(12,6) NOT NULL  COMMENT 'La Latitud geographique de Fournisseur',
   PRIMARY KEY (`idFournisseur`),
    CONSTRAINT `fouadr`
     FOREIGN KEY (`idAdrFournisseur`)
@@ -91,11 +91,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bitvoix`.`facture` (
   `idFacture` INT NOT NULL AUTO_INCREMENT COMMENT 'code fournisseur',
   `idFournisseur` INT NOT NULL COMMENT 'code fournisseur',
-  `idForfaitFournisseur` VARCHAR(1) NOT NULL COMMENT 'Identifie le type de forfaits : Base Stantard Premium',
-  `typeSerFournisseur` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Type de service   1 Personalisé  -- 2. Agenda  3. Demande',
-  `dateInsFournisseur` DATE NOT NULL COMMENT 'date d\'inscription',
-  `dateEcheFournisseur` DATE NOT NULL COMMENT 'date d\'échéance d\'inscription',
-  `nomRefFournisseur` VARCHAR(20) NOT NULL  COLLATE utf8_unicode_ci  COMMENT 'Nombre de référence Paypal',
+  `idForfaitFacture` VARCHAR(1) NOT NULL COMMENT 'Identifie le type de forfaits :1.Base 2.Stantard 3.Premium',
+  `typeSerFacture` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Type de service   1 Personalisé  -- 2. Agenda  3. Demande',
+  `dateInsFacture` DATE NOT NULL COMMENT 'date d\'inscription',
+  `dateEcheFacture` DATE NOT NULL COMMENT 'date d\'échéance d\'inscription',
+  `nomRefFacture` VARCHAR(20) NOT NULL  COLLATE utf8_unicode_ci  COMMENT 'Nombre de référence Paypal',
+  `statusFacture` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci  COMMENT ' Status 1.Actif 2. Annule  ',
   PRIMARY KEY (`idFacture`),
    CONSTRAINT `facfou`
     FOREIGN KEY (`idFournisseur`)
@@ -109,19 +110,20 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bitvoix`.`services` (
   `idService` INT NOT NULL AUTO_INCREMENT COMMENT 'code du service',
   `idFournisseur` INT NOT NULL COMMENT 'code fournisseur',
-  `desShortService` VARCHAR(12) NOT NULL  COLLATE utf8_unicode_ci COMMENT 'Courte description du service',
+  `titreService` VARCHAR(20) NOT NULL  COLLATE utf8_unicode_ci COMMENT 'Courte description du service',
+  `desShortService` VARCHAR(50) NOT NULL  COLLATE utf8_unicode_ci COMMENT 'Courte description du service',
   `desService` VARCHAR(250) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Description du service',
   `idCategorie` INT NOT NULL COMMENT 'Id Categorie FK', 
-  `ActService` INT NOT NULL COMMENT 'Sercive active',
+  `actService` INT NOT NULL COMMENT 'Sercive active  1 Actif 2 inactif',
   `prixService` DECIMAL(10,2) NOT NULL COMMENT 'prix du fournisseur',
   `promService` DECIMAL(10,2) NOT NULL COMMENT 'prix en promotion',
   `refeService` DECIMAL(10,2) NOT NULL COMMENT 'prix référé',
   `refeEfeService` INT  NOT NULL COMMENT 'Nombre de référé pour accèder à la  promotion',
-  `datlimfournisseur` DATE NOT NULL COMMENT 'Date limite de promotion',
-  `urlSerfournisseur` VARCHAR(200) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'URL de la photo qui correspond au service',
-  `AutSerfournisseur` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci COMMENT 'Autorizacion du service par bit-voix',
+  `datLimService` DATE NOT NULL COMMENT 'Date limite de promotion',
+  `pochetteService` VARCHAR(200) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Pochette de la photo qui correspond au service',
+  `autService` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci COMMENT ' 1 Autorisé 0 Autorisé Autorisation du service par bit-voix',
   PRIMARY KEY (`idService`),
-   CONSTRAINT `sercat`
+  CONSTRAINT `sercat`
     FOREIGN KEY (`idCategorie`)
     REFERENCES `bitvoix`.`categories` (`idCategorie`),
   CONSTRAINT `SerFour`
@@ -130,6 +132,8 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`services` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
 
 -- -----------------------------------------------------
 -- Table `bitvoix`.`requetes`
@@ -140,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`requests` (
   `idService` INT NOT NULL COMMENT 'Id du Service',
   `qualRequest` DECIMAL(3,1) NOT NULL COMMENT 'Score de qualité de service',
   `commRequest` VARCHAR(60) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Commentaires du client',
-  `statRequest` INT NOT NULL COMMENT 'Statut du request: 1. Ouvert, 2. fermé, ',
+  `statRequest` INT NOT NULL COMMENT 'Statut du request: 1. Ouvert, 2. fermé, 3. Annulé',
   `dateRequest` DATE NOT NULL COMMENT 'date de la requete',
   `cleSerRequest` VARCHAR(60) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'cLé du service',
   PRIMARY KEY (`idrequest`),
