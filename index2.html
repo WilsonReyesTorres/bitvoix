@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <!-- Icons Material Desing -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="css/styles.css" rel="stylesheet">
+
+    <title>bitvoix.com</title>
+    <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
+    <!--Specify your app's client ID-->
+    <meta name="google-signin-client_id"
+        content="356909246162-iuhl31i67gerbdope1224ug69e44l7pb.apps.googleusercontent.com">
+    <script src="js/googleLogin.js"></script>
+    <style>
+        .container {
+            padding: 20px;
+        }
+
+        .userContent {
+            padding: 10px 20px;
+            margin: auto;
+            width: 350px;
+            background-color: #F7F7F7;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        }
+
+        .userContent h3 {
+            font-size: 17px;
+        }
+
+        .userContent p {
+            font-size: 15px;
+        }
+
+        .userContent img {
+            max-width: 100%;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="bg-primary shadow">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <a class="navbar-brand" href="#"><img src="images/logo.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="form-inline mr-auto">
+
+                        <input type="text" class="form-control mr-sm-2" placeholder="Que recherchez-vous?"
+                            aria-label="Que recherchez-vous?">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fas fa-map-marker-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control mr-sm-2" placeholder="Localisation"
+                                aria-label="Localisation" aria-describedby="basic-addon1">
+                        </div>
+
+                        <button class="btn btn-outline-light" type="button" id="button-addon2"><i
+                                class="fas fa-search"></i></button>
+
+
+                    </form>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Catégories
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item active" id="loginDiv">
+                            <!--Modal: Se connecter-->
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLRForm">Se
+                                Connecter<span class="sr-only">(current)</span></a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+        </div>
+
+        <!--Modal: Se Connecter-->
+        <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog cascading-modal" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!-- Logo bitvoix -->
+                    <div class="text-center bg-primary py-4 shadow">
+                        <img src="images/logo.png" alt="">
+                    </div>
+
+                    <!--Modal cascading tabs-->
+                    <div class="modal-c-tabs">
+
+                        <!-- Nav tabs -->
+
+                        <ul class="nav nav-tabs md-tabs tabs-2 text-primary darken-3 justify-content-center"
+                            role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i
+                                        class="fas fa-user mr-1"></i>
+                                    Se Connecter</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i
+                                        class="fas fa-user-plus mr-1"></i>
+                                    S'inscrire</a>
+                            </li>
+                        </ul>
+
+
+                        <!-- Tab panels -->
+                        <div class="tab-content">
+                            <!--Panel 7-->
+                            <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+
+                                <!--Body-->
+                                <div class="modal-body mb-1">
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-envelope prefix"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" placeholder="Courriel"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-lock prefix"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Mot de passe"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-primary shadow">Se Connecter</button>
+                                    </div>
+
+                                    <p
+                                        class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-4">
+                                        ou connectez vous avec :</p>
+
+                                    <div class="row my-3 d-flex justify-content-center">
+                                        <!--Facebook-->
+                                        <button type="button"
+                                            class="btn btn-primary btn-rounded mr-3 shadow btn-facebook"><img
+                                                src="images/icono-facebook.jpg" id="i-facebook"> Facebook</button>
+                                        <!--Twitter-->
+
+                                        <!--Google +-->
+                                        <div id="gSignIn"></div>
+                                    </div>
+                                </div>
+                                <!--Footer-->
+                                <div class="modal-footer">
+                                    <div class="options text-center text-md-right mt-1">
+                                        <p>Vous n'avez pas de compte ? <a data-toggle="tab" href="#panel8" role="tab"
+                                                class="text-primary">S'inscrire</a>
+                                        </p>
+                                        <p><a href="#" class="text-primary">Mot de passe oublié ?</a></p>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary waves-effect ml-auto"
+                                        data-dismiss="modal">Fermer</button>
+                                </div>
+
+                            </div>
+                            <!--/.Panel 7-->
+
+                            <!--Panel 8-->
+                            <div class="tab-pane fade" id="panel8" role="tabpanel">
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-envelope prefix"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" placeholder="Courriel"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-lock prefix"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Mot de passe"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-lock prefix"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control"
+                                            placeholder="Confirmer le mot de passe" aria-label="Courriel"
+                                            aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="text-center form-sm mt-2">
+                                        <button class="btn btn-primary shadow">S'inscrire</button>
+                                    </div>
+
+                                    <p
+                                        class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-4">
+                                        ou connectez vous avec :</p>
+
+                                    <div class="row my-3 d-flex justify-content-center">
+                                        <!--Facebook-->
+                                        <button type="button"
+                                            class="btn btn-primary btn-rounded mr-3 shadow btn-facebook"><img
+                                                src="images/icono-facebook.jpg" id="i-facebook"> Facebook</button>
+                                        <!--Twitter-->
+
+                                        <!--Google +-->
+                                        <div id="gSignIn2"></div>
+                                    </div>
+
+                                </div>
+                                <!--Footer Panel-->
+                                <div class="modal-footer">
+                                    <div class="options text-right">
+                                        <p class="pt-1">Vous avez déjà un compte ? <a href="#" class="text-primary">Se
+                                                Connecter</a></p>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary waves-effect ml-auto"
+                                        data-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                            <!--/.Panel 8-->
+                        </div>
+
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+
+    </header>
+
+
+    <div class="container">
+        <!--Display Google sing-in button-->
+        <!-- Show the user profile details-->
+        <div class="userContent" style="display:none;"></div>
+
+    </div>
+
+
+
+
+
+
+
+    <!-- Icons Services -->
+
+    <div class="container text-center mt-4">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-primary btn-lg rounded-circle"><i class="fas fa-car"></i></button>
+                <a href="">Autos</a>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-warning btn-lg rounded-circle"><i
+                        class="fas fa-heartbeat"></i></button>
+                <a href="">Sante</a>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success btn-lg rounded-circle"><i
+                        class="fas fa-utensils"></i></button>
+                <a href="">Gastronomie</a>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-danger btn-lg rounded-circle"><i class="fas fa-star"></i></button>
+                <a href="">Beauté</a>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-primary btn-lg rounded-circle"><i
+                        class="fas fa-shopping-bag"></i></button>
+                <a href="">Produits</a>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-warning btn-lg rounded-circle"><i
+                        class="fas fa-plane"></i></button>
+                <a href="">Voyages</a>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success btn-lg rounded-circle"><i class="fas fa-home"></i></button>
+                <a href="">Maison</a>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-danger btn-lg rounded-circle"><i
+                        class="fas fa-pencil-alt"></i></button>
+                <a href="">Education</a>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-primary btn-lg rounded-circle"><i
+                        class="fas fa-wrench"></i></button>
+                <a href="">Services</a>
+            </div>
+        </div>
+
+
+        <!-- Cards Services -->
+
+        <div class="row mt-2">
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+
+                <!-- Card -->
+                <div class="card booking-card shadow">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/auto.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <!-- Title -->
+                        <h5 class="card-title font-weight-bold"><a>Auto Images</a></h5>
+
+                        <!-- Text -->
+                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <p class="text-muted">4.5 (413)</p>
+                            </li>
+                        </ul>
+                        <!-- <hr> -->
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <p class="card-text small text-muted pt-1">Montréal</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">160$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">120$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="chip text-primary font-weight-bold mr-0">99$</div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+
+                <!-- Card -->
+                <div class="card booking-card shadow">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/Vitrelux.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <!-- Title -->
+                        <h5 class="card-title font-weight-bold"><a>Vitrelux</a></h5>
+
+                        <!-- Text -->
+                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <p class="text-muted">4.5 (413)</p>
+                            </li>
+                        </ul>
+                        <!-- <hr> -->
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <p class="card-text small text-muted pt-1">Montréal</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">160$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">120$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="chip text-primary font-weight-bold mr-0">99$</div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+
+                <!-- Card -->
+                <div class="card booking-card shadow">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/Zükari.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <!-- Title -->
+                        <h5 class="card-title font-weight-bold"><a>Zükari</a></h5>
+
+                        <!-- Text -->
+                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <p class="text-muted">4.5 (413)</p>
+                            </li>
+                        </ul>
+                        <!-- <hr> -->
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <p class="card-text small text-muted pt-1">Montréal</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">160$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">120$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="chip text-primary font-weight-bold mr-0">99$</div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+
+                <!-- Card -->
+                <div class="card booking-card shadow">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/laforce_expedition.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <!-- Title -->
+                        <h5 class="card-title font-weight-bold"><a>Laforce Expedition</a></h5>
+
+                        <!-- Text -->
+                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <p class="text-muted">4.5 (413)</p>
+                            </li>
+                        </ul>
+                        <!-- <hr> -->
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <p class="card-text small text-muted pt-1">Montréal</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">160$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">120$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="chip text-primary font-weight-bold mr-0">99$</div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+
+                <!-- Card -->
+                <div class="card booking-card shadow">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/Ôzeu Déjeuner.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <!-- Title -->
+                        <h5 class="card-title font-weight-bold"><a>Ôzeu Déjeuner</a></h5>
+
+                        <!-- Text -->
+                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <p class="text-muted">4.5 (413)</p>
+                            </li>
+                        </ul>
+                        <!-- <hr> -->
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <p class="card-text small text-muted pt-1">Montréal</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">160$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">120$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="chip text-primary font-weight-bold mr-0">99$</div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+
+                <!-- Card -->
+                <div class="card booking-card shadow">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/Centre Harmonie Santé.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <!-- Title -->
+                        <h5 class="card-title font-weight-bold"><a>Centre Harmonie</a></h5>
+
+                        <!-- Text -->
+                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <p class="text-muted">4.5 (413)</p>
+                            </li>
+                        </ul>
+                        <!-- <hr> -->
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <p class="card-text small text-muted pt-1">Montréal</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">160$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">120$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="chip text-primary font-weight-bold mr-0">99$</div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+
+                <!-- Card -->
+                <div class="card booking-card shadow">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/Kart-O-Mania.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <!-- Title -->
+                        <h5 class="card-title font-weight-bold"><a>Kart-O-Mania</a></h5>
+
+                        <!-- Text -->
+                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <p class="text-muted">4.5 (413)</p>
+                            </li>
+                        </ul>
+                        <!-- <hr> -->
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <p class="card-text small text-muted pt-1">Montréal</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">160$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">120$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="chip text-primary font-weight-bold mr-0">99$</div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+
+                <!-- Card -->
+                <div class="card booking-card shadow">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/Photobook Canada.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <!-- Title -->
+                        <h5 class="card-title font-weight-bold"><a>Photobook Canada</a></h5>
+
+                        <!-- Text -->
+                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <p class="text-muted">4.5 (413)</p>
+                            </li>
+                        </ul>
+                        <!-- <hr> -->
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <p class="card-text small text-muted pt-1">Montréal</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">160$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <del class="chip mr-0 font-weight-bold text-muted">120$</del>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="chip text-primary font-weight-bold mr-0">99$</div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Fin Cards Services -->
+
+    </div>
+
+    <!-- Footer Index -->
+
+    <footer class="page-footer font-small text-white pt-4 mt-2 bg-primary">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+
+                    <!-- Content -->
+                    <!-- <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5> -->
+                    <a href="#"><img src="images/logo.png" alt=""></a>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit inventore repellat
+                        exercitationem quia at nesciunt magnam corporis laudantium adipisci!</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Entreprise</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white">À propos de bitvoix.com</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white">Carrière</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Contact</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white">info@bitvoix.com</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Plus</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white">Conditions Générales</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white">Politique de Confidentialité</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <hr>
+
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+            <li class="list-inline-item">
+                <h5 class="mb-1">Inscrivez-vous gratuitement</h5>
+            </li>
+            <li class="list-inline-item">
+                <a href="#!" class="btn btn-danger btn-rounded shadow" data-toggle="modal"
+                    data-target="#modalLRForm">S'inscrire!</a>
+            </li>
+        </ul>
+        <!-- Call to action -->
+
+        <hr>
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a href="https://www.facebook.com" target="_blank" class="btn-floating btn-fb mx-1 text-white">
+                    <i class="fab fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://www.twitter.com" target="_blank" class="btn-floating btn-tw mx-1 text-white">
+                    <i class="fab fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://www.instagram.com" target="_blank" class="btn-floating btn-instagram mx-1 text-white">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://www.linkedin.com" target="_blank" class="btn-floating btn-li mx-1 text-white">
+                    <i class="fab fa-linkedin-in"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="index.html" class="text-white"> www.bitvoix.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+    <!-- </footer> -->
+
+</body>
+
+
+<!-- Optional JavaScript -->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+</body>
+
+</html>
