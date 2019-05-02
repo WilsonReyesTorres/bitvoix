@@ -53,7 +53,7 @@
 <div id="title-sect">
 <h1>bitvoix<br> Data Dictionay</h1>
 <p>
-<em>2019-04-30</em>
+<em>2019-05-02</em>
 </p>
 <p class="proj-desc">
 <em></em>
@@ -236,7 +236,7 @@
     <td>code fournisseur</td>
 </tr>
 <tr>
-    <td>idForfaitFournisseur</td>
+    <td>idForfaitFacture</td>
     <td>VARCHAR(1)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -246,10 +246,10 @@
     <td>&nbsp;</td>
     <td class='attr'>&nbsp;</td>
     <td></td>
-    <td>Identifie le type de forfaits : Base Stantard Premium</td>
+    <td>Identifie le type de forfaits :1.Base 2.Stantard 3.Premium</td>
 </tr>
 <tr>
-    <td>typeSerFournisseur</td>
+    <td>typeSerFacture</td>
     <td>VARCHAR(1)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -262,7 +262,7 @@
     <td>Type de service   1 Personalisé  -- 2. Agenda  3. Demande</td>
 </tr>
 <tr>
-    <td>dateInsFournisseur</td>
+    <td>dateInsFacture</td>
     <td>DATE</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -275,7 +275,7 @@
     <td>date d'inscription</td>
 </tr>
 <tr>
-    <td>dateEcheFournisseur</td>
+    <td>dateEcheFacture</td>
     <td>DATE</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -288,7 +288,7 @@
     <td>date d'échéance d'inscription</td>
 </tr>
 <tr>
-    <td>nomRefFournisseur</td>
+    <td>nomRefFacture</td>
     <td>VARCHAR(20)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -299,6 +299,19 @@
     <td class='attr'>&nbsp;</td>
     <td></td>
     <td>Nombre de référence Paypal</td>
+</tr>
+<tr>
+    <td>statusFacture</td>
+    <td>VARCHAR(1)</td>
+    <td>&nbsp;</td>
+    <td>&#10004;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td class='attr'>&nbsp;</td>
+    <td></td>
+    <td> Status 1.Actif 2. Annule  </td>
 </tr>
 <table id='fournisseur'>
 <caption>fournisseur</caption>
@@ -327,7 +340,7 @@
     <td>&nbsp;</td>
     <td>&#10004;</td>
     <td></td>
-    <td>code fournisseur</td>
+    <td>ID fournisseur</td>
 </tr>
 <tr>
     <td>nomFournisseur</td>
@@ -379,7 +392,7 @@
     <td>&nbsp;</td>
     <td class='attr'>&nbsp;</td>
     <td></td>
-    <td>Type de service   1 Personalisé  2. Agenda  3. Demande</td>
+    <td>Type de service 1 Personalisé  2. Agenda  3. Demande</td>
 </tr>
 <tr>
     <td>idForfaitFournisseur</td>
@@ -408,7 +421,7 @@
     <td>date d'inscription</td>
 </tr>
 <tr>
-    <td>datecheFournisseur</td>
+    <td>datEcheFournisseur</td>
     <td>DATE</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -435,7 +448,7 @@
 </tr>
 <tr>
     <td>longFournisseur</td>
-    <td>DECIMAL(10,4)</td>
+    <td>DECIMAL(12,6)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
     <td>&nbsp;</td>
@@ -448,7 +461,7 @@
 </tr>
 <tr>
     <td>latiFournisseur</td>
-    <td>DECIMAL(10,4)</td>
+    <td>DECIMAL(12,6)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
     <td>&nbsp;</td>
@@ -778,7 +791,7 @@
     <td>&nbsp;</td>
     <td class='attr'>&nbsp;</td>
     <td></td>
-    <td>Statut du request: 1. Ouvert, 2. fermé, </td>
+    <td>Statut du request: 1. Ouvert, 2. fermé, 3. Annulé</td>
 </tr>
 <tr>
     <td>dateRequest</td>
@@ -849,8 +862,21 @@
     <td>code fournisseur</td>
 </tr>
 <tr>
+    <td>titreService</td>
+    <td>VARCHAR(20)</td>
+    <td>&nbsp;</td>
+    <td>&#10004;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td class='attr'>&nbsp;</td>
+    <td></td>
+    <td>Courte description du service</td>
+</tr>
+<tr>
     <td>desShortService</td>
-    <td>VARCHAR(12)</td>
+    <td>VARCHAR(50)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
     <td>&nbsp;</td>
@@ -888,7 +914,7 @@
     <td>Id Categorie FK</td>
 </tr>
 <tr>
-    <td>ActService</td>
+    <td>actService</td>
     <td>INT(11)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -898,7 +924,7 @@
     <td>&nbsp;</td>
     <td class='attr'>&nbsp;</td>
     <td></td>
-    <td>Sercive active</td>
+    <td>Sercive active  1 Actif 2 inactif</td>
 </tr>
 <tr>
     <td>prixService</td>
@@ -953,7 +979,7 @@
     <td>Nombre de référé pour accèder à la  promotion</td>
 </tr>
 <tr>
-    <td>datlimfournisseur</td>
+    <td>datLimService</td>
     <td>DATE</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -966,7 +992,7 @@
     <td>Date limite de promotion</td>
 </tr>
 <tr>
-    <td>urlSerfournisseur</td>
+    <td>pochetteService</td>
     <td>VARCHAR(200)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -976,10 +1002,10 @@
     <td>&nbsp;</td>
     <td class='attr'>&nbsp;</td>
     <td></td>
-    <td>URL de la photo qui correspond au service</td>
+    <td>Pochette de la photo qui correspond au service</td>
 </tr>
 <tr>
-    <td>AutSerfournisseur</td>
+    <td>autService</td>
     <td>VARCHAR(1)</td>
     <td>&nbsp;</td>
     <td>&#10004;</td>
@@ -989,7 +1015,7 @@
     <td>&nbsp;</td>
     <td class='attr'>&nbsp;</td>
     <td></td>
-    <td>Autorizacion du service par bit-voix</td>
+    <td> 1 Autorisé 0 Autorisé Autorisation du service par bit-voix</td>
 </tr>
 </table>
 </body>
