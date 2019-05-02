@@ -16,6 +16,7 @@ class Membre{
         if(!isset($this->db)){
             // Connect to the database
             $conn = new mysqli($this->dbHost, $this->dbUsername, $this->dbPassword, $this->dbName);
+            mysqli_set_charset($conn,"utf8");
             if($conn->connect_error){
                 die("Failed to connect with MySQL: " . $conn->connect_error);
             }else{

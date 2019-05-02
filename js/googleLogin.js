@@ -24,13 +24,16 @@ function onSuccess(googleUser) {
         });
         request.execute(function (resp) {
             // Display the user details
+
+            /*
             var profileHTML = 'Bonjour ' + resp.given_name +
                 '! <a href="javascript:void(0);" onclick="signOut();">Sign out</a>';
             document.getElementById("loginDiv").innerHTML = profileHTML;
 
             document.getElementById("gSignIn").style.display = "none";
-            //document.getElementsByClassName("userContent")[0].style.display = "block";
+            //document.getElementsByClassName("userContent")[0].style.display = "block";*/
             //Save user data
+            $('#modalLRForm').modal('hide');
             saveUserData(resp);
         });
     });
@@ -41,11 +44,26 @@ function onFailure(error) {
     alert(error);
 }
 // Save user data to the database
-function saveUserData(userData) {
-    $.post('serveur/userData.php', {
-        oauth_provider: 'google',
-        userData: JSON.stringify(userData)
-    });
+function saveUserData(membreData) {
+    $.ajax({
+        method: "POST",
+        url: "serveur/controleurMembres.php",
+        data: {
+            oauthProviderMembre: "google",
+            action: "loginOauth",
+            preNomMembre: membreData.given_name,
+            nomMembre: membreData.family_name,
+            courrielMembre: membreData.email,
+            oauthUidMembre: membreData.id
+        },
+        dataType: 'json',
+		success: function (message) {
+            vue('LoginOKJSON',message.msg);
+		},
+		fail: function () {
+			alert("Vous avez un GROS problème");
+		}
+    })
 }
 // Sign out the user
 function signOut() {

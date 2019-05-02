@@ -6,52 +6,52 @@ $formlogin = "";
 /*
 function login()
 {
-    session_start();
-    $sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
-    if (!empty($sessData['status']['msg'])) {
-        $statusMsg = $sessData['status']['msg'];
-        $statusMsgType = $sessData['status']['type'];
-        unset($_SESSION['sessData']['status']);
-    }
-        $formlogin = '<h2>Login to Your Account</h2>';
-        $formlogin .= !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : '';
-        $formlogin .= '<div class="regisFrm">
-        <form id="loginForm">
-            <input type="email" name="email" placeholder="EMAIL" required="">
-            <input type="password" name="password" placeholder="PASSWORD" required="">
-            <div class="send-button">
-                <input type="button" name="loginSubmit" value="LOGIN" onClick="requetes(\'loginSubmit\');">
-            </div>
-        </form>
-		<p>Don\'t have an account? <span class="lien" onClick="requetes(\'register\');">Register</span></p></div>';
-    
-    echo $formlogin;
+session_start();
+$sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
+if (!empty($sessData['status']['msg'])) {
+$statusMsg = $sessData['status']['msg'];
+$statusMsgType = $sessData['status']['type'];
+unset($_SESSION['sessData']['status']);
+}
+$formlogin = '<h2>Login to Your Account</h2>';
+$formlogin .= !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : '';
+$formlogin .= '<div class="regisFrm">
+<form id="loginForm">
+<input type="email" name="email" placeholder="EMAIL" required="">
+<input type="password" name="password" placeholder="PASSWORD" required="">
+<div class="send-button">
+<input type="button" name="loginSubmit" value="LOGIN" onClick="requetes(\'loginSubmit\');">
+</div>
+</form>
+<p>Don\'t have an account? <span class="lien" onClick="requetes(\'register\');">Register</span></p></div>';
+
+echo $formlogin;
 }
 function loginOK()
 {
-    session_start();
-    $sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
-    if (!empty($sessData['status']['msg'])) {
-        $statusMsg = $sessData['status']['msg'];
-        $statusMsgType = $sessData['status']['type'];
-        unset($_SESSION['sessData']['status']);
-    }
-    //if (!empty($sessData['membreLoggedIn']) && !empty($sessData['membreID'])) {
+session_start();
+$sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
+if (!empty($sessData['status']['msg'])) {
+$statusMsg = $sessData['status']['msg'];
+$statusMsgType = $sessData['status']['type'];
+unset($_SESSION['sessData']['status']);
+}
+//if (!empty($sessData['membreLoggedIn']) && !empty($sessData['membreID'])) {
 
-        $membre = new Membre();
-        $conditions['where'] = array(
-            'id' => $sessData['membreID'],
-        );
-        $conditions['return_type'] = 'single';
-        $membreData = $membre->getRows($conditions);
-        $formlogin = '<h2>Welcome ' . $membreData['first_name'] . '!</h2>
-    <span class="lien" onClick="requetes(\'logout\');">Logout</span>
-    <div class="regisFrm">
-        <p><b>Name: </b>' . $membreData['first_name'] . ' ' . $membreData['last_name'] . '</p>
-        <p><b>Email: </b>' . $membreData['email'] . '</p>
-	</div>';
-    //} 
-    echo $formlogin;
+$membre = new Membre();
+$conditions['where'] = array(
+'id' => $sessData['membreID'],
+);
+$conditions['return_type'] = 'single';
+$membreData = $membre->getRows($conditions);
+$formlogin = '<h2>Welcome ' . $membreData['first_name'] . '!</h2>
+<span class="lien" onClick="requetes(\'logout\');">Logout</span>
+<div class="regisFrm">
+<p><b>Name: </b>' . $membreData['first_name'] . ' ' . $membreData['last_name'] . '</p>
+<p><b>Email: </b>' . $membreData['email'] . '</p>
+</div>';
+//}
+echo $formlogin;
 }*/
 function logout()
 {
@@ -75,29 +75,29 @@ function logout()
 }
 /*function register()
 {
-    session_start();
-    $sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
-    if (!empty($sessData['status']['msg'])) {
-        $statusMsg = $sessData['status']['msg'];
-        $statusMsgType = $sessData['status']['type'];
-        unset($_SESSION['sessData']['status']);
-    }
-    $formlogin = '<h2>Create a New Account</h2>';
-    $formlogin .= !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : '';
-    $formlogin .= '<div class="regisFrm">
-            <form id="membreAccountReg">
-                <input type="text" name="first_name" placeholder="FIRST NAME" required="">
-                <input type="text" name="last_name" placeholder="LAST NAME" required="">
-                <input type="email" name="email" placeholder="EMAIL" required="">
-                <input type="password" name="password" placeholder="PASSWORD" required="">
-                <input type="password" name="confirm_password" placeholder="CONFIRM PASSWORD" required="">
-                <div class="send-button">
-                    <input type="button" name="signupSubmit" value="CREATE ACCOUNT" onClick="requetes(\'insertMembre\');">
-                </div>
-            </form>
-        </div>';
+session_start();
+$sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
+if (!empty($sessData['status']['msg'])) {
+$statusMsg = $sessData['status']['msg'];
+$statusMsgType = $sessData['status']['type'];
+unset($_SESSION['sessData']['status']);
+}
+$formlogin = '<h2>Create a New Account</h2>';
+$formlogin .= !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : '';
+$formlogin .= '<div class="regisFrm">
+<form id="membreAccountReg">
+<input type="text" name="first_name" placeholder="FIRST NAME" required="">
+<input type="text" name="last_name" placeholder="LAST NAME" required="">
+<input type="email" name="email" placeholder="EMAIL" required="">
+<input type="password" name="password" placeholder="PASSWORD" required="">
+<input type="password" name="confirm_password" placeholder="CONFIRM PASSWORD" required="">
+<div class="send-button">
+<input type="button" name="signupSubmit" value="CREATE ACCOUNT" onClick="requetes(\'insertMembre\');">
+</div>
+</form>
+</div>';
 
-    echo $formlogin;
+echo $formlogin;
 }*/
 function loginSubmit()
 {
@@ -120,8 +120,9 @@ function loginSubmit()
         if ($membreData) {
             $sessData['membreLoggedIn'] = true;
             $sessData['membreID'] = $membreData['idMembre'];
+            $sessData['oauth_provider'] = $membreData['oauth_provider'];
             $sessData['status']['type'] = 'success';
-            $sessData['status']['msg'] =  $membreData['preNomMembre'];
+            $sessData['status']['msg'] = $membreData['preNomMembre'];
         } else {
             $sessData['status']['type'] = 'error';
             $sessData['status']['msg'] = 'Courriel ou mot de passe erronés, veuillez réessayer.';
@@ -133,22 +134,61 @@ function loginSubmit()
     //store login status into the session
     $_SESSION['sessData'] = $sessData;
     $reponse = array(
-        'status'=>($sessData['status']['type'] == 'success') ? 'success' : 'error',
-        'msg'=>$sessData['status']['msg']);
+        'status' => ($sessData['status']['type'] == 'success') ? 'success' : 'error',
+        'msg' => $sessData['status']['msg']);
+    echo json_encode($reponse);
+}
+function loginOauth()
+{
+    if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+    //session_start();
+    $locationEnr = "";
+    $membre = new Membre();
+    $membreData = array(
+        'preNomMembre' => $_POST['preNomMembre'],
+        'nomMembre' => $_POST['nomMembre'],
+        'courrielMembre' => $_POST['courrielMembre'],
+        'oauthProviderMembre' => $_POST['oauthProviderMembre'],
+        'oauthUidMembre' => $_POST['oauthUidMembre'],
+    );
+
+    //insert membre data in the database
+
+    $insert = $membre->insert($membreData);
+    //set status based on data insert
+    if ($insert) {
+        $sessData['membreLoggedIn'] = true;
+        $sessData['membreID'] = $insert;
+        $sessData['oauth_provider'] = $membreData['oauthProviderMembre'];
+        $sessData['status']['type'] = 'success';
+        $sessData['status']['msg'] = $membreData['preNomMembre'];
+    } else {
+        $sessData['status']['type'] = 'error';
+        $sessData['status']['msg'] = 'Il y a eu un problème, SVP essayez plus tard.';
+    }
+
+    //store signup status into the session
+    $_SESSION['sessData'] = $sessData;
+//echo '<script>alert('.$sessData['status']['msg'].');</script>';
+    //On va essayer avec celle-ci
+    $reponse = array(
+        'status' => ($sessData['status']['type'] == 'success') ? 'success' : 'error',
+        'msg' => $sessData['status']['msg']);
     echo json_encode($reponse);
 }
 
-function validerLogin(){
-     //start session
-     if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
-     //session_start();
-     $sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
+function validerLogin()
+{
+    //start session
+    if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+    //session_start();
+    $sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
     if (!empty($sessData['status']['msg'])) {
         $statusMsg = $sessData['status']['msg'];
-        $statusMsgType = $sessData['status']['type']; 
+        $statusMsgType = $sessData['status']['type'];
         $reponse = array(
-            'status'=>($sessData['status']['type'] == 'success') ? 'success' : 'error',
-            'msg'=>$sessData['status']['msg']);
+            'status' => ($sessData['status']['type'] == 'success') ? 'success' : 'error',
+            'msg' => $sessData['status']['msg']);
         echo json_encode($reponse);
         //unset($_SESSION['sessData']['status']);
     }
@@ -168,7 +208,7 @@ function enregistrerMembre()
             $sessData['status']['type'] = 'error';
             $sessData['status']['msg'] = 'Les mots de passe ne correspondent pas';
         } else {
-            //Verifie si le membre existe dans la bd 
+            //Verifie si le membre existe dans la bd
             $prevCon['where'] = array('courrielMembre' => $_POST['courrielMembre']);
             $prevCon['return_type'] = 'count';
             $prevMembre = $membre->getRows($prevCon);
@@ -183,7 +223,7 @@ function enregistrerMembre()
                     'courrielMembre' => $_POST['courrielMembre'],
                     'motPasseMembre' => sha1($_POST['motPasseMembre']),
                     'oauthProviderMembre' => 'bitvoix',
-                    'oauthUidMembre' => random_int(100000000,999999999),
+                    'oauthUidMembre' => random_int(100000000, 999999999),
                 );
                 $insert = $membre->insert($membreData);
                 //set status based on data insert
@@ -203,10 +243,10 @@ function enregistrerMembre()
     //store signup status into the session
     $_SESSION['sessData'] = $sessData;
 //echo '<script>alert('.$sessData['status']['msg'].');</script>';
-//On va essayer avec celle-ci
+    //On va essayer avec celle-ci
     $reponse = array(
-        'status'=>($sessData['status']['type'] == 'success') ? 'success' : 'error',
-        'msg'=>$sessData['status']['msg']);
+        'status' => ($sessData['status']['type'] == 'success') ? 'success' : 'error',
+        'msg' => $sessData['status']['msg']);
     echo json_encode($reponse);
 }
 
@@ -224,5 +264,8 @@ switch ($action) {
         break;
     case 'validerLogin':
         validerLogin();
+        break;
+    case 'loginOauth':
+        loginOauth();
         break;
 }
