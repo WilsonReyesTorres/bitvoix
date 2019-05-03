@@ -62,7 +62,7 @@ function getFbUserData() {
                 .link + '">click to view profile</a></p>';*/
             $('#modalLRForm').modal('hide');
             // Save user data
-            saveUserData(response);
+            saveUserDataFacebook(response);
         });
 }
 
@@ -77,7 +77,7 @@ function fbLogout() {
 }
 
 // Save user data to the database
-function saveUserData(membreData) {
+function saveUserDataFacebook(membreData) {
     $.ajax({
         method: "POST",
         url: "serveur/controleurMembres.php",

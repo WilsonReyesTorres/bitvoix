@@ -106,4 +106,38 @@ class Membre{
             return false;
         }
     }
+
+
+    public function update($data= array(), $conditions= array()){
+        if(!empty($data) && is_array($data)){
+            $columns = '';
+            $values  = '';
+            $i = 0;
+            if(!array_key_exists('modifiedMembre',$data)){
+                $data['modifiedMembre'] = date("Y-m-d H:i:s");
+            }
+            $query = "UPDATE ".$this->userTbl." SET ";
+            foreach($data as $key=>$val){
+                $query .= " ".$key."='".$val."'";
+                if($i<(count($data)-1))
+                {
+                    $query .=' ,';
+                }
+                $i++;
+            }
+            if(array_key_exists("where",$conditions)){
+                $query .= ' WHERE ';
+                $i = 0;
+                foreach($conditions['where'] as $key => $value){
+                    $pre = ($i > 0)?' AND ':'';
+                    $query .= $pre.$key." = '".$value."'";
+                    $i++;
+                }
+            }
+            $update = $this->db->query($query);
+            return $update;
+        }else{
+            return false;
+        }
+    }
 }

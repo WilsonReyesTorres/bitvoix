@@ -34,7 +34,7 @@ function onSuccess(googleUser) {
             //document.getElementsByClassName("userContent")[0].style.display = "block";*/
             //Save user data
             $('#modalLRForm').modal('hide');
-            saveUserData(resp);
+            saveUserDataGoogle(resp);
         });
     });
 }
@@ -44,7 +44,7 @@ function onFailure(error) {
     alert(error);
 }
 // Save user data to the database
-function saveUserData(membreData) {
+function saveUserDataGoogle(membreData) {
     $.ajax({
         method: "POST",
         url: "serveur/controleurMembres.php",

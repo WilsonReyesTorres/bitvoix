@@ -2,57 +2,7 @@
 //require_once("../BD/connexion.inc.php");
 include_once '../librairie/membre.php';
 $rep = array();
-$formlogin = "";
-/*
-function login()
-{
-session_start();
-$sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
-if (!empty($sessData['status']['msg'])) {
-$statusMsg = $sessData['status']['msg'];
-$statusMsgType = $sessData['status']['type'];
-unset($_SESSION['sessData']['status']);
-}
-$formlogin = '<h2>Login to Your Account</h2>';
-$formlogin .= !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : '';
-$formlogin .= '<div class="regisFrm">
-<form id="loginForm">
-<input type="email" name="email" placeholder="EMAIL" required="">
-<input type="password" name="password" placeholder="PASSWORD" required="">
-<div class="send-button">
-<input type="button" name="loginSubmit" value="LOGIN" onClick="requetes(\'loginSubmit\');">
-</div>
-</form>
-<p>Don\'t have an account? <span class="lien" onClick="requetes(\'register\');">Register</span></p></div>';
 
-echo $formlogin;
-}
-function loginOK()
-{
-session_start();
-$sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
-if (!empty($sessData['status']['msg'])) {
-$statusMsg = $sessData['status']['msg'];
-$statusMsgType = $sessData['status']['type'];
-unset($_SESSION['sessData']['status']);
-}
-//if (!empty($sessData['membreLoggedIn']) && !empty($sessData['membreID'])) {
-
-$membre = new Membre();
-$conditions['where'] = array(
-'id' => $sessData['membreID'],
-);
-$conditions['return_type'] = 'single';
-$membreData = $membre->getRows($conditions);
-$formlogin = '<h2>Welcome ' . $membreData['first_name'] . '!</h2>
-<span class="lien" onClick="requetes(\'logout\');">Logout</span>
-<div class="regisFrm">
-<p><b>Name: </b>' . $membreData['first_name'] . ' ' . $membreData['last_name'] . '</p>
-<p><b>Email: </b>' . $membreData['email'] . '</p>
-</div>';
-//}
-echo $formlogin;
-}*/
 function logout()
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
@@ -73,32 +23,7 @@ function logout()
     echo $locationLogout;
 
 }
-/*function register()
-{
-session_start();
-$sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : '';
-if (!empty($sessData['status']['msg'])) {
-$statusMsg = $sessData['status']['msg'];
-$statusMsgType = $sessData['status']['type'];
-unset($_SESSION['sessData']['status']);
-}
-$formlogin = '<h2>Create a New Account</h2>';
-$formlogin .= !empty($statusMsg) ? '<p class="' . $statusMsgType . '">' . $statusMsg . '</p>' : '';
-$formlogin .= '<div class="regisFrm">
-<form id="membreAccountReg">
-<input type="text" name="first_name" placeholder="FIRST NAME" required="">
-<input type="text" name="last_name" placeholder="LAST NAME" required="">
-<input type="email" name="email" placeholder="EMAIL" required="">
-<input type="password" name="password" placeholder="PASSWORD" required="">
-<input type="password" name="confirm_password" placeholder="CONFIRM PASSWORD" required="">
-<div class="send-button">
-<input type="button" name="signupSubmit" value="CREATE ACCOUNT" onClick="requetes(\'insertMembre\');">
-</div>
-</form>
-</div>';
 
-echo $formlogin;
-}*/
 function loginSubmit()
 {
     //start session
@@ -118,11 +43,26 @@ function loginSubmit()
         $membreData = $membre->getRows($conditions);
         //set membre data and status based on login credentials
         if ($membreData) {
-            $sessData['membreLoggedIn'] = true;
-            $sessData['membreID'] = $membreData['idMembre'];
-            $sessData['oauth_provider'] = $membreData['oauth_provider'];
-            $sessData['status']['type'] = 'success';
-            $sessData['status']['msg'] = $membreData['preNomMembre'];
+            //Update membre
+            $membreUpd = array(
+                'oauthProviderMembre' => 'bitvoix',
+                'oauthUidMembre' => random_int(100000000, 999999999),
+            );
+            $conditions['where'] = array(
+                'idMembre' => $membreData['idMembre']);
+            $update = $membre->update($membreUpd, $conditions);
+            if ($update) {
+                $sessData['membreLoggedIn'] = true;
+                $sessData['membreId'] = $membreData['idMembre'];
+                $sessData['oauth_provider'] = $membreData['oauthProviderMembre'];
+                $sessData['status']['type'] = 'success';
+                $sessData['status']['msg'] = $membreData['preNomMembre'];
+            } else {
+                $sessData['status']['type'] = 'error';
+                $sessData['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
+            }
+
+            
         } else {
             $sessData['status']['type'] = 'error';
             $sessData['status']['msg'] = 'Courriel ou mot de passe erronés, veuillez réessayer.';
@@ -144,27 +84,54 @@ function loginOauth()
     //session_start();
     $locationEnr = "";
     $membre = new Membre();
-    $membreData = array(
-        'preNomMembre' => $_POST['preNomMembre'],
-        'nomMembre' => $_POST['nomMembre'],
-        'courrielMembre' => $_POST['courrielMembre'],
-        'oauthProviderMembre' => $_POST['oauthProviderMembre'],
-        'oauthUidMembre' => $_POST['oauthUidMembre'],
-    );
-
-    //insert membre data in the database
-
-    $insert = $membre->insert($membreData);
-    //set status based on data insert
-    if ($insert) {
-        $sessData['membreLoggedIn'] = true;
-        $sessData['membreID'] = $insert;
-        $sessData['oauth_provider'] = $membreData['oauthProviderMembre'];
-        $sessData['status']['type'] = 'success';
-        $sessData['status']['msg'] = $membreData['preNomMembre'];
+    //Verifie si le membre existe dans la bd
+    $prevCon['where'] = array('courrielMembre' => $_POST['courrielMembre']);
+    $prevCon['return_type'] = 'single';
+    //$prevCon['return_type'] = 'count';
+    $prevMembre = $membre->getRows($prevCon);
+    if ($prevMembre['idMembre'] != null) {
+        //Update membre
+        $membreData = array(
+            'oauthProviderMembre' => $_POST['oauthProviderMembre'],
+            'oauthUidMembre' => $_POST['oauthUidMembre'],
+        );
+        $conditions['where'] = array(
+            'idMembre' => $prevMembre['idMembre']);
+        $update = $membre->update($membreData, $conditions);
+        if ($update) {
+            $sessData['membreLoggedIn'] = true;
+            $sessData['membreID'] = $prevMembre['idMembre'];
+            $sessData['oauth_provider'] = $prevMembre['oauthProviderMembre'];
+            $sessData['status']['type'] = 'success';
+            $sessData['status']['msg'] = $prevMembre['preNomMembre'];
+        } else {
+            $sessData['status']['type'] = 'error';
+            $sessData['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
+        }
     } else {
-        $sessData['status']['type'] = 'error';
-        $sessData['status']['msg'] = 'Il y a eu un problème, SVP essayez plus tard.';
+
+        $membreData = array(
+            'preNomMembre' => $_POST['preNomMembre'],
+            'nomMembre' => $_POST['nomMembre'],
+            'courrielMembre' => $_POST['courrielMembre'],
+            'oauthProviderMembre' => $_POST['oauthProviderMembre'],
+            'oauthUidMembre' => $_POST['oauthUidMembre'],
+        );
+
+        //insert membre data in the database
+
+        $insert = $membre->insert($membreData);
+        //set status based on data insert
+        if ($insert) {
+            $sessData['membreLoggedIn'] = true;
+            $sessData['membreID'] = $insert;
+            $sessData['oauth_provider'] = $membreData['oauthProviderMembre'];
+            $sessData['status']['type'] = 'success';
+            $sessData['status']['msg'] = $membreData['preNomMembre'];
+        } else {
+            $sessData['status']['type'] = 'error';
+            $sessData['status']['msg'] = 'Il y a eu un problème, SVP essayez plus tard.';
+        }
     }
 
     //store signup status into the session
@@ -210,9 +177,29 @@ function enregistrerMembre()
         } else {
             //Verifie si le membre existe dans la bd
             $prevCon['where'] = array('courrielMembre' => $_POST['courrielMembre']);
-            $prevCon['return_type'] = 'count';
+            $prevCon['return_type'] = 'single';
+            //$prevCon['return_type'] = 'count';
             $prevMembre = $membre->getRows($prevCon);
-            if ($prevMembre > 0) {
+            var_dump($prevMembre);
+            if ($prevMembre['idMembre'] != null) {
+                //Update membre
+                $membreData = array(
+                    'preNomMembre' => $_POST['preNomMembre'],
+                    'nomMembre' => $_POST['nomMembre'],
+                    'motPasseMembre' => sha1($_POST['motPasseMembre']),
+                    'oauthProviderMembre' => 'bitvoix',
+                    'oauthUidMembre' => random_int(100000000, 999999999),
+                );
+                $conditions['where'] = array(
+                    'idMembre' => $prevMembre['idMembre']);
+                $update = $membre->update($membreData, $conditions);
+                if ($update) {
+                    $sessData['status']['type'] = 'success';
+                    $sessData['status']['msg'] = 'Connectez-vous avec votre courriel et mot de passe';
+                } else {
+                    $sessData['status']['type'] = 'error';
+                    $sessData['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
+                }
                 $sessData['status']['type'] = 'error';
                 $sessData['status']['msg'] = 'Le courriel est déjà utilisé, SVP utilise un autre courriel.';
             } else {
