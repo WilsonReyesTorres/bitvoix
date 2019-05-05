@@ -68,7 +68,7 @@ ENGINE = InnoDB;
 -- Table `bitvoix`.`fournisseur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitvoix`.`fournisseur` (
-  `idFournisseur` INT NOT NULL AUTO_INCREMENT COMMENT  'ID fournisseur',
+  `idFournisseur` INT NOT NULL COMMENT  'ID fournisseur',
   `nomFournisseur` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du fournisseur',
   `idAdrFournisseur` INT NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Adresse du fournisseur',
   `cellFournisseur` VARCHAR(10) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Numéro de téléphone portable du fournisseur\n',
@@ -82,7 +82,11 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`fournisseur` (
   PRIMARY KEY (`idFournisseur`),
    CONSTRAINT `fouadr`
     FOREIGN KEY (`idAdrFournisseur`)
-    REFERENCES `bitvoix`.`adresse` (`idAdr`))
+    REFERENCES `bitvoix`.`adresse` (`idAdr`),
+   CONSTRAINT `fourmem`
+    FOREIGN KEY (`idFournisseur`)
+    REFERENCES `bitvoix`.`membres` (`idMembre`))
+
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -213,6 +217,46 @@ show grants for 'bitvoix'@'localhost';
 
 -- revoke all privileges, grant  option  from 'bitvoix'@'localhost';
 -- drop user 'bitvoix'@'localhost';
-INSERT INTO adresse(nroAdr, rueAdr, desVilAdr, codPosAdr) values (2222,'Place','Montreal','H3K3A3');
 
+-- insert categories
 
+INSERT INTO `categories` (`idCategorie`, `desCategorie`) VALUES
+(1, 'Autos'),
+(2, 'Sante'),
+(3, 'Gastronomie'),
+(4, 'Beauté'),
+(5, 'Produits'),
+(6, 'Voyages'),
+(7, 'Maison'),
+(8, 'Education'),
+(9, 'Services');
+
+INSERT INTO `adresse` (`idAdr`, `nroAdr`, `rueAdr`, `desVilAdr`, `codPosAdr`) VALUES
+(1, 759, 'Rue Legendre E', 'Montréal', 'H2M1H1'),
+(2, 8947, 'Rue Lajeunesse', 'Montréal', 'H2M1S1'),
+(3, 529, 'Rue Jarry E', 'Montréal', 'H2P1V4'),
+(4, 8762, 'Rue Lajeunesse', 'Montréal', 'H2M1R6'),
+(5, 9150, 'Rue Lajeunesse', 'Montréal', 'H2M1G2'),
+(6, 545, 'Boul Crémazie E', 'Montréal', 'H2M2V1'),
+(7, 9319, 'Ave Christophe-Colomb', 'Montréal', 'H2M1Z7'),
+(8, 9763, 'Avenue St Charles', 'Montréal', 'H2C2K9');
+
+INSERT INTO `fournisseur` (`idFournisseur`, `nomFournisseur`, `idAdrFournisseur`, `cellFournisseur`, `typeSerFournisseur`, `idForfaitFournisseur`, `datInsFournisseur`, `datEcheFournisseur`, `statuFournisseur`, `longFournisseur`, `latiFournisseur`) VALUES
+(1, 'Coiffeur Ahuntsic', 1, '5143821435', '1', '1', '2019-04-26', '2020-04-26', '1', '-73.643657', '45.551113'),
+(2, 'Location Auto Montreal', 2, '5143890366', '3', '1', '2019-03-27', '2020-03-27', '1', '-73.642728', '45.548068'),
+(3, 'Clinique médicale', 3, '5142743561', '1', '2', '2019-02-28', '2020-02-28', '1', '-73.628843', '45.543587'),
+(4, 'Restaurant Da Remo', 4, '5143887117', '3', '1', '2019-01-29', '2020-01-29', '1', '-73.639209', '45.546668'),
+(5, 'Marché Tradition', 5, '5143816511', '3', '1', '2019-04-30', '2020-04-30', '1', '-73.645996', '45.548747'),
+(6, 'Vacances Tourbec', 6, '5143817082', '3', '1', '2019-05-01', '2020-05-01', '1', '-73.63851', '45.546374'),
+(7, 'Lanaudière Plus', 7, '5142480889', '1', '2', '2019-03-02', '2020-03-02', '1', '-73.644007', '45.557504'),
+(8, 'Mindfulness Educators', 8, '5142563845', '1', '2', '2019-02-03', '2020-02-03', '1', '-73.652314', '45.555895');
+
+INSERT INTO `services` (`idService`, `idFournisseur`, `titreService`, `desShortService`, `desService`, `idCategorie`, `actService`, `prixService`, `promService`, `refeService`, `refeEfeService`, `datLimService`, `pochetteService`, `autService`) VALUES
+(1, 1, 'Coloration Cheveux', 'Votre palette personnalisée', 'Vous vous êtes toujours demandé si les blondes ont plus de plaisir? Et que dire de tous les mystères entourant les rousses? Que vous envisagiez une nuance subtile ou une nouvelle couleur, vibrante laissez-nous créer votre couleur personnalisée!', 4, 1, '105.00', '85.00', '69.00', 114, '2019-12-26', 'coloration_cheveux.jpg', '1'),
+(2, 2, 'Permis Up', '5h, 10h ou 20h de location de voiture', 'Jusqu’à 20h de location de voiture à double commandes afin d’apprendre à conduire en toute confiance', 1, 1, '180.00', '160.00', '120.00', 221, '2019-12-27', 'locationvoiture.jpg', '1'),
+(3, 3, 'Séance d\'ostéopathie', 'Une séance propice au lâcher-prise dans un cadre chaleureux', 'L’ostéopathie est une technique de médecine douce qui utilise les manipulations manuelles visant à apaiser les douleurs physiques ou psychiques. Traitement non thérapeutique, ne remplace pas une consultation médicale. Actes non remboursés par la Sécurité Sociale', 2, 1, '90.00', '50.00', '30.00', 332, '2019-12-28', 'seancedosteopathie.jpg', '1'),
+(4, 4, 'Pizzas pizzas', 'Pizzas au choix à la coupe en illimité pour 1 personne', 'Un large choix de pizzas préparées à base de produits frais et de qualité, à déguster dans un cadre convivial et agréable à souhait', 3, 1, '30.00', '20.00', '14.00', 443, '2019-12-29', 'pizzapizza.jpg', '1'),
+(5, 5, 'Ballotin de chocolats', 'Ballotin de chocolats (100% pur beurre de cacao) chez Marché Tradition', 'Chocolat garantit à 100% beurre de cacao, 100% saveur, 100% qualité, 100% fraîcheur', 5, 1, '45.00', '27.00', '19.00', 555, '2019-12-30', 'ballotindechocolats.jpg', '1'),
+(6, 6, 'Ramada Niagara Falls', '1 nuitée avec bons activités et repas au Ramada Niagara Falls', 'Les chutes du Niagara sont les plus puissantes d’Amérique du Nord. Les visiteurs peuvent explorer les imposantes chutes avec la croisière The Hornblower, avec l’attraction Journey behind the Falls ou tout simplement en les observant sur la promenade.', 6, 1, '199.00', '159.00', '99.00', 666, '2019-12-31', 'niagarafallscanadian.jpg', '1'),
+(7, 7, 'Lavage De Vitres', 'Lavage de fenêtres pour une maison à 1 ou 2 étages', 'Nettoyage de l’extérieur des fenêtres, ou des vitres, rebords, rails et moustiquaires sur la Rive-Nord', 7, 1, '160.00', '120.00', '104.00', 777, '2020-01-01', 'lavevitres.jpg', '1'),
+(8, 8, 'Programmation neuro-linguistique', 'Gagner en confiance et améliorer sa vie grâce aux outils de la PNL', 'Technique d’utilisation des connaissances de la psychologie et des neurosciences pour apprendre à communiquer de façon constructive', 8, 1, '300.00', '199.00', '99.00', 888, '2020-01-02', 'propnl.jpg', '1');

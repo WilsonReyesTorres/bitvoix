@@ -878,6 +878,8 @@
                 <div class="col">
                     <button type="button" class="btn btn-primary font-weight-bold shadow" data-toggle="modal"
                         data-target="#FormService">Nouveau Service</button>
+                    <button type="button" class="btn btn-primary font-weight-bold shadow" data-toggle="modal"
+                        data-target="#FormFourniseur">Profil Fourniseur</button>
                 </div>
                 <div class="row mt-2">
 
@@ -940,7 +942,87 @@
 
                     </div>
 
-                    <!-- Modal -->
+                    <!-- Modal Profil -->
+
+                    <div class="modal fade" id="FormFourniseur" tabindex="-1" role="dialog"
+                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary py-4 shadow">
+                                    <img src="images/logo.png" alt="">
+                                    <button type="button" class="close text-white" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span class="text-white" aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <form id="" enctype="multipart/form-data" action="" method="POST">
+                                            <div class="form-group row">
+                                                <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom fournisseur</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="nomFournisseur"
+                                                        name="nomFournisseur" title="Nom Fournisseur" required>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <h5>Adresse</h5>
+                                            <div class="form-group row">
+                                                <label for="nroAdr" class="col-sm-4 col-form-label">Numéro civique</label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" class="form-control" id="nroAdr"
+                                                        name="nroAdr" step="1" title="Numéro Civique" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="rueAdr" class="col-sm-4 col-form-label">Rue</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="rueAdr"
+                                                        name="rueAdr" title="Rue" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-4">
+                                                    <label for="desVilAdr">Ville</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select id="desVilAdr" name="desVilAdr" class="form-control"
+                                                        required>
+                                                        <option selected value="Montréal">Montréal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="codPosAdr" class="col-sm-4 col-form-label">Code postal</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="codPosAdr"
+                                                        name="codPosAdr" title="Code postal" required>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="form-group row">
+                                                <label for="cellFournisseur" class="col-sm-4 col-form-label">Téléphone</label>
+                                                <div class="col-sm-8">
+                                                    <input type="tel" class="form-control" min="1.0" max="5.0"
+                                                        id="cellFournisseur" name="cellFournisseur"
+                                                        title="Téléphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-center">
+
+                                                <button type="submit" class="btn btn-primary">Envoyer</button>
+
+                                                <button type="reset" class="btn btn-danger">Effacer</button>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Service -->
                     <div class="modal fade" id="FormService" tabindex="-1" role="dialog"
                         aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -1519,7 +1601,7 @@
                                     </td>
                                     <td>
                                         <button type="submit" class="btn btn-danger btn-sm"><i
-                                            class="fas fa-check"></i></button>
+                                                class="fas fa-check"></i></button>
 
                                     </td>
                                 </form>
