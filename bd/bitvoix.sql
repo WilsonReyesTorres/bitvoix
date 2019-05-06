@@ -109,12 +109,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
-<<<<<<< HEAD
+
 -- Table `bitvoix_db`.`services`
-=======
--- Table `bitvoix`.`services`
->>>>>>> eb071b49d7df2e3c0d63a43729e0fb2df2961d81
--- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`services` (
   `idService` INT NOT NULL AUTO_INCREMENT COMMENT 'code du service',
   `idFournisseur` INT NOT NULL COMMENT 'code fournisseur',
