@@ -78,14 +78,6 @@
 
                         <input type="text" class="form-control mr-sm-2" placeholder="Que recherchez-vous?"
                             aria-label="Que recherchez-vous?">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i
-                                        class="fas fa-map-marker-alt"></i></span>
-                            </div>
-                            <input type="text" class="form-control mr-sm-2" placeholder="Localisation"
-                                aria-label="Localisation" aria-describedby="basic-addon1">
-                        </div>
 
                         <button class="btn btn-outline-light" type="button" id="button-addon2"><i
                                 class="fas fa-search"></i></button>
@@ -99,10 +91,15 @@
                                 Catégories
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="#">Autos</a>
+                                <a class="dropdown-item" href="#">Sante</a>
+                                <a class="dropdown-item" href="#">Gastronomie</a>
+                                <a class="dropdown-item" href="#">Beauté</a>
+                                <a class="dropdown-item" href="#">Produits</a>
+                                <a class="dropdown-item" href="#">Voyages</a>
+                                <a class="dropdown-item" href="#">Maison</a>
+                                <a class="dropdown-item" href="#">Education</a>
+                                <a class="dropdown-item" href="#">Services</a>
                             </div>
                         </li>
                         <li class="nav-item active" id="loginDiv">
@@ -217,6 +214,7 @@
                                             <input type="text" id="preNomMembre" name="preNomMembre"
                                                 class="form-control" placeholder="Prénom" aria-label="Prenom"
                                                 aria-describedby="basic-addon1">
+
                                         </div>
 
                                         <div class="input-group mb-3">
@@ -256,6 +254,7 @@
                                                 aria-label="Courriel" aria-describedby="basic-addon1">
                                         </div>
 
+
                                         <div class="text-center form-sm mt-2">
                                             <button type="button" class="btn btn-primary shadow"
                                                 onClick="requetes('insertMembre');">S'inscrire</button>
@@ -279,7 +278,13 @@
 
     <!-- Icons Services -->
 
+
     <div class="container text-center mt-4">
+
+        <div id="googlemaps"></div>
+
+        <!-- Icons Services -->
+
         <div class="row">
             <div class="col">
                 <button type="button" class="btn btn-primary btn-lg rounded-circle"><i class="fas fa-car"></i></button>
@@ -325,18 +330,31 @@
             </div>
         </div>
 
-        <div id="app" class="container">
-        
+        <!-- Page Principal -->
+
+        <div class="row mt-2" id="divprincipal">
         </div>
 
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                aria-hidden="true" id="modalprincipal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary py-4 shadow">
+                            <!-- Logo bitvoix -->
 
-        <!-- Cards Services -->
+                            <img src="images/logo.png" alt="">
 
-
-
-
-
-        <!-- Fin Cards Services -->
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span class="text-white" aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="row m-3" id="modalcontent">
+                            
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
 
     </div>
 
@@ -364,11 +382,13 @@
 
                 <hr class="clearfix w-100 d-md-none">
 
+
                 <!-- Grid column -->
                 <div class="col-md-2 mx-auto">
 
                     <!-- Links -->
                     <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Entreprise</h5>
+
 
                     <ul class="list-unstyled">
                         <li>
@@ -477,10 +497,6 @@
 
     </footer>
 
-    <!-- </footer> -->
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -493,6 +509,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="js/routes.js"></script>
 </body>
 
 </html>

@@ -16,7 +16,9 @@ USE `bitvoix_db` ;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`categories`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`categories` (
+
   `idCategorie` INT NOT NULL auto_increment COMMENT 'Id de categories',
   `desCategorie` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Description des différentes catégories de services ou de biens',
   PRIMARY KEY (`idCategorie`))
@@ -24,10 +26,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+
 -- Table `bitvoix_db`.`adresse`
 -- -----------------------------------------------------
  
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`adresse` (
+
   `idAdr` INT NOT NULL auto_increment COMMENT 'id Adresse',
   `nroAdr` INT NOT NULL COMMENT 'Numéro civique',
   `rueAdr` VARCHAR(40) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Rue de Addrese',
@@ -42,7 +46,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`membres`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`membres` (
+
   `idMembre` INT NOT NULL AUTO_INCREMENT COMMENT 'Id du client',
   `nomMembre` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du client',
   `preNomMembre` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du client',
@@ -60,6 +66,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`fournisseur`
 -- -----------------------------------------------------
+<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`fournisseur` (
   `idFournisseur` INT NOT NULL COMMENT  'ID fournisseur',
   `nomFournisseur` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du fournisseur',
@@ -102,7 +109,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+<<<<<<< HEAD
 -- Table `bitvoix_db`.`services`
+=======
+-- Table `bitvoix`.`services`
+>>>>>>> eb071b49d7df2e3c0d63a43729e0fb2df2961d81
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`services` (
   `idService` INT NOT NULL AUTO_INCREMENT COMMENT 'code du service',
@@ -158,7 +169,7 @@ ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`references`
--- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`references` (
   `idReference` INT NOT NULL auto_increment COMMENT 'Id du references',
   `idService` INT NOT NULL COMMENT 'Id du Service',
@@ -181,10 +192,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
-
-
 
 -- insert categories
 
