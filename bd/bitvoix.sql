@@ -1,5 +1,5 @@
 -- MySQL Workbench Forward Engineering
--- bitvoix2019$
+-- bitvoix_db2019$
 -- Question
 -- Producto mas de categoria
 -- Auditoria Usuario mas fecha
@@ -11,19 +11,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema bitvoix
+-- Schema bitvoix_db
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema bitvoix
+-- Schema bitvoix_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bitvoix` DEFAULT CHARACTER SET utf8  COLLATE=utf8_unicode_ci ;
-USE `bitvoix` ;
+CREATE SCHEMA IF NOT EXISTS `bitvoix_db` DEFAULT CHARACTER SET utf8  COLLATE=utf8_unicode_ci ;
+USE `bitvoix_db` ;
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`categories`
+-- Table `bitvoix_db`.`categories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitvoix`.`categories` (
+CREATE TABLE IF NOT EXISTS `bitvoix_db`.`categories` (
   `idCategorie` INT NOT NULL auto_increment COMMENT 'Id de categories',
   `desCategorie` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Description des différentes catégories de services ou de biens',
   PRIMARY KEY (`idCategorie`))
@@ -31,10 +31,10 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`adresse`
+-- Table `bitvoix_db`.`adresse`
 -- -----------------------------------------------------
  
-CREATE TABLE IF NOT EXISTS `bitvoix`.`adresse` (
+CREATE TABLE IF NOT EXISTS `bitvoix_db`.`adresse` (
   `idAdr` INT NOT NULL auto_increment COMMENT 'id Adresse',
   `nroAdr` INT NOT NULL COMMENT 'Numéro civique',
   `rueAdr` VARCHAR(40) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Rue de Addrese',
@@ -47,9 +47,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`membres`
+-- Table `bitvoix_db`.`membres`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitvoix`.`membres` (
+CREATE TABLE IF NOT EXISTS `bitvoix_db`.`membres` (
   `idMembre` INT NOT NULL AUTO_INCREMENT COMMENT 'Id du client',
   `nomMembre` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du client',
   `preNomMembre` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du client',
@@ -65,9 +65,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`fournisseur`
+-- Table `bitvoix_db`.`fournisseur`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitvoix`.`fournisseur` (
+CREATE TABLE IF NOT EXISTS `bitvoix_db`.`fournisseur` (
   `idFournisseur` INT NOT NULL COMMENT  'ID fournisseur',
   `nomFournisseur` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du fournisseur',
   `idAdrFournisseur` INT NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Adresse du fournisseur',
@@ -82,17 +82,17 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`fournisseur` (
   PRIMARY KEY (`idFournisseur`),
    CONSTRAINT `fouadr`
     FOREIGN KEY (`idAdrFournisseur`)
-    REFERENCES `bitvoix`.`adresse` (`idAdr`),
+    REFERENCES `bitvoix_db`.`adresse` (`idAdr`),
    CONSTRAINT `fourmem`
     FOREIGN KEY (`idFournisseur`)
-    REFERENCES `bitvoix`.`membres` (`idMembre`))
+    REFERENCES `bitvoix_db`.`membres` (`idMembre`))
 
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`facture`
+-- Table `bitvoix_db`.`facture`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitvoix`.`facture` (
+CREATE TABLE IF NOT EXISTS `bitvoix_db`.`facture` (
   `idFacture` INT NOT NULL AUTO_INCREMENT COMMENT 'code fournisseur',
   `idFournisseur` INT NOT NULL COMMENT 'code fournisseur',
   `idForfaitFacture` VARCHAR(1) NOT NULL COMMENT 'Identifie le type de forfaits :1.Base 2.Stantard 3.Premium',
@@ -104,14 +104,14 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`facture` (
   PRIMARY KEY (`idFacture`),
    CONSTRAINT `facfou`
     FOREIGN KEY (`idFournisseur`)
-    REFERENCES `bitvoix`.`fournisseur` (`idFournisseur`))
+    REFERENCES `bitvoix_db`.`fournisseur` (`idFournisseur`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`services`
+-- Table `bitvoix_db`.`services`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitvoix`.`services` (
+CREATE TABLE IF NOT EXISTS `bitvoix_db`.`services` (
   `idService` INT NOT NULL AUTO_INCREMENT COMMENT 'code du service',
   `idFournisseur` INT NOT NULL COMMENT 'code fournisseur',
   `titreService` VARCHAR(20) NOT NULL  COLLATE utf8_unicode_ci COMMENT 'Courte description du service',
@@ -129,10 +129,10 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`services` (
   PRIMARY KEY (`idService`),
   CONSTRAINT `sercat`
     FOREIGN KEY (`idCategorie`)
-    REFERENCES `bitvoix`.`categories` (`idCategorie`),
+    REFERENCES `bitvoix_db`.`categories` (`idCategorie`),
   CONSTRAINT `SerFour`
     FOREIGN KEY (`idFournisseur`)
-    REFERENCES `bitvoix`.`fournisseur` (`idFournisseur`)
+    REFERENCES `bitvoix_db`.`fournisseur` (`idFournisseur`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -140,9 +140,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`requetes`
+-- Table `bitvoix_db`.`requetes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitvoix`.`requests` (
+CREATE TABLE IF NOT EXISTS `bitvoix_db`.`requests` (
   `idRequest` INT NOT NULL auto_increment COMMENT 'Id du request',
   `idMembre` INT NOT NULL COMMENT 'Id du Memebre',
   `idService` INT NOT NULL COMMENT 'Id du Service',
@@ -154,19 +154,19 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`requests` (
   PRIMARY KEY (`idrequest`),
   CONSTRAINT `reqmem`
     FOREIGN KEY (`idMembre`)
-    REFERENCES `bitvoix`.`membres` (`idMembre`),
+    REFERENCES `bitvoix_db`.`membres` (`idMembre`),
   CONSTRAINT `reqser`
     FOREIGN KEY (`idService`)
-    REFERENCES `bitvoix`.`services` (`idService`)
+    REFERENCES `bitvoix_db`.`services` (`idService`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitvoix`.`references`
+-- Table `bitvoix_db`.`references`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitvoix`.`references` (
+CREATE TABLE IF NOT EXISTS `bitvoix_db`.`references` (
   `idReference` INT NOT NULL auto_increment COMMENT 'Id du references',
   `idService` INT NOT NULL COMMENT 'Id du Service',
   `idMembre` INT NOT NULL COMMENT 'Id du Memebre',
@@ -176,10 +176,10 @@ CREATE TABLE IF NOT EXISTS `bitvoix`.`references` (
   PRIMARY KEY (`idReference`),
   CONSTRAINT `refser`
     FOREIGN KEY (`idService`)
-    REFERENCES `bitvoix`.`services` (`idService`),
+    REFERENCES `bitvoix_db`.`services` (`idService`),
   CONSTRAINT `refmem`
     FOREIGN KEY (`idMembre`)
-    REFERENCES `bitvoix`.`membres` (`idMembre`)
+    REFERENCES `bitvoix_db`.`membres` (`idMembre`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -192,31 +192,31 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 
-Create user 'bitvoixadmin'@'localhost' identified by 'adminbitvoixcanada2019$';
-GRANT ALL PRIVILEGES ON bitvoix.* TO 'bitvoixadmin'@'localhost' WITH GRANT OPTION;
-show grants for 'bitvoixadmin'@'localhost';
+Create user 'bitvoix_user'@'localhost' identified by 'adminbitvoix_dbcanada2019$';
+GRANT ALL PRIVILEGES ON bitvoix_db.* TO 'bitvoix_user'@'localhost' WITH GRANT OPTION;
+show grants for 'bitvoix_user'@'localhost';
 
--- revoke all privileges, grant  option  from 'bitvoixadmin'@'localhost';
--- drop user 'bitvoixadmin'@'localhost';
-
-
-Create user 'bitvoix'@'localhost' identified by 'bitvoixcanada2019$';
-grant  ALL PRIVILEGES ON bitvoix.users to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.categories to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.pays to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.villes to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.membres to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.fournisseur to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.facture to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.services to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.requests to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.references to 'bitvoix'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix.users to 'bitvoix'@'localhost' WITH GRANT OPTION;
-show grants for 'bitvoix'@'localhost';
+-- revoke all privileges, grant  option  from 'bitvoix_dbadmin'@'localhost';
+-- drop user 'bitvoix_dbadmin'@'localhost';
 
 
--- revoke all privileges, grant  option  from 'bitvoix'@'localhost';
--- drop user 'bitvoix'@'localhost';
+Create user 'bitvoix_user_end'@'localhost' identified by 'bitvoix_dbcanada2019$';
+grant  ALL PRIVILEGES ON bitvoix_db.users to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.categories to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.pays to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.villes to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.membres to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.fournisseur to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.facture to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.services to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.requests to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.references to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+grant  ALL PRIVILEGES ON bitvoix_db.users to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
+show grants for 'bitvoix_db'@'localhost';
+
+
+-- revoke all privileges, grant  option  from 'bitvoix_db'@'localhost';
+-- drop user 'bitvoix_db'@'localhost';
 
 -- insert categories
 
