@@ -4,9 +4,9 @@ class Connecter{
     //Methode statique qui peut être appelée sans qu'une instance d'objet n'ait été créée
     public static function conexion(){
      //Parametres pour la connexion à la base de données: dbname=nomBaseDeDonnés; host=serveur; charset=utf8; 
-        $dsn = 'mysql:dbname=bitvoix;host=localhost;charset=utf8';
-        $user = 'root'; //usager
-        $password = '';//mot de passe
+        $dsn = 'mysql:dbname=bitvoix_db;host=localhost;charset=utf8';
+        $user = 'bitvoix_user'; //usager
+        $password = 'adminbitvoixcanada2019$';//mot de passe
         
         try {
             $connexion = new PDO($dsn, $user, $password);
