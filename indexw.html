@@ -19,6 +19,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link href="css/styles.css" rel="stylesheet">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="requettes/requetesFournisseur.js"></script>
+    <script src="vues/vuesFournisseur.js"></script>
+    <script src="js/jsFournisseur.js"></script>
 
     <title>bitvoix.com</title>
 </head>
@@ -62,7 +66,8 @@
                                 <a class="dropdown-item" href="#">Maison</a>
                                 <a class="dropdown-item" href="#">Education</a>
                                 <a class="dropdown-item" href="#">Services</a>
-                            </div>
+                            </div>   
+                            <input type="button" value="Fournisseur" onClick="requetesFour('FourAccueil');">
                         </li>
                         <li class="nav-item active">
                             <!--Modal: Se connecter-->
@@ -134,8 +139,8 @@
                                             <span class="input-group-text" id="basic-addon1"><i
                                                     class="fas fa-lock prefix"></i></span>
                                         </div>
-                                        <input type="password" class="form-control" placeholder="Mot de passe"
-                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                        <!-- <input type="password" class="form-control" placeholder="Mot de passe"
+                                            aria-label="Courriel" aria-describedby="basic-addon1"> -->
                                     </div>
 
                                     <div class="text-center mt-3">
@@ -195,8 +200,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-lock prefix"></i></span>
                                         </div>
-                                        <input type="password" class="form-control" placeholder="Mot de passe"
-                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                        <!-- <input type="password" class="form-control" placeholder="Mot de passe"
+                                            aria-label="Courriel" aria-describedby="basic-addon1"> -->
                                     </div>
 
                                     <div class="input-group mb-3">
@@ -204,9 +209,9 @@
                                             <span class="input-group-text" id="basic-addon1"><i
                                                     class="fas fa-lock prefix"></i></span>
                                         </div>
-                                        <input type="password" class="form-control"
+                                        <!-- <input type="password" class="form-control"
                                             placeholder="Confirmer le mot de passe" aria-label="Courriel"
-                                            aria-describedby="basic-addon1">
+                                            aria-describedby="basic-addon1"> -->
                                     </div>
 
                                     <div class="text-center form-sm mt-2">
@@ -461,23 +466,14 @@
     </footer>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
-
-
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-    <script src="js/routes.js"></script>
+  
 </body>
 
 </html>
