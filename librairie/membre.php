@@ -7,9 +7,9 @@
  */
 class Membre{
     private $dbHost     = "localhost";
-    private $dbUsername = "bitvoixadmin";
+    private $dbUsername = "bitvoix_user";
     private $dbPassword = "adminbitvoixcanada2019$";
-    private $dbName     = "bitvoix";
+    private $dbName     = "bitvoix_db";
     private $userTbl    = "membres";
     
     public function __construct(){

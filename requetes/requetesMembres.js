@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	validerLogin();
-    //funciones al cargar la pagina
+	//montrerServices();
+	//funciones al cargar la pagina
 });
 
 
@@ -18,19 +19,18 @@ function envoyerInsertMembre() {
 		contentType: false,
 		processData: false,
 		success: function (message) {
-			if(message.status=='error')
-				vue('erreurInsertMembreJSON',message.msg);
-			else
-			{
+			if (message.status == 'error')
+				vue('erreurInsertMembreJSON', message.msg);
+			else {
 				$('#panel8').removeClass("active");
 				$('#panel8').removeClass("show");
 				$('#tabSinsc').removeClass("active");
 				$('#tabSign').addClass("active");
 				$('#panel7').addClass("active");
 				$('#panel7').addClass("show");
-				vue('enregisterOKJSON',message.msg);
+				vue('enregisterOKJSON', message.msg);
 			}
-			 
+
 			//envoyerLogin();
 		},
 		fail: function () {
@@ -50,15 +50,15 @@ function envoyerLoginSubmit() {
 		contentType: false,
 		processData: false,
 		success: function (message) {
-			if(message.status=='error')
-				vue('erreurLoginSubmitJSON',message.msg);
-			else{
+			if (message.status == 'error')
+				vue('erreurLoginSubmitJSON', message.msg);
+			else {
 				$('#modalLRForm').modal('hide');
-				vue('LoginOKJSON',message.msg);
+				vue('LoginOKJSON', message.msg);
 			}
-			
 
-			
+
+
 		},
 		fail: function () {
 			alert("Vous avez un GROS problème");
@@ -67,31 +67,52 @@ function envoyerLoginSubmit() {
 }
 
 function validerLogin() {
-	var loginForm = new FormData(document.getElementById('loginForm'));
-	loginForm.append('action', 'validerLogin');
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
 		type: 'POST',
-		data: loginForm,
+		data: 'action=validerLogin',
 		dataType: 'json',
-		contentType: false,
-		processData: false,
 		success: function (message) {
-			if(message.status=='error')
-				vue('erreurLoginSubmitJSON',message.msg);
-			else{
+			if (message.status == 'error')
+				vue('erreurLoginSubmitJSON', message.msg);
+			if (message.status == 'succes') {
 				$('#modalLRForm').modal('hide');
-				vue('LoginOKJSON',message.msg);
+				vue('LoginOKJSON', message.msg);
 			}
-			
-
-			
+			if (message.status == 'nonLogin')
+				montrerServices();
 		},
 		fail: function () {
 			alert("Vous avez un GROS problème");
 		}
 	});
 }
+
+function montrerServices() {
+	$.ajax({
+		url: 'serveur/controleurServices.php',
+		type: 'POST',
+		data: {
+			"action": 'listerServCards',
+			"idcateg": 0
+		},
+		dataType: 'json',
+		success: function (donnes) {
+
+			vue('servicesAccueil', donnes);
+
+		},
+		fail: function () {
+			alert("Vous avez un GROS problème");
+		}
+	});
+
+}
+
+function montrerAccueil() {
+
+}
+
 function envoyerLogin() {
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
@@ -118,10 +139,10 @@ function envoyerLogout() {
 		//dataType:'json',
 		dataType: 'text',
 		success: function (formHtml) {
-			
+
 			//$('.container').html(formHtml);
-			if(formHtml=='login')
-				vue('menuConnexion',formHtml);
+			if (formHtml == 'login')
+				vue('menuConnexion', formHtml);
 			//envoyerLogin();
 		},
 		fail: function () {
@@ -155,9 +176,9 @@ var requetes = function (action) {
 		case 'login':
 			envoyerLogin();
 			break;
-		/*case 'register':
-			envoyerRegister();
-			break;*/
+			/*case 'register':
+				envoyerRegister();
+				break;*/
 		case 'insertMembre':
 			envoyerInsertMembre();
 			break;

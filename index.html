@@ -30,35 +30,9 @@
     <script src="js/googleLogin.js"></script>
     <script src="js/facebookLogin.js"></script>
     <script src="requetes/requetesMembres.js"></script>
+    <script src="requetes/requetesServices.js"></script>
     <script src="vues/vuesMembres.js"></script>
 
-    <!-- Hay que borrarlo despues-->
-    <style>
-        .container {
-            padding: 20px;
-        }
-
-        .userContent {
-            padding: 10px 20px;
-            margin: auto;
-            width: 350px;
-            background-color: #F7F7F7;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-        }
-
-        .userContent h3 {
-            font-size: 17px;
-        }
-
-        .userContent p {
-            font-size: 15px;
-        }
-
-        .userContent img {
-            max-width: 100%;
-            margin-bottom: 5px;
-        }
-    </style>
 </head>
 
 <body>
@@ -91,20 +65,20 @@
                                 Catégories
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Autos</a>
-                                <a class="dropdown-item" href="#">Sante</a>
-                                <a class="dropdown-item" href="#">Gastronomie</a>
-                                <a class="dropdown-item" href="#">Beauté</a>
-                                <a class="dropdown-item" href="#">Produits</a>
-                                <a class="dropdown-item" href="#">Voyages</a>
-                                <a class="dropdown-item" href="#">Maison</a>
-                                <a class="dropdown-item" href="#">Education</a>
-                                <a class="dropdown-item" href="#">Services</a>
+                                <a class="dropdown-item" href="javascript:void(0);"  onClick="requetesServ('montrerServicesCat', '1');">Autos</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '2');">Sante</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '3');">Gastronomie</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '4');">Beauté</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '5');">Produits</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '6');">Voyages</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '7');">Maison</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '8');">Education</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '9');">Services</a>
                             </div>
                         </li>
                         <li class="nav-item active" id="loginDiv">
                             <!--Modal: Se connecter-->
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLRForm">Se
+                            <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#modalLRForm">Se
                                 Connecter<span class="sr-only">(current)</span></a>
                         </li>
 
@@ -119,7 +93,7 @@
             aria-hidden="true">
             <div class="modal-dialog cascading-modal" role="document">
                 <!--Content-->
-                <div class="modal-content">
+                <div class="modal-content" id="modalContent">
                     <div class="modal-header bg-primary py-4 shadow">
                         <!-- Logo bitvoix -->
 
@@ -278,62 +252,12 @@
 
     <!-- Icons Services -->
 
+    <div id="googlemaps"></div>
+    <div class="container text-center mt-4" id="main-container">
 
-    <div class="container text-center mt-4">
+    
 
-        <div id="googlemaps"></div>
-
-        <!-- Icons Services -->
-
-        <div class="row">
-            <div class="col">
-                <button type="button" class="btn btn-primary btn-lg rounded-circle"><i class="fas fa-car"></i></button>
-                <a href="">Autos</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-warning btn-lg rounded-circle"><i
-                        class="fas fa-heartbeat"></i></button>
-                <a href="">Sante</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-success btn-lg rounded-circle"><i
-                        class="fas fa-utensils"></i></button>
-                <a href="">Gastronomie</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-danger btn-lg rounded-circle"><i class="fas fa-star"></i></button>
-                <a href="">Beauté</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-primary btn-lg rounded-circle"><i
-                        class="fas fa-shopping-bag"></i></button>
-                <a href="">Produits</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-warning btn-lg rounded-circle"><i
-                        class="fas fa-plane"></i></button>
-                <a href="">Voyages</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-success btn-lg rounded-circle"><i class="fas fa-home"></i></button>
-                <a href="">Maison</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-danger btn-lg rounded-circle"><i
-                        class="fas fa-pencil-alt"></i></button>
-                <a href="">Education</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-primary btn-lg rounded-circle"><i
-                        class="fas fa-wrench"></i></button>
-                <a href="">Services</a>
-            </div>
-        </div>
-
-        <!-- Page Principal -->
-
-        <div class="row mt-2" id="divprincipal">
-        </div>
+        
 
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                 aria-hidden="true" id="modalprincipal">
@@ -511,10 +435,6 @@
     </script>
 
 
-
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-    <script src="js/routes.js"></script>
 </body>
 
 </html>

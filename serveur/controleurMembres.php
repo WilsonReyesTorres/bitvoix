@@ -1,5 +1,4 @@
 <?php
-//require_once("../BD/connexion.inc.php");
 include_once '../librairie/membre.php';
 $rep = array();
 
@@ -62,7 +61,6 @@ function loginSubmit()
                 $sessData['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
             }
 
-            
         } else {
             $sessData['status']['type'] = 'error';
             $sessData['status']['msg'] = 'Courriel ou mot de passe erronés, veuillez réessayer.';
@@ -156,9 +154,14 @@ function validerLogin()
         $reponse = array(
             'status' => ($sessData['status']['type'] == 'success') ? 'success' : 'error',
             'msg' => $sessData['status']['msg']);
-        echo json_encode($reponse);
         //unset($_SESSION['sessData']['status']);
+    } else {
+        $reponse = array(
+            'status' => 'nonLogin',
+            'msg' => '');
+
     }
+    echo json_encode($reponse);
 }
 
 function enregistrerMembre()
@@ -180,7 +183,6 @@ function enregistrerMembre()
             $prevCon['return_type'] = 'single';
             //$prevCon['return_type'] = 'count';
             $prevMembre = $membre->getRows($prevCon);
-            var_dump($prevMembre);
             if ($prevMembre['idMembre'] != null) {
                 //Update membre
                 $membreData = array(
@@ -200,8 +202,6 @@ function enregistrerMembre()
                     $sessData['status']['type'] = 'error';
                     $sessData['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
                 }
-                $sessData['status']['type'] = 'error';
-                $sessData['status']['msg'] = 'Le courriel est déjà utilisé, SVP utilise un autre courriel.';
             } else {
                 //insert membre data in the database
                 $membreData = array(

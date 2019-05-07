@@ -6,11 +6,11 @@ require_once('../librairie/categoriesManager.php');
 
 /*****************************  commencer test ***************/
 // JSON string
-$someJSON = '[{"idCate":"1","desCate":"sante"}]';
+///$someJSON = '[{"idCate":"1","desCate":"sante"}]';
  // Convert JSON string to Array
-$someArray = json_decode($someJSON, true);
+///$someArray = json_decode($someJSON, true);
 
-print_r($someArray);         // Dump all data of the Array
+//print_r($someArray);         // Dump all data of the Array
 // echo $someArray[0]["idCate"]; // Access Array data
 // echo $someArray[0]["desCate"]; // Access Array data
  
@@ -18,6 +18,7 @@ print_r($someArray);         // Dump all data of the Array
 //classe à instancier 
 
 //chargerClasse('adresse')
+/*
 $donnees = [
   'idCate' => $someArray[0]["idCate"],
   'desCate' => $someArray[0]["desCate"]
@@ -27,7 +28,7 @@ $catego = new Categories($donnees);
 echo '<br>';              
 echo 'Id Categorie:'.$catego->idCate();
 echo '<br>Description Categorie: '.$catego->desCate();
-$manage = new CategoriesManager();
+$manage = new CategoriesManager();*/
 //****************************  fin test **********************
 
 
@@ -125,16 +126,16 @@ function modifier(){
 }
 
 //controleur Adresse
-//$action=$_POST['action'];
-$action= '';
-$action= 'enregistrer';
+$action=$_POST['action'];
+//$action= '';
+//$action= 'enregistrer';
 
 switch($action){
     case 'enregistrer':
         enregistrer();
         break;
     case 'lister':
-        lister();
+      lister();
         break;
     case 'enlever':
         enlever();
