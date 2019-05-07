@@ -57,6 +57,18 @@ class ServicesManager
           $result = $stmt->fetchAll(PDO::FETCH_OBJ);
           return $result;
         }
+      public function getListIdFournisseur($idFournisseur)
+        {
+          $idFournisseur = (int) $idFournisseur;
+          $requete = 'SELECT * FROM services WHERE idFournisseur = ? ';
+          $stmt = $this->_pdo->prepare($requete);
+          $stmt->execute(array($idFournisseur));
+          $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+          if (!$result){
+            $result = [ 'idService' => ''];
+          }
+          return $result;
+        }
       public function update(Services $servi)
         {
             $requete = "UPDATE services SET idFournisseur = ?, titreService = ?,
