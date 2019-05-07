@@ -957,9 +957,10 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <form id="" enctype="multipart/form-data" action="" method="POST">
+                                        <form id="formFourniseur">
                                             <div class="form-group row">
-                                                <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom fournisseur</label>
+                                                <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom
+                                                    fournisseur</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="nomFournisseur"
                                                         name="nomFournisseur" title="Nom Fournisseur" required>
@@ -968,17 +969,18 @@
                                             <hr>
                                             <h5>Adresse</h5>
                                             <div class="form-group row">
-                                                <label for="nroAdr" class="col-sm-4 col-form-label">Numéro civique</label>
+                                                <label for="nroAdr" class="col-sm-4 col-form-label">Numéro
+                                                    civique</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" class="form-control" id="nroAdr"
-                                                        name="nroAdr" step="1" title="Numéro Civique" required>
+                                                    <input type="number" class="form-control" id="nroAdr" name="nroAdr"
+                                                        step="1" title="Numéro Civique" pattern="[0-9]{5}" max="99999" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="rueAdr" class="col-sm-4 col-form-label">Rue</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="rueAdr"
-                                                        name="rueAdr" title="Rue" required>
+                                                    <input type="text" class="form-control" id="rueAdr" name="rueAdr"
+                                                        title="Rue" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -993,19 +995,62 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="codPosAdr" class="col-sm-4 col-form-label">Code postal</label>
+                                                <label for="codPosAdr" class="col-sm-4 col-form-label">Code
+                                                    postal</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="codPosAdr"
-                                                        name="codPosAdr" title="Code postal" required>
+                                                        name="codPosAdr" title="A9A9A9" pattern="[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]" required>
                                                 </div>
                                             </div>
-                                            <hr>
                                             <div class="form-group row">
-                                                <label for="cellFournisseur" class="col-sm-4 col-form-label">Téléphone</label>
+                                                <label for="cellFournisseur"
+                                                    class="col-sm-4 col-form-label">Téléphone</label>
                                                 <div class="col-sm-8">
                                                     <input type="tel" class="form-control" min="1.0" max="5.0"
                                                         id="cellFournisseur" name="cellFournisseur"
-                                                        title="Téléphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                                                        pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <h5>Service</h5>
+                                            <div class="form-group row">
+                                                <div class="col-sm-4">
+                                                    <label for="typeSerFournisseur">Type</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select id="typeSerFournisseur" name="typeSerFournisseur" class="form-control"
+                                                        required disabled>
+                                                        <option selected value="1">Personalisé</option>
+                                                        <option value="2">Agenda</option>
+                                                        <option value="3">Demande</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-4">
+                                                    <label for="idForfaitFournisseur">Forfait</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select id="idForfaitFournisseur" name="idForfaitFournisseur" class="form-control"
+                                                        required disabled>
+                                                        <option selected value="1">Base</option>
+                                                        <option value="2">Stantard</option>
+                                                        <option value="3">Premium</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="datInsFournisseur" class="col-sm-4 col-form-label">Date d'inscription</label>
+                                                <div class="col-sm-8">
+                                                    <input type="date" class="form-control" id="datInsFournisseur"
+                                                        name="datInsFournisseur" title="Date d'inscription" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="datEcheFournisseur" class="col-sm-4 col-form-label">Date d'échéance</label>
+                                                <div class="col-sm-8">
+                                                    <input type="date" class="form-control" id="datEcheFournisseur"
+                                                        name="datEcheFournisseur" title="Date d'échéance" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer d-flex justify-content-center">
@@ -1036,13 +1081,13 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container">
-                                        <form id="" enctype="multipart/form-data" action="" method="POST">
+                                        <form id="formService">
                                             <div class="form-group row">
                                                 <label for="titreService" class="col-sm-4 col-form-label">Titre
                                                     Service</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="titreService"
-                                                        name="titreService" title="Titre Service" required>
+                                                        name="titreService" title="Titre Service" maxlength="20" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -1050,7 +1095,7 @@
                                                     courte</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="desShortService"
-                                                        name="desShortService" title="Description courte" required>
+                                                        name="desShortService" title="Description courte" maxlength="50" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -1058,7 +1103,7 @@
                                                     class="col-sm-4 col-form-label">Déscription</label>
                                                 <div class="col-sm-8">
                                                     <textarea class="form-control" id="descFilm" name="descFilm"
-                                                        rows="3" title="Déscription du film" required></textarea>
+                                                        rows="3" title="Déscription du film" maxlength="250" required></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -1788,6 +1833,24 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="js/routes.js"></script>
+    <script>
+        $("#formFourniseur").submit(function(event) {
+            alert('Test');
+         /* stop form from submitting normally */
+         event.preventDefault();
+        
+         /* get the action attribute from the <form action=""> element */
+         var url = $(this).attr('action');
+        
+        //  $.ajax({
+        //  url : url,
+        //  type : 'GET',
+        //  success : function(code_html, statut){
+        //  $("#article").html(code_html);
+        //  }
+        //  });
+         });
+        </script>
 </body>
 
 </html>
