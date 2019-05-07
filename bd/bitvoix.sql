@@ -1,11 +1,3 @@
--- MySQL Workbench Forward Engineering
--- bitvoix_db2019$
--- Question
--- Producto mas de categoria
--- Auditoria Usuario mas fecha
--- En el usuario colocar un slider para identificar los servicios solictados
--- En el usuario colocar un slider para identificar el historia de servicios utilisados
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -23,12 +15,12 @@ USE `bitvoix_db` ;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`categories`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`categories` (
   `idCategorie` INT NOT NULL auto_increment COMMENT 'Id de categories',
   `desCategorie` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Description des différentes catégories de services ou de biens',
   PRIMARY KEY (`idCategorie`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`adresse`
@@ -49,6 +41,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`membres`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`membres` (
   `idMembre` INT NOT NULL AUTO_INCREMENT COMMENT 'Id du client',
   `nomMembre` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du client',
@@ -67,6 +60,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`fournisseur`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`fournisseur` (
   `idFournisseur` INT NOT NULL COMMENT  'ID fournisseur',
   `nomFournisseur` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du fournisseur',
@@ -111,6 +105,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`services`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`services` (
   `idService` INT NOT NULL AUTO_INCREMENT COMMENT 'code du service',
   `idFournisseur` INT NOT NULL COMMENT 'code fournisseur',
@@ -165,7 +160,9 @@ ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`references`
+
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`references` (
   `idReference` INT NOT NULL auto_increment COMMENT 'Id du references',
   `idService` INT NOT NULL COMMENT 'Id du Service',
@@ -191,7 +188,6 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 
-
 Create user 'bitvoix_user'@'localhost' identified by 'adminbitvoix_dbcanada2019$';
 GRANT ALL PRIVILEGES ON bitvoix_db.* TO 'bitvoix_user'@'localhost' WITH GRANT OPTION;
 show grants for 'bitvoix_user'@'localhost';
@@ -200,23 +196,6 @@ show grants for 'bitvoix_user'@'localhost';
 -- drop user 'bitvoix_dbadmin'@'localhost';
 
 
-Create user 'bitvoix_user_end'@'localhost' identified by 'bitvoix_dbcanada2019$';
-grant  ALL PRIVILEGES ON bitvoix_db.users to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.categories to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.pays to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.villes to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.membres to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.fournisseur to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.facture to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.services to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.requests to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.references to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-grant  ALL PRIVILEGES ON bitvoix_db.users to 'bitvoix_user_end'@'localhost' WITH GRANT OPTION;
-show grants for 'bitvoix_db'@'localhost';
-
-
--- revoke all privileges, grant  option  from 'bitvoix_db'@'localhost';
--- drop user 'bitvoix_db'@'localhost';
 
 -- insert categories
 
@@ -230,6 +209,8 @@ INSERT INTO `categories` (`idCategorie`, `desCategorie`) VALUES
 (7, 'Maison'),
 (8, 'Education'),
 (9, 'Services');
+                                           
+-- insert adresses
 
 INSERT INTO `adresse` (`idAdr`, `nroAdr`, `rueAdr`, `desVilAdr`, `codPosAdr`) VALUES
 (1, 759, 'Rue Legendre E', 'Montréal', 'H2M1H1'),
@@ -240,6 +221,18 @@ INSERT INTO `adresse` (`idAdr`, `nroAdr`, `rueAdr`, `desVilAdr`, `codPosAdr`) VA
 (6, 545, 'Boul Crémazie E', 'Montréal', 'H2M2V1'),
 (7, 9319, 'Ave Christophe-Colomb', 'Montréal', 'H2M1Z7'),
 (8, 9763, 'Avenue St Charles', 'Montréal', 'H2C2K9');
+                                           
+-- insert membres
+
+INSERT INTO `membres` (`idMembre`, `nomMembre`, `preNomMembre`, `courrielMembre`, `oauthProviderMembre`, `oauthUidMembre`,`createdMembre`, `modifiedMembre`, `motPasseMembre` ) VALUES
+(1, 'Membre1', 'Prenom1', 'membre1@exemple.com', 'bitvoix', '123456789', NOW(), NOW(), SHA1('123')),
+(2, 'Membre2', 'Prenom2', 'membre2@exemple.com', 'bitvoix', '223456789', NOW(), NOW(), SHA1('123')),
+(3, 'Membre3', 'Prenom3', 'membre3@exemple.com', 'bitvoix', '323456789', NOW(), NOW(), SHA1('123')),
+(4, 'Membre4', 'Prenom4', 'membre4@exemple.com', 'bitvoix', '423456789', NOW(), NOW(), SHA1('123')),
+(5, 'Membre5', 'Prenom5', 'membre5@exemple.com', 'bitvoix', '523456789', NOW(), NOW(), SHA1('123')),
+(6, 'Membre6', 'Prenom6', 'membre6@exemple.com', 'bitvoix', '623456789', NOW(), NOW(), SHA1('123')),
+(7, 'Membre7', 'Prenom7', 'membre7@exemple.com', 'bitvoix', '723456789', NOW(), NOW(), SHA1('123')),
+(8, 'Membre8', 'Prenom8', 'membre8@exemple.com', 'bitvoix', '823456789', NOW(), NOW(), SHA1('123'));
 
 INSERT INTO `fournisseur` (`idFournisseur`, `nomFournisseur`, `idAdrFournisseur`, `cellFournisseur`, `typeSerFournisseur`, `idForfaitFournisseur`, `datInsFournisseur`, `datEcheFournisseur`, `statuFournisseur`, `longFournisseur`, `latiFournisseur`) VALUES
 (1, 'Coiffeur Ahuntsic', 1, '5143821435', '1', '1', '2019-04-26', '2020-04-26', '1', '-73.643657', '45.551113'),
