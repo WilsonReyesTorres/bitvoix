@@ -67,3 +67,38 @@ span.lien{
     color:  #2196F3;
 }
 
+/* Select Images Services */
+
+/* HIDE RADIO */
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio]+img {
+    cursor: pointer;
+    width: 100px;
+    height: 60px;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked+img {
+    outline: 2px solid #ff0000;
+}
+
+#div-images {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+[type=radio]:hover+img {
+-ms-transform:scale(1.25);
+-webkit-transform:scale(1.25);
+transform:scale(1.25);
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Fin Select Images Services */

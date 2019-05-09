@@ -244,7 +244,7 @@
 
 
 
-    <div  class="container text-center mt-4">
+    <div class="container text-center mt-4">
 
         <!-- Icons Services -->
 
@@ -848,7 +848,7 @@
         <!-- Page Fourniseur -->
 
         <div class="row">
-             <!-- Div forfait Services-->
+            <!-- Div forfait Services-->
             <div class="col-lg-9">
                 <div class="col">
                     <button type="button" class="btn btn-primary font-weight-bold shadow" data-toggle="modal"
@@ -923,263 +923,12 @@
                 <h4>Votre forfait:</h4>
                 <div class="card booking-card shadow">
 
-<<<<<<< HEAD
                     <!-- Card image -->
                     <div class="view overlay">
                         <img class="card-img-top" src="images/vip.png" alt="Card image cap">
                         <a href="#!">
                             <div class="mask rgba-white-slight"></div>
                         </a>
-=======
-                    <!-- Modal Profil -->
-
-                    <div class="modal fade" id="FormFourniseur" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-primary py-4 shadow">
-                                    <img src="images/logo.png" alt="">
-                                    <button type="button" class="close text-white" data-dismiss="modal"
-                                        aria-label="Close">
-                                        <span class="text-white" aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="container">
-                                        <form id="formFourniseur">
-                                            <div class="form-group row">
-                                                <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom
-                                                    fournisseur</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="nomFournisseur"
-                                                        name="nomFournisseur" title="Nom Fournisseur" required>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <h5>Adresse</h5>
-                                            <div class="form-group row">
-                                                <label for="nroAdr" class="col-sm-4 col-form-label">Numéro
-                                                    civique</label>
-                                                <div class="col-sm-8">
-                                                    <input type="number" class="form-control" id="nroAdr" name="nroAdr"
-                                                        step="1" title="Numéro Civique" pattern="[0-9]{5}" max="99999" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="rueAdr" class="col-sm-4 col-form-label">Rue</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="rueAdr" name="rueAdr"
-                                                        title="Rue" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-4">
-                                                    <label for="desVilAdr">Ville</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <select id="desVilAdr" name="desVilAdr" class="form-control"
-                                                        required>
-                                                        <option selected value="Montréal">Montréal</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="codPosAdr" class="col-sm-4 col-form-label">Code
-                                                    postal</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="codPosAdr"
-                                                        name="codPosAdr" title="A9A9A9" pattern="[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="cellFournisseur"
-                                                    class="col-sm-4 col-form-label">Téléphone</label>
-                                                <div class="col-sm-8">
-                                                    <input type="tel" class="form-control" min="1.0" max="5.0"
-                                                        id="cellFournisseur" name="cellFournisseur"
-                                                        pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <h5>Service</h5>
-                                            <div class="form-group row">
-                                                <div class="col-sm-4">
-                                                    <label for="typeSerFournisseur">Type</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <select id="typeSerFournisseur" name="typeSerFournisseur" class="form-control"
-                                                        required disabled>
-                                                        <option selected value="1">Personalisé</option>
-                                                        <option value="2">Agenda</option>
-                                                        <option value="3">Demande</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-4">
-                                                    <label for="idForfaitFournisseur">Forfait</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <select id="idForfaitFournisseur" name="idForfaitFournisseur" class="form-control"
-                                                        required disabled>
-                                                        <option selected value="1">Base</option>
-                                                        <option value="2">Stantard</option>
-                                                        <option value="3">Premium</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="datInsFournisseur" class="col-sm-4 col-form-label">Date d'inscription</label>
-                                                <div class="col-sm-8">
-                                                    <input type="date" class="form-control" id="datInsFournisseur"
-                                                        name="datInsFournisseur" title="Date d'inscription" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="datEcheFournisseur" class="col-sm-4 col-form-label">Date d'échéance</label>
-                                                <div class="col-sm-8">
-                                                    <input type="date" class="form-control" id="datEcheFournisseur"
-                                                        name="datEcheFournisseur" title="Date d'échéance" required>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer d-flex justify-content-center">
-
-                                                <button type="submit" class="btn btn-primary">Envoyer</button>
-
-                                                <button type="reset" class="btn btn-danger">Effacer</button>
-
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal Service -->
-                    <div class="modal fade" id="FormService" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bg-primary py-4 shadow">
-                                    <img src="images/logo.png" alt="">
-                                    <button type="button" class="close text-white" data-dismiss="modal"
-                                        aria-label="Close">
-                                        <span class="text-white" aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="container">
-                                        <form id="formService">
-                                            <div class="form-group row">
-                                                <label for="titreService" class="col-sm-4 col-form-label">Titre
-                                                    Service</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="titreService"
-                                                        name="titreService" title="Titre Service" maxlength="20" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="desShortService" class="col-sm-4 col-form-label">Description
-                                                    courte</label>
-                                                <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="desShortService"
-                                                        name="desShortService" title="Description courte" maxlength="50" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="descFilm"
-                                                    class="col-sm-4 col-form-label">Déscription</label>
-                                                <div class="col-sm-8">
-                                                    <textarea class="form-control" id="descFilm" name="descFilm"
-                                                        rows="3" title="Déscription du film" maxlength="250" required></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-4">
-                                                    <label for="">Catégorie</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <select id="idCatFilm" name="idCatFilm" class="form-control"
-                                                        required>
-                                                        <option selected value="">Sélectionnez une option</option>
-                                                        <option value="">Autos</option>
-                                                        <option value="">Sante</option>
-                                                        <option value="">Gastronomie</option>
-                                                        <option value="">Beauté</option>
-                                                        <option value="">Produits</option>
-                                                        <option value="">Voyages</option>
-                                                        <option value="">Maison</option>
-                                                        <option value="">Education</option>
-                                                        <option value="">Services</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="prixService" class="col-sm-4 col-form-label">Prix
-                                                    Service</label>
-                                                <div class="col-sm-8">
-                                                    <input type="number" class="form-control" min="1.0" max="5.0"
-                                                        id="prixService" name="prixService" step="0.1"
-                                                        title="Prix Service" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="promService" class="col-sm-4 col-form-label">Prix
-                                                    Promotion</label>
-                                                <div class="col-sm-8">
-                                                    <input type="number" class="form-control" min="1.0" max="5.0"
-                                                        id="promService" name="promService" step="0.1"
-                                                        title="Prix Promotion" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="refeService" class="col-sm-4 col-form-label">Prix
-                                                    Référe</label>
-                                                <div class="col-sm-8">
-                                                    <input type="number" class="form-control" min="1.0" max="5.0"
-                                                        id="refeService" name="refeService" step="0.1"
-                                                        title="Prix Référe" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="datlimfournisseur" class="col-sm-4 col-form-label">Date
-                                                    limite</label>
-                                                <div class="col-sm-8">
-                                                    <input type="date" class="form-control" id="datlimfournisseur"
-                                                        name="datlimfournisseur" title="Date limite" required>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-4 col-form-label">Image</label>
-                                                <div class="custom-file col-sm-8">
-                                                    <input type="file" class="custom-file-input" id="urlSerfournisseur"
-                                                        name="urlSerfournisseur" required>
-                                                    <label class="custom-file-label" for="urlSerfournisseur"
-                                                        data-browse="Choisir fichier">Sélectionner
-                                                        fichier</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-check row">
-                                                <input class="form-check-input" type="checkbox" value="" id="ActService"
-                                                    name="ActService">
-                                                <label class="form-check-label" for="ActService">
-                                                    Service active
-                                                </label>
-                                            </div>
-                                            <div class="modal-footer d-flex justify-content-center">
-
-                                                <button type="submit" class="btn btn-primary">Envoyer</button>
-
-                                                <button type="reset" class="btn btn-danger">Effacer</button>
-
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
->>>>>>> 68810e35a396ad553e286f21d43dd67d7abe80c3
                     </div>
 
                     <!-- Card content -->
@@ -1201,14 +950,13 @@
 
             <!-- Modal Profil -->
 
-            <div class="modal fade" id="FormFourniseur" tabindex="-1" role="dialog"
-                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="FormFourniseur" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary py-4 shadow">
                             <img src="images/logo.png" alt="">
-                            <button type="button" class="close text-white" data-dismiss="modal"
-                                aria-label="Close">
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                 <span class="text-white" aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -1216,7 +964,8 @@
                             <div class="container">
                                 <form id="" enctype="multipart/form-data" action="" method="POST">
                                     <div class="form-group row">
-                                        <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom fournisseur</label>
+                                        <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom
+                                            fournisseur</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control" id="nomFournisseur"
                                                 name="nomFournisseur" title="Nom Fournisseur" required>
@@ -1227,15 +976,15 @@
                                     <div class="form-group row">
                                         <label for="nroAdr" class="col-sm-4 col-form-label">Numéro civique</label>
                                         <div class="col-sm-8">
-                                            <input type="number" class="form-control" id="nroAdr"
-                                                name="nroAdr" step="1" title="Numéro Civique" required>
+                                            <input type="number" class="form-control" id="nroAdr" name="nroAdr" step="1"
+                                                title="Numéro Civique" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="rueAdr" class="col-sm-4 col-form-label">Rue</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="rueAdr"
-                                                name="rueAdr" title="Rue" required>
+                                            <input type="text" class="form-control" id="rueAdr" name="rueAdr"
+                                                title="Rue" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1243,8 +992,7 @@
                                             <label for="desVilAdr">Ville</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <select id="desVilAdr" name="desVilAdr" class="form-control"
-                                                required>
+                                            <select id="desVilAdr" name="desVilAdr" class="form-control" required>
                                                 <option selected value="Montréal">Montréal</option>
                                             </select>
                                         </div>
@@ -1252,8 +1000,8 @@
                                     <div class="form-group row">
                                         <label for="codPosAdr" class="col-sm-4 col-form-label">Code postal</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="codPosAdr"
-                                                name="codPosAdr" title="Code postal" required>
+                                            <input type="text" class="form-control" id="codPosAdr" name="codPosAdr"
+                                                title="Code postal" required>
                                         </div>
                                     </div>
                                     <hr>
@@ -1261,8 +1009,8 @@
                                         <label for="cellFournisseur" class="col-sm-4 col-form-label">Téléphone</label>
                                         <div class="col-sm-8">
                                             <input type="tel" class="form-control" min="1.0" max="5.0"
-                                                id="cellFournisseur" name="cellFournisseur"
-                                                title="Téléphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                                                id="cellFournisseur" name="cellFournisseur" title="Téléphone"
+                                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer d-flex justify-content-center">
@@ -1280,14 +1028,13 @@
             </div>
 
             <!-- Modal Service -->
-            <div class="modal fade" id="FormService" tabindex="-1" role="dialog"
-                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="FormService" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary py-4 shadow">
                             <img src="images/logo.png" alt="">
-                            <button type="button" class="close text-white" data-dismiss="modal"
-                                aria-label="Close">
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                 <span class="text-white" aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -1311,11 +1058,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="descFilm"
-                                            class="col-sm-4 col-form-label">Déscription</label>
+                                        <label for="descFilm" class="col-sm-4 col-form-label">Déscription</label>
                                         <div class="col-sm-8">
-                                            <textarea class="form-control" id="descFilm" name="descFilm"
-                                                rows="3" title="Déscription du film" required></textarea>
+                                            <textarea class="form-control" id="descFilm" name="descFilm" rows="3"
+                                                title="Déscription du film" required></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1323,8 +1069,7 @@
                                             <label for="">Catégorie</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <select id="idCatFilm" name="idCatFilm" class="form-control"
-                                                required>
+                                            <select id="idCatFilm" name="idCatFilm" class="form-control" required>
                                                 <option selected value="">Sélectionnez une option</option>
                                                 <option value="">Autos</option>
                                                 <option value="">Sante</option>
@@ -1343,8 +1088,8 @@
                                             Service</label>
                                         <div class="col-sm-8">
                                             <input type="number" class="form-control" min="1.0" max="5.0"
-                                                id="prixService" name="prixService" step="0.1"
-                                                title="Prix Service" required>
+                                                id="prixService" name="prixService" step="0.1" title="Prix Service"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1352,8 +1097,8 @@
                                             Promotion</label>
                                         <div class="col-sm-8">
                                             <input type="number" class="form-control" min="1.0" max="5.0"
-                                                id="promService" name="promService" step="0.1"
-                                                title="Prix Promotion" required>
+                                                id="promService" name="promService" step="0.1" title="Prix Promotion"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1361,8 +1106,8 @@
                                             Référe</label>
                                         <div class="col-sm-8">
                                             <input type="number" class="form-control" min="1.0" max="5.0"
-                                                id="refeService" name="refeService" step="0.1"
-                                                title="Prix Référe" required>
+                                                id="refeService" name="refeService" step="0.1" title="Prix Référe"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1375,21 +1120,54 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Image</label>
-                                        <div class="custom-file col-sm-8">
-                                            <input type="file" class="custom-file-input" id="urlSerfournisseur"
+                                        <div class="col-sm-8 p-3" id="div-images">
+                                            <label>
+                                                <input type="radio" name="test" value="locationvoiture.jpg" checked>
+                                                <img src="pochettes/locationvoiture.jpg" title="Autos 1">
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="test" value="coloration_cheveux.jpg">
+                                                <img src="pochettes/coloration_cheveux.jpg">
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="test" value="lavevitres.jpg">
+                                                <img src="pochettes/lavevitres.jpg">
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="test" value="ballotindechocolats.jpg">
+                                                <img src="pochettes/ballotindechocolats.jpg">
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="test" value="niagarafallscanadian.jpg">
+                                                <img src="pochettes/niagarafallscanadian.jpg">
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="test" value="pizzapizza.jpg">
+                                                <img src="pochettes/pizzapizza.jpg">
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="test" value="propnl.jpg">
+                                                <img src="pochettes/propnl.jpg">
+                                            </label>
+
+                                            <label>
+                                                <input type="radio" name="test" value="seancedosteopathie.jpg">
+                                                <img src="pochettes/seancedosteopathie.jpg">
+                                            </label>
+
+                                            <!-- <input type="file" class="custom-file-input" id="urlSerfournisseur"
                                                 name="urlSerfournisseur" required>
                                             <label class="custom-file-label" for="urlSerfournisseur"
                                                 data-browse="Choisir fichier">Sélectionner
-                                                fichier</label>
+                                                fichier</label> -->
                                         </div>
                                     </div>
-                                    <div class="form-check row">
-                                        <input class="form-check-input" type="checkbox" value="" id="ActService"
-                                            name="ActService">
-                                        <label class="form-check-label" for="ActService">
-                                            Service active
-                                        </label>
-                                    </div>
+
                                     <div class="modal-footer d-flex justify-content-center">
 
                                         <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -1727,23 +1505,23 @@
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="js/routes.js"></script>
     <script>
-        $("#formFourniseur").submit(function(event) {
+        $("#formFourniseur").submit(function (event) {
             alert('Test');
-         /* stop form from submitting normally */
-         event.preventDefault();
-        
-         /* get the action attribute from the <form action=""> element */
-         var url = $(this).attr('action');
-        
-        //  $.ajax({
-        //  url : url,
-        //  type : 'GET',
-        //  success : function(code_html, statut){
-        //  $("#article").html(code_html);
-        //  }
-        //  });
-         });
-        </script>
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+            /* get the action attribute from the <form action=""> element */
+            var url = $(this).attr('action');
+
+            //  $.ajax({
+            //  url : url,
+            //  type : 'GET',
+            //  success : function(code_html, statut){
+            //  $("#article").html(code_html);
+            //  }
+            //  });
+        });
+    </script>
 </body>
 
 </html>
