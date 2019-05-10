@@ -21,7 +21,9 @@
     <link href="css/styles.css" rel="stylesheet">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="requettes/requetesFournisseur.js"></script>
+    <script src="requetes/requetesAdministrateur.js"></script>
     <script src="vues/vuesFournisseur.js"></script>
+    <script src="vues/vuesAdministrateur.js"></script>
     <script src="js/jsFournisseur.js"></script>
 
     <title>bitvoix.com</title>
@@ -105,7 +107,10 @@
                                 <a class="dropdown-item" href="#">Education</a>
                                 <a class="dropdown-item" href="#">Services</a>
                             </div>   
-                            
+
+                            <input type="button" value="Fournisseur" onClick="requetesFour('FourAccueil');">
+                            <input type="button" value="Administrateur" onClick="requetesAdm('listerAutorisations');">
+
                         </li>
                         <input type="button" value="Fournisseur" onClick="requetesFour('FourAccueil');">
                         <li class="nav-item active" id="loginDiv">
@@ -184,17 +189,6 @@
                                                 class="form-control" placeholder="Mot de passe" aria-label="Courriel"
                                                 aria-describedby="basic-addon1">
                                         </div>
-<<<<<<< HEAD:indexw.html
-                                        <!-- <input type="password" class="form-control" placeholder="Mot de passe"
-                                            aria-label="Courriel" aria-describedby="basic-addon1"> -->
-                                    </div>
-
-                                    <div class="text-center mt-3">
-                                        <button class="btn btn-primary shadow">Se Connecter</button>
-                                    </div>
-=======
->>>>>>> 68810e35a396ad553e286f21d43dd67d7abe80c3:index.html
-
                                         <div class="text-center mt-3">
                                             <button type="button" class="btn btn-primary shadow"
                                                 onClick="requetes('loginSubmit');">Se Connecter</button>
