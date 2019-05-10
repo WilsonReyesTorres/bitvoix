@@ -370,7 +370,7 @@ function servicesAccueil(donnees) {
 	}
 	//fin del for
 	rep += '</div>';
-	$('#main-container').html(rep);
+	$('#divprincipal').html(rep);
 }
 
 var vue = function (action, donnees) {

@@ -55,6 +55,11 @@ function envoyerLoginSubmit() {
 			else {
 				$('#modalLRForm').modal('hide');
 				vue('LoginOKJSON', message.msg);
+				if(message.msg=='AdminBitvoix'){
+					$('#map').hide();
+					listerAut();
+				}
+				
 			}
 		},
 		fail: function () {
@@ -99,7 +104,13 @@ function validerLogin() {
 			if (message.status == 'success') {
 				$('#modalLRForm').modal('hide');
 				vue('LoginOKJSON', message.msg);
-				montrerServices();
+				if(message.msg=='AdminBitvoix'){
+					$('#map').hide();
+					listerAut();
+				}
+				else{
+					montrerServices();
+				}
 			}
 			if (message.status == 'nonLogin')
 				montrerServices();
