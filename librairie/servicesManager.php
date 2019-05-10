@@ -51,7 +51,10 @@ class ServicesManager
         }
       public function getList()
         {
-          $requete = "SELECT * FROM services ORDER BY idService";
+          $requete = "SELECT idService, services.idFournisseur, titreService, desShortService, desService, services.idCategorie, actService, prixService, promService, refeService, refeEfeService, datLimService, pochetteService, autService, fournisseur.nomFournisseur, categories.desCategorie 
+          FROM services, fournisseur, categories 
+          WHERE services.idFournisseur = fournisseur.idFournisseur AND services.idCategorie = categories.idCategorie
+          ORDER BY idService";
           $stmt = $this->_pdo->prepare($requete);
           $stmt->execute();
           $result = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -61,7 +64,7 @@ class ServicesManager
         {
           $idFournisseur = (int) $idFournisseur;
           // $requete = 'SELECT * FROM services WHERE idFournisseur = ? ';
-          $requete = ' SELECT services.*, 	AVG(qualRequest) AS Quality, COUNT(qualRequest) as kcount
+          $requete = ' SELECT services.*, 	truncate(AVG(qualRequest),1) AS Quality, COUNT(qualRequest) as kcount
            FROM services, requests
            WHERE services.idService =  requests.idService
              AND services.idFournisseur = ?
