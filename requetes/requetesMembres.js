@@ -56,9 +56,6 @@ function envoyerLoginSubmit() {
 				$('#modalLRForm').modal('hide');
 				vue('LoginOKJSON', message.msg);
 			}
-
-
-
 		},
 		fail: function () {
 			alert("Vous avez un GROS problème");
@@ -66,6 +63,30 @@ function envoyerLoginSubmit() {
 	});
 }
 
+function envoyerUpdateMembre() {
+	var membreFormUp = new FormData(document.getElementById('membreFormUp'));
+	membreFormUp.append('action', 'membreUpdate');
+	$.ajax({
+		url: 'serveur/controleurMembres.php',
+		type: 'POST',
+		data: membreFormUp,
+		dataType: 'json',
+		contentType: false,
+		processData: false,
+		success: function (message) {
+			if (message.status == 'error')
+				vue('erreurLoginSubmitJSON', message.msg);
+			else {
+				$('#modalLRForm').modal('hide');
+				vue('modalConnecter', message.msg)
+				//vue('LoginOKJSON', message.msg);
+			}
+		},
+		fail: function () {
+			alert("Vous avez un GROS problème");
+		}
+	});
+}
 function validerLogin() {
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
@@ -75,9 +96,10 @@ function validerLogin() {
 		success: function (message) {
 			if (message.status == 'error')
 				vue('erreurLoginSubmitJSON', message.msg);
-			if (message.status == 'succes') {
+			if (message.status == 'success') {
 				$('#modalLRForm').modal('hide');
 				vue('LoginOKJSON', message.msg);
+				montrerServices();
 			}
 			if (message.status == 'nonLogin')
 				montrerServices();
@@ -109,20 +131,15 @@ function montrerServices() {
 
 }
 
-function montrerAccueil() {
-
-}
-
-function envoyerLogin() {
+function envoyerMajProfil() {
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
 		type: 'POST',
-		data: 'action=login',
-		//dataType:'json',
-		dataType: 'html',
-		success: function (formHtml) {
-			$('#container').html(formHtml);
-			//vue('listerJSON',listeFilms);
+		data: 'action=chercheUser',
+		dataType: 'json',
+		success: function (donnes) {
+			//alert(donnes);
+			vue('formMajUser', donnes);
 		},
 		fail: function () {
 			alert("Vous avez un GROS problème");
@@ -150,35 +167,11 @@ function envoyerLogout() {
 		}
 	});
 }
-/*
-function envoyerRegister() {
-	$.ajax({
-		url: 'serveur/controleurMembres.php',
-		type: 'POST',
-		//data:{"action":'login'},
-		data: 'action=register',
-		//dataType:'json',
-		dataType: 'html',
-		success: function (formHtml) {
-			$('#container').html(formHtml);
-			//vue('listerJSON',listeFilms);
-		},
-		fail: function () {
-			alert("Vous avez un GROS problème");
-		}
-	});
-}
-*/
+
 
 //controleur des requetes
 var requetes = function (action) {
 	switch (action) {
-		case 'login':
-			envoyerLogin();
-			break;
-			/*case 'register':
-				envoyerRegister();
-				break;*/
 		case 'insertMembre':
 			envoyerInsertMembre();
 			break;
@@ -188,6 +181,12 @@ var requetes = function (action) {
 		case 'logout':
 			envoyerLogout();
 			break;
-		default:
+		case 'majProfil':
+			envoyerMajProfil();
+			break;
+		case 'updateMembre':
+			envoyerUpdateMembre();
+			break;
+			default:
 	}
 }

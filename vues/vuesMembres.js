@@ -1,4 +1,6 @@
-var modalsLogin = '<div class="modal-header bg-primary py-4 shadow">' +
+
+function modalConnecter(){
+	rep = '<div class="modal-header bg-primary py-4 shadow">' +
 	'<!-- Logo bitvoix -->' +
 	'' +
 	'<img src="images/logo.png" alt="">' +
@@ -147,7 +149,8 @@ var modalsLogin = '<div class="modal-header bg-primary py-4 shadow">' +
 	'</div>' +
 	'' +
 	'</div>';
-
+	$('#modalContent').html(rep);
+}
 function menuMembre(membrePrenom) {
 	$('#loginDiv').addClass("dropdown");
 	rep = '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"' +
@@ -155,7 +158,7 @@ function menuMembre(membrePrenom) {
 		membrePrenom +
 		'</a>' +
 		'<div class="dropdown-menu" aria-labelledby="navbarDropdown">' +
-		'<span class="lien dropdown-item" onClick="requetes(\'majProfil\');">Mise à jour profil</span>' +
+		'<span class="lien dropdown-item" onClick="requetes(\'majProfil\');">Mise à jour Membre</span>' +
 		'<span class="lien dropdown-item" onClick="requetesFour(\'FourAccueil\');">Fournisseur</span>' +
 		'<span class="lien dropdown-item" onClick="requetes(\'logout\');">Déconnexion</span>' +
 		'</div>';
@@ -166,6 +169,52 @@ function menuConnexion() {
 	$('#loginDiv').removeClass("dropdown");
 	rep = '<a class="nav-link" href="#" data-toggle="modal" data-target="#modalLRForm">Se Connecter<span class="sr-only">(current)</span></a>';
 	$('#loginDiv').html(rep);
+}
+
+function formMajUser(donnees){
+	var rep = '<div class="modal-header bg-primary py-4 shadow">' +
+	'<!-- Logo bitvoix -->' +
+	'<img src="images/logo.png" alt="">' +
+	'<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">' +
+		'<span class="text-white" aria-hidden="true">&times;</span>' +
+	'</button>' +
+	'</div>' +
+	'' +
+	'<div class="modal-body">' +
+		'<div id="messageEnregistrer"></div>' +
+			'<form id="membreFormUp">' +
+				'<div class="input-group mb-3">' +
+					'<div class="input-group-prepend">' +
+						'<span class="input-group-text"><i class="fas fa-user mr-1"></i></span>' +
+					'</div>' +
+					'<input type="text" id="preNomMembre" name="preNomMembre" value="' +donnees.preNomMembre+'"'+
+					' class="form-control" placeholder="Prénom" aria-label="Prenom" aria-describedby="basic-addon1">' +
+				'</div>' +
+				'<div class="input-group mb-3">' +
+					'<div class="input-group-prepend">' +
+						'<span class="input-group-text"><i class="fas fa-user mr-1"></i></span>' +
+					'</div>' +
+					'<input type="text" id="nomMembre" name="nomMembre" class="form-control" value="' +donnees.nomMembre+'"'+
+					' placeholder="Nom" aria-label="Nom" aria-describedby="basic-addon1">' +
+					'</div>' +
+				'<div class="input-group mb-3">' +
+					'<div class="input-group-prepend">' +
+						'<span class="input-group-text"><i class="fas fa-envelope prefix"></i></span>' +
+					'</div>' +
+					'<input type="email" id="courrielMembre" readonly name="courrielMembre" value="' +donnees.courrielMembre+'"'+
+					' class="form-control" placeholder="Courriel" aria-label="Courriel"' +
+					' aria-describedby="basic-addon1">' +
+				'</div>' +
+				'<input type="hidden" id="idMembre" name="idMembre" value="'+donnees.idMembre+'">'+
+				'<div class="text-center form-sm mt-2">' +
+					'<button type="button" class="btn btn-primary shadow" onClick="requetes(\'updateMembre\');">Mise à jour Membre</button>' +
+				'</div>' +
+			'</form>' +
+		'</div>' +
+	'</div>';
+	$('#modalContent').html(rep);
+	$('#modalLRForm').modal('show');
+	//$('#modalLRForm').modal('hide');
 }
 
 function servicesAccueil(donnees) {
@@ -230,8 +279,8 @@ function servicesAccueil(donnees) {
 			'<div class="card-body">' +
 			'' +
 			'<!-- Title -->' +
-			'<h5 class="card-title font-weight-bold"><a>' + donnees[j].titreService + '</a></h5>' +
-			'' +
+			'<h5 class="font-weight-bold"><a>' + donnees[j].titreService + '</a></h5>' +
+			'<p class="card-text small text-muted ">' + donnees[j].nomFournisseur + '</p>' +
 			'<!-- Text -->' +
 			'<p class="card-text">' + donnees[j].desShortService + '</p>' +
 			'<ul class="list-unstyled list-inline rating mb-0">';
@@ -357,6 +406,12 @@ var vue = function (action, donnees) {
 		case 'servicesAccueil':
 			servicesAccueil(donnees);
 			break;
+		case 'formMajUser':
+		 	formMajUser(donnees);
+			break;
+		case 'modalConnecter':
+			modalConnecter(donnees);
+		   break;
 	}
 
 }

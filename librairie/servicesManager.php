@@ -52,8 +52,8 @@ class ServicesManager
     {
 //            echo '<br> ID: '.$idCate.'<br>';
         $idService = (int) $idService;
-        $requete = 'SELECT COUNT(idRequest) as nomQ, AVG(qualRequest) AS qualServ
-        FROM requests 
+        $requete = 'SELECT COUNT(idRequest) as nomQ, round(AVG(qualRequest)*2,0)/2 AS qualServ
+        FROM requests
         WHERE idService=? GROUP BY idService';
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($idService));
@@ -74,9 +74,19 @@ class ServicesManager
     }
     public function getListServices()
     {
-        $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
-        FROM services, fournisseur, adresse 
-        WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 ORDER BY services.idService;";
+        if ((isset($_SESSION['sessData']["lat"])) && (isset($_SESSION['sessData']["lng"]))) {
+            $longitude = $_SESSION['sessData']["lng"];
+            $latitude = $_SESSION['sessData']["lat"];
+            $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr,
+            ( 6371 * acos( cos( radians(" . $latitude . ") ) * cos( radians( latiFournisseur ) ) * cos( radians( longFournisseur ) - radians(" . $longitude . ") ) + sin( radians(" . $latitude . ") ) * sin( radians( latiFournisseur ) ) ) ) AS distance
+            FROM services, fournisseur, adresse
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 HAVING distance < 10 ORDER BY services.idService;";
+        } else {
+            $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
+            FROM services, fournisseur, adresse
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 ORDER BY services.idService;";
+        }
+
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -84,15 +94,23 @@ class ServicesManager
     }
     public function getListServicesCat($idCategorie)
     {
-        $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
-        FROM services, fournisseur, adresse 
-        WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 AND services.idCategorie=? ORDER BY services.idService;";
+        if ((isset($_SESSION['sessData']["lat"])) && (isset($_SESSION['sessData']["lng"]))) {
+            $longitude = $_SESSION['sessData']["lng"];
+            $latitude = $_SESSION['sessData']["lat"];
+            $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr,
+            ( 6371 * acos( cos( radians(" . $latitude . ") ) * cos( radians( latiFournisseur ) ) * cos( radians( longFournisseur ) - radians(" . $longitude . ") ) + sin( radians(" . $latitude . ") ) * sin( radians( latiFournisseur ) ) ) ) AS distance
+            FROM services, fournisseur, adresse
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 AND services.idCategorie=? HAVING distance < 10 ORDER BY services.idService;";
+        } else {
+            $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
+            FROM services, fournisseur, adresse
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 AND services.idCategorie=? ORDER BY services.idService;";
+        }
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($idCategorie));
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
-
 
     public function update(Services $servi)
     {

@@ -1,7 +1,9 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
 require_once "../bd/connecter.php";
 require_once '../librairie/services.php';
 require_once '../librairie/servicesManager.php';
+
 
 /*****************************  commencer test ***************/
 

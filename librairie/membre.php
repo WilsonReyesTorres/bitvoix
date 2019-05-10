@@ -53,7 +53,6 @@ class Membre{
         }elseif(!array_key_exists("start",$conditions) && array_key_exists("limit",$conditions)){
             $sql .= ' LIMIT '.$conditions['limit']; 
         }
-        
         $result = $this->db->query($sql);
         
         if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){
@@ -134,6 +133,7 @@ class Membre{
                     $i++;
                 }
             }
+            //echo $query;
             $update = $this->db->query($query);
             return $update;
         }else{
