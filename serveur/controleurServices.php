@@ -131,25 +131,24 @@ function fiche(){
       'desCate' => $_POST['desCategorie']
       ];
     */
-    $donnees = [
-      'idService' => '3',
-      'idFournisseur' => '1', 
-      'titreService' => 'Titre', 
-      'desShortService' => 'Traduction',
-      'desService' => 'Traduction certifiée en français et anglais',
-      'idCategorie' => '1', 
-      'actService' =>  '1',
-      'prixService' => '12.20',
-      'promService' => '10.22',
-      'refeService' => '9.00',
-      'refeEfeService' => '1',
-      'datLimService' => '2019-05-31',
-      'pochetteService' => 'Tout le monde debout.jpg',
-      'autService' => '1' ];
-    
-   $servi = new Services($donnees);
+    // $donnees = [
+    //   'idService' => $_POST['idService'],
+    //   'idFournisseur' => '', 
+    //   'titreService' => '', 
+    //   'desShortService' => '',
+    //   'desService' => 'Traduction certifiée en français et anglais',
+    //   'idCategorie' => '1', 
+    //   'actService' =>  '1',
+    //   'prixService' => '12.20',
+    //   'promService' => '10.22',
+    //   'refeService' => '9.00',
+    //   'refeEfeService' => '1',
+    //   'datLimService' => '2019-05-31',
+    //   'pochetteService' => 'Tout le monde debout.jpg',
+    //   'autService' => '1' ];
+    //  $servi = new Services($donnees);
    $manager = new ServicesManager(); 
-   $ServicesList = $manager->get($servi->idService());
+   $ServicesList = $manager->get($_POST['idService']);
    echo json_encode($ServicesList);
 }
 

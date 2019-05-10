@@ -21,9 +21,10 @@ return rep;
 
 
 
-function  formFournisseur(){
+function  formFournisseur(ModiNew){
     var rep1 = /*html*/ `
     <div class="container">
+    
     <form id="enregFormFournisseur">
     <div class="form-group row">
         <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom
@@ -36,9 +37,11 @@ function  formFournisseur(){
     <hr>
     <h5>Adresse</h5>
     <div class="form-group row">
+        
         <label for="nroAdr" class="col-sm-4 col-form-label">Numéro
             civique</label>
         <div class="col-sm-8">
+            <input type="hidden" id="idAdrFournisseur" name="idAdrFournisseur">
             <input type="number" class="form-control" id="nroAdr" name="nroAdr"
                 step="1" title="Numéro Civique" pattern="[0-9]{5}" max="99999" required>
         </div>
@@ -73,7 +76,7 @@ function  formFournisseur(){
         <label for="cellFournisseur"
             class="col-sm-4 col-form-label">Téléphone</label>
         <div class="col-sm-8">
-            <input type="tel" class="form-control" min="1.0" max="5.0"
+            <input type="tel" class="form-control" 
                 id="cellFournisseur" name="cellFournisseur"
                 pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
         </div>
@@ -120,11 +123,17 @@ function  formFournisseur(){
                 name="datEcheFournisseur" title="Date d'échéance" readonly>
         </div>
     </div>
-    <div class="modal-footer d-flex justify-content-center">
-
-        <button type="button" class="btn btn-primary" onclick = "requetesFour(\'enregistrer\')" >Envoyer</button>
-    
-        <button type="reset" class="btn btn-danger">Effacer</button>
+    <div class="modal-footer d-flex justify-content-center"> `;
+       if (ModiNew == "N"){
+        rep1+= /*html*/ `
+        <button type="button" class="btn btn-primary" onclick = "requetesFour(\'enregistrer\')" >enregistrer</button> 
+        <button type="reset" class="btn btn-danger">Effacer</button>`;
+       }else if (ModiNew == "M") {
+        rep1+= /*html*/ `
+        <button type="button" class="btn btn-primary" onclick = "requetesFour(\'modifier\')" >Modifier</button> `;           
+       }
+    rep1+= /*html*/`
+        
 
     </div>
 </form>
@@ -168,9 +177,26 @@ function date_actuel(){
 
 
 function montreFournisseur(fiche){
-    alert("montreFournisseur");
-    $('#divprincipal').html(formFournisseur());
+    // alert("montreFournisseur");
+    // $('#divprincipal').html(formFournisseur());
     // $('#num').val(fiche.num);
+    $('#idAdrFournisseur').val(fiche.idAdrFournisseur);
+    $('#nomFournisseur').val(fiche.nomFournisseur);
+    $('#cellFournisseur').val(fiche.cellFournisseur);
+    $('#typeSerFournisseur').val(fiche.typeSerFournisseur);
+    $('#idForfaitFournisseur').val(fiche.idForfaitFournisseur);
+    $('#datInsFournisseur').val(fiche.datInsFournisseur);
+    $('#datEcheFournisseur').val(fiche.datEcheFournisseur);
+    $('#nroAdr').val(fiche.nroAdr);
+    $('#rueAdr').val(fiche.rueAdr); 
+    $('#desVilAdr').val(fiche.desVilAdr); 
+    $('#codPosAdr').val(fiche.codPosAdr);
+
+    // $('#statuFournisseur').val(fiche.statuFournisseur);
+    // $('#longFournisseur').val(fiche.num);
+    // $('#latiFournisseur').val(fiche.num);
+
+    
 }
 
 function montreFournisseurN(fiche){
@@ -180,6 +206,280 @@ function montreFournisseurN(fiche){
 
 }
  
+function montreetoile(NroEtoile,total)
+{   var cadena = "";
+    var Nro=Math.floor(NroEtoile);
+    var decimal = NroEtoile - Nro;
+    for (var i=0; i < Nro; i++ ){
+         cadena += "<li class=\"list-inline-item mr-0\"><i class=\"fas fa-star amber-text text-warning\"></i></li>"; 
+    }
+    if (decimal >= 0.5){
+        cadena += "<li class=\"list-inline-item\"><i class=\"fas fa-star-half-alt amber-text text-warning\"></i> </li>";
+    } else {
+        // cadena += "<li class=\"list-inline-item\"><i class=\"fas fa-star-half-alt amber-text text-warning\"></i> </li>";
+        cadena += "_";
+    }
+    cadena += "<li class=\"list-inline-item\"> <p class=\"text-muted\">"+NroEtoile+" ("+total+")</p> </li>";
+
+    // <li class="list-inline-item mr-0"><i
+    //     class="fas fa-star amber-text text-warning"></i>
+    // </li>
+    // <li class="list-inline-item mr-0"><i
+    //     class="fas fa-star amber-text text-warning"></i>
+    // </li>
+    // <li class="list-inline-item mr-0"><i
+    //     class="fas fa-star amber-text text-warning"></i>
+    // </li>
+    // <li class="list-inline-item mr-0"><i
+    //     class="fas fa-star amber-text text-warning"></i>
+    // </li>
+    // <li class="list-inline-item"><i
+    //     class="fas fa-star-half-alt amber-text text-warning"></i>
+    // </li>
+    // <li class="list-inline-item">
+    //     <p class="text-muted">4.5 (413)</p>
+    // </li>
+   return cadena
+}
+
+function ImagenActualise(SelecValue,pochetteSelec){
+    SelecValue =  parseInt(SelecValue);
+//   alert("Imagen actual"+ "Options: " + SelecValue + "Objeto: "+objactualise);
+//   +
+// ''+
+// ''+
+// '<label>'+
+// '<input type="radio" name="test" value="lavevitres.jpg">'+
+// '<img src="pochettes/lavevitres.jpg">'+
+// '</label>'+
+// ''+
+// '<label>'+
+// '<input type="radio" name="test" value="ballotindechocolats.jpg">'+
+// '<img src="pochettes/ballotindechocolats.jpg">'+
+// '</label>'+
+// '<label>'+
+// '<input type="radio" name="test" value="niagarafallscanadian.jpg">'+
+// '<img src="pochettes/niagarafallscanadian.jpg">'+
+// '</label>'+
+// ''+
+// '<label>'+
+// '<input type="radio" name="test" value="pizzapizza.jpg">'+
+// '<img src="pochettes/pizzapizza.jpg">'+
+// '</label>'+
+// ''+
+// '<label>'+
+// '<input type="radio" name="test" value="propnl.jpg">'+
+// '<img src="pochettes/propnl.jpg">'+
+// '</label>'+
+// ''+
+// '<label>'+
+// '<input type="radio" name="test" value="seancedosteopathie.jpg">'+
+// '<img src="pochettes/seancedosteopathie.jpg">'+
+// '</label>'
+
+    switch(SelecValue) {
+        case 1:
+             if (pochetteSelec === 'coloration_cheveux.jpg'){
+                 imgout = '<label>'+ '<input type="radio" name="pochetteService" value="coloration_cheveux.jpg" checked>'+
+                '<img src="/pochettes/autos/coloration_cheveux.jpg" title="Autos">'+ '</label>';  
+               }else{
+                 imgout = '<label>'+ '<input type="radio" name="pochetteService" value="coloration_cheveux.jpg" >'+
+                 '<img src="/pochettes/autos/coloration_cheveux.jpg" title="Autos">'+ '</label>';  
+               }
+          break;
+        case 2:
+            if (pochetteSelec === 'seancedosteopathie.jpg'){
+               imgout = '<label>'+ '<input type="radio" name="pochetteService" value="seancedosteopathie.jpg" checked>'+
+               '<img src="pochettes/sante/seancedosteopathie.jpg" title="Sante">'+ '</label>';  
+            }{
+                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="seancedosteopathie.jpg" >'+
+                '<img src="pochettes/sante/seancedosteopathie.jpg" title="Sante">'+ '</label>';  
+            }
+          break;
+        case 3:
+           if (pochetteSelec === 'seancedosteopathie.jpg'){
+              imgout = '<label>'+ '<input type="radio" name="pochetteService" value="pizzapizza.jpg" checked>'+
+              '<img src="pochettes/gastronomie/pizzapizza.jpg" title="Gastronomie">'+ '</label>';  
+            }else{
+                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="pizzapizza.jpg" >'+
+              '<img src="pochettes/gastronomie/pizzapizza.jpg" title="Gastronomie">'+ '</label>';  
+            } 
+          break;
+        case 4:
+           if (pochetteSelec === 'seancedosteopathie.jpg'){
+            imgout = '<label>'+ '<input type="radio" name="test" value="lavevitres.jpg" checked>'+
+            '<img src="pochettes/beaute/lavevitres.jpg" title="Beauté">'+ '</label>';  
+            }else{
+              imgout = '<label>'+ '<input type="radio" name="test" value="lavevitres.jpg" >'+
+              '<img src="pochettes/beaute/lavevitres.jpg" title="Beauté">'+ '</label>';  
+            }
+            break;
+        case 5:
+            if (pochetteSelec === 'propnl.jpg'){
+                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="propnl.jpg" checked>'+
+                '<img src="pochettes/produits/propnl.jpg" title="Produits">'+ '</label>';  
+            }else{
+                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="propnl.jpg" >'+
+                '<img src="pochettes/produits/propnl.jpg" title="Produits">'+ '</label>';  
+            }
+            break;
+        case 6:
+            if (pochetteSelec === 'ballotindechocolats.jpg'){
+            imgout = '<label>'+ '<input type="radio" name="pochetteService" value="ballotindechocolats.jpg" checked>'+
+            '<img src="pochettes/voyages/ballotindechocolats.jpg" title="Voyages">'+ '</label>';  
+            }else{
+                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="ballotindechocolats.jpg" >'+
+            '<img src="pochettes/voyages/ballotindechocolats.jpg" title="Voyages">'+ '</label>';  
+            }
+            break;
+        case 7:
+            if (pochetteSelec === 'niagarafallscanadian.jpg'){
+                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="niagarafallscanadian.jpg" >'+
+                '<img src="pochettes/maison/niagarafallscanadian.jpg" title="Maison">'+ '</label>';  
+            }else{
+                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="niagarafallscanadian.jpg" checked>'+
+                '<img src="pochettes/maison/niagarafallscanadian.jpg" title="Maison">'+ '</label>';  
+            }
+          break;
+        case 8:
+        if (pochetteSelec === 'locationvoiture.jpg'){
+            imgout = '<label>'+ '<input type="radio" name="pochetteService" value="locationvoiture.jpg" checked>'+
+            '<img src="pochettes/education/locationvoiture.jpg" title="Education">'+ '</label>';  
+        }else{
+            imgout = '<label>'+ '<input type="radio" name="pochetteService" value="locationvoiture.jpg" >'+
+            '<img src="pochettes/education/locationvoiture.jpg" title="Education">'+ '</label>';  
+        }
+          break;
+        case 9:
+          if (pochetteSelec === 'ballotindechocolats.jpg'){
+            imgout = '<label>'+ '<input type="radio" name="pochetteService" value="ballotindechocolats.jpg" checked>'+
+            '<img src="pochettes/services/ballotindechocolats.jpg" title="Services">'+ '</label>';  
+            }{
+                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="ballotindechocolats.jpg" >'+
+                '<img src="pochettes/services/ballotindechocolats.jpg" title="Services">'+ '</label>';  
+            }
+          break;  
+        default:
+      }
+    
+         alert("dibujando div-images");
+         $('#div-images').html(""); 
+         $('#div-images').html(imgout);
+    
+}
+
+
+function montreFormService(){
+    rep1 = /*html*/`
+    <form id="AddServiceFuornisseur" >
+    <div class="form-group row">
+        <label for="titreService" class="col-sm-4 col-form-label">Titre
+            Service</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="titreService"
+                name="titreService" title="Titre Service" required>
+            <input type="hidden" class="form-control" id="idService"
+                name="idService">    
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="desShortService" class="col-sm-4 col-form-label">Description
+            courte</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="desShortService"
+                name="desShortService" title="Description courte" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="desService"
+            class="col-sm-4 col-form-label">Déscription</label>
+        <div class="col-sm-8">
+            <textarea class="form-control" id="desService" name="desService"
+                rows="3" title="Déscription du Service" required></textarea>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <label for="">Catégorie</label>
+        </div>
+        <div class="col-sm-8">
+            <select id="idCategorie" name="idCategorie" class="form-control" onchange="ImagenActualise(this.value,'X')"
+                required>
+                <option value="">Sélectionnez une option</option>
+                <option value="1">Autos</option>
+                <option value="2">Sante</option>
+                <option value="3">Gastronomie</option>
+                <option value="4">Beauté</option>
+                <option value="5">Produits</option>
+                <option value="6">Voyages</option>
+                <option value="7">Maison</option>
+                <option value="8">Education</option>
+                <option  selected  value="9">Services</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="prixService" class="col-sm-4 col-form-label">Prix
+            Service</label>
+        <div class="col-sm-8">
+            <input type="number" class="form-control" 
+                id="prixService" name="prixService" step="0.1"
+                title="Prix Service" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="promService" class="col-sm-4 col-form-label">Prix
+            Promotion</label>
+        <div class="col-sm-8">
+            <input type="number" class="form-control" 
+                id="promService" name="promService" step="0.1"
+                title="Prix Promotion" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="refeService" class="col-sm-4 col-form-label">Prix
+            Référe</label>
+        <div class="col-sm-8">
+            <input type="number" class="form-control" 
+                id="refeService" name="refeService" step="0.1"
+                title="Prix Référe" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="datLimService" class="col-sm-4 col-form-label">Date
+            limite</label>
+        <div class="col-sm-8">
+            <input type="date" class="form-control" id="datLimService"
+                name="datLimService" title="Date limite" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Image</label>
+        <div class="col-sm-8 p-3" id="div-images">
+            <!--imagenes-->
+            
+        </div>
+    </div>
+    <div class="form-check row">
+        <input class="form-check-input" type="checkbox" value="" id="ActService"
+            name="ActService" readonly>
+        <label class="form-check-label" for="ActService">
+            Service active
+        </label>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+
+        <button type="button" class="btn btn-primary">Enregistrer</button>
+
+        <button type="button" class="btn btn-danger">Effacer</button>
+
+    </div>
+    </form>`;
+return rep1;
+
+}
+
+
 function formServicesFour_modal(fiche){
     
 
@@ -195,70 +495,59 @@ function formServicesFour_modal(fiche){
         </div>
         <div class="row mt-2">
             <!-- Card Service du Fournisseur -->
-            <div class="col-lg-4 col-sm-6 mb-2">`;
-  
+            `;
+            
             if (fiche.idService !== "" ) {
-            rep1+=  /*html*/ ` 
-             <!-- Card -->
-             <div class="card booking-card shadow" id="card-services">
-
-                    <!-- Card image -->
-                    <div class="view overlay">
-                        <img class="card-img-top" src="images/auto.jpg" alt="Card image cap">
-                        <a href="#!">
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                    <!-- Card content -->
-                    <div class="card-body">
-
-                        <!-- Text -->
-                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
-                        <ul class="list-unstyled list-inline rating mb-0">
-                            <li class="list-inline-item mr-0"><i
-                                    class="fas fa-star amber-text text-warning"></i>
-                            </li>
-                            <li class="list-inline-item mr-0"><i
-                                    class="fas fa-star amber-text text-warning"></i>
-                            </li>
-                            <li class="list-inline-item mr-0"><i
-                                    class="fas fa-star amber-text text-warning"></i>
-                            </li>
-                            <li class="list-inline-item mr-0"><i
-                                    class="fas fa-star amber-text text-warning"></i>
-                            </li>
-                            <li class="list-inline-item"><i
-                                    class="fas fa-star-half-alt amber-text text-warning"></i>
-                            </li>
-
-                            <li class="list-inline-item">
-                                <p class="text-muted">4.5 (413)</p>
-                            </li>
-                        </ul>
-                        <!-- <hr> -->
-                        <ul class="list-unstyled list-inline mb-0">
-                            <li class="list-inline-item">
-                                <p class="card-text small text-muted pt-1">17-05-2019</p>
-                            </li>
-                            <li class="list-inline-item">
-                                <button type="button" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#FormService"><i class="fas fa-pencil-alt"></i></button>
-                            </li>
-
-                        </ul>
-
-
-                    </div>
-
-                </div> 
-                <!-- Card -->
-                `;
+                var i;
                 
+                for(var i=0; i < fiche.length; i++){
+                ligne = fiche[i];
+
+                rep1+=  /*html*/ ` 
+                <!-- Card -->
+                <div class="col-lg-4 col-sm-6 mb-2">
+                <div class="card booking-card shadow" id="card-services">
+
+                        <!-- Card image -->
+                        <div class="view overlay">
+                            <img class="card-img-top" src="pochettes/` + ligne.pochetteService + `" alt="Card image cap">
+                            <a href="#!">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+
+                        <!-- Card content -->
+                        <div class="card-body">
+
+                            <!-- Text -->
+                            <p class="card-text"> ` + ligne.titreService + /*html*/ ` </p>
+                            <ul class="list-unstyled list-inline rating mb-0"> `+ montreetoile(ligne.Quality,ligne.kcount)+/*html*/`
+                            </ul>
+                            <!-- <hr> -->
+                            <ul class="list-unstyled list-inline mb-0">
+                                <li class="list-inline-item">
+                                    <p class="card-text small text-muted pt-1">`+ligne.datLimService+/*html*/`</p>
+                                </li>
+                                <li class="list-inline-item">
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#FormService"><i class="fas fa-pencil-alt" 
+                                        onclick="ModalRequetesSer(\'`+ligne.idService+`\')" ></i></button>
+                                </li>
+
+                            </ul>
+
+
+                        </div>
+
+                    </div> 
+                    <!-- Card -->
+                </div>
+                    `;
+                }
             }
 
             rep1+=  /*html*/`
-            </div>
+           
         </div>
     </div>
     <!-- Div forfait Logo et Graphique -->
@@ -304,68 +593,10 @@ function formServicesFour_modal(fiche){
                         <span class="text-white" aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <form id="Modifier_Fournisseur" enctype="multipart/form-data" action="" method="POST">
-                            <div class="form-group row">
-                                <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom fournisseur</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="nomFournisseur"
-                                        name="nomFournisseur" title="Nom Fournisseur" required>
-                                </div>
-                            </div>
-                            <hr>
-                            <h5>Adresse</h5>
-                            <div class="form-group row">
-                                <label for="nroAdr" class="col-sm-4 col-form-label">Numéro civique</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="nroAdr"
-                                        name="nroAdr" step="1" title="Numéro Civique" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="rueAdr" class="col-sm-4 col-form-label">Rue</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="rueAdr"
-                                        name="rueAdr" title="Rue" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-4">
-                                    <label for="desVilAdr">Ville</label>
-                                </div>
-                                <div class="col-sm-8">
-                                    <select id="desVilAdr" name="desVilAdr" class="form-control"
-                                        required>
-                                        <option selected value="Montréal">Montréal</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="codPosAdr" class="col-sm-4 col-form-label">Code postal</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="codPosAdr"
-                                        name="codPosAdr" title="Code postal" required>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="form-group row">
-                                <label for="cellFournisseur" class="col-sm-4 col-form-label">Téléphone</label>
-                                <div class="col-sm-8">
-                                    <input type="tel" class="form-control" min="1.0" max="5.0"
-                                        id="cellFournisseur" name="cellFournisseur"
-                                        title="Téléphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-                                </div>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-
-                                <button type="button" class="btn btn-primary"   >Envoyer</button>
-
-                                <button type="reset" class="btn btn-danger">Effacer</button>
-
-                            </div>
-                        </form>
-                    </div>
+                <div class="modal-body">`;
+                /**************      Include form du Fournisser  *************/
+                rep1+= formFournisseur('M');
+                rep1+=  /*html*/ `
                 </div>
             </div>
         </div>
@@ -385,111 +616,8 @@ function formServicesFour_modal(fiche){
                 </div>
                 <div class="modal-body">
                     <div class="container">
-                        <form id="AddServiceFuornisseur" >
-                            <div class="form-group row">
-                                <label for="titreService" class="col-sm-4 col-form-label">Titre
-                                    Service</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="titreService"
-                                        name="titreService" title="Titre Service" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="desShortService" class="col-sm-4 col-form-label">Description
-                                    courte</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="desShortService"
-                                        name="desShortService" title="Description courte" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="descFilm"
-                                    class="col-sm-4 col-form-label">Déscription</label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control" id="descFilm" name="descFilm"
-                                        rows="3" title="Déscription du film" required></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-4">
-                                    <label for="">Catégorie</label>
-                                </div>
-                                <div class="col-sm-8">
-                                    <select id="idCatFilm" name="idCatFilm" class="form-control"
-                                        required>
-                                        <option selected value="">Sélectionnez une option</option>
-                                        <option value="">Autos</option>
-                                        <option value="">Sante</option>
-                                        <option value="">Gastronomie</option>
-                                        <option value="">Beauté</option>
-                                        <option value="">Produits</option>
-                                        <option value="">Voyages</option>
-                                        <option value="">Maison</option>
-                                        <option value="">Education</option>
-                                        <option value="">Services</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="prixService" class="col-sm-4 col-form-label">Prix
-                                    Service</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" min="1.0" max="5.0"
-                                        id="prixService" name="prixService" step="0.1"
-                                        title="Prix Service" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="promService" class="col-sm-4 col-form-label">Prix
-                                    Promotion</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" min="1.0" max="5.0"
-                                        id="promService" name="promService" step="0.1"
-                                        title="Prix Promotion" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="refeService" class="col-sm-4 col-form-label">Prix
-                                    Référe</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" min="1.0" max="5.0"
-                                        id="refeService" name="refeService" step="0.1"
-                                        title="Prix Référe" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="datlimfournisseur" class="col-sm-4 col-form-label">Date
-                                    limite</label>
-                                <div class="col-sm-8">
-                                    <input type="date" class="form-control" id="datlimfournisseur"
-                                        name="datlimfournisseur" title="Date limite" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Image</label>
-                                <div class="custom-file col-sm-8">
-                                    <input type="file" class="custom-file-input" id="urlSerfournisseur"
-                                        name="urlSerfournisseur" required>
-                                    <label class="custom-file-label" for="urlSerfournisseur"
-                                        data-browse="Choisir fichier">Sélectionner
-                                        fichier</label>
-                                </div>
-                            </div>
-                            <div class="form-check row">
-                                <input class="form-check-input" type="checkbox" value="" id="ActService"
-                                    name="ActService">
-                                <label class="form-check-label" for="ActService">
-                                    Service active
-                                </label>
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-
-                                <button type="button" class="btn btn-primary">Envoyer</button>
-
-                                <button type="button" class="btn btn-danger">Effacer</button>
-
-                            </div>
-                        </form>
+                    <!-- Form Service-->
+                    `+montreFormService()+ /*html*/`
                     </div>
                 </div>
             </div>
@@ -501,13 +629,38 @@ function formServicesFour_modal(fiche){
 
 
 function montreServicesFour(fiche){
+    // var Myjson = JSON.stringify(donneFuornisseur).length;
+    // alert( "Hola"+myJSON);
+
     alert("Montre  les Services pour Fournisseur");
     $('#divprincipal').html(formServicesFour_modal(fiche));
 }
 
+
 function ModalFournisseur(){
     
 }
+
+function montreGetServicesFour(donnees){
+    $('#idAdrFournisseur').val(donnees.idAdrFournisseur);
+    $('#idService').val(donnees.idService);
+    $('#idFournisseur').val(donnees.idFournisseur);
+    $('#titreService').val(donnees.titreService);
+    $('#desShortService').val(donnees.desShortService);
+    $('#desService').val(donnees.desService);
+    $('#idCategorie').val(donnees.idCategorie);
+    $('#actService').val(donnees.actService);
+    $('#prixService').val(donnees.prixService);
+    $('#promService').val(donnees.promService);
+    $('#refeService').val(donnees.refeService);
+    $('#refeEfeService').val(donnees.refeEfeService);
+    $('#datLimService').val(donnees.datLimService);
+    $('#pochetteService').val(donnees.pochetteService);
+    $('#autService').val(donnees.autService);
+    $('#div-images').html(ImagenActualise(donnees.idCategorie,donnees.pochetteService));
+}
+
+
 
 
 var vueFournisseur=function(action,donnees){
@@ -543,6 +696,9 @@ var vueFournisseur=function(action,donnees){
         break;
         case 'ModalFournisseur':
               ModalFournisseur(donnees);
+        break;
+        case 'montreGetServicesFour':
+              montreGetServicesFour(donnees);
         break;
        
 		

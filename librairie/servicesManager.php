@@ -38,7 +38,7 @@ class ServicesManager
             $stmt->execute(array($idService));
             $result = $stmt->fetch(PDO::FETCH_OBJ);
            if (!$result){
-               $result = [ 'idService' => $idService,       'idFournisseur' => '', 
+               $result = [ 'idService' => '',       'idFournisseur' => '', 
                           'titreService'=> '',
                           'desShortService' => '', 'desService' => '',
                           'idCategorie' => '',     'actService' =>  '',
@@ -60,7 +60,14 @@ class ServicesManager
       public function getListIdFournisseur($idFournisseur)
         {
           $idFournisseur = (int) $idFournisseur;
-          $requete = 'SELECT * FROM services WHERE idFournisseur = ? ';
+          // $requete = 'SELECT * FROM services WHERE idFournisseur = ? ';
+          $requete = ' SELECT services.*, 	AVG(qualRequest) AS Quality, COUNT(qualRequest) as kcount
+           FROM services, requests
+           WHERE services.idService =  requests.idService
+             AND services.idFournisseur = ?
+             AND  requests.statRequest <> 3
+           GROUP BY idService;';
+
           $stmt = $this->_pdo->prepare($requete);
           $stmt->execute(array($idFournisseur));
           $result = $stmt->fetchAll(PDO::FETCH_OBJ);
