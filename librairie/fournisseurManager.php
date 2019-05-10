@@ -42,8 +42,11 @@ class FournisseurManager
         }
       public function getList()
         {
-          $requete = " SELECT idFournisseur, nomFournisseur, idAdrFournisseur, cellFournisseur, typeSerFournisseur, idForfaitFournisseur, datInsFournisseur, datEcheFournisseur, statuFournisseur, longFournisseur,latiFournisseur
-          FROM fournisseur ORDER BY nomFournisseur";
+          $requete = " SELECT idFournisseur, nomFournisseur, idAdrFournisseur, cellFournisseur, typeSerFournisseur, idForfaitFournisseur, datInsFournisseur, datEcheFournisseur, statuFournisseur, longFournisseur,latiFournisseur,
+          adresse.nroAdr, adresse.rueAdr, adresse.desVilAdr, adresse.codPosAdr 
+          FROM fournisseur , adresse 
+          WHERE adresse.idAdr  = fournisseur.idAdrFournisseur
+          ORDER BY nomFournisseur";
           $stmt = $this->_pdo->prepare($requete);
           $stmt->execute();
           $result = $stmt->fetchAll(PDO::FETCH_OBJ);
