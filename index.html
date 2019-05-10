@@ -19,12 +19,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link href="css/styles.css" rel="stylesheet">
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="requettes/requetesFournisseur.js"></script>
-    <script src="requetes/requetesAdministrateur.js"></script>
-    <script src="vues/vuesFournisseur.js"></script>
-    <script src="vues/vuesAdministrateur.js"></script>
-    <script src="js/jsFournisseur.js"></script>
 
     <title>bitvoix.com</title>
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -36,35 +30,12 @@
     <script src="js/googleLogin.js"></script>
     <script src="js/facebookLogin.js"></script>
     <script src="requetes/requetesMembres.js"></script>
+    <script src="requetes/requetesServices.js"></script>
     <script src="vues/vuesMembres.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkbWdMgGs624sL4rwDFjyat-ImNwsMnrk&callback=initMap">
+    </script>
 
-    <!-- Hay que borrarlo despues-->
-    <style>
-        .container {
-            padding: 20px;
-        }
-
-        .userContent {
-            padding: 10px 20px;
-            margin: auto;
-            width: 350px;
-            background-color: #F7F7F7;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-        }
-
-        .userContent h3 {
-            font-size: 17px;
-        }
-
-        .userContent p {
-            font-size: 15px;
-        }
-
-        .userContent img {
-            max-width: 100%;
-            margin-bottom: 5px;
-        }
-    </style>
 </head>
 
 <body>
@@ -97,22 +68,20 @@
                                 Catégories
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Autos</a>
-                                <a class="dropdown-item" href="#">Sante</a>
-                                <a class="dropdown-item" href="#">Gastronomie</a>
-                                <a class="dropdown-item" href="#">Beauté</a>
-                                <a class="dropdown-item" href="#">Produits</a>
-                                <a class="dropdown-item" href="#">Voyages</a>
-                                <a class="dropdown-item" href="#">Maison</a>
-                                <a class="dropdown-item" href="#">Education</a>
-                                <a class="dropdown-item" href="#">Services</a>
-                            </div>   
-                            <input type="button" value="Fournisseur" onClick="requetesFour('FourAccueil');">
-                            <input type="button" value="Administrateur" onClick="requetesAdm('listerAutorisations');">
+                                <a class="dropdown-item" href="javascript:void(0);"  onClick="requetesServ('montrerServicesCat', '1');">Autos</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '2');">Sante</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '3');">Gastronomie</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '4');">Beauté</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '5');">Produits</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '6');">Voyages</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '7');">Maison</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '8');">Education</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '9');">Services</a>
+                            </div>
                         </li>
                         <li class="nav-item active" id="loginDiv">
                             <!--Modal: Se connecter-->
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLRForm">Se
+                            <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#modalLRForm">Se
                                 Connecter<span class="sr-only">(current)</span></a>
                         </li>
 
@@ -127,7 +96,7 @@
             aria-hidden="true">
             <div class="modal-dialog cascading-modal" role="document">
                 <!--Content-->
-                <div class="modal-content">
+                <div class="modal-content" id="modalContent">
                     <div class="modal-header bg-primary py-4 shadow">
                         <!-- Logo bitvoix -->
 
@@ -186,16 +155,6 @@
                                                 class="form-control" placeholder="Mot de passe" aria-label="Courriel"
                                                 aria-describedby="basic-addon1">
                                         </div>
-<<<<<<< HEAD:indexw.html
-                                        <!-- <input type="password" class="form-control" placeholder="Mot de passe"
-                                            aria-label="Courriel" aria-describedby="basic-addon1"> -->
-                                    </div>
-
-                                    <div class="text-center mt-3">
-                                        <button class="btn btn-primary shadow">Se Connecter</button>
-                                    </div>
-=======
->>>>>>> 68810e35a396ad553e286f21d43dd67d7abe80c3:index.html
 
                                         <div class="text-center mt-3">
                                             <button type="button" class="btn btn-primary shadow"
@@ -252,12 +211,6 @@
                                                 class="form-control" placeholder="Courriel" aria-label="Courriel"
                                                 aria-describedby="basic-addon1">
                                         </div>
-<<<<<<< HEAD:indexw.html
-                                        <!-- <input type="password" class="form-control" placeholder="Mot de passe"
-                                            aria-label="Courriel" aria-describedby="basic-addon1"> -->
-                                    </div>
-=======
->>>>>>> 68810e35a396ad553e286f21d43dd67d7abe80c3:index.html
 
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -267,13 +220,6 @@
                                                 class="form-control" placeholder="Mot de passe" aria-label="Password"
                                                 aria-describedby="basic-addon1">
                                         </div>
-<<<<<<< HEAD:indexw.html
-                                        <!-- <input type="password" class="form-control"
-                                            placeholder="Confirmer le mot de passe" aria-label="Courriel"
-                                            aria-describedby="basic-addon1"> -->
-                                    </div>
-=======
->>>>>>> 68810e35a396ad553e286f21d43dd67d7abe80c3:index.html
 
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -309,84 +255,10 @@
 
     <!-- Icons Services -->
 
+    <div id="map"></div>
+    <script src="js/googleMaps.js"></script>
 
-    <div class="container text-center mt-4">
-
-        <div id="googlemaps"></div>
-
-        <!-- Icons Services -->
-
-        <div class="row">
-            <div class="col">
-                <button type="button" class="btn btn-primary btn-lg rounded-circle"><i class="fas fa-car"></i></button>
-                <a href="">Autos</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-warning btn-lg rounded-circle"><i
-                        class="fas fa-heartbeat"></i></button>
-                <a href="">Sante</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-success btn-lg rounded-circle"><i
-                        class="fas fa-utensils"></i></button>
-                <a href="">Gastronomie</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-danger btn-lg rounded-circle"><i class="fas fa-star"></i></button>
-                <a href="">Beauté</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-primary btn-lg rounded-circle"><i
-                        class="fas fa-shopping-bag"></i></button>
-                <a href="">Produits</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-warning btn-lg rounded-circle"><i
-                        class="fas fa-plane"></i></button>
-                <a href="">Voyages</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-success btn-lg rounded-circle"><i class="fas fa-home"></i></button>
-                <a href="">Maison</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-danger btn-lg rounded-circle"><i
-                        class="fas fa-pencil-alt"></i></button>
-                <a href="">Education</a>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-primary btn-lg rounded-circle"><i
-                        class="fas fa-wrench"></i></button>
-                <a href="">Services</a>
-            </div>
-        </div>
-
-        <!-- Page Principal -->
-
-        <div class="row mt-2" id="divprincipal">
-        </div>
-
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                aria-hidden="true" id="modalprincipal">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header bg-primary py-4 shadow">
-                            <!-- Logo bitvoix -->
-
-                            <img src="images/logo.png" alt="">
-
-                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                <span class="text-white" aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="row m-3" id="modalcontent">
-                            
-                        </div>
-                    </div>
-                </div>
-        </div>
-        
-
+    <div class="container text-center mt-4" id="main-container">
     </div>
 
     <!-- Footer Index -->
@@ -529,23 +401,19 @@
     </footer>
 
 
-<<<<<<< HEAD:indexw.html
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-=======
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
->>>>>>> 68810e35a396ad553e286f21d43dd67d7abe80c3:index.html
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
-  
+
 </body>
 
 </html>
