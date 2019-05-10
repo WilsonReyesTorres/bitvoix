@@ -9,9 +9,17 @@ class FournisseurManager
         }
     public function add(Fournisseurs $funi)
         {
-            $requete = 'INSERT INTO fournisseur(nomFournisseur,idAdrFournisseur,cellFournisseur,typeSerFournisseur,idForfaitFournisseur,datInsFournisseur,datEcheFournisseur,statuFournisseur,longFournisseur,latiFournisseur) VALUES (?,?,?,?,?,?,?,?,?,?);';
+            $requete = 'INSERT INTO fournisseur(idFournisseur,nomFournisseur,
+            idAdrFournisseur,cellFournisseur, typeSerFournisseur,idForfaitFournisseur,
+            datInsFournisseur, datEcheFournisseur, statuFournisseur, longFournisseur,
+            latiFournisseur) VALUES (?,?,?,?,?,?,?,?,?,?,?);';
             $stmt = $this->_pdo->prepare($requete);
-            $stmt->execute(array($funi->nomFournisseur(),$funi->idAdrFournisseur(),$funi->cellFournisseur(),$funi->typeSerFournisseur(),$funi->idForfaitFournisseur(),$funi->datInsFournisseur(),$funi->datEcheFournisseur(),$funi-> statuFournisseur(),$funi->longFournisseur(),$funi->latiFournisseur() ));
+            $stmt->execute(array($funi->idFournisseur(), $funi->nomFournisseur(),
+            $funi->idAdrFournisseur(),   $funi->cellFournisseur(),
+            $funi->typeSerFournisseur(), $funi->idForfaitFournisseur(),
+            $funi->datInsFournisseur(),  $funi->datEcheFournisseur(),
+            $funi-> statuFournisseur(),  $funi->longFournisseur(),
+            $funi->latiFournisseur()));
         }
       public function delete(Fournisseurs $funi)
         {
@@ -23,19 +31,26 @@ class FournisseurManager
         {
           
             $idFournisseur = (int) $idFournisseur;
-            $requete = 'SELECT * FROM fournisseur WHERE idFournisseur = ? ';
+            $requete = 'SELECT fournisseur.*, adresse.nroAdr, adresse.rueAdr, adresse.desVilAdr, adresse.codPosAdr 
+                        FROM  adresse, fournisseur 
+                        WHERE adresse.idAdr  = fournisseur.idAdrFournisseur
+                              AND fournisseur.idFournisseur = ?';
+
             $stmt = $this->_pdo->prepare($requete);
             $stmt->execute(array($idFournisseur));
             $result = $stmt->fetch(PDO::FETCH_OBJ);
             if (!$result){
-               $result = ['idCate' => '', 'desCate' => ''];
+               $result = ['idFournisseur' => '', 'nomFournisseur' => ''];
             }
             return $result;
         }
       public function getList()
         {
-          $requete = " SELECT idFournisseur, nomFournisseur, idAdrFournisseur, cellFournisseur, typeSerFournisseur, idForfaitFournisseur, datInsFournisseur, datEcheFournisseur, statuFournisseur, longFournisseur,latiFournisseur
-          FROM fournisseur ORDER BY nomFournisseur";
+          $requete = " SELECT idFournisseur, nomFournisseur, idAdrFournisseur, cellFournisseur, typeSerFournisseur, idForfaitFournisseur, datInsFournisseur, datEcheFournisseur, statuFournisseur, longFournisseur,latiFournisseur,
+          adresse.nroAdr, adresse.rueAdr, adresse.desVilAdr, adresse.codPosAdr 
+          FROM fournisseur , adresse 
+          WHERE adresse.idAdr  = fournisseur.idAdrFournisseur
+          ORDER BY nomFournisseur";
           $stmt = $this->_pdo->prepare($requete);
           $stmt->execute();
           $result = $stmt->fetchAll(PDO::FETCH_OBJ);

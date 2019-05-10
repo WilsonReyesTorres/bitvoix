@@ -1,4 +1,5 @@
 <?php
+
 class Connecter{
     //Methode statique qui peut être appelée sans qu'une instance d'objet n'ait été créée
     public static function conexion(){
@@ -7,6 +8,7 @@ class Connecter{
         $user = 'bitvoix_user'; //usager
         $password = 'adminbitvoixcanada2019$';//mot de passe
         
+
         try {
             $connexion = new PDO($dsn, $user, $password);
         } catch (PDOException $e) {
@@ -15,6 +17,7 @@ class Connecter{
         $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         return $connexion;
     }
+
     public static function closeConnection()
     {
         unset($connexion);
@@ -26,4 +29,5 @@ public function __construct(){
        $this->productos=array(); //Le decimos que sea un array 
        $this->db=Conectar::conexion(); //Almacenamos en db la llamada la clase estática Conectar
     }*/
+
 ?>

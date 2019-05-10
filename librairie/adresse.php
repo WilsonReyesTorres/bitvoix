@@ -37,7 +37,8 @@ class Adresse
     // Liste des setters
     public function setIdAdr($idAdr)
         {
-        if (is_string($idAdr)){
+        $idAdr = (int) $idAdr; 
+        if ($idAdr > 0){
               $this->_idAdr = $idAdr;    
             }
         }

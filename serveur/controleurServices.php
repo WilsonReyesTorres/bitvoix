@@ -1,5 +1,6 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+
 require_once "../bd/connecter.php";
 require_once '../librairie/services.php';
 require_once '../librairie/servicesManager.php';
@@ -46,30 +47,32 @@ echo '<br>Autorisation du service par bit-voix:'.$servi->autService();
 //$manage = new ServicesManager();
 //****************************  fin test **********************
 
-function enregistrer()
-{
-    /*
-    $donnees = [
-    'idCate' => $_POST['idCategorie'],
-    'desCate' => $_POST['desCategorie']
-    ];
-     */
-    echo "enregistrer";
-    $donnees = [
-        'idService' => '1',
-        'idFournisseur' => '1',
-        'titreService' => 'Titre',
-        'desShortService' => 'Traduction',
-        'desService' => 'Traduction certifiée en français et anglais',
-        'idCategorie' => '1',
-        'actService' => '1',
-        'prixService' => '12.20',
-        'promService' => '10.22',
-        'refeService' => '9.00',
-        'refeEfeService' => '1',
-        'datLimService' => '2019-05-31',
-        'pochetteService' => 'Tout le monde debout.jpg',
-        'autService' => '1'];
+
+
+
+function enregistrer(){
+     /*
+     $donnees = [
+      'idCate' => $_POST['idCategorie'],
+      'desCate' => $_POST['desCategorie']
+     ];
+    */
+    // echo "enregistrer";
+   $donnees = [
+  'idService' => '1',
+  'idFournisseur' => '1', 
+  'titreService' => 'Titre', 
+  'desShortService' => 'Traduction',
+  'desService' => 'Traduction certifiée en français et anglais',
+  'idCategorie' => '1', 
+  'actService' =>  '1',
+  'prixService' => '12.20',
+  'promService' => '10.22',
+  'refeService' => '9.00',
+  'refeEfeService' => '1',
+  'datLimService' => '2019-05-31',
+  'pochetteService' => 'Tout le monde debout.jpg',
+  'autService' => '1' ];
 
     $servi = new Services($donnees);
     $manager = new ServicesManager();
@@ -181,34 +184,33 @@ function enlever()
     echo json_encode($rep);
 }
 
-function fiche()
-{
-    /*
-    $donnees = [
-    'idCate' => $_POST['idCategorie'],
-    'desCate' => $_POST['desCategorie']
-    ];
-     */
-    $donnees = [
-        'idService' => '3',
-        'idFournisseur' => '1',
-        'titreService' => 'Titre',
-        'desShortService' => 'Traduction',
-        'desService' => 'Traduction certifiée en français et anglais',
-        'idCategorie' => '1',
-        'actService' => '1',
-        'prixService' => '12.20',
-        'promService' => '10.22',
-        'refeService' => '9.00',
-        'refeEfeService' => '1',
-        'datLimService' => '2019-05-31',
-        'pochetteService' => 'Tout le monde debout.jpg',
-        'autService' => '1'];
 
-    $servi = new Services($donnees);
-    $manager = new ServicesManager();
-    $ServicesList = $manager->get($servi->idService());
-    echo json_encode($ServicesList);
+function fiche(){
+  /*
+     $donnees = [
+      'idCate' => $_POST['idCategorie'],
+      'desCate' => $_POST['desCategorie']
+      ];
+    */
+    // $donnees = [
+    //   'idService' => $_POST['idService'],
+    //   'idFournisseur' => '', 
+    //   'titreService' => '', 
+    //   'desShortService' => '',
+    //   'desService' => 'Traduction certifiée en français et anglais',
+    //   'idCategorie' => '1', 
+    //   'actService' =>  '1',
+    //   'prixService' => '12.20',
+    //   'promService' => '10.22',
+    //   'refeService' => '9.00',
+    //   'refeEfeService' => '1',
+    //   'datLimService' => '2019-05-31',
+    //   'pochetteService' => 'Tout le monde debout.jpg',
+    //   'autService' => '1' ];
+    //  $servi = new Services($donnees);
+   $manager = new ServicesManager(); 
+   $ServicesList = $manager->get($_POST['idService']);
+   echo json_encode($ServicesList);
 }
 
 function modifier()
@@ -243,10 +245,42 @@ function modifier()
     echo json_encode($rep);
 }
 
-//controleur Adresse
-$action = $_POST['action'];
-$idcateg=$_POST['idcateg'];
-switch ($action) {
+function listSerFour($membreId){
+  /*
+     $donnees = [
+      'idCate' => $_POST['idCategorie'],
+      'desCate' => $_POST['desCategorie']
+      ];
+    */
+//  $donnees = [
+//       'idService' => '',
+//       'idFournisseur' => $membreId, 
+//       'titreService' => '', 
+//       'desShortService' => '',
+//       'desService' => '',
+//       'idCategorie' => '', 
+//       'actService' =>  '',
+//       'prixService' => '',
+//       'promService' => '',
+//       'refeService' => '',
+//       'refeEfeService' => '',
+//       'datLimService' => '',
+//       'pochetteService' => '',
+//       'autService' => '' ];
+    
+  //  $servi = new Services($donnees);
+   $manager = new ServicesManager(); 
+   $ServicesList = $manager->getListIdFournisseur($membreId);
+   echo json_encode($ServicesList);
+}
+
+
+
+//controleur  Services
+$action=$_POST['action'];
+// $action= 'listSerFour';
+
+switch($action){
     case 'enregistrer':
         enregistrer();
         break;
@@ -267,5 +301,8 @@ switch ($action) {
         break;
     case 'modifier':
         modifier();
+        break;
+    case 'listSerFour':
+        listSerFour($_SESSION["membreId"]);
         break;
 }

@@ -1,11 +1,3 @@
--- MySQL Workbench Forward Engineering
--- bitvoix2019$
--- Question
--- Producto mas de categoria
--- Auditoria Usuario mas fecha
--- En el usuario colocar un slider para identificar los servicios solictados
--- En el usuario colocar un slider para identificar el historia de servicios utilisados
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -23,12 +15,12 @@ USE `bitvoix_db` ;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`categories`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`categories` (
   `idCategorie` INT NOT NULL auto_increment COMMENT 'Id de categories',
   `desCategorie` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Description des différentes catégories de services ou de biens',
   PRIMARY KEY (`idCategorie`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`adresse`
@@ -49,6 +41,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`membres`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`membres` (
   `idMembre` INT NOT NULL AUTO_INCREMENT COMMENT 'Id du client',
   `nomMembre` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du client',
@@ -67,8 +60,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`fournisseur`
 -- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`fournisseur` (
-  `idFournisseur` INT NOT NULL AUTO_INCREMENT COMMENT  'ID fournisseur',
+  `idFournisseur` INT NOT NULL COMMENT  'ID fournisseur',
   `nomFournisseur` VARCHAR(45) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Nom du fournisseur',
   `idAdrFournisseur` INT NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Adresse du fournisseur',
   `cellFournisseur` VARCHAR(10) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Numéro de téléphone portable du fournisseur\n',
@@ -82,7 +76,10 @@ CREATE TABLE IF NOT EXISTS `bitvoix_db`.`fournisseur` (
   PRIMARY KEY (`idFournisseur`),
    CONSTRAINT `fouadr`
     FOREIGN KEY (`idAdrFournisseur`)
-    REFERENCES `bitvoix_db`.`adresse` (`idAdr`))
+    REFERENCES `bitvoix_db`.`adresse` (`idAdr`),
+   CONSTRAINT `fourmem`
+    FOREIGN KEY (`idFournisseur`)
+    REFERENCES `bitvoix_db`.`membres` (`idMembre`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -161,7 +158,7 @@ ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`references`
--- -----------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`references` (
   `idReference` INT NOT NULL auto_increment COMMENT 'Id du references',
   `idService` INT NOT NULL COMMENT 'Id du Service',
@@ -188,9 +185,14 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 
+
 Create user 'bitvoix_user'@'localhost' identified by 'adminbitvoixcanada2019$';
 GRANT ALL PRIVILEGES ON bitvoix_db.* TO 'bitvoix_user'@'localhost' WITH GRANT OPTION;
 show grants for 'bitvoix_user'@'localhost';
+
+-- revoke all privileges, grant  option  from 'bitvoix_dbadmin'@'localhost';
+-- drop user 'bitvoix_dbadmin'@'localhost';
+
 
 
 
@@ -206,6 +208,8 @@ INSERT INTO `categories` (`idCategorie`, `desCategorie`) VALUES
 (7, 'Maison'),
 (8, 'Education'),
 (9, 'Services');
+                                           
+-- insert adresses
 
 INSERT INTO `adresse` (`idAdr`, `nroAdr`, `rueAdr`, `desVilAdr`, `codPosAdr`) VALUES
 (1, 759, 'Rue Legendre E', 'Montréal', 'H2M1H1'),
@@ -216,6 +220,8 @@ INSERT INTO `adresse` (`idAdr`, `nroAdr`, `rueAdr`, `desVilAdr`, `codPosAdr`) VA
 (6, 545, 'Boul Crémazie E', 'Montréal', 'H2M2V1'),
 (7, 9319, 'Ave Christophe-Colomb', 'Montréal', 'H2M1Z7'),
 (8, 9763, 'Avenue St Charles', 'Montréal', 'H2C2K9');
+                                           
+-- insert membres
 
 INSERT INTO `membres` (`idMembre`, `nomMembre`, `preNomMembre`, `courrielMembre`, `oauthProviderMembre`, `oauthUidMembre`,`createdMembre`, `modifiedMembre`, `motPasseMembre` ) VALUES
 (1, 'Membre1', 'Prenom1', 'membre1@exemple.com', 'bitvoix', '123456789', NOW(), NOW(), SHA1('123')),
@@ -246,4 +252,5 @@ INSERT INTO `services` (`idService`, `idFournisseur`, `titreService`, `desShortS
 (5, 5, 'Ballotin de chocolats', 'Ballotin de chocolats (100% pur beurre de cacao) chez Marché Tradition', 'Chocolat garantit à 100% beurre de cacao, 100% saveur, 100% qualité, 100% fraîcheur', 5, 1, '45.00', '27.00', '19.00', 555, '2019-12-30', 'ballotindechocolats.jpg', '1'),
 (6, 6, 'Ramada Niagara Falls', '1 nuitée avec bons activités et repas au Ramada Niagara Falls', 'Les chutes du Niagara sont les plus puissantes d’Amérique du Nord. Les visiteurs peuvent explorer les imposantes chutes avec la croisière The Hornblower, avec l’attraction Journey behind the Falls ou tout simplement en les observant sur la promenade.', 6, 1, '199.00', '159.00', '99.00', 666, '2019-12-31', 'niagarafallscanadian.jpg', '1'),
 (7, 7, 'Lavage De Vitres', 'Lavage de fenêtres pour une maison à 1 ou 2 étages', 'Nettoyage de l’extérieur des fenêtres, ou des vitres, rebords, rails et moustiquaires sur la Rive-Nord', 7, 1, '160.00', '120.00', '104.00', 777, '2020-01-01', 'lavevitres.jpg', '1'),
-(8, 8, 'Programmation neuro-linguistique', 'Gagner en confiance et améliorer sa vie grâce aux outils de la PNL', 'Technique d’utilisation des connaissances de la psychologie et des neurosciences pour apprendre à communiquer de façon constructive', 8, 1, '300.00', '199.00', '99.00', 888, '2020-01-02', 'propnl.jpg', '1');
+(8, 8, 'PNL', 'Gagner en confiance et améliorer sa vie grâce aux outils de la PNL', 'Technique d’utilisation des connaissances de la psychologie et des neurosciences pour apprendre à communiquer de façon constructive', 8, 1, '300.00', '199.00', '99.00', 888, '2020-01-02', 'propnl.jpg', '1');
+

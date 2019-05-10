@@ -2,12 +2,24 @@
 class AdresseManager
 {
     private $_pdo; //Instance de PDO
+    private $_idAdr; // ID Adress
 
     public function __construct()
         {
             $this->setDb();
         }
 
+    public function setIdAdr($idAdr)
+    {
+        if (is_string($idAdr)){
+            $this->_idAdr = $idAdr;    
+        }
+    }
+    // listes des getters
+    public function idAdr()
+    {
+        return $this->_idAdr;
+    }
 
     public function add(Adresse $adre)
         {
@@ -16,10 +28,12 @@ class AdresseManager
             // Exécution de la requête.
             //var_dump($adre);
 // var_dump($this->_pdo);
-        echo '<br>';
+        // echo '<br>';
             $requete = 'INSERT INTO adresse(nroAdr, rueAdr, desVilAdr, codPosAdr) VALUES (?,?,?,?);';
             $stmt = $this->_pdo->prepare($requete);
             $stmt->execute(array($adre->nroAdr(),$adre->rueAdr(),$adre->desVilAdr(), $adre->codPosAdr()));
+            $id = $this->_pdo->lastInsertId();
+            $this->_idAdr=$id;
           }
 
       public function delete(Adresse  $adre)
@@ -29,6 +43,7 @@ class AdresseManager
             $requete = 'DELETE FROM adresse WHERE idAdr = ?';
             $stmt = $this->_pdo->prepare($requete);
             $stmt->execute(array($adre->idAdr()));
+            
           }
 
       public function get($idAdr)
@@ -59,8 +74,6 @@ class AdresseManager
 
       public function update(Adresse  $Adres)
           {
-//          var_dump($Adres);
-// return;
             $requete = "UPDATE adresse SET nroAdr = ?, rueAdr = ?, desVilAdr = ?, codPosAdr = ? WHERE idAdr = ?";
             $stmt = $this->_pdo->prepare($requete);
             $stmt->execute(array($Adres->nroAdr(),$Adres->rueAdr(),$Adres->desVilAdr(),$Adres->codPosAdr(),$Adres->idAdr()));
@@ -71,7 +84,5 @@ class AdresseManager
             $this->_pdo = Connecter::conexion(); //_pdo c'est l'appel à la classe statique Connecter
           }
 }
-
-//https://openclassrooms.com/fr/courses/1665806-programmez-en-oriente-objet-en-php/1666490-tp-mini-jeu-de-combat
 
 ?>
