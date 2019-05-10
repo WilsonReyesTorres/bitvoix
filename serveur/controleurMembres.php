@@ -1,5 +1,4 @@
 <?php
-//require_once("../BD/connexion.inc.php");
 include_once '../librairie/membre.php';
 $rep = array();
 
@@ -62,7 +61,6 @@ function loginSubmit()
                 $sessData['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
             }
 
-            
         } else {
             $sessData['status']['type'] = 'error';
             $sessData['status']['msg'] = 'Courriel ou mot de passe erronés, veuillez réessayer.';
@@ -156,11 +154,53 @@ function validerLogin()
         $reponse = array(
             'status' => ($sessData['status']['type'] == 'success') ? 'success' : 'error',
             'msg' => $sessData['status']['msg']);
-        echo json_encode($reponse);
         //unset($_SESSION['sessData']['status']);
-    }
-}
+    } else {
+        $reponse = array(
+            'status' => 'nonLogin',
+            'msg' => '');
 
+    }
+    echo json_encode($reponse);
+}
+function membreUpdate()
+{
+    if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+    //var_dump($_SESSION['sessData'] ["membreID"]);
+    $membre = new Membre();
+    $membreData = array(
+        'nomMembre' => $_POST['nomMembre'],
+        'preNomMembre' => $_POST['preNomMembre'],
+    );
+    $conditions['where'] = array(
+        'idMembre' => $_POST['idMembre']);
+    $update = $membre->update($membreData, $conditions);
+    if ($update) {
+        $_SESSION['sessData']['membreLoggedIn'] = true;
+        $_SESSION['sessData']["membreID"] = $_POST['idMembre'];
+        $_SESSION['sessData']['status']['type'] = 'success';
+        $_SESSION['sessData']['status']['msg'] = $_POST['preNomMembre'];
+    } else {
+        $sessData['status']['type'] = 'error';
+        $sessData['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
+    }
+    //store signup status into the session
+    $_SESSION['sessData'] = $sessData;
+    $reponse = array(
+        'status' => ($sessData['status']['type'] == 'success') ? 'success' : 'error',
+        'msg' => $sessData['status']['msg']);
+    echo json_encode($reponse);
+}
+function chercheUser()
+{
+    if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+    //var_dump($_SESSION['sessData'] ["membreID"]);
+    $membre = new Membre();
+    $prevCon['where'] = array('idMembre' => $_SESSION['sessData']["membreID"]);
+    $prevCon['return_type'] = 'single';
+    $membreAct = $membre->getRows($prevCon);
+    echo json_encode($membreAct);
+}
 function enregistrerMembre()
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
@@ -180,7 +220,6 @@ function enregistrerMembre()
             $prevCon['return_type'] = 'single';
             //$prevCon['return_type'] = 'count';
             $prevMembre = $membre->getRows($prevCon);
-            var_dump($prevMembre);
             if ($prevMembre['idMembre'] != null) {
                 //Update membre
                 $membreData = array(
@@ -200,8 +239,6 @@ function enregistrerMembre()
                     $sessData['status']['type'] = 'error';
                     $sessData['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
                 }
-                $sessData['status']['type'] = 'error';
-                $sessData['status']['msg'] = 'Le courriel est déjà utilisé, SVP utilise un autre courriel.';
             } else {
                 //insert membre data in the database
                 $membreData = array(
@@ -254,5 +291,11 @@ switch ($action) {
         break;
     case 'loginOauth':
         loginOauth();
+        break;
+    case 'chercheUser':
+        chercheUser();
+        break;
+    case 'membreUpdate':
+        membreUpdate();
         break;
 }

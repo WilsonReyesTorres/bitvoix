@@ -80,7 +80,6 @@ CREATE TABLE IF NOT EXISTS `bitvoix_db`.`fournisseur` (
    CONSTRAINT `fourmem`
     FOREIGN KEY (`idFournisseur`)
     REFERENCES `bitvoix_db`.`membres` (`idMembre`))
-
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -105,7 +104,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`services`
 -- -----------------------------------------------------
-
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`services` (
   `idService` INT NOT NULL AUTO_INCREMENT COMMENT 'code du service',
   `idFournisseur` INT NOT NULL COMMENT 'code fournisseur',
@@ -161,8 +159,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `bitvoix_db`.`references`
 
--- -----------------------------------------------------
-
 CREATE TABLE IF NOT EXISTS `bitvoix_db`.`references` (
   `idReference` INT NOT NULL auto_increment COMMENT 'Id du references',
   `idService` INT NOT NULL COMMENT 'Id du Service',
@@ -188,12 +184,15 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 
-Create user 'bitvoix_user'@'localhost' identified by 'adminbitvoix_dbcanada2019$';
+
+
+Create user 'bitvoix_user'@'localhost' identified by 'adminbitvoixcanada2019$';
 GRANT ALL PRIVILEGES ON bitvoix_db.* TO 'bitvoix_user'@'localhost' WITH GRANT OPTION;
 show grants for 'bitvoix_user'@'localhost';
 
 -- revoke all privileges, grant  option  from 'bitvoix_dbadmin'@'localhost';
 -- drop user 'bitvoix_dbadmin'@'localhost';
+
 
 
 
@@ -234,6 +233,7 @@ INSERT INTO `membres` (`idMembre`, `nomMembre`, `preNomMembre`, `courrielMembre`
 (7, 'Membre7', 'Prenom7', 'membre7@exemple.com', 'bitvoix', '723456789', NOW(), NOW(), SHA1('123')),
 (8, 'Membre8', 'Prenom8', 'membre8@exemple.com', 'bitvoix', '823456789', NOW(), NOW(), SHA1('123'));
 
+
 INSERT INTO `fournisseur` (`idFournisseur`, `nomFournisseur`, `idAdrFournisseur`, `cellFournisseur`, `typeSerFournisseur`, `idForfaitFournisseur`, `datInsFournisseur`, `datEcheFournisseur`, `statuFournisseur`, `longFournisseur`, `latiFournisseur`) VALUES
 (1, 'Coiffeur Ahuntsic', 1, '5143821435', '1', '1', '2019-04-26', '2020-04-26', '1', '-73.643657', '45.551113'),
 (2, 'Location Auto Montreal', 2, '5143890366', '3', '1', '2019-03-27', '2020-03-27', '1', '-73.642728', '45.548068'),
@@ -252,4 +252,5 @@ INSERT INTO `services` (`idService`, `idFournisseur`, `titreService`, `desShortS
 (5, 5, 'Ballotin de chocolats', 'Ballotin de chocolats (100% pur beurre de cacao) chez Marché Tradition', 'Chocolat garantit à 100% beurre de cacao, 100% saveur, 100% qualité, 100% fraîcheur', 5, 1, '45.00', '27.00', '19.00', 555, '2019-12-30', 'ballotindechocolats.jpg', '1'),
 (6, 6, 'Ramada Niagara Falls', '1 nuitée avec bons activités et repas au Ramada Niagara Falls', 'Les chutes du Niagara sont les plus puissantes d’Amérique du Nord. Les visiteurs peuvent explorer les imposantes chutes avec la croisière The Hornblower, avec l’attraction Journey behind the Falls ou tout simplement en les observant sur la promenade.', 6, 1, '199.00', '159.00', '99.00', 666, '2019-12-31', 'niagarafallscanadian.jpg', '1'),
 (7, 7, 'Lavage De Vitres', 'Lavage de fenêtres pour une maison à 1 ou 2 étages', 'Nettoyage de l’extérieur des fenêtres, ou des vitres, rebords, rails et moustiquaires sur la Rive-Nord', 7, 1, '160.00', '120.00', '104.00', 777, '2020-01-01', 'lavevitres.jpg', '1'),
-(8, 8, 'Programmation neuro-linguistique', 'Gagner en confiance et améliorer sa vie grâce aux outils de la PNL', 'Technique d’utilisation des connaissances de la psychologie et des neurosciences pour apprendre à communiquer de façon constructive', 8, 1, '300.00', '199.00', '99.00', 888, '2020-01-02', 'propnl.jpg', '1');
+(8, 8, 'PNL', 'Gagner en confiance et améliorer sa vie grâce aux outils de la PNL', 'Technique d’utilisation des connaissances de la psychologie et des neurosciences pour apprendre à communiquer de façon constructive', 8, 1, '300.00', '199.00', '99.00', 888, '2020-01-02', 'propnl.jpg', '1');
+

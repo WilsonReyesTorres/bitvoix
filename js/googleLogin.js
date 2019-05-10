@@ -63,7 +63,7 @@ function saveUserDataGoogle(membreData) {
 		fail: function () {
 			alert("Vous avez un GROS problème");
 		}
-    })
+    });
 }
 // Sign out the user
 function signOut() {

@@ -6,7 +6,9 @@ class Connecter{
      //Parametres pour la connexion à la base de données: dbname=nomBaseDeDonnés; host=serveur; charset=utf8; 
         $dsn = 'mysql:dbname=bitvoix_db;host=localhost;charset=utf8';
         $user = 'bitvoix_user'; //usager
-        $password = 'adminbitvoix_dbcanada2019$';//mot de passe        
+        $password = 'adminbitvoixcanada2019$';//mot de passe
+        
+
         try {
             $connexion = new PDO($dsn, $user, $password);
         } catch (PDOException $e) {
@@ -27,4 +29,5 @@ public function __construct(){
        $this->productos=array(); //Le decimos que sea un array 
        $this->db=Conectar::conexion(); //Almacenamos en db la llamada la clase estática Conectar
     }*/
+
 ?>

@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	validerLogin();
-    //funciones al cargar la pagina
+	//montrerServices();
+	//funciones al cargar la pagina
 });
 
 
@@ -18,19 +19,18 @@ function envoyerInsertMembre() {
 		contentType: false,
 		processData: false,
 		success: function (message) {
-			if(message.status=='error')
-				vue('erreurInsertMembreJSON',message.msg);
-			else
-			{
+			if (message.status == 'error')
+				vue('erreurInsertMembreJSON', message.msg);
+			else {
 				$('#panel8').removeClass("active");
 				$('#panel8').removeClass("show");
 				$('#tabSinsc').removeClass("active");
 				$('#tabSign').addClass("active");
 				$('#panel7').addClass("active");
 				$('#panel7').addClass("show");
-				vue('enregisterOKJSON',message.msg);
+				vue('enregisterOKJSON', message.msg);
 			}
-			 
+
 			//envoyerLogin();
 		},
 		fail: function () {
@@ -50,15 +50,12 @@ function envoyerLoginSubmit() {
 		contentType: false,
 		processData: false,
 		success: function (message) {
-			if(message.status=='error')
-				vue('erreurLoginSubmitJSON',message.msg);
-			else{
+			if (message.status == 'error')
+				vue('erreurLoginSubmitJSON', message.msg);
+			else {
 				$('#modalLRForm').modal('hide');
-				vue('LoginOKJSON',message.msg);
+				vue('LoginOKJSON', message.msg);
 			}
-			
-
-			
 		},
 		fail: function () {
 			alert("Vous avez un GROS problème");
@@ -66,42 +63,83 @@ function envoyerLoginSubmit() {
 	});
 }
 
-function validerLogin() {
-	var loginForm = new FormData(document.getElementById('loginForm'));
-	loginForm.append('action', 'validerLogin');
+function envoyerUpdateMembre() {
+	var membreFormUp = new FormData(document.getElementById('membreFormUp'));
+	membreFormUp.append('action', 'membreUpdate');
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
 		type: 'POST',
-		data: loginForm,
+		data: membreFormUp,
 		dataType: 'json',
 		contentType: false,
 		processData: false,
 		success: function (message) {
-			if(message.status=='error')
-				vue('erreurLoginSubmitJSON',message.msg);
-			else{
+			if (message.status == 'error')
+				vue('erreurLoginSubmitJSON', message.msg);
+			else {
 				$('#modalLRForm').modal('hide');
-				vue('LoginOKJSON',message.msg);
+				vue('modalConnecter', message.msg)
+				//vue('LoginOKJSON', message.msg);
 			}
-			
-
-			
 		},
 		fail: function () {
 			alert("Vous avez un GROS problème");
 		}
 	});
 }
-function envoyerLogin() {
+function validerLogin() {
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
 		type: 'POST',
-		data: 'action=login',
-		//dataType:'json',
-		dataType: 'html',
-		success: function (formHtml) {
-			$('#container').html(formHtml);
-			//vue('listerJSON',listeFilms);
+		data: 'action=validerLogin',
+		dataType: 'json',
+		success: function (message) {
+			if (message.status == 'error')
+				vue('erreurLoginSubmitJSON', message.msg);
+			if (message.status == 'success') {
+				$('#modalLRForm').modal('hide');
+				vue('LoginOKJSON', message.msg);
+				montrerServices();
+			}
+			if (message.status == 'nonLogin')
+				montrerServices();
+		},
+		fail: function () {
+			alert("Vous avez un GROS problème");
+		}
+	});
+}
+
+function montrerServices() {
+	$.ajax({
+		url: 'serveur/controleurServices.php',
+		type: 'POST',
+		data: {
+			"action": 'listerServCards',
+			"idcateg": 0
+		},
+		dataType: 'json',
+		success: function (donnes) {
+
+			vue('servicesAccueil', donnes);
+
+		},
+		fail: function () {
+			alert("Vous avez un GROS problème");
+		}
+	});
+
+}
+
+function envoyerMajProfil() {
+	$.ajax({
+		url: 'serveur/controleurMembres.php',
+		type: 'POST',
+		data: 'action=chercheUser',
+		dataType: 'json',
+		success: function (donnes) {
+			//alert(donnes);
+			vue('formMajUser', donnes);
 		},
 		fail: function () {
 			alert("Vous avez un GROS problème");
@@ -118,10 +156,10 @@ function envoyerLogout() {
 		//dataType:'json',
 		dataType: 'text',
 		success: function (formHtml) {
-			
+
 			//$('.container').html(formHtml);
-			if(formHtml=='login')
-				vue('menuConnexion',formHtml);
+			if (formHtml == 'login')
+				vue('menuConnexion', formHtml);
 			//envoyerLogin();
 		},
 		fail: function () {
@@ -129,35 +167,11 @@ function envoyerLogout() {
 		}
 	});
 }
-/*
-function envoyerRegister() {
-	$.ajax({
-		url: 'serveur/controleurMembres.php',
-		type: 'POST',
-		//data:{"action":'login'},
-		data: 'action=register',
-		//dataType:'json',
-		dataType: 'html',
-		success: function (formHtml) {
-			$('#container').html(formHtml);
-			//vue('listerJSON',listeFilms);
-		},
-		fail: function () {
-			alert("Vous avez un GROS problème");
-		}
-	});
-}
-*/
+
 
 //controleur des requetes
 var requetes = function (action) {
 	switch (action) {
-		case 'login':
-			envoyerLogin();
-			break;
-		/*case 'register':
-			envoyerRegister();
-			break;*/
 		case 'insertMembre':
 			envoyerInsertMembre();
 			break;
@@ -167,6 +181,12 @@ var requetes = function (action) {
 		case 'logout':
 			envoyerLogout();
 			break;
-		default:
+		case 'majProfil':
+			envoyerMajProfil();
+			break;
+		case 'updateMembre':
+			envoyerUpdateMembre();
+			break;
+			default:
 	}
 }
