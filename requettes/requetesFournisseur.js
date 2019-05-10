@@ -92,30 +92,73 @@ $.ajax({
 
 
 function  Ficher_Fournisseur(){
-    var enregForm = new FormData(document.getElementById('Modifier_Fournisseur'));
+   // var enregForm = new FormData(document.getElementById('Modifier_Fournisseur'));
     alert( 'Consulter le donnes de Fournisseur');
-    enregForm.append('action', 'fiche');
+    // enregForm.append('action', 'fiche');
     $.ajax({
         url: 'serveur/controleurFournisseur.php',
         type: 'POST',
-        data: enregForm,
+        data: {"action": "fiche" },
         dataType: 'json',
-        contentType: false,
-		processData: false,
         success: function (donnees) {
             if (donnees.idFournisseur !== ""){
-               alert("Mostar Furnisseur");
+               alert("Mostar Furnisseur donnees");
+               vueFournisseur('montreFournisseur',donnees);
             }
-            //alert(message);
-            //vue('enregistrer',message);
-            //vue('enregistrerJSON',message);
-            //vue('enregistrerXML', message);
         },
         fail: function () {
             alert("Vous avez un GROS problème");
         }
     });
 } 
+
+function  modifier_Fournisseur(){
+    alert( 'Modifier le donnes de Fournisseur');
+    var donnees2=$('#enregFormFournisseur').serialize()+"&action=modifier";
+    // var enregFormFour = new FormData(document.getElementById('enregFormFournisseur'));
+    // enregFormFour.append('action', 'modifier');
+    //  alert(JSON.stringify(enregFormFour));
+   
+    $.ajax({
+        url: 'serveur/controleurFournisseur.php',
+        type: 'POST',
+         data: donnees2 , 
+          dataType: 'text',
+          success: function (donnees) {
+           if (donnees.idFournisseur !== ""){
+                alert(" Fournisseur a été modifier ");
+                $('#FormFourniseur').modal('hide');
+                // ServicesFournisseur();
+             }
+          },
+          fail: function () {
+             alert("Vous avez un GROS problème");
+         }
+     });
+ } 
+
+
+ function GetServiceFournisseur(idService){
+    $.ajax({
+        url: 'serveur/controleurServices.php',
+        type: 'POST',
+        data: {
+            "action": 'fiche',
+            "idService": idService
+        },
+        dataType: 'json',
+        success: function (donneSerFuornisseur) {
+             alert('Services du Fournisseur a Consulte'+ donneSerFuornisseur.idService);
+
+             vueFournisseur('montreGetServicesFour', donneSerFuornisseur);
+        },
+        fail: function () {
+            alert("Vous avez un GROS problème");
+        }
+    });
+    
+    
+ }
 
 //controleur des requetes
 var requetesFour = function (action) {
@@ -125,7 +168,7 @@ var requetesFour = function (action) {
              envoyerEnregistrerFour();
              break;
         case 'FourAccueil':
-            FourAccueil();
+            FourAccueil(); 
             break;
         case 'Ficher_Fournisseur':
             Ficher_Fournisseur();
@@ -136,11 +179,16 @@ var requetesFour = function (action) {
         // case 'fiche':
         //     envoyerFiche();
         //     break;
-        // case 'modifier':
-        //     modifier();
-        //     break;
+        case 'modifier':
+            modifier_Fournisseur();
+            break;
+        case 'serviceFournisseur':
+             serviceFournisseur();
+            break;   
         default:
     }
 }
 
-
+var ModalRequetesSer = function(NroSer){
+    GetServiceFournisseur(NroSer);
+}

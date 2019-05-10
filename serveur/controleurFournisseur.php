@@ -208,24 +208,60 @@ function fiche(){
 
 
 function modifier(){
-      /*
-     $donnees = [
-     'idCate' => $_POST['idCategorie'],
-     'desCate' => $_POST['desCategorie']
-    ];
-    */
+   
     $donnees = [
-     'idFournisseur' => "3",
-     'nomFournisseur' => "Novaquim",
-     'idAdrFournisseur' => "1",
-     'cellFournisseur' => "514-412-3434",
-     'typeSerFournisseur' => "1",
-     'idForfaitFournisseur' => "1",
-     'datInsFournisseur' => "2019-04-30",
-     'datEcheFournisseur' => "2020-04-30",
-     'statuFournisseur' => "1",
-     'longFournisseur' => "45.540386",
-     'latiFournisseur' => "-73.697921"
+        'idAdr' => $_POST['idAdrFournisseur'],
+        'nroAdr' => $_POST['nroAdr'],
+        'rueAdr' => $_POST['rueAdr'],
+        'desVilAdr' => $_POST['desVilAdr'],
+        'codPosAdr' => $_POST['codPosAdr']
+      ];
+
+
+   //   $donnees = [
+   //     'idAdr' => '',
+   //     'nroAdr' => '2239',
+   //     'rueAdr' => 'Place Arthur Vallee',
+   //     'desVilAdr' => 'Montréal',
+   //     'codPosAdr' => 'H3m3g2'
+   //   ];
+     try{
+     $adress = new Adresse($donnees);
+     $manager = new AdresseManager();
+     $manager->update($adress); 
+     }catch (Exception $e){
+        $rep['erreur']="Probleme pour enregistrer";
+      }finally {
+      }
+
+
+
+    $adresse=$_POST['nroAdr'].' '.$_POST['rueAdr'].', '.$_POST['desVilAdr'].' , Canada';
+ 
+    // Obtener los resultados JSON de la peticion.
+    $geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($adresse).'&sensor=false&key=AIzaSyAkbWdMgGs624sL4rwDFjyat-ImNwsMnrk');
+    
+    // Convertir el JSON en array.
+    $geo = json_decode($geo, true);
+    //print_r($geo);
+    // Si todo esta bien
+    if ($geo['status'] = 'OK') {
+        // Obtener los valores
+        $latitude = $geo['results'][0]['geometry']['location']['lat'];
+        $longitude = $geo['results'][0]['geometry']['location']['lng'];
+    }
+    $donnees = [
+        'idFournisseur' => $_SESSION["membreId"],
+        'nomFournisseur' => $_POST['nomFournisseur'],
+        'idAdrFournisseur' =>$_POST['idAdrFournisseur'],
+        'cellFournisseur' => $_POST['cellFournisseur'],
+        'typeSerFournisseur' => "1",
+        'idForfaitFournisseur' => "1",
+        'datInsFournisseur' => $_POST["datInsFournisseur"],
+        'datEcheFournisseur' => $_POST["datEcheFournisseur"],
+        'statuFournisseur' => "1",
+        'longFournisseur' => $longitude,
+        'latiFournisseur' => $latitude
     ];
     $fourni = new Fournisseurs($donnees);
     $manager = new FournisseurManager();
