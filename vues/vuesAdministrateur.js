@@ -44,13 +44,13 @@ function listerJSONAut(listeAut) {
 							rep += /*html*/ `
 						<tr>
 							<th scope="row">` + (ligne.idService) + `</th>
-							<td>` + (ligne.titreService) + `</td>
 							<td>` + (ligne.nomFournisseur) + `</td>
+							<td>` + (ligne.titreService) + `</td>
 							<td>` + (ligne.desCategorie) + `</td>
 							<td>` + (ligne.prixService) + `</td>
 							<td>
 								<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAutorisation` + (ligne.idService) + `"><i class="fas fa-eye"></i></button>
-								<button type="button" class="btn btn-danger btn-sm" onClick="requetesAdm('autoriserService');"><i class="fas fa-check" title="Autorizer"></i></button>
+								<button type="button" class="btn btn-danger btn-sm" onClick="autorisationSer('` + (ligne.idService) + `');"><i class="fas fa-check" title="Autorizer"></i></button>
 							</td>
 						</tr>
 						<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAutorisation` + (ligne.idService) + `">
@@ -105,30 +105,26 @@ function listerJSONCat(listeCat) {
 	var taille = listeCat.length;
 	rep = `
 	<h3>Catégories</h3>
-	<div class="row justify-content-md-center">
-		<div class="col col-lg-4">
-			<table class="table table-hover">
-				<thead class="bg-primary text-white shadow">
-					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Déscription</th>
-					</tr>
-				</thead>
-				<tbody>`
-			for (i = 0; i < taille; i++) {
-				ligne = listeCat[i];
-				rep += `
-					<tr>
-						<th scope="row">` + (ligne.idCategorie) + `</th>
-						<td>` + (ligne.desCategorie) + `</td>
-					</tr>
-				`
-			}
-			rep += /*html*/`
-				</tbody>
-			</table>
-		</div>
-	</div>
+	<table class="table table-hover">
+		<thead class="bg-primary text-white shadow">
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Déscription</th>
+			</tr>
+		</thead>
+		<tbody>`
+	for (i = 0; i < taille; i++) {
+		ligne = listeCat[i];
+		rep += `
+			<tr>
+				<th scope="row">` + (ligne.idCategorie) + `</th>
+				<td>` + (ligne.desCategorie) + `</td>
+			</tr>
+		`
+	}
+	rep += /*html*/`
+		</tbody>
+	</table>
 	`
 
 	$('#tab-vuerequetes').html(rep);
