@@ -21,6 +21,111 @@
     <link href="css/styles.css" rel="stylesheet">
 
     <title>bitvoix.com</title>
+
+    <script>
+        window.onload = function () {
+            serviFour();
+        }
+        
+        function serviFour() {
+            rep = /*html*/ `
+            <div class="col-lg-4 col-sm-6 mb-2">
+
+                <!-- Card -->
+                <div class="card booking-card shadow" id="card-services">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/auto.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div class="card-body">
+
+                        <!-- Text -->
+                        <p class="card-text">Teinture complète des vitres d'une automobile</p>
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item mr-0"><i
+                                    class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i
+                                    class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i
+                                    class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item mr-0"><i
+                                    class="fas fa-star amber-text text-warning"></i>
+                            </li>
+                            <li class="list-inline-item"><i
+                                    class="fas fa-star-half-alt amber-text text-warning"></i>
+                            </li>
+
+                            <li class="list-inline-item">
+                                <p class="text-muted">4.5 (413)</p>
+                            </li>
+                        </ul>
+                        <!-- <hr> -->
+                        <ul class="list-unstyled list-inline mb-0">
+                            <li class="list-inline-item">
+                                <p class="card-text small text-muted pt-1">17-05-2019</p>
+                            </li>
+                            <li class="list-inline-item">
+                                <button type="button" class="btn btn-danger" data-toggle="modal"
+                                    data-target="#FormService"><i class="fas fa-pencil-alt"></i></button>
+                            </li>
+
+                        </ul>
+
+
+                    </div>
+
+                </div>
+                <!-- Card -->
+
+            </div>
+            `
+            $('#divfour').html(rep);
+        }
+
+        function commmandesFour() {
+            rep = `
+            <table class="table table-hover">
+                <thead class="bg-primary text-white shadow">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Membre</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">No. Ref</th>
+                        <th scope="col">Clé Service</th>
+                        <th scope="col">Verification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>nomMembre + preNomMembre</td>
+                        <td>titreService</td>
+                        <td>prixService</td>
+                        <td>NroRefe</td>
+                        <td>cleSerRequest</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm" onClick="function();"><i class="fas fa-check" title="Autorizer"></i></button>
+                            <button type="button" class="btn btn-danger btn-sm" onClick="function();"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            `
+            $('#divfour').html(rep);
+        }
+    
+    
+    </script>
 </head>
 
 <body>
@@ -244,7 +349,7 @@
 
 
 
-    <div  class="container text-center mt-4">
+    <div class="container text-center mt-4">
 
         <!-- Icons Services -->
 
@@ -848,74 +953,21 @@
         <!-- Page Fourniseur -->
 
         <div class="row">
-             <!-- Div forfait Services-->
+            <!-- Div forfait Services-->
             <div class="col-lg-9">
-                <div class="col">
+                <div>
+                    <button type="button" class="btn btn-primary font-weight-bold shadow" onclick="serviFour();">Services</button>
                     <button type="button" class="btn btn-primary font-weight-bold shadow" data-toggle="modal"
                         data-target="#FormService">Nouveau Service</button>
                     <button type="button" class="btn btn-primary font-weight-bold shadow" data-toggle="modal"
-                        data-target="#FormFourniseur">Profil Fourniseur</button>
+                        data-target="#FormFourniseur">Profil</button>
+                    <button type="button" class="btn btn-primary font-weight-bold shadow" onclick="commmandesFour();">Commandes</button>
                 </div>
-                <div class="row mt-2">
-                    <!-- Card Service du Fournisseur -->
-                    <div class="col-lg-4 col-sm-6 mb-2">
-
-                        <!-- Card -->
-                        <div class="card booking-card shadow" id="card-services">
-
-                            <!-- Card image -->
-                            <div class="view overlay">
-                                <img class="card-img-top" src="images/auto.jpg" alt="Card image cap">
-                                <a href="#!">
-                                    <div class="mask rgba-white-slight"></div>
-                                </a>
-                            </div>
-
-                            <!-- Card content -->
-                            <div class="card-body">
-
-                                <!-- Text -->
-                                <p class="card-text">Teinture complète des vitres d'une automobile</p>
-                                <ul class="list-unstyled list-inline rating mb-0">
-                                    <li class="list-inline-item mr-0"><i
-                                            class="fas fa-star amber-text text-warning"></i>
-                                    </li>
-                                    <li class="list-inline-item mr-0"><i
-                                            class="fas fa-star amber-text text-warning"></i>
-                                    </li>
-                                    <li class="list-inline-item mr-0"><i
-                                            class="fas fa-star amber-text text-warning"></i>
-                                    </li>
-                                    <li class="list-inline-item mr-0"><i
-                                            class="fas fa-star amber-text text-warning"></i>
-                                    </li>
-                                    <li class="list-inline-item"><i
-                                            class="fas fa-star-half-alt amber-text text-warning"></i>
-                                    </li>
-
-                                    <li class="list-inline-item">
-                                        <p class="text-muted">4.5 (413)</p>
-                                    </li>
-                                </ul>
-                                <!-- <hr> -->
-                                <ul class="list-unstyled list-inline mb-0">
-                                    <li class="list-inline-item">
-                                        <p class="card-text small text-muted pt-1">17-05-2019</p>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#FormService"><i class="fas fa-pencil-alt"></i></button>
-                                    </li>
-
-                                </ul>
+                <div class="row mt-2" id="divfour">
 
 
-                            </div>
-
-                        </div>
-                        <!-- Card -->
-
-                    </div>
+                    
+                    
                 </div>
             </div>
             <!-- Div forfait Logo et Graphique -->
@@ -925,7 +977,7 @@
 
                     <!-- Card image -->
                     <div class="view overlay">
-                        <img class="card-img-top" src="images/vip.png" alt="Card image cap">
+                        <img class="card-img-top" src="images/basebv.png" alt="Card image cap">
                         <a href="#!">
                             <div class="mask rgba-white-slight"></div>
                         </a>
@@ -935,7 +987,7 @@
                     <div id="graphique" class="card-body">
 
                         <!-- Title -->
-                        <h5 class="card-title font-weight-bold"><a>VIP</a></h5>
+                        <h5 class="card-title font-weight-bold"><a>BASE BITVOIX</a></h5>
 
                         <!-- Text -->
                         <p class="card-text">Date d'échéance : 12-09-2019</p>
@@ -943,21 +995,72 @@
                     </div>
 
                 </div>
-                <button type="button" class="btn btn-primary font-weight-bold shadow mt-2">Changer mon forfait</button>
+                <button type="button" class="btn btn-primary font-weight-bold shadow mt-2" data-toggle="modal" data-target=".bd-example-modal-xl">Changer mon forfait</button>
+
+                <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary py-4 shadow">
+                                <img src="images/logo.png" alt="">
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                    <span class="text-white" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Forfaits <b>les plus populaires</b></h3>
+                                <p>Nos clients ont aimé ces forfaits. Choisissez le vôtre!</p>
+                                <div class="card-deck">
+                                    <div class="card shadow card-forfait">
+                                        <img src="images/basebv.png" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><b>BASE</b> BITVOIX</h5>
+                                            <p class="card-text">Trois (3) services ou produits <b>GRATUITS</b></p>
+                                            <p class="card-text">Durée de trois (3) mois</p>
+                                            <p class="card-text">Publiez votre annonce sur la page la plus visitée et captez un maximum d'attention</p>
+                                            <p class="card-text font-weight-bold">0.00$</p>
+                                            <button type="button" class="btn btn-primary font-weight-bold shadow">Gratuit</button>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow card-forfait">
+                                        <img src="images/standardbv.png" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><b>STANDARD</b> BITVOIX</h5>
+                                            <p class="card-text">Services ou produits <b>ILLIMITÉS</b></p>
+                                            <p class="card-text">Durée de 1 an</p>
+                                            <p class="card-text">Publiez votre annonce sur la page la plus visitée et captez un maximum d'attention</p>
+                                            <p class="card-text font-weight-bold">9.99$</p>
+                                            <button type="button" class="btn btn-primary font-weight-bold shadow" ><i class="fab fa-paypal"></i> Paypal</button>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow card-forfait">
+                                        <img src="images/premiumbv.png" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><b>PREMIUM</b> BITVOIX</h5>
+                                            <p class="card-text">Services ou produits <b>ILLIMITÉS</b></p>
+                                            <p class="card-text">Durée de 1 an</p>
+                                            <p class="card-text">Administration de agenda et <br>marketing</p>
+                                            <p class="card-text font-weight-bold">29.99$</p>
+                                            <button type="button" class="btn btn-primary font-weight-bold shadow disabled"><i class="fab fa-paypal"></i> PayPal</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
 
             <!-- Modal Profil -->
 
-            <div class="modal fade" id="FormFourniseur" tabindex="-1" role="dialog"
-                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="FormFourniseur" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary py-4 shadow">
                             <img src="images/logo.png" alt="">
-                            <button type="button" class="close text-white" data-dismiss="modal"
-                                aria-label="Close">
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                 <span class="text-white" aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -965,7 +1068,8 @@
                             <div class="container">
                                 <form id="" enctype="multipart/form-data" action="" method="POST">
                                     <div class="form-group row">
-                                        <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom fournisseur</label>
+                                        <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom
+                                            fournisseur</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control" id="nomFournisseur"
                                                 name="nomFournisseur" title="Nom Fournisseur" required>
@@ -976,15 +1080,15 @@
                                     <div class="form-group row">
                                         <label for="nroAdr" class="col-sm-4 col-form-label">Numéro civique</label>
                                         <div class="col-sm-8">
-                                            <input type="number" class="form-control" id="nroAdr"
-                                                name="nroAdr" step="1" title="Numéro Civique" required>
+                                            <input type="number" class="form-control" id="nroAdr" name="nroAdr" step="1"
+                                                title="Numéro Civique" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="rueAdr" class="col-sm-4 col-form-label">Rue</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="rueAdr"
-                                                name="rueAdr" title="Rue" required>
+                                            <input type="text" class="form-control" id="rueAdr" name="rueAdr"
+                                                title="Rue" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -992,8 +1096,7 @@
                                             <label for="desVilAdr">Ville</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <select id="desVilAdr" name="desVilAdr" class="form-control"
-                                                required>
+                                            <select id="desVilAdr" name="desVilAdr" class="form-control" required>
                                                 <option selected value="Montréal">Montréal</option>
                                             </select>
                                         </div>
@@ -1001,8 +1104,8 @@
                                     <div class="form-group row">
                                         <label for="codPosAdr" class="col-sm-4 col-form-label">Code postal</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="codPosAdr"
-                                                name="codPosAdr" title="Code postal" required>
+                                            <input type="text" class="form-control" id="codPosAdr" name="codPosAdr"
+                                                title="Code postal" required>
                                         </div>
                                     </div>
                                     <hr>
@@ -1010,8 +1113,8 @@
                                         <label for="cellFournisseur" class="col-sm-4 col-form-label">Téléphone</label>
                                         <div class="col-sm-8">
                                             <input type="tel" class="form-control" min="1.0" max="5.0"
-                                                id="cellFournisseur" name="cellFournisseur"
-                                                title="Téléphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                                                id="cellFournisseur" name="cellFournisseur" title="Téléphone"
+                                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer d-flex justify-content-center">
@@ -1029,14 +1132,13 @@
             </div>
 
             <!-- Modal Service -->
-            <div class="modal fade" id="FormService" tabindex="-1" role="dialog"
-                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal fade" id="FormService" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary py-4 shadow">
                             <img src="images/logo.png" alt="">
-                            <button type="button" class="close text-white" data-dismiss="modal"
-                                aria-label="Close">
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                 <span class="text-white" aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -1060,11 +1162,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="descFilm"
-                                            class="col-sm-4 col-form-label">Déscription</label>
+                                        <label for="descFilm" class="col-sm-4 col-form-label">Déscription</label>
                                         <div class="col-sm-8">
-                                            <textarea class="form-control" id="descFilm" name="descFilm"
-                                                rows="3" title="Déscription du film" required></textarea>
+                                            <textarea class="form-control" id="descFilm" name="descFilm" rows="3"
+                                                title="Déscription du film" required></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1072,8 +1173,7 @@
                                             <label for="">Catégorie</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <select id="idCatFilm" name="idCatFilm" class="form-control"
-                                                required>
+                                            <select id="idCatFilm" name="idCatFilm" class="form-control" required>
                                                 <option selected value="">Sélectionnez une option</option>
                                                 <option value="">Autos</option>
                                                 <option value="">Sante</option>
@@ -1092,8 +1192,8 @@
                                             Service</label>
                                         <div class="col-sm-8">
                                             <input type="number" class="form-control" min="1.0" max="5.0"
-                                                id="prixService" name="prixService" step="0.1"
-                                                title="Prix Service" required>
+                                                id="prixService" name="prixService" step="0.1" title="Prix Service"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1101,8 +1201,8 @@
                                             Promotion</label>
                                         <div class="col-sm-8">
                                             <input type="number" class="form-control" min="1.0" max="5.0"
-                                                id="promService" name="promService" step="0.1"
-                                                title="Prix Promotion" required>
+                                                id="promService" name="promService" step="0.1" title="Prix Promotion"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1110,8 +1210,8 @@
                                             Référe</label>
                                         <div class="col-sm-8">
                                             <input type="number" class="form-control" min="1.0" max="5.0"
-                                                id="refeService" name="refeService" step="0.1"
-                                                title="Prix Référe" required>
+                                                id="refeService" name="refeService" step="0.1" title="Prix Référe"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1185,27 +1285,27 @@
 
         <!-- Page Administrateur -->
 
-            <div class="container mt-3">
-                <h3>Administrateur</h3>
-                <br>
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#tab-activations">Activations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tab-categories">Catégories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tab-membres">Membres</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tab-fournisseurs">Fournisseurs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#tab-services">Services</a>
-                    </li>
-                </ul>
+        <div class="container mt-3">
+            <h3>Administrateur</h3>
+            <br>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tab-activations">Activations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-categories">Catégories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-membres">Membres</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-fournisseurs">Fournisseurs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tab-services">Services</a>
+                </li>
+            </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
@@ -1502,23 +1602,23 @@
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="js/routes.js"></script>
     <script>
-        $("#formFourniseur").submit(function(event) {
+        $("#formFourniseur").submit(function (event) {
             alert('Test');
-         /* stop form from submitting normally */
-         event.preventDefault();
-        
-         /* get the action attribute from the <form action=""> element */
-         var url = $(this).attr('action');
-        
-        //  $.ajax({
-        //  url : url,
-        //  type : 'GET',
-        //  success : function(code_html, statut){
-        //  $("#article").html(code_html);
-        //  }
-        //  });
-         });
-        </script>
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+            /* get the action attribute from the <form action=""> element */
+            var url = $(this).attr('action');
+
+            //  $.ajax({
+            //  url : url,
+            //  type : 'GET',
+            //  success : function(code_html, statut){
+            //  $("#article").html(code_html);
+            //  }
+            //  });
+        });
+    </script>
 </body>
 
 </html>
