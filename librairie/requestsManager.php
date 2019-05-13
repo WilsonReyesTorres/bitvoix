@@ -10,14 +10,13 @@ class RequestsManager
     public function add(Requests $reque)
         {
             $requete = 'INSERT INTO requests(idMembre,  idService,  qualRequest,  commRequest,  
-                    statRequest,  dateRequest,  cleSerRequest) VALUES (?,?,?,?,?,?,?);';
+                    statRequest,  dateRequest,  cleSerRequest) VALUES (?,?,?,?,?,NOW(),?);';
             $stmt = $this->_pdo->prepare($requete);
             $stmt->execute(array($reque->idMembre(),
                                  $reque->idService(),
                                  $reque->qualRequest(),
                                  $reque->commRequest(),
                                  $reque->statRequest(),
-                                 $reque->dateRequest(),
                                  $reque->cleSerRequest()));
         }
       public function delete(Requests $reque)

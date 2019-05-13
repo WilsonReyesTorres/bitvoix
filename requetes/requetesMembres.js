@@ -55,11 +55,13 @@ function envoyerLoginSubmit() {
 			else {
 				$('#modalLRForm').modal('hide');
 				vue('LoginOKJSON', message.msg);
-				if(message.msg=='AdminBitvoix'){
+				if (message.msg == 'AdminBitvoix') {
 					$('#map').hide();
 					listerAut();
+				} else {
+					montrerServices2();
 				}
-				
+
 			}
 		},
 		fail: function () {
@@ -92,6 +94,33 @@ function envoyerUpdateMembre() {
 		}
 	});
 }
+function envoyerRequest() {
+	var formRequest = new FormData(document.getElementById('formRequest'));
+	formRequest.append('action', 'enregistrer');
+	$.ajax({
+		url: 'serveur/controleurRequests.php',
+		type: 'POST',
+		data: formRequest,
+		dataType: 'json',
+		contentType: false,
+		processData: false,
+		success: function (message) {
+alert('Request envoyé');
+			/*
+			if (message.status == 'error')
+				vue('erreurLoginSubmitJSON', message.msg);
+			else {
+				$('#modalLRForm').modal('hide');
+				vue('modalConnecter', message.msg)
+				//vue('LoginOKJSON', message.msg);
+			}*/
+		},
+		fail: function () {
+			alert("Vous avez un GROS problème");
+		}
+	});
+}
+
 function validerLogin() {
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
@@ -104,12 +133,12 @@ function validerLogin() {
 			if (message.status == 'success') {
 				$('#modalLRForm').modal('hide');
 				vue('LoginOKJSON', message.msg);
-				if(message.msg=='AdminBitvoix'){
+				if (message.msg == 'AdminBitvoix') {
 					$('#map').hide();
 					listerAut();
-				}
-				else{
-					montrerServices();
+				} else {
+					montrerServices2();
+
 				}
 			}
 			if (message.status == 'nonLogin')
@@ -121,6 +150,35 @@ function validerLogin() {
 	});
 }
 
+function montrerServices2() {
+	$.ajax({
+		url: 'serveur/controleurServices.php',
+		type: 'POST',
+		data: {
+			"action": 'listerServCards',
+			"idcateg": 0
+		},
+		dataType: 'json',
+		success: function (donnes) {
+
+			vue('servicesAccueil', donnes);
+			//Activer le button modal3
+			var y = document.getElementsByClassName("imgLien");
+			var k;
+			for (k = 0; k < y.length; k++) {
+				y[i].setAttribute("data-target", "#refModal" +(k + 1) ) ;
+				y[i].setAttribute("title", "Référer le service" ) ;
+				document.getElementById("buttonReq"+(k + 1)).disabled=false;
+				document.getElementById("buttonReq"+(k + 1)).setAttribute("title", "Demande de service" ) ;
+			}
+
+		},
+		fail: function () {
+			alert("Vous avez un GROS problème");
+		}
+	});
+
+}
 function montrerServices() {
 	$.ajax({
 		url: 'serveur/controleurServices.php',
@@ -141,7 +199,6 @@ function montrerServices() {
 	});
 
 }
-
 function envoyerMajProfil() {
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
@@ -171,6 +228,7 @@ function envoyerLogout() {
 			//$('.container').html(formHtml);
 			if (formHtml == 'login')
 				vue('menuConnexion', formHtml);
+				montrerServices();
 			//envoyerLogin();
 		},
 		fail: function () {
@@ -198,6 +256,9 @@ var requetes = function (action) {
 		case 'updateMembre':
 			envoyerUpdateMembre();
 			break;
-			default:
+		case 'request':
+			envoyerRequest();
+			break;
+		default:
 	}
 }

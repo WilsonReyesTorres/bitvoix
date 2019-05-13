@@ -34,6 +34,9 @@ function montrerServicesCat(idcateg) {
     });
 }
 
+var filtrerServ = function (idcateg){
+    montrerServicesCat(idcateg);
+}
 
 
 //controleur des requetes

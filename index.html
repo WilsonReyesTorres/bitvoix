@@ -36,7 +36,6 @@
     <script src="vues/vuesMembres.js"></script>
     <script src="vues/vuesAdministrateur.js"></script>
     <script src="vues/vuesFournisseur.js"></script>
-    <script src="vues/vuesServices.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkbWdMgGs624sL4rwDFjyat-ImNwsMnrk&callback=initMap">
     </script>
@@ -73,15 +72,15 @@
                                 Catégories
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="javascript:void(0);"  onClick="requetesServ('montrerServicesCat', '1');">Autos</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '2');">Sante</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '3');">Gastronomie</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '4');">Beauté</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '5');">Produits</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '6');">Voyages</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '7');">Maison</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '8');">Education</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '9');">Services</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('1');">Autos</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('2');">Sante</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('3');">Gastronomie</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('4');">Beauté</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('5');">Produits</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('6');">Voyages</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('7');">Maison</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('8');">Education</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('9');">Services</a>
                             </div>
                         </li>
                         <li class="nav-item active" id="loginDiv">

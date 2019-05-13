@@ -49,6 +49,9 @@ span.lien{
     color:  #2196F3;
 }
 
+.imgLien{
+    cursor: pointer;
+}
 .col{
     max-width: 10%;
 }

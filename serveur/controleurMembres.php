@@ -98,7 +98,7 @@ function loginOauth()
         $update = $membre->update($membreData, $conditions);
         if ($update) {
             $sessData['membreLoggedIn'] = true;
-            $sessData['membreID'] = $prevMembre['idMembre'];
+            $sessData['membreId'] = $prevMembre['idMembre'];
             $sessData['oauth_provider'] = $prevMembre['oauthProviderMembre'];
             $sessData['status']['type'] = 'success';
             $sessData['status']['msg'] = $prevMembre['preNomMembre'];
@@ -122,7 +122,7 @@ function loginOauth()
         //set status based on data insert
         if ($insert) {
             $sessData['membreLoggedIn'] = true;
-            $sessData['membreID'] = $insert;
+            $sessData['membreId'] = $insert;
             $sessData['oauth_provider'] = $membreData['oauthProviderMembre'];
             $sessData['status']['type'] = 'success';
             $sessData['status']['msg'] = $membreData['preNomMembre'];
@@ -166,7 +166,7 @@ function validerLogin()
 function membreUpdate()
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
-    //var_dump($_SESSION['sessData'] ["membreID"]);
+    //var_dump($_SESSION['sessData'] ["membreId"]);
     $membre = new Membre();
     $membreData = array(
         'nomMembre' => $_POST['nomMembre'],
@@ -177,7 +177,7 @@ function membreUpdate()
     $update = $membre->update($membreData, $conditions);
     if ($update) {
         $_SESSION['sessData']['membreLoggedIn'] = true;
-        $_SESSION['sessData']["membreID"] = $_POST['idMembre'];
+        $_SESSION['sessData']["membreId"] = $_POST['idMembre'];
         $_SESSION['sessData']['status']['type'] = 'success';
         $_SESSION['sessData']['status']['msg'] = $_POST['preNomMembre'];
     } else {
@@ -194,10 +194,19 @@ function membreUpdate()
 function chercheUser()
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
-    //var_dump($_SESSION['sessData'] ["membreID"]);
+    //var_dump($_SESSION['sessData'] ["membreId"]);
     $membre = new Membre();
-    $prevCon['where'] = array('idMembre' => $_SESSION['sessData']["membreID"]);
+    $prevCon['where'] = array('idMembre' => $_SESSION['sessData']["membreId"]);
     $prevCon['return_type'] = 'single';
+    $membreAct = $membre->getRows($prevCon);
+    echo json_encode($membreAct);
+}
+function listerMembres()
+{
+    if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+    //var_dump($_SESSION['sessData'] ["membreId"]);
+    $membre = new Membre();
+    $prevCon['return_type'] = 'all';
     $membreAct = $membre->getRows($prevCon);
     echo json_encode($membreAct);
 }
@@ -297,5 +306,7 @@ switch ($action) {
         break;
     case 'membreUpdate':
         membreUpdate();
+    case 'listerMembres':
+        listerMembres();
         break;
 }
