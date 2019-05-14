@@ -1,4 +1,5 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
 require_once("../bd/connecter.php");
 require_once('../librairie/references.php');
 require_once('../librairie/referencesManager.php');
@@ -7,7 +8,7 @@ require_once('../librairie/referencesManager.php');
 /*****************************  commencer test ***************/
 
 //chargerClasse('adresse')
-$donnees = [
+/*$donnees = [
     'idReference' => '1',
     'idService' => '1',
     'idMembre' => '1',
@@ -22,7 +23,7 @@ echo '<br>Id du Service:'.$refe->idService();
 echo '<br>Id du Memebre:'.$refe->idMembre();
 echo '<br>courriel reference:'.$refe->courReferences();
 echo '<br>Switch reference 0= Non 1=Oui:'.$refe->switReferences();
-echo '<br>Date de reference:'.$refe->dateReferences();
+echo '<br>Date de reference:'.$refe->dateReferences();*/
 
 
 //****************************  fin test **********************
@@ -30,23 +31,18 @@ echo '<br>Date de reference:'.$refe->dateReferences();
 
 
 function enregistrer(){
-     /*
-     $donnees = [
-      'idCate' => $_POST['idCategorie'],
-      'desCate' => $_POST['desCategorie']
-     ];
-    */
+
+    $idService=$_POST['idService'];
     $donnees = [
-    'idReference' => '1',
-    'idService' => '1',
-    'idMembre' => '1',
-    'courReferences' => 'W@gmail.com',
-    'switReferences' => '0',
-    'dateReferences' => '2019-02-20'];
-    try{
+    'idService' => $idService,
+    'idMembre' => $_SESSION['sessData']["membreId"],
+    'courReferences' => $_POST['courReferences'],
+    'switReferences' => '0'];
     $refe = new References($donnees);
     $manager = new ReferencesManager();
-    $manager->add($refe); 
+    $idReference =$manager->add($refe); 
+    try{
+    
     }catch (Exception $e){
 	   $rep['erreur']="Probleme pour enregistrer";
 	 }finally {
@@ -135,9 +131,8 @@ function modifier(){
 }
 
 //controleur Adresse
-//$action=$_POST['action'];
-$action= '';
-$action= 'modifier';
+$action=$_POST['action'];
+
 
 switch($action){
     case 'enregistrer':

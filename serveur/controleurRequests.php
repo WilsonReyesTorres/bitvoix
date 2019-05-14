@@ -35,25 +35,19 @@ echo '<br>cLé du service" :'.$reque->cleSerRequest();*/
 
 
 function enregistrer(){
-  foreach ($_POST as $nombre_campo => $valor) 
-	{ 
-		$asignacion = "\$".$nombre_campo."='".$valor."';"; 
-		echo $nombre_campo." = ".$valor."<br>";  
-		eval($asignacion); 
-	}  
+   $idService=$_POST['idService'];
+  $cleSerRequest= "cleSerRequest".$idService;
 
      $donnees = [
       'idMembre' => $_SESSION['sessData']["membreId"],
       'idService' => $idService,
       'statRequest' => '1',
-      'cleSerRequest' => $_POST['cleSerRequest1']]; 
-
-      print_r($donnees);
-      $reque = new Requests($donnees);
-    $manager = new RequestsManager();
-    $manager->add($reque); 
+      'cleSerRequest' => $_POST[$cleSerRequest]]; 
+     
     try{
-   
+    $reque = new Requests($donnees);
+    $manager = new RequestsManager();
+    $idRequest = $manager->add($reque); 
     }catch (Exception $e){
 	   $rep['erreur']="Probleme pour enregistrer";
 	 }finally {

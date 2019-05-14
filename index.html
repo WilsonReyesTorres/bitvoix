@@ -37,7 +37,7 @@
     <script src="vues/vuesAdministrateur.js"></script>
     <script src="vues/vuesFournisseur.js"></script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkbWdMgGs624sL4rwDFjyat-ImNwsMnrk&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkbWdMgGs624sL4rwDFjyat-ImNwsMnrk&callback=initMap">
     </script>
 
 </head>
@@ -55,7 +55,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="form-inline mr-auto">
+                    <!-- <form class="form-inline mr-auto">
 
                         <input type="text" class="form-control mr-sm-2" placeholder="Que recherchez-vous?"
                             aria-label="Que recherchez-vous?">
@@ -64,28 +64,38 @@
                                 class="fas fa-search"></i></button>
 
 
-                    </form>
+                    </form> -->
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown active">
+                        <li class="nav-item dropdown active" id="menuCategDiv">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Catégories
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('1');">Autos</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('2');">Sante</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('3');">Gastronomie</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('4');">Beauté</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('5');">Produits</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('6');">Voyages</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('7');">Maison</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('8');">Education</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('9');">Services</a>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onClick="filtrerServ('1');">Autos</a>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onClick="filtrerServ('2');">Sante</a>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onClick="filtrerServ('3');">Gastronomie</a>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onClick="filtrerServ('4');">Beauté</a>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onClick="filtrerServ('5');">Produits</a>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onClick="filtrerServ('6');">Voyages</a>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onClick="filtrerServ('7');">Maison</a>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onClick="filtrerServ('8');">Education</a>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onClick="filtrerServ('9');">Services</a>
                             </div>
                         </li>
                         <li class="nav-item active" id="loginDiv">
                             <!--Modal: Se connecter-->
-                            <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#modalLRForm">Se
+                            <a class="nav-link" href="javascript:void(0);" data-toggle="modal"
+                                data-target="#modalLRForm">Se
                                 Connecter<span class="sr-only">(current)</span></a>
                         </li>
 
@@ -171,7 +181,8 @@
 
                                     <div class="row my-3 d-flex justify-content-center">
                                         <!--Facebook-->
-                                        <a href="javascript:void(0);" onclick="fbLogin()" id="fbLink"><img src="images/fblogin.png" height="30px" /></a>
+                                        <a href="javascript:void(0);" onclick="fbLogin()" id="fbLink"><img
+                                                src="images/fblogin.png" height="30px" /></a>
 
                                         <!--Google +-->
                                         <div id="gSignIn"></div>
@@ -356,21 +367,21 @@
         <!-- Footer Links -->
 
         <hr>
+        <div id="footerButton">
+            <!-- Call to action -->
+            <ul class="list-unstyled list-inline text-center py-2">
+                <li class="list-inline-item">
+                    <h5 class="mb-1">Inscrivez-vous gratuitement</h5>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#!" class="btn btn-danger btn-rounded shadow" data-toggle="modal"
+                        data-target="#modalLRForm">S'inscrire!</a>
+                </li>
+            </ul>
+            <!-- Call to action -->
 
-        <!-- Call to action -->
-        <ul class="list-unstyled list-inline text-center py-2">
-            <li class="list-inline-item">
-                <h5 class="mb-1">Inscrivez-vous gratuitement</h5>
-            </li>
-            <li class="list-inline-item">
-                <a href="#!" class="btn btn-danger btn-rounded shadow" data-toggle="modal"
-                    data-target="#modalLRForm">S'inscrire!</a>
-            </li>
-        </ul>
-        <!-- Call to action -->
-
-        <hr>
-
+            <hr>
+        </div>
         <!-- Social buttons -->
         <ul class="list-unstyled list-inline text-center">
             <li class="list-inline-item">

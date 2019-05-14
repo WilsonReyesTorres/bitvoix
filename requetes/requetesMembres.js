@@ -50,15 +50,20 @@ function envoyerLoginSubmit() {
 		contentType: false,
 		processData: false,
 		success: function (message) {
-			if (message.status == 'error')
+			if (message.status == 'error') {
 				vue('erreurLoginSubmitJSON', message.msg);
-			else {
+			}
+			if (message.status == 'success') {
 				$('#modalLRForm').modal('hide');
+				$('#footerButton').hide();
 				vue('LoginOKJSON', message.msg);
 				if (message.msg == 'AdminBitvoix') {
 					$('#map').hide();
+					$('#menuCategDiv').hide();
 					listerAut();
 				} else {
+					//$('#divprincipal').html("");
+					//$("p").html("Hello <b>world</b>!");
 					montrerServices2();
 				}
 
@@ -94,32 +99,7 @@ function envoyerUpdateMembre() {
 		}
 	});
 }
-function envoyerRequest() {
-	var formRequest = new FormData(document.getElementById('formRequest'));
-	formRequest.append('action', 'enregistrer');
-	$.ajax({
-		url: 'serveur/controleurRequests.php',
-		type: 'POST',
-		data: formRequest,
-		dataType: 'json',
-		contentType: false,
-		processData: false,
-		success: function (message) {
-alert('Request envoyé');
-			/*
-			if (message.status == 'error')
-				vue('erreurLoginSubmitJSON', message.msg);
-			else {
-				$('#modalLRForm').modal('hide');
-				vue('modalConnecter', message.msg)
-				//vue('LoginOKJSON', message.msg);
-			}*/
-		},
-		fail: function () {
-			alert("Vous avez un GROS problème");
-		}
-	});
-}
+
 
 function validerLogin() {
 	$.ajax({
@@ -132,11 +112,14 @@ function validerLogin() {
 				vue('erreurLoginSubmitJSON', message.msg);
 			if (message.status == 'success') {
 				$('#modalLRForm').modal('hide');
+				$('#footerButton').hide();
 				vue('LoginOKJSON', message.msg);
 				if (message.msg == 'AdminBitvoix') {
 					$('#map').hide();
+					$('#menuCategDiv').hide();
 					listerAut();
 				} else {
+
 					montrerServices2();
 
 				}
@@ -162,14 +145,14 @@ function montrerServices2() {
 		success: function (donnes) {
 
 			vue('servicesAccueil', donnes);
-			//Activer le button modal3
+			//Activer le button modal3 ei 2
 			var y = document.getElementsByClassName("imgLien");
 			var k;
 			for (k = 0; k < y.length; k++) {
-				y[i].setAttribute("data-target", "#refModal" +(k + 1) ) ;
-				y[i].setAttribute("title", "Référer le service" ) ;
-				document.getElementById("buttonReq"+(k + 1)).disabled=false;
-				document.getElementById("buttonReq"+(k + 1)).setAttribute("title", "Demande de service" ) ;
+				y[k].setAttribute("data-target", "#refModal" + (k + 1));
+				y[k].setAttribute("title", "Référer le service");
+				document.getElementById("buttonReq" + (k + 1)).disabled = false;
+				document.getElementById("buttonReq" + (k + 1)).setAttribute("title", "Demande de service");
 			}
 
 		},
@@ -179,6 +162,7 @@ function montrerServices2() {
 	});
 
 }
+
 function montrerServices() {
 	$.ajax({
 		url: 'serveur/controleurServices.php',
@@ -199,6 +183,7 @@ function montrerServices() {
 	});
 
 }
+
 function envoyerMajProfil() {
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
@@ -228,7 +213,9 @@ function envoyerLogout() {
 			//$('.container').html(formHtml);
 			if (formHtml == 'login')
 				vue('menuConnexion', formHtml);
-				montrerServices();
+			$('#menuCategDiv').show();
+			$('#footerButton').show();
+			montrerServices();
 			//envoyerLogin();
 		},
 		fail: function () {

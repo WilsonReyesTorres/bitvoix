@@ -159,12 +159,23 @@ function menuMembre(membrePrenom) {
 		'</a>' +
 		'<div class="dropdown-menu" aria-labelledby="navbarDropdown">' +
 		'<span class="lien dropdown-item" onClick="requetes(\'majProfil\');">Mise à jour Membre</span>' +
+		'<span class="lien dropdown-item" onClick="requetes(\'reqMembre\');">Requêtes Membre</span>' +
 		'<span class="lien dropdown-item" onClick="requetesFour(\'FourAccueil\');">Fournisseur</span>' +
 		'<span class="lien dropdown-item" onClick="requetes(\'logout\');">Déconnexion</span>' +
 		'</div>';
 	$('#loginDiv').html(rep);
 }
-
+function menuAdmin(admin) {
+	$('#loginDiv').addClass("dropdown");
+	rep = '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"' +
+		'data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+		admin +
+		'</a>' +
+		'<div class="dropdown-menu" aria-labelledby="navbarDropdown">' +
+		'<span class="lien dropdown-item" onClick="requetes(\'logout\');">Déconnexion</span>' +
+		'</div>';
+	$('#loginDiv').html(rep);
+}
 function menuConnexion() {
 	$('#loginDiv').removeClass("dropdown");
 	rep = '<a class="nav-link" href="#" data-toggle="modal" data-target="#modalLRForm">Se Connecter<span class="sr-only">(current)</span></a>';
@@ -220,7 +231,7 @@ function formMajUser(donnees) {
 function servicesAccueil(donnees) {
 	rep = '<!-- Icons Services -->' +
 		'' +
-		'<div class="row">' +
+		'<div class="row d-none d-lg-flex d-flex justify-content-center">' +
 		'<div class="col">' +
 		'<button type="button" class="btn btn-primary btn-lg rounded-circle" onClick="filtrerServ(\'1\');"><i class="fas fa-car"></i></button>' +
 		'<a href="javascript:void(0);" onClick="filtrerServ(\'1\');">Autos</a>' +
@@ -416,7 +427,7 @@ function servicesAccueil(donnees) {
 			'' +
 			'' +
 			'<div class="text-center form-sm mt-2">' +
-			'<button class="btn btn-primary shadow" data-dismiss="modal" onClick="requetes(\'request\');">Confirmer</button>' +
+			'<button class="btn btn-primary shadow" data-dismiss="modal" onClick="envoyerForm(\'formRequest'+donnees[j].idService+'\');">Confirmer</button>' +
 			'</div>' +
 			'</form>' +
 			'</div>' +
@@ -443,7 +454,7 @@ function servicesAccueil(donnees) {
 			'<hr>' +
 			'</div>' +
 			'<div class="modal-body">' +
-			'<form id="formRef' + donnees[j].idService + '">' +
+			'<form id="formReferer' + donnees[j].idService + '">' +
 			'' +
 			'<input type="hidden" name="idService" id="idService" value="' + donnees[j].idService + '" >' +
 			'' +
@@ -459,14 +470,14 @@ function servicesAccueil(donnees) {
 			'<div class="input-group-prepend">' +
 			'<span class="input-group-text"><i class="fas fa-envelope prefix"></i></span>' +
 			'</div>' +
-			'<input type="email" placeholder="Courriel personne à référencer" class="form-control" id="cleSerRequest" name="cleSerRequest" >' +
+			'<input type="email" placeholder="Courriel personne à référencer" class="form-control" id="courReferences" name="courReferences" >' +
 			'</div>' +
 			'' +
 			'' +
 			'' +
 			'' +
 			'<div class="text-center form-sm mt-2">' +
-			'<button class="btn btn-primary shadow" data-dismiss="modal">Confirmer</button>' +
+			'<button class="btn btn-primary shadow" data-dismiss="modal" onClick="envoyerRef(\'formReferer'+donnees[j].idService+'\');">Confirmer</button>' +
 			'</div>' +
 			'</form>' +
 			'</div>' +
@@ -506,11 +517,18 @@ var vue = function (action, donnees) {
 			$('#membreForm')[0].reset();
 			break;
 		case 'LoginOKJSON':
-			menuMembre(donnees);
+			if(donnees=='AdminBitvoix'){
+				menuAdmin(donnees);
+			}else{
+				menuMembre(donnees);
+			}			
 			$('#loginForm')[0].reset();
 			break;
 		case 'menuConnexion':
 			menuConnexion();
+			break;
+		case 'menuAdmin':
+			menuAdmin();
 			break;
 		case 'servicesAccueil':
 			servicesAccueil(donnees);
