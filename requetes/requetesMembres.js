@@ -149,7 +149,7 @@ function montrerServices2() {
 			vue('servicesAccueil', donnes);
 			//Activer le button modal3 ei 2
 			var y = document.getElementsByClassName("imgLien");
-			var k;
+			//var k;
 			for (k = 0; k < y.length; k++) {
 				y[k].setAttribute("data-target", "#refModal" + (k + 1));
 				y[k].setAttribute("title", "Référer le service");

@@ -222,14 +222,7 @@ class ServicesManager
     }
     
 
-    public function updActivation($idService)
-    {
-        $idService = (int) $idService;
-        $requete = " update services set autService = 1 Where IdService = ?";
-        // var_dump($requete);
-        $stmt = $this->_pdo->prepare($requete);
-        $stmt->execute(array($idService));
-    }
+
 
     public function setDb()
     {

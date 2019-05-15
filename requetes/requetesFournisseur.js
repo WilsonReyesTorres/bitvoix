@@ -328,7 +328,7 @@ function HistoireFact(){
          },
         dataType: 'json',
         success: function (donnees) {
-           alert('Histoire');
+          
           
              vueFournisseur('voirHistoireFact',donnees);
         },

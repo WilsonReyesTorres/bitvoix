@@ -264,7 +264,7 @@ function autoriser()
     echo json_encode($rep);
 }
 
-function listSerFour($membreId){
+function listSerFour(){
   /*
      $donnees = [
       'idCate' => $_POST['idCategorie'],
