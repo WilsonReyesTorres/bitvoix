@@ -131,9 +131,9 @@ function enregistrer(){
     ];
 */
 
-
+    $userId = $_SESSION['sessData']['membreId'];
     $donnees = [
-    'idFournisseur' => $_SESSION["membreId"],
+    'idFournisseur' => $userId,
     'nomFournisseur' => $_POST['nomFournisseur'],
     'idAdrFournisseur' => $manager->idAdr(),
     'cellFournisseur' => $_POST['cellFournisseur'],
@@ -148,7 +148,8 @@ function enregistrer(){
     $funisseur = new Fournisseurs($donnees);
     $manager = new FournisseurManager();
     $manager->add($funisseur); 
-    
+    $rep['msg']="Le Fournisseur a créé ";
+    echo json_encode($rep);  
     }catch (Exception $e){
 	   $rep['erreur']="Probleme pour enregistrer";
 	 }finally {
@@ -201,8 +202,12 @@ function enlever(){
 
 
 function fiche(){
+    
+
+    if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
     $manager = new FournisseurManager(); 
-    $fourniList = $manager->get($_SESSION["membreId"]);
+    $userId = $_SESSION['sessData']['membreId'];
+    $fourniList = $manager->get($userId );  
     echo json_encode($fourniList);
 }
 
@@ -250,16 +255,18 @@ function modifier(){
         $latitude = $geo['results'][0]['geometry']['location']['lat'];
         $longitude = $geo['results'][0]['geometry']['location']['lng'];
     }
+
+    $userId = $_SESSION['sessData']['membreId'];
     $donnees = [
-        'idFournisseur' => $_SESSION["membreId"],
+        'idFournisseur' => $userId,
         'nomFournisseur' => $_POST['nomFournisseur'],
         'idAdrFournisseur' =>$_POST['idAdrFournisseur'],
         'cellFournisseur' => $_POST['cellFournisseur'],
-        'typeSerFournisseur' => "1",
-        'idForfaitFournisseur' => "1",
+        'typeSerFournisseur' => $_POST['typeSerFournisseur'],
+        'idForfaitFournisseur' => $_POST['idForfaitFournisseur'],
         'datInsFournisseur' => $_POST["datInsFournisseur"],
         'datEcheFournisseur' => $_POST["datEcheFournisseur"],
-        'statuFournisseur' => "1",
+        'statuFournisseur' =>  $_POST["statuFournisseur"],
         'longFournisseur' => $longitude,
         'latiFournisseur' => $latitude
     ];
@@ -272,6 +279,8 @@ function modifier(){
 
 $action = $_POST['action'];
 // $action = 'enregistrer';
+
+
 
 switch($action){
     case 'enregistrer':
@@ -289,5 +298,5 @@ switch($action){
     case 'modifier':
         modifier();
         break;
-}
+ }
 ?>

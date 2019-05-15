@@ -98,14 +98,11 @@ var envoyerRef = function (formReference){
     envoyerReference(formReference);
 }
 
-
 //controleur des requetes
 var requetesServ = function (action, idcateg) {
     switch (action) {
         case 'montrerServicesCat':
         montrerServicesCat(idcateg);
             break;
-
-        default:
     }
 }

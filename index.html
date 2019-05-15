@@ -4,12 +4,12 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="style/dialog.css" />        
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -17,9 +17,11 @@
     <!-- Icons Material Desing -->
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <link href="css/styles.css" rel="stylesheet">
-
+    <!--Paypal-->
+    <script src="https://www.paypal.com/sdk/js?client-id=AUpBr_SyhAoLZPPXq8bE7d_EdWsD08EYQmvjwSbkgINFwKnqQUSh0M8SMqZz2-lHvZu6tPU-PeeHZl86"></script>
+    
+     <!--Fin Paypal-->
     <title>bitvoix.com</title>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/general.js"></script>
@@ -28,6 +30,8 @@
     <meta name="google-signin-client_id"
         content="356909246162-iuhl31i67gerbdope1224ug69e44l7pb.apps.googleusercontent.com">
     <script src="js/googleLogin.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="js/facebookLogin.js"></script>
     <script src="requetes/requetesMembres.js"></script>
     <script src="requetes/requetesServices.js"></script>
@@ -39,7 +43,7 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkbWdMgGs624sL4rwDFjyat-ImNwsMnrk&callback=initMap">
     </script>
-
+    
 </head>
 
 <body>
@@ -252,6 +256,7 @@
 
         <!-- Footer Index -->
     </div>
+
     <footer class="page-footer font-small text-white pt-4 mt-2 bg-primary">
 
         <!-- Footer Links -->
@@ -386,10 +391,8 @@
             <a href="index.html" class="text-white"> www.bitvoix.com</a>
         </div>
         <!-- Copyright -->
-
+       
     </footer>
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -401,8 +404,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-
-
 </body>
-
 </html>

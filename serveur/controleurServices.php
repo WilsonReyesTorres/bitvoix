@@ -9,7 +9,8 @@ require_once '../librairie/servicesManager.php';
 /*****************************  commencer test ***************/
 
 //chargerClasse('adresse')
-/*$donnees = [
+/*
+$donnees = [
 'idService' => '1',
 'idFournisseur' => '3',
 'titreService' => 'Titre',
@@ -42,38 +43,39 @@ echo '<br>Date limite de promotion:'.$servi->datLimService();
 echo '<br>Pochette de la photo qui correspond au service: '.$servi->pochetteService();
 echo '<br>Autorisation du service par bit-voix:'.$servi->autService();
 
- */
 
-//$manage = new ServicesManager();
-//****************************  fin test **********************
+
+$manager = new ServicesManager();
+$manager->add($servi);
+return;*/
+//****************************  fin test *******************
 
 
 
 
 function enregistrer(){
-     /*
-     $donnees = [
-      'idCate' => $_POST['idCategorie'],
-      'desCate' => $_POST['desCategorie']
-     ];
-    */
-    // echo "enregistrer";
-   $donnees = [
-  'idService' => '1',
-  'idFournisseur' => '1', 
-  'titreService' => 'Titre', 
-  'desShortService' => 'Traduction',
-  'desService' => 'Traduction certifiée en français et anglais',
-  'idCategorie' => '1', 
-  'actService' =>  '1',
-  'prixService' => '12.20',
-  'promService' => '10.22',
-  'refeService' => '9.00',
-  'refeEfeService' => '1',
-  'datLimService' => '2019-05-31',
-  'pochetteService' => 'Tout le monde debout.jpg',
-  'autService' => '1' ];
+    $actService = (int) $_POST['actService'];
+    $prixService = (int) $_POST['prixService'];
+    $promService = (int) $_POST['promService'];
+    $refeService = (int) $_POST['refeService'];
+    $userId = $_SESSION['sessData']['membreId'];
+    $donnees = [
+    'idService' => $_POST['idService'],
+    'idFournisseur' => $userId, 
+    'titreService' => $_POST['titreService'], 
+    'desShortService' => $_POST['desShortService'],
+    'desService' => $_POST['desService'],
+    'idCategorie' => $_POST['idCategorie'], 
+    'actService' =>  1,
+    'prixService' => $prixService,
+    'promService' => $promService ,
+    'refeService' => $refeService,
+    'refeEfeService' => $_POST['refeEfeService'],
+    'datLimService' => $_POST['datLimService'],
+    'pochetteService' => $_POST['pochetteService'],
+    'autService' => '0' ];
 
+  
     $servi = new Services($donnees);
     $manager = new ServicesManager();
     $manager->add($servi);
@@ -81,7 +83,7 @@ function enregistrer(){
     } catch (Exception $e) {
         $rep['erreur'] = "Probleme pour enregistrer";
     } finally {
-
+  
     }
 }
 
@@ -222,29 +224,33 @@ function modifier()
     'desCate' => $_POST['desCategorie']
     ];
      */
+    $actService = (int) $_POST['actService'];
+    $prixService = (int) $_POST['prixService'];
+    $promService = (int) $_POST['promService'];
+    $refeService = (int) $_POST['refeService'];
+    $userId = $_SESSION['sessData']['membreId'];
     $donnees = [
-        'idService' => '3',
-        'idFournisseur' => '1',
-        'titreService' => 'Services',
-        'desShortService' => 'Mecanique',
-        'desService' => 'Mécanicien spécialisé en synchronisation ',
-        'idCategorie' => '1',
-        'actService' => '1',
-        'prixService' => '12.20',
-        'promService' => '10.22',
-        'refeService' => '9.00',
-        'refeEfeService' => '1',
-        'datLimService' => '2019-12-31',
-        'pochetteService' => 'Tout le monde debout.jpg',
-        'autService' => '1'];
-
+    'idService' => $_POST['idService'],
+    'idFournisseur' => $userId, 
+    'titreService' => $_POST['titreService'], 
+    'desShortService' => $_POST['desShortService'],
+    'desService' => $_POST['desService'],
+    'idCategorie' => $_POST['idCategorie'], 
+    'actService' =>  $actService,
+    'prixService' => $prixService,
+    'promService' => $promService ,
+    'refeService' => $refeService,
+    'refeEfeService' => $_POST['refeEfeService'],
+    'datLimService' => $_POST['datLimService'],
+    'pochetteService' => $_POST['pochetteService'],
+    'autService' => '0' ];
     $servi = new Services($donnees);
-
     $manager = new ServicesManager();
     $manager->update($servi);
     $rep['msg'] = "Service a été actualisé";
     echo json_encode($rep);
 }
+
 
 function autoriser()
 {
@@ -282,12 +288,32 @@ function listSerFour($membreId){
 //       'autService' => '' ];
     
   //  $servi = new Services($donnees);
+   $userId = $_SESSION['sessData']['membreId'];
    $manager = new ServicesManager(); 
-   $ServicesList = $manager->getListIdFournisseur($membreId);
+   $ServicesList = $manager->getListIdFournisseur($userId);
    echo json_encode($ServicesList);
 }
 
+function forfaitServic(){
+   $userId = $_SESSION['sessData']['membreId'];
+   $manager = new ServicesManager(); 
+   $ServicesList = $manager->forfaitServic($userId);
+   echo json_encode($ServicesList);
+};
 
+function listServRequetes(){
+   $userId = $_SESSION['sessData']['membreId'];
+   $manager = new ServicesManager(); 
+   $ServicesList = $manager->forfaitServic($userId);
+   echo json_encode($ServicesList);
+};
+
+function FourRequetsActif(){
+    $userId = $_SESSION['sessData']['membreId'];
+    $manager = new ServicesManager(); 
+    $ServicesList = $manager->fourRequeService($userId);
+    echo json_encode($ServicesList); 
+}
 
 //controleur  Services
 $action=$_POST['action'];
@@ -319,6 +345,15 @@ switch($action){
         autoriser();
         break;
     case 'listSerFour':
-        listSerFour($_SESSION["membreId"]);
+        listSerFour();
         break;
+    case 'forfaitServic';
+        forfaitServic();
+        break;
+    case 'listServRequetes':
+         listServRequetes();
+         break;
+     case 'FourRequetsActif':
+        FourRequetsActif();    
+       
 }

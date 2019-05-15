@@ -67,6 +67,7 @@ class FournisseurManager
                                 $funi->longFournisseur(),$funi->latiFournisseur(),
                                 $funi->idFournisseur()));
         }
+      
       public function setDb()
         {
             $this->_pdo = Connecter::conexion(); //_pdo c'est l'appel à la classe statique Connecter

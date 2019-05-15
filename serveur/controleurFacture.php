@@ -1,19 +1,20 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
-
 require_once("../bd/connecter.php");
 require_once('../librairie/factures.php');
 require_once('../librairie/facturesManager.php');
 
 /*****************************  commencer test ***************/
 
-//  $donnees = ['idFacture' =>'5',
+
+//  $donnees = ['idFacture' =>'0',
+
 //     'idFournisseur' =>'3',
 //     'idForfaitFacture' =>'1',
 //     'typeSerFacture' =>'1',
 //     'dateInsFacture' =>'2019-02-15',
 //     'dateEcheFacture' =>'2020-02-15',
-//     'nomRefFacture' =>' #Paypal',
+//     'nomRefFacture' =>'5XU51522CB911553M',
 //     'statusFacture' =>'1' ];
 
 // //var_dump($donnees);
@@ -28,8 +29,6 @@ require_once('../librairie/facturesManager.php');
 // echo '<br>date d\'échéance d\'inscription'.$factu->dateEcheFacture();
 // echo '<br>Nombre de référence Paypal :'.$factu->nomRefFacture();
 // echo '<br>Status 1.Actif 2. Annule :'.$factu->statusFacture();
-
-
 //$manage = new CategoriesManager();
 //****************************  fin test **********************
 
@@ -40,19 +39,21 @@ function enregistrer(){
       'desCate' => $_POST['desCategorie']
      ];
     */
-     $donnees = ['idFacture' =>'5',
-    'idFournisseur' =>'3',
+    $userId = $_SESSION['sessData']['membreId'];
+     $donnees = ['idFacture' =>'0',
+    'idFournisseur' => $userId ,
     'idForfaitFacture' =>'1',
     'typeSerFacture' =>'1',
-    'dateInsFacture' =>'2019-02-15',
-    'dateEcheFacture' =>'2020-02-15',
-    'nomRefFacture' =>' #Paypal',
+    'dateInsFacture' =>'2019-05-10',
+    'dateEcheFacture' =>'2020-05-10',
+    'nomRefFacture' =>$_POST['nomRefFacture'],
     'statusFacture' =>'1' ];
    
      try{
     $factu = new Factures($donnees);
-    $manager = new FacturesManager();
-    $manager->add($factu); 
+    $manager = new FacturesManager($factu);
+    $myJSON = $manager->add($factu); 
+    echo json_encode($myJSON) ;
     
     }catch (Exception $e){
 	   $rep['erreur']="Probleme pour enregistrer";
@@ -144,10 +145,30 @@ function modifier(){
     echo json_encode($rep);
 }
 
+
+function getFactFournisseur(){
+    
+  $userId = $_SESSION['sessData']['membreId'];
+    // $userId = 11;
+    $donnees = ['idFacture' =>'0',
+    'idFournisseur' => $userId,
+    'idForfaitFacture' =>'',
+    'typeSerFacture' =>'',
+    'dateInsFacture' =>'',
+    'dateEcheFacture' =>'',
+    'nomRefFacture' =>'',
+    'statusFacture' =>''];
+    
+   $factu = new Factures($donnees);
+   $manager = new FacturesManager(); 
+   $factuList = $manager->getListFactFournisseur($factu->idFournisseur());
+   echo json_encode($factuList);
+}
+
+
 //controleur Adresse
 $action=$_POST['action'];
 // $action= '';
-// $action= 'enregistrer';
 
 switch($action){
     case 'enregistrer':
@@ -165,4 +186,7 @@ switch($action){
     case 'modifier':
         modifier();
         break;
+    case 'getListFactFournisseur':
+        getFactFournisseur();
+        break;    
 }

@@ -117,7 +117,7 @@ class Services
         }
     public function setRefeEfeService($refeEfeService)
         {
-            $refeEfeService = (int) $refeEfeService;
+            $refeEfeService = (float) $refeEfeService;
             if ($refeEfeService > 0){
                 $this->_refeEfeService = $refeEfeService;
             }
@@ -137,9 +137,8 @@ class Services
         }
     public function setAutService($autService)
         {
-            $autService = (int) $autService;
-            if ($autService > 0){
-                $this->_autService = $autService;
+            if (is_string($autService)){
+              $this->_autService = $autService;    
             }
         }
     // listes des getters

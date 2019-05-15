@@ -52,7 +52,7 @@ class Requests
         }
     public function setQualRequest($qualRequest)
         {
-            $qualRequest = (int) $qualRequest;
+            $qualRequest = (float) $qualRequest;
             if ($qualRequest > 0){
                 $this->_qualRequest = $qualRequest;
             }
