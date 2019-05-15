@@ -45,9 +45,17 @@ class FacturesManager
             }
             return $result;
         }
-      public function getList()
+        public function getList()
         {
-          $requete = "SELECT * FROM facture ORDER BY idFacture";
+          $requete = "SELECT facture.* ,fournisseur.nomFournisseur,fournisseur.cellFournisseur,adresse.nroAdr,adresse.rueAdr,adresse.desVilAdr,adresse.codPosAdr,membres.courrielMembre
+          FROM facture 
+          JOIN fournisseur
+          ON facture.idFournisseur = fournisseur.idFournisseur
+          JOIN adresse 
+          ON adresse.idAdr = fournisseur.idAdrFournisseur
+          JOIN membres 
+          ON membres.idMembre = fournisseur.idFournisseur
+          ORDER BY facture.idFacture;";
           $stmt = $this->_pdo->prepare($requete);
           $stmt->execute();
           $result = $stmt->fetchAll(PDO::FETCH_OBJ);

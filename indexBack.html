@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="css/dialog.css" />
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -19,14 +21,24 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link href="css/styles.css" rel="stylesheet">
-<script src="js/general.js"></script>
+
+
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AUpBr_SyhAoLZPPXq8bE7d_EdWsD08EYQmvjwSbkgINFwKnqQUSh0M8SMqZz2-lHvZu6tPU-PeeHZl86">
+    </script>
+
+    <script src="js/paypal.js"></script>
+
+
+    <script src="js/general.js"></script>
+
     <title>bitvoix.com</title>
 
     <script>
         window.onload = function () {
             serviFour();
         }
-        
+
         function serviFour() {
             rep = /*html*/ `
             <div class="col-lg-4 col-sm-6 mb-2">
@@ -123,8 +135,6 @@
             `
             $('#divfour').html(rep);
         }
-    
-    
     </script>
 </head>
 
@@ -429,9 +439,10 @@
                             </li>
                             <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
                             </li>
-                            <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
+                            <li class="list-inline-item mr-0"><i
+                                    class="fas fa-star-half-alt amber-text text-warning"></i>
                             </li>
-                            <li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i>
+                            <li class="list-inline-item mr-0"><i class="far fa-star text-warning"></i>
                             </li>
 
                             <li class="list-inline-item">
@@ -1064,18 +1075,20 @@
             <!-- Div forfait Services-->
             <div class="col-lg-9">
                 <div>
-                    <button type="button" class="btn btn-primary font-weight-bold shadow" onclick="serviFour();">Services</button>
+                    <button type="button" class="btn btn-primary font-weight-bold shadow"
+                        onclick="serviFour();">Services</button>
                     <button type="button" class="btn btn-primary font-weight-bold shadow" data-toggle="modal"
                         data-target="#FormService">Nouveau Service</button>
                     <button type="button" class="btn btn-primary font-weight-bold shadow" data-toggle="modal"
                         data-target="#FormFourniseur">Profil</button>
-                    <button type="button" class="btn btn-primary font-weight-bold shadow" onclick="commmandesFour();">Commandes</button>
+                    <button type="button" class="btn btn-primary font-weight-bold shadow"
+                        onclick="commmandesFour();">Commandes</button>
                 </div>
                 <div class="row mt-2" id="divfour">
 
 
-                    
-                    
+
+
                 </div>
             </div>
             <!-- Div forfait Logo et Graphique -->
@@ -1104,9 +1117,12 @@
 
                 </div>
 
-                <button type="button" class="btn btn-primary font-weight-bold shadow mt-2" data-toggle="modal" data-target=".bd-example-modal-xl">Changer mon forfait</button>
+                <button type="button" class="btn btn-primary font-weight-bold shadow mt-2" data-toggle="modal"
+                    data-target=".bd-example-modal-xl">Changer mon forfait</button>
 
-                <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+
+                <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+                    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header bg-primary py-4 shadow">
@@ -1120,36 +1136,39 @@
                                 <p>Nos clients ont aimé ces forfaits. Choisissez le vôtre!</p>
                                 <div class="card-deck">
                                     <div class="card shadow card-forfait">
-                                        <img src="images/basebv.png" class="card-img-top" alt="...">
+                                        <img src="images/basebv.png" class="card-img-top p-2" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title"><b>BASE</b> BITVOIX</h5>
                                             <p class="card-text">Trois (3) services ou produits <b>GRATUITS</b></p>
                                             <p class="card-text">Durée de trois (3) mois</p>
-                                            <p class="card-text">Publiez votre annonce sur la page la plus visitée et captez un maximum d'attention</p>
+                                            <p class="card-text">Publiez votre annonce sur la page la plus visitée et
+                                                captez un maximum d'attention</p>
                                             <p class="card-text font-weight-bold">0.00$</p>
-                                            <button type="button" class="btn btn-primary font-weight-bold shadow">Gratuit</button>
+                                            <!-- <button type="button" class="btn btn-primary font-weight-bold shadow disabled">Gratuit</button> -->
                                         </div>
                                     </div>
                                     <div class="card shadow card-forfait">
-                                        <img src="images/standardbv.png" class="card-img-top" alt="...">
+                                        <img src="images/standardbv.png" class="card-img-top p-2" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title"><b>STANDARD</b> BITVOIX</h5>
                                             <p class="card-text">Services ou produits <b>ILLIMITÉS</b></p>
                                             <p class="card-text">Durée de 1 an</p>
-                                            <p class="card-text">Publiez votre annonce sur la page la plus visitée et captez un maximum d'attention</p>
+                                            <p class="card-text">Publiez votre annonce sur la page la plus visitée et
+                                                captez un maximum d'attention</p>
                                             <p class="card-text font-weight-bold">9.99$</p>
-                                            <button type="button" class="btn btn-primary font-weight-bold shadow" ><i class="fab fa-paypal"></i> Paypal</button>
+                                            <div id="paypal-button-container"></div>
+                                            <!-- <button type="button" class="btn btn-primary font-weight-bold shadow" ><i class="fab fa-paypal"></i> Paypal</button> -->
                                         </div>
                                     </div>
                                     <div class="card shadow card-forfait">
-                                        <img src="images/premiumbv.png" class="card-img-top" alt="...">
+                                        <img src="images/premiumbv.png" class="card-img-top p-2" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title"><b>PREMIUM</b> BITVOIX</h5>
                                             <p class="card-text">Services ou produits <b>ILLIMITÉS</b></p>
                                             <p class="card-text">Durée de 1 an</p>
                                             <p class="card-text">Administration de agenda et <br>marketing</p>
                                             <p class="card-text font-weight-bold">29.99$</p>
-                                            <button type="button" class="btn btn-primary font-weight-bold shadow disabled"><i class="fab fa-paypal"></i> PayPal</button>
+                                            <!-- <button type="button" class="btn btn-primary font-weight-bold shadow disabled"><i class="fab fa-paypal"></i> PayPal</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -1157,6 +1176,51 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Graphique Marketing -->
+
+                <div class="card booking-card shadow mt-2" data-toggle="modal" data-target=".graphMarketingModal"
+                    id="card-graphmrketing">
+
+                    <!-- Card image -->
+                    <div class="view overlay">
+                        <img class="card-img-top" src="images/graphiquemarketing.jpg" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!-- Card content -->
+                    <div id="graphique" class="card-body">
+
+                        <!-- Title -->
+                        <h5 class="card-title font-weight-bold"><a>Graphique Marketing</a></h5>
+
+                    </div>
+
+                </div>
+
+                <div class="modal fade graphMarketingModal" tabindex="-1" role="dialog"
+                    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary py-4 shadow">
+                                <img src="images/logo.png" alt="">
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                    <span class="text-white" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Graphique <b>Marketing</b></h3>
+                                <div>Ici la graphique</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fin Graphique Marketing -->
+
             </div>
 
 

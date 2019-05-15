@@ -310,5 +310,8 @@ switch ($action) {
     case 'membreUpdate':
         membreUpdate();
         break;
+    case 'listerMembres':
+        listerMembres();
+        break;
 
 }
