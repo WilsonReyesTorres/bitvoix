@@ -66,7 +66,10 @@ class ServicesManager
     }
     public function getList()
     {
-        $requete = "SELECT * FROM services ORDER BY idService";
+        $requete = "SELECT idService, services.idFournisseur, titreService, desShortService, desService, services.idCategorie, actService, prixService, promService, refeService, refeEfeService, datLimService, pochetteService, autService, fournisseur.nomFournisseur, categories.desCategorie 
+        FROM services, fournisseur, categories 
+        WHERE services.idFournisseur = fournisseur.idFournisseur AND services.idCategorie = categories.idCategorie
+        ORDER BY idService";
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -138,7 +141,7 @@ class ServicesManager
                                 prixService =? , promService = ?, refeService = ? ,
                                 refeEfeService = ?, datLimService = ?, pochetteService =? ,
                                 autService = ? WHERE idService = ?";
-        var_dump($requete);
+        // var_dump($requete);
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($servi->idFournisseur(), $servi->titreService(),
             $servi->desShortService(), $servi->desService(),
@@ -148,6 +151,16 @@ class ServicesManager
             $servi->datLimService(), $servi->pochetteService(),
             $servi->autService(),
             $servi->idCategorie()));
+    }
+
+
+    public function updActivation($idService)
+    {
+        $idService = (int) $idService;
+        $requete = " update services set autService = 1 Where IdService = ?";
+        // var_dump($requete);
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute(array($idService));
     }
 
     public function setDb()

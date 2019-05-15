@@ -83,6 +83,27 @@ function autoriserSe(){
     });
 }
 
+function updateautService(idService){
+    $.ajax({
+        url: 'serveur/controleurServices.php',
+        type: 'POST',
+        data: {
+            "action": 'autoriser',
+            "idService": idService
+        },
+        dataType: 'json',
+        success: function (donneSerFuornisseur) {
+            alert('Service ID #' + idService + ' a été autorisé');
+			listerAut();
+        },
+        fail: function () {
+            alert("Vous avez un GROS problème");
+        }
+    });
+    
+    
+ }
+
 // function envoyerEnlever(){
 // 	var idf=$('#numE').val();
 // 	$.ajax({
@@ -172,4 +193,8 @@ switch(action){
 	break;
 	default :
 }	
+}
+
+var autorisationSer = function(idSer){
+    updateautService(idSer);
 }

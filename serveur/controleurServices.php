@@ -246,6 +246,18 @@ function modifier()
     echo json_encode($rep);
 }
 
+function autoriser()
+{
+    $idSer = $_POST['idService'];
+
+    // $servi = new Services($donnees);
+
+    $manager = new ServicesManager();
+    $manager->updActivation($idSer);
+    $rep['msg'] = "Service a été actualisé";
+    echo json_encode($rep);
+}
+
 function listSerFour($membreId){
   /*
      $donnees = [
@@ -302,6 +314,9 @@ switch($action){
         break;
     case 'modifier':
         modifier();
+        break;
+    case 'autoriser':
+        autoriser();
         break;
     case 'listSerFour':
         listSerFour($_SESSION["membreId"]);
