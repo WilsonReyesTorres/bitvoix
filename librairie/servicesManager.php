@@ -143,9 +143,11 @@ class ServicesManager
     {
       $idFournisseur = (int) $idFournisseur;
       // $requete = 'SELECT * FROM services WHERE idFournisseur = ? ';
-      $requete = 'SELECT services.*, TRUNCATE(AVG( IF(requests.statRequest <> 3,qualRequest,0)),1)  AS Quality, COUNT(qualRequest) AS kcount
-      FROM services
+      $requete = '   SELECT services.*, TRUNCATE(AVG( IF(requests.statRequest <> 3,qualRequest,0)),1)  AS Quality,
+             COUNT(qualRequest) AS kcount, fournisseur.idForfaitFournisseur,fournisseur.datEcheFournisseur
+             FROM services
        LEFT JOIN requests  ON services.idService =  requests.idService
+       INNER JOIN fournisseur ON services.idFournisseur  = fournisseur.idFournisseur
       WHERE services.idFournisseur = ?
       GROUP BY idService;';
       $stmt = $this->_pdo->prepare($requete);

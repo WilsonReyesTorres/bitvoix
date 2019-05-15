@@ -569,23 +569,30 @@ function formServicesFour_modal(fiche){
     <div class="card booking-card shadow">
 
         <!-- Card image -->
-        <div class="view overlay">
-            <img class="card-img-top" src="images/basebv.png" alt="Card image cap">
-            <a href="#!">
+        <div class="view overlay">`;
+        if (ligne.idForfaitFournisseur =="1"){
+            rep1+=`<img class="card-img-top" src="images/basebv.png" alt="Card image cap">`;
+        }else{
+            rep1+=`<img class="card-img-top" src="images/standardbv.png" alt="Card image cap">`;
+        }
+
+         rep1+= /*html*/`   <a href="#!">
                 <div class="mask rgba-white-slight"></div>
             </a>
         </div>
 
         <!-- Card content -->
         <div id="graphique" class="card-body">
-
-            <!-- Title -->
-            <h5 class="card-title font-weight-bold"><a>BASE BITVOIX</a></h5>
-
-            <!-- Text -->
-            <p class="card-text">Date d'échéance : 12-09-2019</p>
-
-        </div>
+            <!-- Title -->`;
+            if (ligne.idForfaitFournisseur =="1"){
+            rep1+= /*html*/`   <h5 class="card-title font-weight-bold"><a>BASE BITVOIX</a></h5>`;
+            }else{
+                rep1+= /*html*/`   <h5 class="card-title font-weight-bold"><a>STANDARD BITVOIX</a></h5>`;
+            }
+          
+            rep1+= /*html*/` <p class="card-text">Date d'échéance : `+ligne.datEcheFournisseur+`</p>`;
+           
+            rep1+= /*html*/`</div>
 
     </div>
     <button type="button" class="btn btn-primary font-weight-bold shadow mt-2" data-toggle="modal" data-target=".bd-example-modal-xl">Changer mon forfait</button>

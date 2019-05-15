@@ -8,7 +8,11 @@ class FacturesManager
         }
     public function add(Factures $factu)
         {
-            $requete = 'INSERT INTO facture (idFournisseur,idForfaitFacture,typeSerFacture,
+          $requete = "UPDATE  fournisseur  SET   idForfaitFournisseur = '2' WHERE idFournisseur = ?";
+          $stmt = $this->_pdo->prepare($requete);
+          $stmt->execute(array($factu->idFournisseur()));
+
+          $requete = 'INSERT INTO facture (idFournisseur,idForfaitFacture,typeSerFacture,
                         dateInsFacture, dateEcheFacture, nomRefFacture, statusFacture) 
                         VALUES (?,?,?,NOW(),(ADDDATE(NOW(), INTERVAL 365 DAY)),?,?);';
             $stmt = $this->_pdo->prepare($requete);
@@ -18,6 +22,8 @@ class FacturesManager
                                  $factu->nomRefFacture(),
                                  $factu->statusFacture() ));
             $result = ['idFacture' => $this->_pdo->lastInsertId()];
+           
+
             return $result;
         }
       public function delete(Factures $factu)
