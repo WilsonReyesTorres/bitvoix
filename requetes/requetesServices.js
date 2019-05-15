@@ -35,14 +35,11 @@ function montrerServicesCat(idcateg) {
 }
 
 
-
 //controleur des requetes
 var requetesServ = function (action, idcateg) {
     switch (action) {
         case 'montrerServicesCat':
         montrerServicesCat(idcateg);
             break;
-
-        default:
     }
 }

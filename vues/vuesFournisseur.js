@@ -1,29 +1,143 @@
-function formEnregistrer(pourQui){
-	var rep = '<div id="divEnreg">'+
-'			<span onClick="cacher(\'divEnreg\')">X</span>'+
-'			<h1>Enregistrer un film</h1>'+
-'			<form id="enregForm"">';
-if(pourQui=="M")
-	rep+='				Numero:<input type="text" id="num" name="num" readonly><br><br>';
-rep+='				Titre:<input type="text" id="titre" name="titre" value=""><br><br>'+
-'				Realisateur:<input type="text" id="res" name="res" value=""><br><br>'+
-'				Pochette : <input type="file" name="pochette"><br><br>';
-if(pourQui=="E"){
-	rep+='<input type="button" value="Envoyer" onClick="requetes(\'enregistrer\');">';
-}else
-	if(pourQui=="M"){
-	  rep+='<input type="button" value="Envoyer" onClick="requetes(\'modifier\');">';
-	}
-rep+='</form></div>';
-return rep;
+function  ImageArray(SelecValue,pochetteSelec){
+    var categories = new Array("","Autos","Beauté","Education","Gastronomie","Maison","Produits","Santé","Services","Voyages");
+    var catephysique  = new Array("","auto","beaute","education","gastronomie","maison","produits","sante","services","voyages")
+    ins_image = "";
+    SelecValue = parseInt(SelecValue);
+    for(i=1;i<=3;i++){
+        imgout = catephysique[SelecValue]+i+".jpg";
+        if (imgout == pochetteSelec){
+            img_sel = "checked";
+        } else{
+            img_sel = "" ;
+        }
+        ins_image  +=  '<label>  <input type="radio" name="pochetteService" value="'+catephysique[SelecValue]+i+'.jpg" '+ img_sel+'> <img  title="'+categories[SelecValue]+'" src="pochettes/'+catephysique[SelecValue]+i+'.jpg">  </label>'
+       
+        }
+        alert(ins_image);
+    $('#div-images').html(""); 
+    $('#div-images').html(ins_image);
+
+    //'<label>'+
+    // '<input type="radio" name="test" value="lavevitres.jpg" checked >'+
+    // '<img src="pochettes/lavevitres.jpg">'+
+    // '</label>'+
+
+
+}
+
+function commmandesFour(listCommand) {
+    var taille = listCommand.length;
+    var prix = 0.0;
+    rep = `
+    <table class="table table-hover">
+        <thead class="bg-primary text-white shadow">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Membre</th>
+                <th scope="col">Service</th>
+                <th scope="col">Prix</th>
+                <th scope="col">No. Ref</th>
+                <th scope="col">Clé Service</th>
+                <th scope="col">Verification</th>
+            </tr>
+        </thead>
+        <tbody>`;
+        for(var i=0; i <taille ; i++){
+            ligne=listCommand[i];
+            if (ligne.NroRefe >= ligne.reefeEfeService){
+                prix =  ligne.refeService;
+            } else
+               prix = ligne.promService;
+            rep+=`
+            <tr>
+                <th scope="row">`+ligne.idRequest+`</th>
+                <td>`+ligne.nomMembre +` ` +ligne.preNomMembre+`</td>
+                <td>`+ligne.titreService+`</td>
+                <td>`+prix+`</td>
+                <td>`+ligne.NroRefe+`</td>
+                <td>`+ligne.cleSerRequest+`</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm" onClick="FerRequets(`+ligne.idRequest+`);"><i class="fas fa-check" title="Autorizer"></i></button>
+                    <button type="button" class="btn btn-danger btn-sm" onClick="DelRequets(`+ligne.idRequest+`);"><i class="fas fa-trash-alt"></i></button>
+                </td>
+            </tr>`;
+            };
+          rep += /*html*/   `
+        </tbody>
+    </table>
+    `
+    $('#divfour').html(rep);
 }
 
 
 
+function disegne() {
+    $('#tableau_analytique').highcharts({
+        title: {
+            text: 'Flux de caisse'
+        },
+        xAxis: {
+            categories: ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUIN', 'JUI', 'AOUT', 'SEP', 'OCT', 'NOV', 'DEC']
+        },
+        yAxis: {
+            title: 'Porcentaje %',
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '%'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+                type: 'column',
+                name: 'Service 1',
+                data: [50, 23, 21, 45, 78, 23]
+            }, {
+                type: 'column',
+                name: 'Service 2',
+                data: [25, 23, 21, 67, 89, 0]
+            }, {
+                type: 'column',
+                name: 'Service 3',
+                data: [20, 18, 19, 78, 28, 67]
+            },
+            {
+                name: 'Obj-Ser1.',
+                data: [80, 60, 45, 56, 45, 23]
+
+            },
+            {
+                name: 'Obj-Ser2.',
+                data: [50, 40, 35, 50, 45, 23]
+
+            },
+            {
+                name: 'Obj-Ser3.',
+                data: [10, 12, 20, 50, 25, 50]
+
+            }
+        ],
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        }
+    });
+}
 
 function  formFournisseur(ModiNew){
     var rep1 = /*html*/ `
-    <div class="container">
+    <div class="container objformFournisseur" >
     
     <form id="enregFormFournisseur">
     <div class="form-group row">
@@ -123,6 +237,7 @@ function  formFournisseur(ModiNew){
                 name="datEcheFournisseur" title="Date d'échéance" readonly>
         </div>
     </div>
+
     <div class="modal-footer d-flex justify-content-center"> `;
        if (ModiNew == "N"){
         rep1+= /*html*/ `
@@ -161,7 +276,7 @@ function listerJSON(listeFilms){
 
 
 function date_actuel(){
-    alert('fechaactual');
+    // alert('fechaactual');
     var fecha = new Date(); //Fecha actual
     var mes = fecha.getMonth()+1; //obteniendo mes
     var dia = fecha.getDate(); //obteniendo dia
@@ -200,8 +315,8 @@ function montreFournisseur(fiche){
 }
 
 function montreFournisseurN(fiche){
-    alert("montreFournisseur");
-    $('#divprincipal').html(formFournisseur());
+    // alert("montreFournisseur");
+    $('#divprincipal').html(formFournisseur('N'));
     date_actuel();
 
 }
@@ -210,14 +325,23 @@ function montreetoile(NroEtoile,total)
 {   var cadena = "";
     var Nro=Math.floor(NroEtoile);
     var decimal = NroEtoile - Nro;
-    for (var i=0; i < Nro; i++ ){
-         cadena += "<li class=\"list-inline-item mr-0\"><i class=\"fas fa-star amber-text text-warning\"></i></li>"; 
-    }
-    if (decimal >= 0.5){
-        cadena += "<li class=\"list-inline-item\"><i class=\"fas fa-star-half-alt amber-text text-warning\"></i> </li>";
+    if (Nro>0){
+        for (var i=0; i < Nro; i++ ){
+            cadena += "<li class=\"list-inline-item mr-0\"><i class=\"fas fa-star amber-text text-warning\"></i></li>"; 
+        }
+        if (decimal >= 0.5){
+            cadena += "<li class=\"list-inline-item mr-0\"><i class=\"fas fa-star-half-alt amber-text text-warning\"></i> </li>";
+        } else {
+            // cadena += "<li class=\"list-inline-item\"><i class=\"fas fa-star-half-alt amber-text text-warning\"></i> </li>";
+            cadena += "<li class=\"list-inline-item mr-0\"><i class=\"fas fa-star text-warning\"></i></li>";
+        }
     } else {
-        // cadena += "<li class=\"list-inline-item\"><i class=\"fas fa-star-half-alt amber-text text-warning\"></i> </li>";
-        cadena += "_";
+       Nro = -1;  
+    }
+   
+    //etoile vide
+    for (var j = Nro + 1; j< 5; j++){
+        cadena += "<li class=\"list-inline-item mr-0\"><i class=\"far fa-star text-warning\"></i></li>";
     }
     cadena += "<li class=\"list-inline-item\"> <p class=\"text-muted\">"+NroEtoile+" ("+total+")</p> </li>";
 
@@ -242,139 +366,14 @@ function montreetoile(NroEtoile,total)
    return cadena
 }
 
-function ImagenActualise(SelecValue,pochetteSelec){
-    SelecValue =  parseInt(SelecValue);
-//   alert("Imagen actual"+ "Options: " + SelecValue + "Objeto: "+objactualise);
-//   +
-// ''+
-// ''+
-// '<label>'+
-// '<input type="radio" name="test" value="lavevitres.jpg">'+
-// '<img src="pochettes/lavevitres.jpg">'+
-// '</label>'+
-// ''+
-// '<label>'+
-// '<input type="radio" name="test" value="ballotindechocolats.jpg">'+
-// '<img src="pochettes/ballotindechocolats.jpg">'+
-// '</label>'+
-// '<label>'+
-// '<input type="radio" name="test" value="niagarafallscanadian.jpg">'+
-// '<img src="pochettes/niagarafallscanadian.jpg">'+
-// '</label>'+
-// ''+
-// '<label>'+
-// '<input type="radio" name="test" value="pizzapizza.jpg">'+
-// '<img src="pochettes/pizzapizza.jpg">'+
-// '</label>'+
-// ''+
-// '<label>'+
-// '<input type="radio" name="test" value="propnl.jpg">'+
-// '<img src="pochettes/propnl.jpg">'+
-// '</label>'+
-// ''+
-// '<label>'+
-// '<input type="radio" name="test" value="seancedosteopathie.jpg">'+
-// '<img src="pochettes/seancedosteopathie.jpg">'+
-// '</label>'
 
-    switch(SelecValue) {
-        case 1:
-             if (pochetteSelec === 'coloration_cheveux.jpg'){
-                 imgout = '<label>'+ '<input type="radio" name="pochetteService" value="coloration_cheveux.jpg" checked>'+
-                '<img src="/pochettes/autos/coloration_cheveux.jpg" title="Autos">'+ '</label>';  
-               }else{
-                 imgout = '<label>'+ '<input type="radio" name="pochetteService" value="coloration_cheveux.jpg" >'+
-                 '<img src="/pochettes/autos/coloration_cheveux.jpg" title="Autos">'+ '</label>';  
-               }
-          break;
-        case 2:
-            if (pochetteSelec === 'seancedosteopathie.jpg'){
-               imgout = '<label>'+ '<input type="radio" name="pochetteService" value="seancedosteopathie.jpg" checked>'+
-               '<img src="pochettes/sante/seancedosteopathie.jpg" title="Sante">'+ '</label>';  
-            }{
-                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="seancedosteopathie.jpg" >'+
-                '<img src="pochettes/sante/seancedosteopathie.jpg" title="Sante">'+ '</label>';  
-            }
-          break;
-        case 3:
-           if (pochetteSelec === 'seancedosteopathie.jpg'){
-              imgout = '<label>'+ '<input type="radio" name="pochetteService" value="pizzapizza.jpg" checked>'+
-              '<img src="pochettes/gastronomie/pizzapizza.jpg" title="Gastronomie">'+ '</label>';  
-            }else{
-                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="pizzapizza.jpg" >'+
-              '<img src="pochettes/gastronomie/pizzapizza.jpg" title="Gastronomie">'+ '</label>';  
-            } 
-          break;
-        case 4:
-           if (pochetteSelec === 'seancedosteopathie.jpg'){
-            imgout = '<label>'+ '<input type="radio" name="test" value="lavevitres.jpg" checked>'+
-            '<img src="pochettes/beaute/lavevitres.jpg" title="Beauté">'+ '</label>';  
-            }else{
-              imgout = '<label>'+ '<input type="radio" name="test" value="lavevitres.jpg" >'+
-              '<img src="pochettes/beaute/lavevitres.jpg" title="Beauté">'+ '</label>';  
-            }
-            break;
-        case 5:
-            if (pochetteSelec === 'propnl.jpg'){
-                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="propnl.jpg" checked>'+
-                '<img src="pochettes/produits/propnl.jpg" title="Produits">'+ '</label>';  
-            }else{
-                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="propnl.jpg" >'+
-                '<img src="pochettes/produits/propnl.jpg" title="Produits">'+ '</label>';  
-            }
-            break;
-        case 6:
-            if (pochetteSelec === 'ballotindechocolats.jpg'){
-            imgout = '<label>'+ '<input type="radio" name="pochetteService" value="ballotindechocolats.jpg" checked>'+
-            '<img src="pochettes/voyages/ballotindechocolats.jpg" title="Voyages">'+ '</label>';  
-            }else{
-                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="ballotindechocolats.jpg" >'+
-            '<img src="pochettes/voyages/ballotindechocolats.jpg" title="Voyages">'+ '</label>';  
-            }
-            break;
-        case 7:
-            if (pochetteSelec === 'niagarafallscanadian.jpg'){
-                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="niagarafallscanadian.jpg" >'+
-                '<img src="pochettes/maison/niagarafallscanadian.jpg" title="Maison">'+ '</label>';  
-            }else{
-                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="niagarafallscanadian.jpg" checked>'+
-                '<img src="pochettes/maison/niagarafallscanadian.jpg" title="Maison">'+ '</label>';  
-            }
-          break;
-        case 8:
-        if (pochetteSelec === 'locationvoiture.jpg'){
-            imgout = '<label>'+ '<input type="radio" name="pochetteService" value="locationvoiture.jpg" checked>'+
-            '<img src="pochettes/education/locationvoiture.jpg" title="Education">'+ '</label>';  
-        }else{
-            imgout = '<label>'+ '<input type="radio" name="pochetteService" value="locationvoiture.jpg" >'+
-            '<img src="pochettes/education/locationvoiture.jpg" title="Education">'+ '</label>';  
-        }
-          break;
-        case 9:
-          if (pochetteSelec === 'ballotindechocolats.jpg'){
-            imgout = '<label>'+ '<input type="radio" name="pochetteService" value="ballotindechocolats.jpg" checked>'+
-            '<img src="pochettes/services/ballotindechocolats.jpg" title="Services">'+ '</label>';  
-            }{
-                imgout = '<label>'+ '<input type="radio" name="pochetteService" value="ballotindechocolats.jpg" >'+
-                '<img src="pochettes/services/ballotindechocolats.jpg" title="Services">'+ '</label>';  
-            }
-          break;  
-        default:
-      }
-    
-         alert("dibujando div-images");
-         $('#div-images').html(""); 
-         $('#div-images').html(imgout);
-    
-}
-
-
-function montreFormService(){
+function montreFormService(TypeTrasaction){
     rep1 = /*html*/`
     <form id="AddServiceFuornisseur" >
     <div class="form-group row">
         <label for="titreService" class="col-sm-4 col-form-label">Titre
             Service</label>
+
         <div class="col-sm-8">
             <input type="text" class="form-control" id="titreService"
                 name="titreService" title="Titre Service" required>
@@ -403,7 +402,7 @@ function montreFormService(){
             <label for="">Catégorie</label>
         </div>
         <div class="col-sm-8">
-            <select id="idCategorie" name="idCategorie" class="form-control" onchange="ImagenActualise(this.value,'X')"
+            <select id="idCategorie" name="idCategorie" class="form-control" onchange="ImageArray(this.value,'X')"
                 required>
                 <option value="">Sélectionnez une option</option>
                 <option value="1">Autos</option>
@@ -437,12 +436,20 @@ function montreFormService(){
         </div>
     </div>
     <div class="form-group row">
-        <label for="refeService" class="col-sm-4 col-form-label">Prix
-            Référe</label>
+        <label for="refeService" class="col-sm-4 col-form-label">Prix Référe</label>
         <div class="col-sm-8">
             <input type="number" class="form-control" 
                 id="refeService" name="refeService" step="0.1"
                 title="Prix Référe" required>
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label for="refeEfeService" class="col-sm-4 col-form-label">Nombre de références</label>
+        <div class="col-sm-8">
+            <input type="number" class="form-control" 
+                id="refeEfeService" name="refeEfeService" step="1"
+                title="Nombre de références" required>
         </div>
     </div>
     <div class="form-group row">
@@ -457,21 +464,22 @@ function montreFormService(){
         <label class="col-sm-4 col-form-label">Image</label>
         <div class="col-sm-8 p-3" id="div-images">
             <!--imagenes-->
-            
         </div>
     </div>
-    <div class="form-check row">
-        <input class="form-check-input" type="checkbox" value="" id="ActService"
-            name="ActService" readonly>
-        <label class="form-check-label" for="ActService">
+     <div class="form-check row">
+        <input class="form-check-input" type="checkbox" value="1" id="actService"
+            name="actService">
+        <label class="form-check-label" for="actService">
             Service active
         </label>
     </div>
-    <div class="modal-footer d-flex justify-content-center">
-
-        <button type="button" class="btn btn-primary">Enregistrer</button>
-
-        <button type="button" class="btn btn-danger">Effacer</button>
+    <div class="modal-footer d-flex justify-content-center">`;
+      if (TypeTrasaction === 'M'){
+        rep1 += /*html*/`<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('ModifierService')">Modifier</button> `;
+      } else{
+         rep1 += /*html*/` <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('EnregistrerService')">Enregistrer</button> `;
+      }
+        rep1+= /*html*/`  
 
     </div>
     </form>`;
@@ -480,20 +488,24 @@ return rep1;
 }
 
 
+
+
 function formServicesFour_modal(fiche){
-    
 
     var rep1 = /*html*/ `
     <!-- Div forfait Services-->
- 
+    <div class="row"> 
     <div class="col-lg-9">
-        <div class="col">
+        <div>
+            <button type="button" class="btn btn-primary font-weight-bold shadow" onclick="requetesFour('FourAccueil');">Services</button>
             <button type="button" class="btn btn-primary font-weight-bold shadow" data-toggle="modal"
-                data-target="#FormService">Nouveau Service</button>
+                data-target="#FormService" onClick="requetesFour('ServiceBlank')" >Nouveau Service</button>
             <button type="button" class="btn btn-primary font-weight-bold shadow" data-toggle="modal"
                 data-target="#FormFourniseur" onClick="requetesFour('Ficher_Fournisseur');">Profil Fourniseur</button>
+            <button type="button" class="btn btn-primary font-weight-bold shadow" onclick="requetesFour('FourCommand');">Commandes</button>    
+            <button type="button" class="btn btn-primary font-weight-bold shadow" onclick="requetesFour('HistoireFact');">Histoire Facturation</button>    
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2" id="divfour">
             <!-- Card Service du Fournisseur -->
             `;
             
@@ -551,35 +563,136 @@ function formServicesFour_modal(fiche){
         </div>
     </div>
     <!-- Div forfait Logo et Graphique -->
+  
     <div class="col-lg-3 bg-light">
-        <h4>Votre forfait:</h4>
-        <div class="card booking-card shadow">
+    <h4>Votre forfait:</h4>
+    <div class="card booking-card shadow">
 
-            <!-- Card image -->
-            <div class="view overlay">
-                <img class="card-img-top" src="images/vip.png" alt="Card image cap">
-                <a href="#!">
-                    <div class="mask rgba-white-slight"></div>
-                </a>
-            </div>
+        <!-- Card image -->
+        <div class="view overlay">
+            <img class="card-img-top" src="images/basebv.png" alt="Card image cap">
+            <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
 
-            <!-- Card content -->
-            <div id="graphique" class="card-body">
+        <!-- Card content -->
+        <div id="graphique" class="card-body">
 
-                <!-- Title -->
-                <h5 class="card-title font-weight-bold"><a>VIP</a></h5>
+            <!-- Title -->
+            <h5 class="card-title font-weight-bold"><a>BASE BITVOIX</a></h5>
 
-                <!-- Text -->
-                <p class="card-text">Date d'échéance : 12-09-2019</p>
-
-            </div>
+            <!-- Text -->
+            <p class="card-text">Date d'échéance : 12-09-2019</p>
 
         </div>
-        <button type="button" class="btn btn-primary font-weight-bold shadow mt-2">Changer mon forfait</button>
+
+    </div>
+    <button type="button" class="btn btn-primary font-weight-bold shadow mt-2" data-toggle="modal" data-target=".bd-example-modal-xl">Changer mon forfait</button>
+   <div id="Paye"></div>
+    <div  class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary py-4 shadow">
+                    <img src="images/logo.png" alt="">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3>Forfaits <b>les plus populaires</b></h3>
+                    <p>Nos clients ont aimé ces forfaits. Choisissez le vôtre!</p>
+                    <div class="card-deck">
+                        <div class="card shadow card-forfait">
+                            <img src="images/basebv.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><b>BASE</b> BITVOIX</h5>
+                                <p class="card-text">Trois (3) services ou produits <b>GRATUITS</b></p>
+                                <p class="card-text">Durée de trois (3) mois</p>
+                                <p class="card-text">Publiez votre annonce sur la page la plus visitée et captez un maximum d'attention</p>
+                                <p class="card-text font-weight-bold">0.00$</p>
+                                <button type="button" class="btn btn-primary font-weight-bold shadow disabled">Gratuit</button>
+                            </div>
+                        </div>
+                        <div class="card shadow card-forfait">
+                            <img src="images/standardbv.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><b>STANDARD</b> BITVOIX</h5>
+                                <p class="card-text">Services ou produits <b>ILLIMITÉS</b></p>
+                                <p class="card-text">Durée de 1 an</p>
+                                <p class="card-text">Publiez votre annonce sur la page la plus visitée et captez un maximum d'attention</p>
+                                <p class="card-text font-weight-bold">9.99$</p>
+                                <div id="paypal-button-container"></div>
+                                <script src="js/paypal.js"></script>
+                            </div>
+                        </div>
+                        <div class="card shadow card-forfait">
+                            <img src="images/premiumbv.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><b>PREMIUM</b> BITVOIX</h5>
+                                <p class="card-text">Services ou produits <b>ILLIMITÉS</b></p>
+                                <p class="card-text">Durée de 1 an</p>
+                                <p class="card-text">Administration de agenda et <br>marketing</p>
+                                <p class="card-text font-weight-bold">29.99$</p>
+                                <button type="button" class="btn btn-primary font-weight-bold shadow disabled"><i class="fab fa-paypal"></i> PayPal</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+ 
+
+    <!-- Graphique Marketing -->
+
+    <div class="card booking-card shadow mt-2" data-toggle="modal" data-target=".graphMarketingModal" id="card-graphmrketing">
+
+        <!-- Card image -->
+        <div class="view overlay">
+            <img class="card-img-top" src="images/graphiquemarketing.jpg" alt="Card image cap">
+            <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+
+        <!-- Card content -->
+        <div id="graphique" class="card-body">
+
+            <!-- Title -->
+            <h5 class="card-title font-weight-bold"><a>Graphique Marketing</a></h5>
+
+        </div>
+
+    </div>
+    
+
+    <div class="modal fade graphMarketingModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-primary py-4 shadow">
+                    <img src="images/logo.png" alt="">
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3>Graphique <b>Marketing</b></h3>
+                    <div id="tableau_analytique">Ici la graphique</div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Fin Graphique Marketing -->
 
     </div>
 
-
+    <!-- <div id="tableau_analytique" class="col-lg-4 bg-light"></div> -->
     <!-- Modal Profil -->
 
     <div class="modal fade" id="FormFourniseur" tabindex="-1" role="dialog"
@@ -615,9 +728,9 @@ function formServicesFour_modal(fiche){
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="container">
+                    <div class="container" id="NewService">
                     <!-- Form Service-->
-                    `+montreFormService()+ /*html*/`
+                    `+montreFormService('M')+ /*html*/`
                     </div>
                 </div>
             </div>
@@ -632,14 +745,11 @@ function montreServicesFour(fiche){
     // var Myjson = JSON.stringify(donneFuornisseur).length;
     // alert( "Hola"+myJSON);
 
-    alert("Montre  les Services pour Fournisseur");
+    // alert("Montre  les Services pour Fournisseur");
     $('#divprincipal').html(formServicesFour_modal(fiche));
+    disegne();
 }
 
-
-function ModalFournisseur(){
-    
-}
 
 function montreGetServicesFour(donnees){
     $('#idAdrFournisseur').val(donnees.idAdrFournisseur);
@@ -657,10 +767,193 @@ function montreGetServicesFour(donnees){
     $('#datLimService').val(donnees.datLimService);
     $('#pochetteService').val(donnees.pochetteService);
     $('#autService').val(donnees.autService);
-    $('#div-images').html(ImagenActualise(donnees.idCategorie,donnees.pochetteService));
+    $('#div-images').html(ImageArray(donnees.idCategorie,donnees.pochetteService));
+}
+
+function vueServiceBlank(){
+    $('#NewService').html(montreFormService('N'));
+    $('#idAdrFournisseur').val('');
+    $('#idService').val('');
+    $('#idFournisseur').val('');
+    $('#titreService').val('');
+    $('#desShortService').val('');
+    $('#desService').val('');
+    $('#idCategorie').val('0.0');
+    $('#actService').val('0.0');;
+    $('#prixService').val('0.0');
+    $('#promService').val('0.0');
+    $('#refeService').val('0.0');
+    $('#refeEfeService').val('0');
+    $('#datLimService').val('');
+    $('#pochetteService').val('');
+    $('#autService').val('');
+    $('#div-images').html(ImageArray(donnees.idCategorie,donnees.pochetteService));
 }
 
 
+
+function voirHistoireFact(listeFac) {
+    
+	var taille = listeFac.length;
+	rep = /*html*/ `
+	<h3>Factures</h3>
+	<table class="table table-hover">
+		<thead class="bg-primary text-white shadow">
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Fournisseur</th>
+				<th scope="col">Forfait</th>
+				<th scope="col">Date</th>
+				<th scope="col"># PayPal</th>
+				<th scope="col">Prix</th>
+				<th scope="col">Voir facture</th>
+			</tr>
+		</thead>
+		<tbody>`
+			for (i = 0; i < taille; i++) {
+				ligne = listeFac[i];
+				rep += /*html*/ `
+			<tr>
+				<th scope="row">` + (ligne.idFacture) + `</th>
+				<td>` + (ligne.nomFournisseur) + `</td>`
+				var forfait = "";
+				var forfait = parseInt(ligne.idForfaitFacture);
+				switch (forfait) {
+					case 1:
+						forfait = "Base";
+						break;
+					case 2:
+						forfait = "Stantard";
+						break;
+					case 3:
+						forfait = "Premium";
+						break;
+				}
+				rep += `<td>` + forfait + `</td>
+				<td>` + (ligne.dateInsFacture) + `</td>
+				<td>` + (ligne.nomRefFacture) + `</td>
+				<td>11,48$</td>
+				<td>
+					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalFacture` + (ligne.idFacture) + `" title="Voir facture"><i class="fas fa-eye"></i></button>
+				</td>
+			</tr>
+			<div class="modal fade bd-qw-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+				aria-hidden="true" id="modalFacture` + (ligne.idFacture) + `">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header bg-primary py-4 shadow">
+							<!-- Logo bitvoix -->
+
+							<img src="images/logo.png" alt="">
+
+							<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+								<span class="text-white" aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="container my-2 text-left">
+								<div class="card">
+									<div class="card-header">
+										Facture No.
+										<strong> ` + (ligne.idFacture) + `</strong>
+										<span class="float-right"> <strong>Date:</strong> ` + (ligne.dateInsFacture) + `</span>
+									</div>
+									<div class="card-body">
+										<div class="row mb-4">
+											<div class="col-sm-6">
+												<h6 class="mb-3">Facturé à:</h6>
+												<div><strong>` + (ligne.nomFournisseur) + `</strong></div>
+												<div>` + (ligne.nroAdr) + ` ` + (ligne.rueAdr) + `</div>
+												<div>` + (ligne.desVilAdr) + `, ` + (ligne.codPosAdr) + `</div>
+												<div>Courriel : ` + (ligne.courrielMembre) + `</div>
+												<div>Téléphone : ` + (ligne.cellFournisseur) + `</div>
+											</div>
+											<div class="col-sm-6">
+												<h6 class="mb-3">Ref. PayPal : <b>125R2554W</b></h6>
+												<div><strong>BitVoix</strong></div>
+												<div>9155 Rue Saint-Hubert</div>
+												<div>Montréal, H2M1Y8</div>
+												<div>Courriel : info@bitvoix.com</div>
+												<div>Téléphone : 5144310342</div>
+											</div>
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-sm-1">
+												<div class="font-weight-bold">#</div>
+												<hr>
+												<div>1</div>
+											</div>
+											<div class="col-sm-2">
+												<div class="font-weight-bold">Item</div>
+												<hr>
+												<div>Standard BitVoix</div>
+											</div>
+											<div class="col-sm-5">
+												<div class="font-weight-bold">Description</div>
+												<hr>
+												<div>Services ou produits ILLIMITÉS - Durée de 1 an</div>
+											</div>
+											<div class="col-sm-2">
+												<div class="font-weight-bold">Unit Cost</div>
+												<hr>
+												<div>$9,99</div>
+											</div>
+											<div class="col-sm-1">
+												<div class="font-weight-bold">Qty</div>
+												<hr>
+												<div>1</div>
+											</div>
+											<div class="col-sm-1">
+												<div class="font-weight-bold">Total</div>
+												<hr>
+												<div>$9,99</div>
+											</div>
+										</div><br>
+										<div class="row">
+											<div class="col-lg-4 col-sm-5">
+											</div>
+											<div class="col-lg-4 col-sm-5 ml-auto">
+												<div class="row">
+													<div class="col-sm-9">
+														<div class="font-weight-bold">Sous-total</div>
+														<hr>
+														<div class="font-weight-bold">TPS (5%)</div>
+														<hr>
+														<div class="font-weight-bold">TVQ (9,975%)</div>
+														<hr>
+														<div class="font-weight-bold">Total</div>
+													</div>
+													<div class="col-sm-3">
+														<div>$9,99</div>
+														<hr>
+														<div>$0,49</div>
+														<hr>
+														<div>$0,99</div>
+														<hr>
+														<div class="font-weight-bold">$11,48</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+    			</div>
+			</div>
+			`
+				}
+			
+			rep+= `
+		</tbody>
+	</table>
+	
+	`;
+ 
+    $('#divfour').html(rep);
+}
 
 
 var vueFournisseur=function(action,donnees){
@@ -700,11 +993,15 @@ var vueFournisseur=function(action,donnees){
         case 'montreGetServicesFour':
               montreGetServicesFour(donnees);
         break;
-       
-		
+        case 'vueServiceBlank':
+              vueServiceBlank();
+        break; 
+        case 'commmandesFour':
+              commmandesFour(donnees);     
+        break;
+        case 'voirHistoireFact':
+              voirHistoireFact(donnees);
+        break;
 	}
 	
 }
-
-
-

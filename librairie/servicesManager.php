@@ -9,12 +9,14 @@ class ServicesManager
     }
     public function add(Services $servi)
     {
-        $requete = 'INSERT INTO services (  idFournisseur, titreService,  desShortService, desService,  idCategorie, actService, prixService, promService, refeService,
-                                                refeEfeService, datLimService, pochetteService, autService)
-                                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);';
+        $requete = 'INSERT INTO services (  idFournisseur, titreService,  desShortService, 
+                                            desService,  idCategorie, 
+                                            actService, prixService, 
+                                            promService, refeService,
+                                            refeEfeService, datLimService, pochetteService, autService)
+                                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)';
         $stmt = $this->_pdo->prepare($requete);
-        $stmt->execute(array($servi->idFournisseur(), $servi->titreService(),
-            $servi->desShortService(),
+        $stmt->execute(array($servi->idFournisseur(), $servi->titreService(), $servi->desShortService(),
             $servi->desService(), $servi->idCategorie(),
             $servi->actService(), $servi->prixService(),
             $servi->promService(), $servi->refeService(),
@@ -66,11 +68,14 @@ class ServicesManager
     }
     public function getList()
     {
-        $requete = "SELECT * FROM services ORDER BY idService";
-        $stmt = $this->_pdo->prepare($requete);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-        return $result;
+      $requete = "SELECT idService, services.idFournisseur, titreService, desShortService, desService, services.idCategorie, actService, prixService, promService, refeService, refeEfeService, datLimService, pochetteService, autService, fournisseur.nomFournisseur, categories.desCategorie 
+      FROM services, fournisseur, categories 
+      WHERE services.idFournisseur = fournisseur.idFournisseur AND services.idCategorie = categories.idCategorie
+      ORDER BY idService";
+      $stmt = $this->_pdo->prepare($requete);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+      return $result;
     }
     public function getListServices()
     {
@@ -112,13 +117,31 @@ class ServicesManager
         return $result;
     }
 
+    public function getListIdFournisseur($idFournisseur)
+    {
+      $idFournisseur = (int) $idFournisseur;
+      // $requete = 'SELECT * FROM services WHERE idFournisseur = ? ';
+      $requete = 'SELECT services.*, TRUNCATE(AVG( IF(requests.statRequest <> 3,qualRequest,0)),1)  AS Quality, COUNT(qualRequest) AS kcount
+      FROM services
+       LEFT JOIN requests  ON services.idService =  requests.idService
+      WHERE services.idFournisseur = ?
+      GROUP BY idService;';
+      $stmt = $this->_pdo->prepare($requete);
+      $stmt->execute(array($idFournisseur));
+      $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+      if (!$result){
+        $result = [ 'idService' => ''];
+      }
+      return $result;
+    }
+
     public function update(Services $servi)
     {
         $requete = "UPDATE services SET idFournisseur = ?, titreService = ?,
                                 desShortService= ?, desService= ?,   idCategorie= ?, actService = ?,
                                 prixService =? , promService = ?, refeService = ? ,
-                                refeEfeService = ?, datLimService = ?, pochetteService =? ,
-                                autService = ? WHERE idService = ?";
+                                refeEfeService = ?, datLimService = ?, pochetteService =? 
+                                WHERE idService = ?";
         var_dump($requete);
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($servi->idFournisseur(), $servi->titreService(),
@@ -127,10 +150,56 @@ class ServicesManager
             $servi->prixService(), $servi->promService(),
             $servi->refeService(), $servi->refeEfeService(),
             $servi->datLimService(), $servi->pochetteService(),
-            $servi->autService(),
-            $servi->idCategorie()));
+            $servi->idService()));
+    }
+    public function updActivation($idService)
+    {
+        $idService = (int) $idService;
+        $requete = " update services set autService = 1 Where IdService = ?";
+        // var_dump($requete);
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute(array($idService));
     }
 
+    public function forfaitServic($idFournisseur){
+        // $idFournisseur = (int) $idFournisseur;
+        $requete = " SELECT idForfaitFournisseur, (SELECT count(idservice)  FROM bitvoix_db.services WHERE idFournisseur = ?) AS nroServ
+                     FROM Fournisseur  WHERE  idFournisseur = ?";
+        // var_dump($requete);
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute(array($idFournisseur,$idFournisseur));
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    public function listServRequetes($idFournisseur){
+        // $idFournisseur = (int) $idFournisseur;
+        $requete = " SELECT idForfaitFournisseur, (SELECT count(idservice)  FROM bitvoix_db.services WHERE idFournisseur = ?) AS nroServ
+                     FROM Fournisseur  WHERE  idFournisseur = ?";
+        // var_dump($requete);
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute(array($idFournisseur,$idFournisseur));
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    public function fourRequeService($idFournisseur){
+        $requete = "   SELECT services.titreService, services.prixService, services.promService, services.refeService,services.refeEfeService,
+        IF (services.datLimService >= now(),'Actif','échéance') AS Servstatut,
+        requests.idRequest, requests.idMembre, requests.cleSerRequest,
+        membres.nomMembre,membres.preNomMembre,
+        f_referido(membres.idMembre,requests.idService) AS NroRefe
+        FROM services,requests,membres
+        WHERE services.idFournisseur = ?
+        AND services.idService =  requests.idService
+        AND requests.idMembre = membres.idMembre
+        AND requests.statRequest = 1; ";
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute(array($idFournisseur));
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+    
     public function setDb()
     {
         $this->_pdo = Connecter::conexion(); //_pdo c'est l'appel à la classe statique Connecter

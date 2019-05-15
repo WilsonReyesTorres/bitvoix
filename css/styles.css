@@ -99,3 +99,46 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* Fin Select Images Services */
+
+/* Cards Forfait */
+
+.card-forfait:hover img {
+    -ms-transform:scale(1.03);
+    -webkit-transform:scale(1.03);
+    transform:scale(1.03);
+}
+
+.card-forfait img {
+    -webkit-transition:all .4s linear;
+    transition:all .4s linear;
+    }
+
+/* Fin Cards Forfait */
+
+
+/****  Fournisseur  **/
+
+.objformFournisseur {
+   width: 60%;
+}
+
+
+/* Cards Graphique Marketing */
+
+#card-graphmrketing {
+    cursor: pointer;
+    overflow:hidden;
+}
+
+#card-graphmrketing:hover img {
+    -ms-transform:scale(1.05);
+    -webkit-transform:scale(1.05);
+    transform:scale(1.05);
+}
+
+#card-graphmrketing img {
+    -webkit-transition:all .4s linear;
+    transition:all .4s linear;
+    }
+
+/* Fin Cards Graphique Marketing */

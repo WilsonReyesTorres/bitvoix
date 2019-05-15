@@ -1,31 +1,32 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
 require_once("../bd/connecter.php");
 require_once('../librairie/requests.php');
 require_once('../librairie/requestsManager.php');
 
 
 /*****************************  commencer test ***************/
-$donnees = [
-  'idRequest' => '1',
-  'idMembre' => '1',
-  'idService' => '1',
-  'qualRequest' => '2',
-  'commRequest' => 'c\'est Cool',
-  'statRequest' => '1',
-  'dateRequest' => '2019-05-01',
-  'cleSerRequest' => 'x938x847267x'];
+// $donnees = [
+//   'idRequest' => '1',
+//   'idMembre' => '1',
+//   'idService' => '1',
+//   'qualRequest' => '2',
+//   'commRequest' => 'c\'est Cool',
+//   'statRequest' => '1',
+//   'dateRequest' => '2019-05-01',
+//   'cleSerRequest' => 'x938x847267x'];
 
-$reque = new Requests($donnees);
+// $reque = new Requests($donnees);
 
-echo '<br>';              
-echo '<br>Id du request:'.$reque->idRequest();
-echo '<br>Id du Memebre:'.$reque->idMembre();
-echo '<br>Id du Service:'.$reque->idService();
-echo '<br>Score de qualité de service :'.$reque->qualRequest();
-echo '<br>Commentaires du client :'.$reque->commRequest();
-echo '<br>Statut du request: 1. Ouvert, 2. fermé :'.$reque->statRequest();
-echo '<br>date de la requete :'.$reque->dateRequest();
-echo '<br>cLé du service" :'.$reque->cleSerRequest();
+// echo '<br>';              
+// echo '<br>Id du request:'.$reque->idRequest();
+// echo '<br>Id du Memebre:'.$reque->idMembre();
+// echo '<br>Id du Service:'.$reque->idService();
+// echo '<br>Score de qualité de service :'.$reque->qualRequest();
+// echo '<br>Commentaires du client :'.$reque->commRequest();
+// echo '<br>Statut du request: 1. Ouvert, 2. fermé :'.$reque->statRequest();
+// echo '<br>date de la requete :'.$reque->dateRequest();
+// echo '<br>cLé du service" :'.$reque->cleSerRequest();
 
 
 //$manage = new CategoriesManager();
@@ -84,19 +85,19 @@ function enlever(){
     ];*/
     
     $donnees = [
-      'idRequest' => '1',
+      'idRequest' => $_POST['idRequest'],
       'idMembre' => '1',
       'idService' => '1',
-      'qualRequest' => '2',
-      'commRequest' => 'c\'est Cool',
-      'statRequest' => '1',
+      'qualRequest' => '3',
+      'commRequest' => '',
+      'statRequest' => '3',
       'dateRequest' => '2019-05-01',
-      'cleSerRequest' => 'x938x847267x'];
+      'cleSerRequest' => 'x'];
     $reque = new Requests($donnees);
     $manager = new RequestsManager();
     $manager->delete($reque); 
-    $rep['msg']="Requete a été enleve";
-   echo json_encode($rep);  
+    $rep['msg']="Requete a été enlever";
+    echo json_encode($rep);  
 }
 
 function fiche(){
@@ -134,10 +135,10 @@ function modifier(){
       'idMembre' => '1',
       'idService' => '1',
       'qualRequest' => '3',
-      'commRequest' => 'c\'est super Cool',
+      'commRequest' => '',
       'statRequest' => '1',
-      'dateRequest' => '2019-02-01',
-      'cleSerRequest' => 'x938x847267x'];
+      'dateRequest' => '2019-05-17',
+      'cleSerRequest' => 'x'];
     $reque = new Requests($donnees);
     $manager = new RequestsManager(); 
     $manager->update($reque);
@@ -145,10 +146,38 @@ function modifier(){
     echo json_encode($rep);
 }
 
+
+function FermeRequet(){
+    
+  /*
+  $donnees = [
+   'idCate' => $_POST['idCategorie'],
+   'desCate' => $_POST['desCategorie']
+ ];*/
+ //  'idRequest' => $_POST['idRequest'],
+ $donnees = [
+   'idRequest' => 13,
+   'idMembre' => '1',
+   'idService' => '1',
+   'qualRequest' => '1',
+   'commRequest' => 'x',
+   'statRequest' => '2',
+   'dateRequest' => '2019-05-17',
+   'cleSerRequest' => 'x'];
+  
+ $reque = new Requests($donnees);
+ var_dump( $reque );
+
+ $manager = new RequestsManager();
+ $manager->delete($reque); 
+ $rep['msg']="Requete a été Fermer";
+echo json_encode($rep);  
+}
+
 //controleur Adresse
-//$action=$_POST['action'];
-$action= '';
-$action= 'modifier';
+$action=$_POST['action'];
+// $action= '';
+// $action= 'FermeRequet';
 
 switch($action){
     case 'enregistrer':
@@ -166,4 +195,7 @@ switch($action){
     case 'modifier':
         modifier();
         break;
+    case 'FermeRequet':
+        FermeRequet();
+        break;   
 }

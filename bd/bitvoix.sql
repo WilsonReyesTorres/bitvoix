@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `bitvoix_db`.`facture` (
   `dateEcheFacture` DATE NOT NULL COMMENT 'date d\'échéance d\'inscription',
   `nomRefFacture` VARCHAR(20) NOT NULL  COLLATE utf8_unicode_ci  COMMENT 'Nombre de référence Paypal',
   `statusFacture` VARCHAR(1) NOT NULL COLLATE utf8_unicode_ci  COMMENT ' Status 1.Actif 2. Annule  ',
+  `prixFacture` DECIMAL(10,2)  COMMENT 'prix Facture',
   PRIMARY KEY (`idFacture`),
    CONSTRAINT `facfou`
     FOREIGN KEY (`idFournisseur`)
@@ -139,8 +140,8 @@ CREATE TABLE IF NOT EXISTS `bitvoix_db`.`requests` (
   `idRequest` INT NOT NULL auto_increment COMMENT 'Id du request',
   `idMembre` INT NOT NULL COMMENT 'Id du Memebre',
   `idService` INT NOT NULL COMMENT 'Id du Service',
-  `qualRequest` DECIMAL(3,1) NOT NULL COMMENT 'Score de qualité de service',
-  `commRequest` VARCHAR(60) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'Commentaires du client',
+  `qualRequest` DECIMAL(3,1) COMMENT 'Score de qualité de service',
+  `commRequest` VARCHAR(60)  COLLATE utf8_unicode_ci  COMMENT 'Commentaires du client',
   `statRequest` INT NOT NULL COMMENT 'Statut du request: 1. Ouvert, 2. fermé, 3. Annulé',
   `dateRequest` DATE NOT NULL COMMENT 'date de la requete',
   `cleSerRequest` VARCHAR(60) NOT NULL COLLATE utf8_unicode_ci  COMMENT 'cLé du service',
@@ -182,7 +183,23 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-
+drop function if exists f_referido;
+delimiter //
+create function f_referido(
+  idMembre int,
+  idService int) 
+  returns int
+  deterministic
+begin 
+   declare valor int;
+   SELECT count(courReferences)   into valor
+     FROM bitvoix_db.`references`
+     WHERE  references.switReferences = '0'
+	   and  references.idMembre = idMembre
+       and  references.idService = idService;
+   return valor;
+end //
+delimiter ;
 
 
 
@@ -253,4 +270,3 @@ INSERT INTO `services` (`idService`, `idFournisseur`, `titreService`, `desShortS
 (6, 6, 'Ramada Niagara Falls', '1 nuitée avec bons activités et repas au Ramada Niagara Falls', 'Les chutes du Niagara sont les plus puissantes d’Amérique du Nord. Les visiteurs peuvent explorer les imposantes chutes avec la croisière The Hornblower, avec l’attraction Journey behind the Falls ou tout simplement en les observant sur la promenade.', 6, 1, '199.00', '159.00', '99.00', 666, '2019-12-31', 'niagarafallscanadian.jpg', '1'),
 (7, 7, 'Lavage De Vitres', 'Lavage de fenêtres pour une maison à 1 ou 2 étages', 'Nettoyage de l’extérieur des fenêtres, ou des vitres, rebords, rails et moustiquaires sur la Rive-Nord', 7, 1, '160.00', '120.00', '104.00', 777, '2020-01-01', 'lavevitres.jpg', '1'),
 (8, 8, 'PNL', 'Gagner en confiance et améliorer sa vie grâce aux outils de la PNL', 'Technique d’utilisation des connaissances de la psychologie et des neurosciences pour apprendre à communiquer de façon constructive', 8, 1, '300.00', '199.00', '99.00', 888, '2020-01-02', 'propnl.jpg', '1');
-

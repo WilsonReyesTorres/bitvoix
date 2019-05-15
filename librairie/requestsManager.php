@@ -22,9 +22,9 @@ class RequestsManager
         }
       public function delete(Requests $reque)
         {
-            $requete = 'UPDATE requests SET statRequest = 3  WHERE idRequest = ?';
+            $requete = 'UPDATE requests SET statRequest = ?  WHERE idRequest = ?';
             $stmt = $this->_pdo->prepare($requete);
-            $stmt->execute(array($reque->idRequest()));
+            $stmt->execute(array($reque->statRequest(),$reque->idRequest()));
         }
       public function get($idRequest)
         {
