@@ -1,31 +1,33 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+
 require_once("../bd/connecter.php");
 require_once('../librairie/factures.php');
 require_once('../librairie/facturesManager.php');
 
 /*****************************  commencer test ***************/
 
- $donnees = ['idFacture' =>'5',
-    'idFournisseur' =>'3',
-    'idForfaitFacture' =>'1',
-    'typeSerFacture' =>'1',
-    'dateInsFacture' =>'2019-02-15',
-    'dateEcheFacture' =>'2020-02-15',
-    'nomRefFacture' =>' #Paypal',
-    'statusFacture' =>'1' ];
+//  $donnees = ['idFacture' =>'5',
+//     'idFournisseur' =>'3',
+//     'idForfaitFacture' =>'1',
+//     'typeSerFacture' =>'1',
+//     'dateInsFacture' =>'2019-02-15',
+//     'dateEcheFacture' =>'2020-02-15',
+//     'nomRefFacture' =>' #Paypal',
+//     'statusFacture' =>'1' ];
 
-//var_dump($donnees);
-$factu = new Factures($donnees);
+// //var_dump($donnees);
+// $factu = new Factures($donnees);
 
-echo '<br>';              
-echo '<br>Id factura :'.$factu->idFacture();
-echo '<br>Code fournisseu '.$factu->idFournisseur();
-echo '<br>Identifie le type de forfaits : 1.Base 2.Stantard 3.Premium :'.$factu->idForfaitFacture();
-echo '<br>Type de service   1 Personalisé  -- 2. Agenda  3. Demande'.$factu->typeSerFacture();
-echo '<br>date d\'inscription:'.$factu->dateInsFacture();
-echo '<br>date d\'échéance d\'inscription'.$factu->dateEcheFacture();
-echo '<br>Nombre de référence Paypal :'.$factu->nomRefFacture();
-echo '<br>Status 1.Actif 2. Annule :'.$factu->statusFacture();
+// echo '<br>';              
+// echo '<br>Id factura :'.$factu->idFacture();
+// echo '<br>Code fournisseu '.$factu->idFournisseur();
+// echo '<br>Identifie le type de forfaits : 1.Base 2.Stantard 3.Premium :'.$factu->idForfaitFacture();
+// echo '<br>Type de service   1 Personalisé  -- 2. Agenda  3. Demande'.$factu->typeSerFacture();
+// echo '<br>date d\'inscription:'.$factu->dateInsFacture();
+// echo '<br>date d\'échéance d\'inscription'.$factu->dateEcheFacture();
+// echo '<br>Nombre de référence Paypal :'.$factu->nomRefFacture();
+// echo '<br>Status 1.Actif 2. Annule :'.$factu->statusFacture();
 
 
 //$manage = new CategoriesManager();
@@ -143,9 +145,9 @@ function modifier(){
 }
 
 //controleur Adresse
-//$action=$_POST['action'];
-$action= '';
-$action= 'enregistrer';
+$action=$_POST['action'];
+// $action= '';
+// $action= 'enregistrer';
 
 switch($action){
     case 'enregistrer':

@@ -201,6 +201,15 @@ function chercheUser()
     $membreAct = $membre->getRows($prevCon);
     echo json_encode($membreAct);
 }
+function listerMembres()
+{
+    if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+    //var_dump($_SESSION['sessData'] ["membreId"]);
+    $membre = new Membre();
+    $prevCon['return_type'] = 'all';
+    $membreAct = $membre->getRows($prevCon);
+    echo json_encode($membreAct);
+}
 function enregistrerMembre()
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
@@ -297,5 +306,8 @@ switch ($action) {
         break;
     case 'membreUpdate':
         membreUpdate();
+        break;
+    case 'listerMembres':
+        listerMembres();
         break;
 }
