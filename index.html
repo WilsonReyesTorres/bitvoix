@@ -37,236 +37,221 @@
     <script src="vues/vuesAdministrateur.js"></script>
     <script src="vues/vuesFournisseur.js"></script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkbWdMgGs624sL4rwDFjyat-ImNwsMnrk&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkbWdMgGs624sL4rwDFjyat-ImNwsMnrk&callback=initMap">
     </script>
 
 </head>
 
 <body>
-
-    <header class="bg-primary shadow">
+    <!-- <header class="navbar navbar-expand-lg navbar-dark flex-column flex-md-row bd-navbar bg-primary"> -->
+    <header class="navbar navbar-expand-lg navbar-dark flex-column flex-md-row bd-navbar bg-primary ">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="#"><img src="images/logo.png" alt=""></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="form-inline mr-auto">
-
-                        <input type="text" class="form-control mr-sm-2" placeholder="Que recherchez-vous?"
-                            aria-label="Que recherchez-vous?">
-
-                        <button class="btn btn-outline-light" type="button" id="button-addon2"><i
-                                class="fas fa-search"></i></button>
-
-
-                    </form>
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown active">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Catégories
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="javascript:void(0);"  onClick="requetesServ('montrerServicesCat', '1');">Autos</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '2');">Sante</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '3');">Gastronomie</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '4');">Beauté</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '5');">Produits</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '6');">Voyages</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '7');">Maison</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '8');">Education</a>
-                                <a class="dropdown-item" href="javascript:void(0);" onClick="requetesServ('montrerServicesCat', '9');">Services</a>
-                            </div>
-                        </li>
-                        <li class="nav-item active" id="loginDiv">
-                            <!--Modal: Se connecter-->
-                            <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#modalLRForm">Se
-                                Connecter<span class="sr-only">(current)</span></a>
-                        </li>
-
-                    </ul>
-
-                </div>
-            </nav>
-        </div>
-
-        <!--Modal: Se Connecter-->
-        <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog cascading-modal" role="document">
-                <!--Content-->
-                <div class="modal-content" id="modalContent">
-                    <div class="modal-header bg-primary py-4 shadow">
-                        <!-- Logo bitvoix -->
-
-                        <img src="images/logo.png" alt="">
-
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                            <span class="text-white" aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <!--Modal cascading tabs-->
-                    <div class="modal-c-tabs">
-
-                        <!-- Nav tabs -->
-
-                        <ul class="nav nav-tabs md-tabs tabs-2 text-primary darken-3 justify-content-center"
-                            role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" id="tabSign" href="#panel7" role="tab"><i
-                                        class="fas fa-user mr-1"></i>
-                                    Se Connecter</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" id="tabSinsc" href="#panel8" role="tab"><i
-                                        class="fas fa-user-plus mr-1"></i>
-                                    S'inscrire</a>
-                            </li>
-                        </ul>
-
-
-                        <!-- Tab panels -->
-                        <div class="tab-content">
-                            <!--Panel 7-->
-                            <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
-
-                                <!--Body-->
-                                <div class="modal-body mb-1">
-                                    <div id="messageLogin"></div>
-                                    <form id="loginForm">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1"><i
-                                                        class="fas fa-envelope prefix"></i></span>
-                                            </div>
-                                            <input type="email" id="courrielMembre" name="courrielMembre"
-                                                class="form-control" placeholder="Courriel" aria-label="Courriel"
-                                                aria-describedby="basic-addon1">
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1"><i
-                                                        class="fas fa-lock prefix"></i></span>
-                                            </div>
-                                            <input type="password" id="motPasseMembre" name="motPasseMembre"
-                                                class="form-control" placeholder="Mot de passe" aria-label="Courriel"
-                                                aria-describedby="basic-addon1">
-                                        </div>
-
-                                        <div class="text-center mt-3">
-                                            <button type="button" class="btn btn-primary shadow"
-                                                onClick="requetes('loginSubmit');">Se Connecter</button>
-                                        </div>
-                                    </form>
-                                    <p
-                                        class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-4">
-                                        ou connectez vous avec :</p>
-
-                                    <div class="row my-3 d-flex justify-content-center">
-                                        <!--Facebook-->
-                                        <a href="javascript:void(0);" onclick="fbLogin()" id="fbLink"><img src="images/fblogin.png" height="30px" /></a>
-
-                                        <!--Google +-->
-                                        <div id="gSignIn"></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!--/.Panel 7-->
-
-                            <!--Panel 8-->
-                            <div class="tab-pane fade" id="panel8" role="tabpanel">
-
-                                <!--Body-->
-                                <div class="modal-body">
-                                    <div id="messageEnregistrer"></div>
-                                    <form id="membreForm">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user mr-1"></i></span>
-                                            </div>
-                                            <input type="text" id="preNomMembre" name="preNomMembre"
-                                                class="form-control" placeholder="Prénom" aria-label="Prenom"
-                                                aria-describedby="basic-addon1">
-
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user mr-1"></i></span>
-                                            </div>
-                                            <input type="text" id="nomMembre" name="nomMembre" class="form-control"
-                                                placeholder="Nom" aria-label="Nom" aria-describedby="basic-addon1">
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="fas fa-envelope prefix"></i></span>
-                                            </div>
-                                            <input type="email" id="courrielMembre" name="courrielMembre"
-                                                class="form-control" placeholder="Courriel" aria-label="Courriel"
-                                                aria-describedby="basic-addon1">
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-lock prefix"></i></span>
-                                            </div>
-                                            <input type="password" id="motPasseMembre" name="motPasseMembre"
-                                                class="form-control" placeholder="Mot de passe" aria-label="Password"
-                                                aria-describedby="basic-addon1">
-                                        </div>
-
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1"><i
-                                                        class="fas fa-lock prefix"></i></span>
-                                            </div>
-                                            <input type="password" id="motPasseMembreConf" name="motPasseMembreConf"
-                                                class="form-control" placeholder="Confirmer le mot de passe"
-                                                aria-label="Courriel" aria-describedby="basic-addon1">
-                                        </div>
-
-
-                                        <div class="text-center form-sm mt-2">
-                                            <button type="button" class="btn btn-primary shadow"
-                                                onClick="requetes('insertMembre');">S'inscrire</button>
-                                        </div>
-
-                                    </form>
-
-                                </div>
-
-                            </div>
-                            <!--/.Panel 8-->
+            <a class="navbar-brand" href="#"><img src="images/logo.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+                <!-- <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex"> -->
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown active" id="menuCategDiv">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catégories</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('1');">Autos</a>
+                            <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('2');">Sante</a>
+                            <a class="dropdown-item" href="javascript:void(0);"
+                                onClick="filtrerServ('3');">Gastronomie</a>
+                            <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('4');">Beauté</a>
+                            <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('5');">Produits</a>
+                            <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('6');">Voyages</a>
+                            <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('7');">Maison</a>
+                            <a class="dropdown-item" href="javascript:void(0);"
+                                onClick="filtrerServ('8');">Education</a>
+                            <a class="dropdown-item" href="javascript:void(0);" onClick="filtrerServ('9');">Services</a>
                         </div>
-
-                    </div>
-                </div>
-                <!--/.Content-->
+                    </li>
+                    <li class="nav-item active" id="loginDiv">
+                        <!--Modal: Se connecter-->
+                        <a class="nav-link" href="javascript:void(0);" data-toggle="modal" data-target="#modalLRForm">Se
+                            Connecter<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
             </div>
         </div>
-
     </header>
+
+    <!--Modal: Se Connecter-->
+    <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog cascading-modal" role="document">
+            <!--Content-->
+            <div class="modal-content" id="modalContent">
+                <div class="modal-header bg-primary py-4 shadow">
+                    <!-- Logo bitvoix -->
+
+                    <img src="images/logo.png" alt="">
+
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!--Modal cascading tabs-->
+                <div class="modal-c-tabs">
+
+                    <!-- Nav tabs -->
+
+                    <ul class="nav nav-tabs md-tabs tabs-2 text-primary darken-3 justify-content-center" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" id="tabSign" href="#panel7" role="tab"><i
+                                    class="fas fa-user mr-1"></i>
+                                Se Connecter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" id="tabSinsc" href="#panel8" role="tab"><i
+                                    class="fas fa-user-plus mr-1"></i>
+                                S'inscrire</a>
+                        </li>
+                    </ul>
+
+
+                    <!-- Tab panels -->
+                    <div class="tab-content">
+                        <!--Panel 7-->
+                        <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+
+                            <!--Body-->
+                            <div class="modal-body mb-1">
+                                <div id="messageLogin"></div>
+                                <form id="loginForm">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-envelope prefix"></i></span>
+                                        </div>
+                                        <input type="email" id="courrielMembre" name="courrielMembre"
+                                            class="form-control" placeholder="Courriel" aria-label="Courriel"
+                                            aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-lock prefix"></i></span>
+                                        </div>
+                                        <input type="password" id="motPasseMembre" name="motPasseMembre"
+                                            class="form-control" placeholder="Mot de passe" aria-label="Courriel"
+                                            aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="text-center mt-3">
+                                        <button type="button" class="btn btn-primary shadow"
+                                            onClick="requetes('loginSubmit');">Se Connecter</button>
+                                    </div>
+                                </form>
+                                <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-4">
+                                    ou connectez vous avec :</p>
+
+                                <div class="row my-3 d-flex justify-content-center">
+                                    <!--Facebook-->
+                                    <a href="javascript:void(0);" onclick="fbLogin()" id="fbLink"><img
+                                            src="images/fblogin.png" height="30px" /></a>
+
+                                    <!--Google +-->
+                                    <div id="gSignIn"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--/.Panel 7-->
+
+                        <!--Panel 8-->
+                        <div class="tab-pane fade" id="panel8" role="tabpanel">
+
+                            <!--Body-->
+                            <div class="modal-body">
+                                <div id="messageEnregistrer"></div>
+                                <form id="membreForm">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user mr-1"></i></span>
+                                        </div>
+                                        <input type="text" id="preNomMembre" name="preNomMembre" class="form-control"
+                                            placeholder="Prénom" aria-label="Prenom" aria-describedby="basic-addon1">
+
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user mr-1"></i></span>
+                                        </div>
+                                        <input type="text" id="nomMembre" name="nomMembre" class="form-control"
+                                            placeholder="Nom" aria-label="Nom" aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-envelope prefix"></i></span>
+                                        </div>
+                                        <input type="email" id="courrielMembre" name="courrielMembre"
+                                            class="form-control" placeholder="Courriel" aria-label="Courriel"
+                                            aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-lock prefix"></i></span>
+                                        </div>
+                                        <input type="password" id="motPasseMembre" name="motPasseMembre"
+                                            class="form-control" placeholder="Mot de passe" aria-label="Password"
+                                            aria-describedby="basic-addon1">
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i
+                                                    class="fas fa-lock prefix"></i></span>
+                                        </div>
+                                        <input type="password" id="motPasseMembreConf" name="motPasseMembreConf"
+                                            class="form-control" placeholder="Confirmer le mot de passe"
+                                            aria-label="Courriel" aria-describedby="basic-addon1">
+                                    </div>
+
+
+                                    <div class="text-center form-sm mt-2">
+                                        <button type="button" class="btn btn-primary shadow"
+                                            onClick="requetes('insertMembre');">S'inscrire</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                        <!--/.Panel 8-->
+                    </div>
+
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+
+
+
+
 
     <!-- Icons Services -->
 
     <div id="map"></div>
     <script src="js/googleMaps.js"></script>
+    <div class="container">
+        <div class="container text-center mt-4" id="divprincipal">
+        </div>
 
-    <div class="container text-center mt-4" id="divprincipal">
+        <!-- Footer Index -->
     </div>
-
-    <!-- Footer Index -->
-
     <footer class="page-footer font-small text-white pt-4 mt-2 bg-primary">
 
         <!-- Footer Links -->
@@ -356,21 +341,21 @@
         <!-- Footer Links -->
 
         <hr>
+        <div id="footerButton">
+            <!-- Call to action -->
+            <ul class="list-unstyled list-inline text-center py-2">
+                <li class="list-inline-item">
+                    <h5 class="mb-1">Inscrivez-vous gratuitement</h5>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#!" class="btn btn-danger btn-rounded shadow" data-toggle="modal"
+                        data-target="#modalLRForm">S'inscrire!</a>
+                </li>
+            </ul>
+            <!-- Call to action -->
 
-        <!-- Call to action -->
-        <ul class="list-unstyled list-inline text-center py-2">
-            <li class="list-inline-item">
-                <h5 class="mb-1">Inscrivez-vous gratuitement</h5>
-            </li>
-            <li class="list-inline-item">
-                <a href="#!" class="btn btn-danger btn-rounded shadow" data-toggle="modal"
-                    data-target="#modalLRForm">S'inscrire!</a>
-            </li>
-        </ul>
-        <!-- Call to action -->
-
-        <hr>
-
+            <hr>
+        </div>
         <!-- Social buttons -->
         <ul class="list-unstyled list-inline text-center">
             <li class="list-inline-item">

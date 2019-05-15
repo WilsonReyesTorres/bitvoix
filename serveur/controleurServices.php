@@ -126,8 +126,9 @@ function listerServCards()
 
 }
 
-function listerServCardsCat($idCategorie)
+function listerServCardsCat()
 {
+    $idCategorie=$_POST['idcateg'];
     try {
         $manager = new ServicesManager();
         $ServicesList = $manager->getListServicesCat($idCategorie);
@@ -303,7 +304,7 @@ switch($action){
         listerServCards();
         break;
     case 'listerServCardsCat':
-    listerServCardsCat($idcateg);
+    listerServCardsCat();
         break;
     case 'enlever':
         enlever();

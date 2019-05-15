@@ -22,11 +22,15 @@
 
     <link href="css/styles.css" rel="stylesheet">
 
+
     <script
         src="https://www.paypal.com/sdk/js?client-id=AUpBr_SyhAoLZPPXq8bE7d_EdWsD08EYQmvjwSbkgINFwKnqQUSh0M8SMqZz2-lHvZu6tPU-PeeHZl86">
     </script>
 
     <script src="js/paypal.js"></script>
+
+
+    <script src="js/general.js"></script>
 
     <title>bitvoix.com</title>
 
@@ -353,8 +357,6 @@
 
     </header>
 
-
-
     <div class="container text-center mt-4">
 
         <!-- Icons Services -->
@@ -410,11 +412,11 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
 
-                <!-- Card -->
-                <div class="card booking-card shadow" data-toggle="modal" data-target=".bd-example-modal-lg"
+                <!--Card -->
+                <div class="card booking-card shadow" data-toggle="modal" data-target="#serviceModal"
                     id="card-services">
 
-                    <!-- Card image -->
+                    <!--Card image -->
                     <div class="view overlay">
                         <img class="card-img-top" src="images/auto.jpg" alt="Card image cap">
                         <a href="#!">
@@ -422,13 +424,13 @@
                         </a>
                     </div>
 
-                    <!-- Card content -->
+                    <!--Card content-->
                     <div class="card-body">
 
-                        <!-- Title -->
+                        <!--Title-->
                         <h5 class="card-title font-weight-bold"><a>Auto Images</a></h5>
 
-                        <!-- Text -->
+                        <!--Text -->
                         <p class="card-text">Teinture complète des vitres d'une automobile</p>
                         <ul class="list-unstyled list-inline rating mb-0">
                             <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
@@ -447,7 +449,7 @@
                                 <p class="text-muted">4.5 (413)</p>
                             </li>
                         </ul>
-                        <!-- <hr> -->
+                        <hr>
                         <ul class="list-unstyled list-inline mb-0">
                             <li class="list-inline-item">
                                 <p class="card-text small text-muted pt-1">Montréal</p>
@@ -466,16 +468,15 @@
                     </div>
 
                 </div>
-                <!-- Card -->
+                <!--Card -->
 
             </div>
-
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                aria-hidden="true">
+            <!-- Modal -->
+            <div class="modal fade bd-example-modal-lg" id="serviceModal">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header bg-primary py-4 shadow">
-                            <!-- Logo bitvoix -->
+                            <!--Logo bitvoix -->
 
                             <img src="images/logo.png" alt="">
 
@@ -513,8 +514,18 @@
                                     </li>
                                 </ul>
                                 <button class="btn btn-info font-weight-bold shadow" disabled><del>160$</del></button>
-                                <button class="btn btn-outline-info font-weight-bold shadow">120$</button>
+
+
+
+                                <button class="btn btn-outline-info font-weight-bold shadow" data-toggle="modal"
+                                    title="Demande de service" data-target="#reqModal"
+                                    onclick="document.getElementById('cleSerRequest').value = getRndInteger(10000,99999);">120$</button>
+
+
+
                                 <button class="btn btn-info font-weight-bold shadow">99$</button>
+                                <img id="bitvoixButton" class="imgLien" src="images/bitVoix.png" alt="" title="Référer le service" data-toggle="modal"
+                                title="Demande de service" data-target="#refModal" width="37px">
                                 <p class="card-text mt-4">Date Limite : <b>25-08-2019</b></p>
                             </div>
                             <div class="col-lg-12">
@@ -525,15 +536,116 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+            <!-- Fin Modal -->
+
+            <!-- Modal2 -->
+            <div class="modal fade bd-example-modal-sm" role="dialog" id="reqModal">
+                <div class="modal-dialog bd-example-modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary py-4 shadow">
+
+                            <img src="images/logo.png" alt="">
+
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span class="text-white" aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="col-lg-12">
+                            <h5 class="font-weight-bold mt-2">Demande de Service</h5>
+                            <hr>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+
+                                    <input type="hidden" name="idService" id="idService" value="1" >
+
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-check-square"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Nom" aria-label="Nom" value="Auto Images" readonly>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fab fa-slack-hash"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" id="cleSerRequest" name="cleSerRequest" readonly>   
+                                </div>
+                                <small id="emailHelp" class="form-text text-muted">Gardez ce numéro pour avoir accès à un meilleur prix de votre service</small>
+
+
+
+                                <div class="text-center form-sm mt-2">
+                                    <button class="btn btn-primary shadow" data-dismiss="modal">Confirmer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Modal2 -->
+
+            <!-- Modal3 -->
+            <div class="modal fade bd-example-modal-sm" role="dialog" id="refModal">
+                    <div class="modal-dialog bd-example-modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary py-4 shadow">
+    
+                                <img src="images/logo.png" alt="">
+    
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                    <span class="text-white" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="col-lg-12">
+                                <h5 class="font-weight-bold mt-2">BitVoix de Service</h5>
+                                <small id="emailHelp" class="form-text text-muted">Recommandez cette service à un(e) ami(e)</small>
+                                <hr>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+    
+                                        <input type="hidden" name="idService" id="idService" value="1" >
+    
+    
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-check-square"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Nom" aria-label="Nom" value="Auto Images" readonly>
+                                    </div>
+    
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-envelope prefix"></i></span>
+                                        </div>
+                                        <input type="email" placeholder="Courriel personne à référencer" class="form-control" id="cleSerRequest" name="cleSerRequest" >   
+                                    </div>
+                                   
+    
+    
+    
+                                    <div class="text-center form-sm mt-2">
+                                        <button class="btn btn-primary shadow" data-dismiss="modal">Confirmer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin Modal3 -->
 
             <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
 
-                <!-- Card -->
+                <!--Card -->
                 <div class="card booking-card shadow" id="card-services">
 
-                    <!-- Card image -->
+                    <!--Card image -->
                     <div class="view overlay">
                         <img class="card-img-top" src="images/Vitrelux.jpg" alt="Card image cap">
                         <a href="#!">
@@ -541,13 +653,13 @@
                         </a>
                     </div>
 
-                    <!-- Card content -->
+                    <!--Card content-->
                     <div class="card-body">
 
-                        <!-- Title -->
+                        <!--Title -->
                         <h5 class="card-title font-weight-bold"><a>Vitrelux</a></h5>
 
-                        <!-- Text -->
+                        <!--Text -->
                         <p class="card-text">Teinture complète des vitres d'une automobile</p>
                         <ul class="list-unstyled list-inline rating mb-0">
                             <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
@@ -565,7 +677,7 @@
                                 <p class="text-muted">4.5 (413)</p>
                             </li>
                         </ul>
-                        <!-- <hr> -->
+                        <hr>
                         <ul class="list-unstyled list-inline mb-0">
                             <li class="list-inline-item">
                                 <p class="card-text small text-muted pt-1">Montréal</p>
@@ -590,7 +702,7 @@
 
             <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
 
-                <!-- Card -->
+                <!--Card -->
                 <div class="card booking-card shadow" id="card-services">
 
                     <!-- Card image -->
@@ -607,7 +719,7 @@
                         <!-- Title -->
                         <h5 class="card-title font-weight-bold"><a>Zükari</a></h5>
 
-                        <!-- Text -->
+                        <!--Text-->
                         <p class="card-text">Teinture complète des vitres d'une automobile</p>
                         <ul class="list-unstyled list-inline rating mb-0">
                             <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
@@ -625,7 +737,7 @@
                                 <p class="text-muted">4.5 (413)</p>
                             </li>
                         </ul>
-                        <!-- <hr> -->
+                        <hr>
                         <ul class="list-unstyled list-inline mb-0">
                             <li class="list-inline-item">
                                 <p class="card-text small text-muted pt-1">Montréal</p>
@@ -644,16 +756,16 @@
                     </div>
 
                 </div>
-                <!-- Card -->
+                <!--Card -->
 
             </div>
 
             <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
 
-                <!-- Card -->
+                <!--Card -->
                 <div class="card booking-card shadow" id="card-services">
 
-                    <!-- Card image -->
+                    <!-- Card image-->
                     <div class="view overlay">
                         <img class="card-img-top" src="images/laforce_expedition.jpg" alt="Card image cap">
                         <a href="#!">
@@ -664,10 +776,10 @@
                     <!-- Card content -->
                     <div class="card-body">
 
-                        <!-- Title -->
+                        <!--  Title -->
                         <h5 class="card-title font-weight-bold"><a>Laforce Expedition</a></h5>
 
-                        <!-- Text -->
+                        <!--Text -->
                         <p class="card-text">Teinture complète des vitres d'une automobile</p>
                         <ul class="list-unstyled list-inline rating mb-0">
                             <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
@@ -685,7 +797,7 @@
                                 <p class="text-muted">4.5 (413)</p>
                             </li>
                         </ul>
-                        <!-- <hr> -->
+                        <hr>
                         <ul class="list-unstyled list-inline mb-0">
                             <li class="list-inline-item">
                                 <p class="card-text small text-muted pt-1">Montréal</p>
@@ -713,7 +825,7 @@
                 <!-- Card -->
                 <div class="card booking-card shadow" id="card-services">
 
-                    <!-- Card image -->
+                    <!-- Card image-->
                     <div class="view overlay">
                         <img class="card-img-top" src="images/Ôzeu Déjeuner.jpg" alt="Card image cap">
                         <a href="#!">
@@ -721,13 +833,13 @@
                         </a>
                     </div>
 
-                    <!-- Card content -->
+                    <!-- Card content-->
                     <div class="card-body">
 
                         <!-- Title -->
                         <h5 class="card-title font-weight-bold"><a>Ôzeu Déjeuner</a></h5>
 
-                        <!-- Text -->
+                        <!--Text -->
                         <p class="card-text">Teinture complète des vitres d'une automobile</p>
                         <ul class="list-unstyled list-inline rating mb-0">
                             <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
@@ -745,7 +857,7 @@
                                 <p class="text-muted">4.5 (413)</p>
                             </li>
                         </ul>
-                        <!-- <hr> -->
+                        <hr>
                         <ul class="list-unstyled list-inline mb-0">
                             <li class="list-inline-item">
                                 <p class="card-text small text-muted pt-1">Montréal</p>
@@ -764,7 +876,7 @@
                     </div>
 
                 </div>
-                <!-- Card -->
+                <!--Card -->
 
             </div>
 
@@ -781,13 +893,13 @@
                         </a>
                     </div>
 
-                    <!-- Card content -->
+                    <!--Card content-->
                     <div class="card-body">
 
                         <!-- Title -->
                         <h5 class="card-title font-weight-bold"><a>Centre Harmonie</a></h5>
 
-                        <!-- Text -->
+                        <!--Text -->
                         <p class="card-text">Teinture complète des vitres d'une automobile</p>
                         <ul class="list-unstyled list-inline rating mb-0">
                             <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
@@ -810,7 +922,7 @@
                                 <p class="text-muted">4.5 (413)</p>
                             </li>
                         </ul>
-                        <!-- <hr> -->
+                        <hr>
                         <ul class="list-unstyled list-inline mb-0">
                             <li class="list-inline-item">
                                 <p class="card-text small text-muted pt-1">Montréal</p>
@@ -829,16 +941,16 @@
                     </div>
 
                 </div>
-                <!-- Card -->
+                <!--Card -->
 
             </div>
 
             <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
 
-                <!-- Card -->
+                <!--Card -->
                 <div class="card booking-card shadow" id="card-services">
 
-                    <!-- Card image -->
+                    <!--Card image -->
                     <div class="view overlay">
                         <img class="card-img-top" src="images/Kart-O-Mania.jpg" alt="Card image cap">
                         <a href="#!">
@@ -846,13 +958,13 @@
                         </a>
                     </div>
 
-                    <!-- Card content -->
+                    <!--Card content -->
                     <div class="card-body">
 
-                        <!-- Title -->
+                        <!--Title -->
                         <h5 class="card-title font-weight-bold"><a>Kart-O-Mania</a></h5>
 
-                        <!-- Text -->
+                        <!--Text -->
                         <p class="card-text">Teinture complète des vitres d'une automobile</p>
                         <ul class="list-unstyled list-inline rating mb-0">
                             <li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i>
@@ -870,7 +982,7 @@
                                 <p class="text-muted">4.5 (413)</p>
                             </li>
                         </ul>
-                        <!-- <hr> -->
+                        <hr>
                         <ul class="list-unstyled list-inline mb-0">
                             <li class="list-inline-item">
                                 <p class="card-text small text-muted pt-1">Montréal</p>
@@ -889,16 +1001,16 @@
                     </div>
 
                 </div>
-                <!-- Card -->
+                <!--Card -->
 
             </div>
 
             <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
 
-                <!-- Card -->
+                <!--Card -->
                 <div class="card booking-card shadow" id="card-services">
 
-                    <!-- Card image -->
+                    <!--Card image -->
                     <div class="view overlay">
                         <img class="card-img-top" src="images/Photobook Canada.jpg" alt="Card image cap">
                         <a href="#!">
@@ -909,7 +1021,7 @@
                     <!-- Card content -->
                     <div class="card-body">
 
-                        <!-- Title -->
+                        <!--Title -->
                         <h5 class="card-title font-weight-bold"><a>Photobook Canada</a></h5>
 
                         <!-- Text -->
@@ -930,7 +1042,7 @@
                                 <p class="text-muted">4.5 (413)</p>
                             </li>
                         </ul>
-                        <!-- <hr> -->
+                        <hr>
                         <ul class="list-unstyled list-inline mb-0">
                             <li class="list-inline-item">
                                 <p class="card-text small text-muted pt-1">Montréal</p>
@@ -949,7 +1061,7 @@
                     </div>
 
                 </div>
-                <!-- Card -->
+                <!--Card -->
 
             </div>
 
@@ -1004,8 +1116,10 @@
                     </div>
 
                 </div>
+
                 <button type="button" class="btn btn-primary font-weight-bold shadow mt-2" data-toggle="modal"
                     data-target=".bd-example-modal-xl">Changer mon forfait</button>
+
 
                 <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
                     aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -1482,17 +1596,20 @@
                 </div>
                 <div id="tab-membres" class="container tab-pane fade"><br>
                     <h3>Membres</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                        laudantium,
                         totam rem aperiam.</p>
                 </div>
                 <div id="tab-fournisseurs" class="container tab-pane fade"><br>
                     <h3>Fournisseurs</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                        laudantium,
                         totam rem aperiam.</p>
                 </div>
                 <div id="tab-services" class="container tab-pane fade"><br>
                     <h3>Services</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                        laudantium,
                         totam rem aperiam.</p>
                 </div>
             </div>
