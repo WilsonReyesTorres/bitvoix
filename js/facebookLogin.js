@@ -92,6 +92,8 @@ function saveUserDataFacebook(membreData) {
         dataType: 'json',
         success: function (message) {
             vue('LoginOKJSON', message.msg);
+            $('#footerButton').hide();
+            montrerServices2();
         },
         fail: function () {
             alert("Vous avez un GROS problème");

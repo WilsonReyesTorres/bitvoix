@@ -1,14 +1,10 @@
-$(document).ready(function () {
-
-    //funciones al cargar la pagina
-    //loadDoc('accueil.html', $("#acc"));
-    //loadMeteo();
-});
 
 
 
 
-
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
 
 
 

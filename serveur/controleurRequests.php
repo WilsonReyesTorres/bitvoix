@@ -1,11 +1,12 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
 require_once("../bd/connecter.php");
 require_once('../librairie/requests.php');
 require_once('../librairie/requestsManager.php');
 
 
 /*****************************  commencer test ***************/
-$donnees = [
+/*$donnees = [
   'idRequest' => '1',
   'idMembre' => '1',
   'idService' => '1',
@@ -25,7 +26,7 @@ echo '<br>Score de qualité de service :'.$reque->qualRequest();
 echo '<br>Commentaires du client :'.$reque->commRequest();
 echo '<br>Statut du request: 1. Ouvert, 2. fermé :'.$reque->statRequest();
 echo '<br>date de la requete :'.$reque->dateRequest();
-echo '<br>cLé du service" :'.$reque->cleSerRequest();
+echo '<br>cLé du service" :'.$reque->cleSerRequest();*/
 
 
 //$manage = new CategoriesManager();
@@ -34,25 +35,19 @@ echo '<br>cLé du service" :'.$reque->cleSerRequest();
 
 
 function enregistrer(){
-     /*
+   $idService=$_POST['idService'];
+  $cleSerRequest= "cleSerRequest".$idService;
+
      $donnees = [
-      'idCate' => $_POST['idCategorie'],
-      'desCate' => $_POST['desCategorie']
-     ];
-    */
-    $donnees = [
-      'idRequest' => '1',
-      'idMembre' => '1',
-      'idService' => '1',
-      'qualRequest' => '2',
-      'commRequest' => 'c\'est Cool',
+      'idMembre' => $_SESSION['sessData']["membreId"],
+      'idService' => $idService,
       'statRequest' => '1',
-      'dateRequest' => '2019-05-01',
-      'cleSerRequest' => 'x938x847267x'];
+      'cleSerRequest' => $_POST[$cleSerRequest]]; 
+     
     try{
     $reque = new Requests($donnees);
     $manager = new RequestsManager();
-    $manager->add($reque); 
+    $idRequest = $manager->add($reque); 
     }catch (Exception $e){
 	   $rep['erreur']="Probleme pour enregistrer";
 	 }finally {
@@ -75,6 +70,19 @@ function lister(){
     
 }
 
+function requetesMembre(){
+  $idMembre= $_SESSION['sessData']["membreId"];
+  try{ 
+   $manager = new RequestsManager();
+   $RequestsList = $manager->getListMembre($idMembre);
+   echo json_encode($RequestsList);
+   }catch (Exception $e){
+    $rep['erreur']="Probleme pour lister";
+  }finally {
+ 
+  }
+   
+}
 function enlever(){
     
      /*
@@ -146,9 +154,8 @@ function modifier(){
 }
 
 //controleur Adresse
-//$action=$_POST['action'];
-$action= '';
-$action= 'modifier';
+$action=$_POST['action'];
+
 
 switch($action){
     case 'enregistrer':
@@ -165,5 +172,8 @@ switch($action){
         break;
     case 'modifier':
         modifier();
+        break;
+    case 'requetesMembre':
+        requetesMembre();
         break;
 }

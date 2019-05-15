@@ -181,14 +181,14 @@ function membreUpdate()
         $_SESSION['sessData']['status']['type'] = 'success';
         $_SESSION['sessData']['status']['msg'] = $_POST['preNomMembre'];
     } else {
-        $sessData['status']['type'] = 'error';
-        $sessData['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
+        $_SESSION['sessData']['status']['type'] = 'error';
+        $_SESSION['sessData']['status']['msg'] = 'Il y a eu un problème avec la mise à jour, SVP essayez plus tard.';
     }
     //store signup status into the session
-    $_SESSION['sessData'] = $sessData;
+    //$_SESSION['sessData'] = $sessData;
     $reponse = array(
-        'status' => ($sessData['status']['type'] == 'success') ? 'success' : 'error',
-        'msg' => $sessData['status']['msg']);
+        'status' => ($_SESSION['sessData']['status']['type'] == 'success') ? 'success' : 'error',
+        'msg' => $_SESSION['sessData']['status']['msg']);
     echo json_encode($reponse);
 }
 function chercheUser()
@@ -198,6 +198,15 @@ function chercheUser()
     $membre = new Membre();
     $prevCon['where'] = array('idMembre' => $_SESSION['sessData']["membreId"]);
     $prevCon['return_type'] = 'single';
+    $membreAct = $membre->getRows($prevCon);
+    echo json_encode($membreAct);
+}
+function listerMembres()
+{
+    if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+    //var_dump($_SESSION['sessData'] ["membreId"]);
+    $membre = new Membre();
+    $prevCon['return_type'] = 'all';
     $membreAct = $membre->getRows($prevCon);
     echo json_encode($membreAct);
 }
@@ -294,8 +303,12 @@ switch ($action) {
         break;
     case 'chercheUser':
         chercheUser();
+        break;    
+    case 'listerMembres':
+        listerMembres();
         break;
     case 'membreUpdate':
         membreUpdate();
         break;
+
 }

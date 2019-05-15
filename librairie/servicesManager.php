@@ -93,6 +93,16 @@ class ServicesManager
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if($result==NULL){
+            $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
+            FROM services, fournisseur, adresse
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 ORDER BY services.idService;";
+            $stmt = $this->_pdo->prepare($requete);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        }
+
         return $result;
     }
     public function getListServicesCat($idCategorie)
@@ -112,6 +122,15 @@ class ServicesManager
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($idCategorie));
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if($result==NULL){
+            $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
+            FROM services, fournisseur, adresse
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 AND services.idCategorie=? ORDER BY services.idService;";
+            $stmt = $this->_pdo->prepare($requete);
+            $stmt->execute(array($idCategorie));
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        }
         return $result;
     }
 
