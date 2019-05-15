@@ -334,16 +334,27 @@ function servicesAccueil(donnees) {
 			'<!-- Text -->' +
 			'<p class="card-text">' + donnees[j].desShortService + '</p>' +
 			'<ul class="list-unstyled list-inline rating mb-0">';
-		var qualf = parseFloat(donnees[j].qualServ).toFixed(1);
+		var qualifi = donnees[j].qualServ;
+		if (qualifi == null)
+			qualifi =0;
+		
+			var qualf = parseFloat(qualifi).toFixed(1);
 
 		for (i = 0; i < qualf; i++) {
 			if ((qualf - i) >= 1) {
 				rep += '<li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i></li>';
 			}
 			if ((qualf - i) == 0.5) {
-				rep += '<li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i></li>';
+				rep += '<li class="list-inline-item mr-0"><i class="fas fa-star-half-alt amber-text text-warning"></i></li>';
 			}
 		}
+		for (l = i; l < 5; l++) {
+			
+			rep += '<li class="list-inline-item mr-0"><i class="far fa-star amber-text text-warning"></i></li>';
+			
+		}
+		
+
 		rep += '<li class="list-inline-item">' +
 			'<p class="text-muted">' + qualf + ' (' + donnees[j].nomQ + ')</p>' +
 			'</li>' +
@@ -397,8 +408,13 @@ function servicesAccueil(donnees) {
 				rep += '<li class="list-inline-item mr-0"><i class="fas fa-star amber-text text-warning"></i></li>';
 			}
 			if ((qualf - i) == 0.5) {
-				rep += '<li class="list-inline-item"><i class="fas fa-star-half-alt amber-text text-warning"></i></li>';
+				rep += '<li class="list-inline-item mr-0"><i class="fas fa-star-half-alt amber-text text-warning"></i></li>';
 			}
+		}
+		for (l = i; l < 5; l++) {
+			
+			rep += '<li class="list-inline-item mr-0"><i class="far fa-star amber-text text-warning"></i></li>';
+			
 		}
 		rep += '<li class="list-inline-item">' +
 			'<p class="text-muted">' + qualf + ' (' + donnees[j].nomQ + ')</p>' +
