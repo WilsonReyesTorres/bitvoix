@@ -6,7 +6,9 @@ require_once('../librairie/facturesManager.php');
 
 /*****************************  commencer test ***************/
 
+
 //  $donnees = ['idFacture' =>'0',
+
 //     'idFournisseur' =>'3',
 //     'idForfaitFacture' =>'1',
 //     'typeSerFacture' =>'1',
@@ -27,8 +29,6 @@ require_once('../librairie/facturesManager.php');
 // echo '<br>date d\'échéance d\'inscription'.$factu->dateEcheFacture();
 // echo '<br>Nombre de référence Paypal :'.$factu->nomRefFacture();
 // echo '<br>Status 1.Actif 2. Annule :'.$factu->statusFacture();
-
-
 //$manage = new CategoriesManager();
 //****************************  fin test **********************
 
@@ -169,7 +169,6 @@ function getFactFournisseur(){
 //controleur Adresse
 $action=$_POST['action'];
 // $action= '';
-//  $action= 'getListFactFournisseur';
 
 switch($action){
     case 'enregistrer':

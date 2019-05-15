@@ -48,7 +48,7 @@ class FacturesManager
             }
             return $result;
         }
-      public function getList()
+        public function getList()
         {
           $requete = "SELECT facture.* ,fournisseur.nomFournisseur,
           fournisseur.cellFournisseur,adresse.nroAdr,adresse.rueAdr,adresse.desVilAdr,adresse.codPosAdr,

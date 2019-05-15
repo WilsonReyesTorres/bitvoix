@@ -140,4 +140,12 @@ class Membre{
             return false;
         }
     }
+
+    public function getList(){
+        $requete = " SELECT * FROM membres";
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
 }

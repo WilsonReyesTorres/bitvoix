@@ -6,6 +6,7 @@ require_once('../librairie/requestsManager.php');
 
 
 /*****************************  commencer test ***************/
+
 // $donnees = [
 //   'idRequest' => '1',
 //   'idMembre' => '1',
@@ -29,31 +30,26 @@ require_once('../librairie/requestsManager.php');
 // echo '<br>cLé du service" :'.$reque->cleSerRequest();
 
 
+
 //$manage = new CategoriesManager();
 //****************************  fin test **********************
 
 
 
 function enregistrer(){
-     /*
+   $idService=$_POST['idService'];
+  $cleSerRequest= "cleSerRequest".$idService;
+
      $donnees = [
-      'idCate' => $_POST['idCategorie'],
-      'desCate' => $_POST['desCategorie']
-     ];
-    */
-    $donnees = [
-      'idRequest' => '1',
-      'idMembre' => '1',
-      'idService' => '1',
-      'qualRequest' => '2',
-      'commRequest' => 'c\'est Cool',
+      'idMembre' => $_SESSION['sessData']["membreId"],
+      'idService' => $idService,
       'statRequest' => '1',
-      'dateRequest' => '2019-05-01',
-      'cleSerRequest' => 'x938x847267x'];
+      'cleSerRequest' => $_POST[$cleSerRequest]]; 
+     
     try{
     $reque = new Requests($donnees);
     $manager = new RequestsManager();
-    $manager->add($reque); 
+    $idRequest = $manager->add($reque); 
     }catch (Exception $e){
 	   $rep['erreur']="Probleme pour enregistrer";
 	 }finally {
@@ -76,6 +72,19 @@ function lister(){
     
 }
 
+function requetesMembre(){
+  $idMembre= $_SESSION['sessData']["membreId"];
+  try{ 
+   $manager = new RequestsManager();
+   $RequestsList = $manager->getListMembre($idMembre);
+   echo json_encode($RequestsList);
+   }catch (Exception $e){
+    $rep['erreur']="Probleme pour lister";
+  }finally {
+ 
+  }
+   
+}
 function enlever(){
     
      /*
@@ -176,9 +185,6 @@ echo json_encode($rep);
 
 //controleur Adresse
 $action=$_POST['action'];
-// $action= '';
-// $action= 'FermeRequet';
-
 switch($action){
     case 'enregistrer':
         enregistrer();
@@ -198,4 +204,8 @@ switch($action){
     case 'FermeRequet':
         FermeRequet();
         break;   
+    case 'requetesMembre':
+        requetesMembre();
+        break;
+
 }

@@ -128,8 +128,9 @@ function listerServCards()
 
 }
 
-function listerServCardsCat($idCategorie)
+function listerServCardsCat()
 {
+    $idCategorie=$_POST['idcateg'];
     try {
         $manager = new ServicesManager();
         $ServicesList = $manager->getListServicesCat($idCategorie);
@@ -250,7 +251,20 @@ function modifier()
     echo json_encode($rep);
 }
 
-function listSerFour(){
+
+function autoriser()
+{
+    $idSer = $_POST['idService'];
+
+    // $servi = new Services($donnees);
+
+    $manager = new ServicesManager();
+    $manager->updActivation($idSer);
+    $rep['msg'] = "Service a été actualisé";
+    echo json_encode($rep);
+}
+
+function listSerFour($membreId){
   /*
      $donnees = [
       'idCate' => $_POST['idCategorie'],
@@ -316,7 +330,7 @@ switch($action){
         listerServCards();
         break;
     case 'listerServCardsCat':
-    listerServCardsCat($idcateg);
+    listerServCardsCat();
         break;
     case 'enlever':
         enlever();
@@ -326,6 +340,9 @@ switch($action){
         break;
     case 'modifier':
         modifier();
+        break;
+    case 'autoriser':
+        autoriser();
         break;
     case 'listSerFour':
         listSerFour();

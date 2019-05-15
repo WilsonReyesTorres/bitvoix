@@ -50,7 +50,8 @@ class ServicesManager
         }
         return $result;
     }
-    public function getQualServ($idService)
+   
+  public function getQualServ($idService)
     {
 //            echo '<br> ID: '.$idCate.'<br>';
         $idService = (int) $idService;
@@ -66,7 +67,8 @@ class ServicesManager
         }
         return $result;
     }
-    public function getList()
+   
+  public function getList()
     {
       $requete = "SELECT idService, services.idFournisseur, titreService, desShortService, desService, services.idCategorie, actService, prixService, promService, refeService, refeEfeService, datLimService, pochetteService, autService, fournisseur.nomFournisseur, categories.desCategorie 
       FROM services, fournisseur, categories 
@@ -77,7 +79,8 @@ class ServicesManager
       $result = $stmt->fetchAll(PDO::FETCH_OBJ);
       return $result;
     }
-    public function getListServices()
+   
+  public function getListServices()
     {
         if ((isset($_SESSION['sessData']["lat"])) && (isset($_SESSION['sessData']["lng"]))) {
             $longitude = $_SESSION['sessData']["lng"];
@@ -95,6 +98,16 @@ class ServicesManager
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if($result==NULL){
+            $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
+            FROM services, fournisseur, adresse
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 ORDER BY services.idService;";
+            $stmt = $this->_pdo->prepare($requete);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        }
+
         return $result;
     }
     public function getListServicesCat($idCategorie)
@@ -114,6 +127,15 @@ class ServicesManager
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($idCategorie));
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if($result==NULL){
+            $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
+            FROM services, fournisseur, adresse
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 AND services.idCategorie=? ORDER BY services.idService;";
+            $stmt = $this->_pdo->prepare($requete);
+            $stmt->execute(array($idCategorie));
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        }
         return $result;
     }
 
@@ -140,9 +162,8 @@ class ServicesManager
         $requete = "UPDATE services SET idFournisseur = ?, titreService = ?,
                                 desShortService= ?, desService= ?,   idCategorie= ?, actService = ?,
                                 prixService =? , promService = ?, refeService = ? ,
-                                refeEfeService = ?, datLimService = ?, pochetteService =? 
-                                WHERE idService = ?";
-        var_dump($requete);
+                                refeEfeService = ?, datLimService = ?, pochetteService =? ,
+                               autService = ? WHERE idService = ?";
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($servi->idFournisseur(), $servi->titreService(),
             $servi->desShortService(), $servi->desService(),
@@ -200,6 +221,16 @@ class ServicesManager
         return $result;
     }
     
+
+    public function updActivation($idService)
+    {
+        $idService = (int) $idService;
+        $requete = " update services set autService = 1 Where IdService = ?";
+        // var_dump($requete);
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute(array($idService));
+    }
+
     public function setDb()
     {
         $this->_pdo = Connecter::conexion(); //_pdo c'est l'appel à la classe statique Connecter
