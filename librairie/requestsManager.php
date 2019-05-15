@@ -54,6 +54,17 @@ class RequestsManager
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
+
+    public function getListMembre($idMembre)
+    {
+        $requete = "SELECT idRequest, dateRequest, cleSerRequest, titreService, nomFournisseur  
+        FROM requests, fournisseur, services 
+        WHERE services.idFournisseur=fournisseur.idFournisseur AND requests.idService=services.idService and idMembre=?;";
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute(array($idMembre));
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
     public function update(Requests $reque)
     {
         $requete = "UPDATE requests SET idMembre = ?,  idService = ?,  qualRequest = ?,  commRequest = ?,

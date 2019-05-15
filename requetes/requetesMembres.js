@@ -90,7 +90,8 @@ function envoyerUpdateMembre() {
 				vue('erreurLoginSubmitJSON', message.msg);
 			else {
 				$('#modalLRForm').modal('hide');
-				vue('modalConnecter', message.msg)
+				vue('modalConnecter', message.msg);
+				location.reload();
 				//vue('LoginOKJSON', message.msg);
 			}
 		},
@@ -99,6 +100,7 @@ function envoyerUpdateMembre() {
 		}
 	});
 }
+
 
 
 function validerLogin() {
@@ -183,7 +185,21 @@ function montrerServices() {
 	});
 
 }
-
+function envoyerReqMembre() {
+	$.ajax({
+		url: 'serveur/controleurRequests.php',
+		type: 'POST',
+		data: 'action=requetesMembre',
+		dataType: 'json',
+		success: function (donnes) {
+			//alert(donnes);
+			vue('requetesMembre', donnes);
+		},
+		fail: function () {
+			alert("Vous avez un GROS problème");
+		}
+	});
+}
 function envoyerMajProfil() {
 	$.ajax({
 		url: 'serveur/controleurMembres.php',
@@ -245,6 +261,9 @@ var requetes = function (action) {
 			break;
 		case 'request':
 			envoyerRequest();
+			break;
+		case 'reqMembre':
+			envoyerReqMembre();
 			break;
 		default:
 	}

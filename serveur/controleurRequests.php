@@ -70,6 +70,19 @@ function lister(){
     
 }
 
+function requetesMembre(){
+  $idMembre= $_SESSION['sessData']["membreId"];
+  try{ 
+   $manager = new RequestsManager();
+   $RequestsList = $manager->getListMembre($idMembre);
+   echo json_encode($RequestsList);
+   }catch (Exception $e){
+    $rep['erreur']="Probleme pour lister";
+  }finally {
+ 
+  }
+   
+}
 function enlever(){
     
      /*
@@ -159,5 +172,8 @@ switch($action){
         break;
     case 'modifier':
         modifier();
+        break;
+    case 'requetesMembre':
+        requetesMembre();
         break;
 }

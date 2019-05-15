@@ -227,11 +227,50 @@ function formMajUser(donnees) {
 	$('#modalLRForm').modal('show');
 	//$('#modalLRForm').modal('hide');
 }
+function requetesMembre(donnees) {
+	var rep = '<div class="modal-header bg-primary py-4 shadow">' +
+		'<!-- Logo bitvoix -->' +
+		'<img src="images/logo.png" alt="">' +
+		'<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">' +
+		'<span class="text-white" aria-hidden="true">&times;</span>' +
+		'</button>' +
+		'</div>' +
+		'' +
+		'<div class="modal-body">' +
+			'<div class="container-fluid">'+
+				'<div class="row">'+
+					'<div class="col-md-12 font-weight-bold text-center"><h4>Services demandés</h4></div>'+
+				'</div>'+
+				'<div class="row">'+
+					'<div class="col-md-1 font-weight-bold small text-center">Id</div>'+
+					'<div class="col-md-2 font-weight-bold small text-center">Date Req</div>'+
+					'<div class="col-md-4 font-weight-bold small text-center">Service</div>'+
+					'<div class="col-md-1 font-weight-bold small text-center">Cle</div>'+
+					'<div class="col-md-4 font-weight-bold small text-center">Fournisseur</div>'+
+				'</div>';
 
+			for(i=0;i<donnees.length;i++){
+				rep +='<div class="row">'+
+					'<div class="col-md-1 small text-center">'+donnees[i].idRequest+'</div>'+
+					'<div class="col-md-2 small text-center">'+donnees[i].dateRequest+'</div>'+
+					'<div class="col-md-4 small text-center">'+donnees[i].titreService+'</div>'+
+					'<div class="col-md-1 small text-center">'+donnees[i].cleSerRequest+'</div>'+
+					'<div class="col-md-4 small text-center">'+donnees[i].nomFournisseur+'</div>'+
+				'</div>';
+				}
+	rep +='</div>' +
+		'</div>'+
+		'<div class="modal-footer">'+
+		'<button type="button" class="btn btn-primary" data-dismiss="modal" onClick="location.reload();">Fermer</button>'+
+		'</div>';
+	$('#modalContent').html(rep);
+	$('#modalLRForm').modal('show');
+	//$('#modalLRForm').modal('hide');
+}
 function servicesAccueil(donnees) {
 	rep = '<!-- Icons Services -->' +
 		'' +
-		'<div class="row d-none d-lg-flex d-flex justify-content-center">' +
+		'<div class="row d-none d-lg-flex justify-content-center">' +
 		'<div class="col">' +
 		'<button type="button" class="btn btn-primary btn-lg rounded-circle" onClick="filtrerServ(\'1\');"><i class="fas fa-car"></i></button>' +
 		'<a href="javascript:void(0);" onClick="filtrerServ(\'1\');">Autos</a>' +
@@ -538,6 +577,9 @@ var vue = function (action, donnees) {
 			break;
 		case 'modalConnecter':
 			modalConnecter(donnees);
+			break;
+		case 'requetesMembre':
+			requetesMembre(donnees);
 			break;
 	}
 
