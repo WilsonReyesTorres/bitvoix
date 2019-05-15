@@ -335,7 +335,7 @@ function servicesAccueil(donnees) {
 			'<p class="card-text">' + donnees[j].desShortService + '</p>' +
 			'<ul class="list-unstyled list-inline rating mb-0">';
 		var qualifi = donnees[j].qualServ;
-		if (qualifi == null)
+		if (qualifi === null||qualifi ==="")
 			qualifi =0;
 		
 			var qualf = parseFloat(qualifi).toFixed(1);
