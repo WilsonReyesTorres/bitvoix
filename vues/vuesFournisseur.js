@@ -487,8 +487,10 @@ return rep1;
 
 
 function formServicesFour_modal(fiche){
-
-    var rep1 = /*html*/ `
+    for(var j=0; j < fiche.length; j++){
+        ligne = fiche[j];
+    }
+     var rep1 = /*html*/ `
     <!-- Div forfait Services-->
     <div class="row"> 
     <div class="col-lg-9">
@@ -505,7 +507,7 @@ function formServicesFour_modal(fiche){
             <!-- Card Service du Fournisseur -->
             `;
             
-            if (fiche.idService !== "" ) {
+            if (fiche[0].idService !== "" ) {
                 var i;
                 
                 for(var i=0; i < fiche.length; i++){
@@ -566,7 +568,8 @@ function formServicesFour_modal(fiche){
 
         <!-- Card image -->
         <div class="view overlay">`;
-        if (ligne.idForfaitFournisseur =="1"){
+        
+        if (ligne.idForfaitFournisseur == "1"){
             rep1+=`<img class="card-img-top" src="images/basebv.png" alt="Card image cap">`;
         }else{
             rep1+=`<img class="card-img-top" src="images/standardbv.png" alt="Card image cap">`;

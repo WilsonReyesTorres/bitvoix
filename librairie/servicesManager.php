@@ -154,7 +154,13 @@ class ServicesManager
       $stmt->execute(array($idFournisseur));
       $result = $stmt->fetchAll(PDO::FETCH_OBJ);
       if (!$result){
-        $result = [ 'idService' => '','idForfaitFournisseur' => '1'];
+        $requete = " SELECT '' AS idService, idForfaitFournisseur,datEcheFournisseur, idForfaitFournisseur
+                     FROM fournisseur
+                     WHERE idFournisseur = ? ";
+        // var_dump($requete);
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute(array($idFournisseur));
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
       }
       return $result;
     }

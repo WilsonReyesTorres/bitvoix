@@ -84,7 +84,7 @@ $.ajax({
     },
     dataType: 'json',
     success: function (donneFuornisseur) {
-        // alert('Services du Fournisseur');
+        alert('Services du Fournisseur');
         $('#map').modal('hide');
          vueFournisseur('montreServicesFour', donneFuornisseur);
     },
