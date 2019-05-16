@@ -50,7 +50,7 @@ function listerJSONAut(listeAut) {
 							<td>` + (ligne.nomFournisseur) + `</td>
 							<td>` + (ligne.titreService) + `</td>
 							<td>` + (ligne.desCategorie) + `</td>
-							<td>` + (ligne.prixService) + `</td>
+							<td>` + (ligne.prixService) + `$</td>
 							<td>
 								<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAutorisation` + (ligne.idService) + `"><i class="fas fa-eye"></i></button>
 								<button type="button" class="btn btn-danger btn-sm" onClick="autorisationSer('` + (ligne.idService) + `');"><i class="fas fa-check" title="Autorizer"></i></button>
@@ -128,7 +128,7 @@ function listerJSONSer(listeSer) {
 				<td>` + (ligne.nomFournisseur) + `</td>
 				<td>` + (ligne.titreService) + `</td>
 				<td>` + (ligne.desCategorie) + `</td>
-				<td>` + (ligne.prixService) + `</td>
+				<td>` + (ligne.prixService) + `$</td>
 			</tr>
 			<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modalAutorisation` + (ligne.idService) + `">
 				<div class="modal-dialog modal-lg">
@@ -215,7 +215,7 @@ function listerJSONFac(listeFac) {
 				rep += `<td>` + forfait + `</td>
 				<td>` + (ligne.dateInsFacture) + `</td>
 				<td>` + (ligne.nomRefFacture) + `</td>
-				<td>11,48$</td>
+				<td>` + (ligne.prixFacture) + `$</td>
 				<td>
 					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalFacture` + (ligne.idFacture) + `" title="Voir facture"><i class="fas fa-eye"></i></button>
 				</td>
@@ -252,7 +252,7 @@ function listerJSONFac(listeFac) {
 												<div>Téléphone : ` + (ligne.cellFournisseur) + `</div>
 											</div>
 											<div class="col-sm-6">
-												<h6 class="mb-3">Ref. PayPal : <b>125R2554W</b></h6>
+												<h6 class="mb-3">Ref. PayPal : <b>` + (ligne.nomRefFacture) + `</b></h6>
 												<div><strong>BitVoix</strong></div>
 												<div>9155 Rue Saint-Hubert</div>
 												<div>Montréal, H2M1Y8</div>

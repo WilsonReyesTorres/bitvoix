@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style/dialog.css" />        
+    <link rel="stylesheet" href="style/dialog.css" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -19,9 +19,11 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <!--Paypal-->
-    <script src="https://www.paypal.com/sdk/js?client-id=AUpBr_SyhAoLZPPXq8bE7d_EdWsD08EYQmvjwSbkgINFwKnqQUSh0M8SMqZz2-lHvZu6tPU-PeeHZl86"></script>
-    
-     <!--Fin Paypal-->
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AUpBr_SyhAoLZPPXq8bE7d_EdWsD08EYQmvjwSbkgINFwKnqQUSh0M8SMqZz2-lHvZu6tPU-PeeHZl86">
+    </script>
+
+    <!--Fin Paypal-->
     <title>bitvoix.com</title>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/general.js"></script>
@@ -30,6 +32,7 @@
     <meta name="google-signin-client_id"
         content="356909246162-iuhl31i67gerbdope1224ug69e44l7pb.apps.googleusercontent.com">
     <script src="js/googleLogin.js"></script>
+    <script src="js/footer.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="js/facebookLogin.js"></script>
@@ -43,7 +46,7 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkbWdMgGs624sL4rwDFjyat-ImNwsMnrk&callback=initMap">
     </script>
-    
+
 </head>
 
 <body>
@@ -271,8 +274,8 @@
                     <!-- Content -->
                     <!-- <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5> -->
                     <a href="#"><img src="images/logo.png" alt=""></a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit inventore repellat
-                        exercitationem quia at nesciunt magnam corporis laudantium adipisci!</p>
+                    <p><b>Bitvoix</b> est la nouvelle façon pour les petites et moyennes entreprises de faire connaître
+                        leurs services en appliquant la technique « bouche à oreille »</p>
 
                 </div>
                 <!-- Grid column -->
@@ -309,7 +312,7 @@
 
                     <ul class="list-unstyled">
                         <li>
-                            <a href="#!" class="text-white">info@bitvoix.com</a>
+                            <a href="mailto: info@bitvoix.com" class="text-white">info@bitvoix.com</a>
                         </li>
                     </ul>
 
@@ -325,18 +328,41 @@
                     <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Plus</h5>
 
                     <ul class="list-unstyled">
-                        <li>
+                        <!-- <li>
                             <a href="#!" class="text-white">FAQ</a>
+                        </li> -->
+                        <li>
+                            <a data-toggle="modal" href="#modalFooter" class="text-white" onclick="conditionsGen();">Conditions Générales</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">Conditions Générales</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Politique de Confidentialité</a>
+                            <a data-toggle="modal" href="#modalFooter" class="text-white" onclick="politiqueConf();">Politique de Confidentialité</a>
                         </li>
                     </ul>
 
                 </div>
+
+                <!-- Modal Footer -->
+
+                <div class="modal fade bd-footer-modal-xl" tabindex="-1" role="dialog"
+                    aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" id="modalFooter">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary py-4 shadow">
+                                <!-- Logo bitvoix -->
+    
+                                <img src="images/logo.png" alt="">
+    
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                    <span class="text-white" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body text-muted" id="mFooterContent">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Grid column -->
 
             </div>
@@ -391,7 +417,7 @@
             <a href="index.html" class="text-white"> www.bitvoix.com</a>
         </div>
         <!-- Copyright -->
-       
+
     </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -405,4 +431,5 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 </body>
+
 </html>
