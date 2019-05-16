@@ -1,6 +1,6 @@
 function  ImageArray(SelecValue,pochetteSelec){
-    var categories = new Array("","Autos","Beauté","Education","Gastronomie","Maison","Produits","Santé","Services","Voyages");
-    var catephysique  = new Array("","auto","beaute","education","gastronomie","maison","produits","sante","services","voyages")
+    var categories = new Array("","Autos","Santé","Gastronomie","Beauté","Produits","Voyages","Maison","Education","Services");
+    var catephysique  = new Array("","auto","sante","gastronomie","beaute","produits","voyages","maison","education","services")
     ins_image = "";
     SelecValue = parseInt(SelecValue);
     if (SelecValue > 0){
@@ -132,7 +132,7 @@ function disegne() {
 function  formFournisseur(ModiNew){
     var rep1 = /*html*/ ` 
     
-    <div class="container objformFournisseur border pt-2 shadow rounded font-weight-bold" >
+    <div class="container objformFournisseur border pt-2 shadow rounded font-weight-bold " >
     <h2> Devenir fournisseur</h2> <hr>
     <form id="enregFormFournisseur">
     <div class="form-group row">
@@ -238,11 +238,11 @@ function  formFournisseur(ModiNew){
     <div class="modal-footer d-flex justify-content-center"> `;
        if (ModiNew == "N"){
         rep1+= /*html*/ `
-        <button type="button" class="btn btn-primary" onclick = "requetesFour(\'enregistrer\')" >Enregistrer</button> 
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick = "requetesFour(\'enregistrer\')" >Enregistrer</button> 
         <button type="reset" class="btn btn-danger">Effacer</button>`;
        }else if (ModiNew == "M") {
         rep1+= /*html*/ `
-        <button type="button" class="btn btn-primary" onclick = "requetesFour(\'modifier\')" >Modifier</button> `;           
+        <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick = "requetesFour(\'modifier\')" >Modifier</button> `;           
        }
     rep1+= /*html*/`
 
@@ -273,17 +273,22 @@ function listerJSON(listeFilms){
 
 function date_actuel(){
     // alert('fechaactual');
-    var fecha = new Date(); //Fecha actual
-    var mes = fecha.getMonth()+1; //obteniendo mes
-    var dia = fecha.getDate(); //obteniendo dia
-    var ano = fecha.getFullYear() + 1; //obteniendo año
-    if(dia<10)
-    dia='0'+dia; //agrega cero si el menor de 10
-    if(mes<10)
-    mes='0'+mes; //agrega cero si el menor de 10
-   document.getElementById('datInsFournisseur').value = ano +"-"+mes+"-"+ dia;
-   ano+=1;
-   document.getElementById('datEcheFournisseur').value = ano +"-"+mes+"-"+ dia;
+        var fecha = new Date(); //Fecha actual
+        var fechafin = new Date(); //Fecha actual
+        fechafin.setMonth(fecha.getMonth() + 3);
+        var mes = fecha.getMonth(); //obteniendo mes
+        var mesfin = fechafin.getMonth();
+        var dia = fecha.getDate(); //obteniendo dia
+        var ano = fecha.getFullYear(); //obteniendo año
+        var anofin = fechafin.getFullYear();
+        if (dia < 10)
+            dia = '0' + dia; //agrega cero si el menor de 10
+        if (mes < 10)
+            mes = '0' + mes; //agrega cero si el menor de 10
+        if (mesfin < 10)
+            mesfin = '0' + mesfin;
+    document.getElementById('datInsFournisseur').value = ano +"-"+mes+"-"+ dia;
+    document.getElementById('datEcheFournisseur').value = anofin +"-"+mesfin+"-"+ dia;
 }
 
 
@@ -362,6 +367,13 @@ function montreetoile(NroEtoile,total)
    return cadena
 }
 
+function elimineModal(){
+  
+    $('#FormService').modal('hide');
+    // $('#FormService').removeClass('show'); 
+    $('#FormService').modal('toggle');
+    $('.modal-backdrop').remove();
+}
 
 function montreFormService(TypeTrasaction){
     rep1 = /*html*/`
@@ -463,17 +475,17 @@ function montreFormService(TypeTrasaction){
         </div>
     </div>
      <div class="form-check row">
-        <input class="form-check-input" type="checkbox" value="1" id="actService"
+        <input hiden class="form-check-input" type="checkbox" value="1" id="actService"
             name="actService">
-        <label class="form-check-label" for="actService">
+        <label hiden class="form-check-label" for="actService">
             Service active
         </label>
     </div>
     <div class="modal-footer d-flex justify-content-center">`;
       if (TypeTrasaction === 'M'){
-        rep1 += /*html*/`<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('ModifierService')">Modifier</button> `;
+        rep1 += /*html*/`<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('ModifierService'); elimineModal()">Modifier</button> `;
       } else{
-         rep1 += /*html*/` <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('EnregistrerService')">Enregistrer</button> `;
+         rep1 += /*html*/` <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('EnregistrerService'); elimineModal()">Enregistrer</button> `;
       }
         rep1+= /*html*/`  
 
@@ -777,6 +789,7 @@ function montreGetServicesFour(donnees){
 }
 
 function vueServiceBlank(){
+    // alert("Nuevo");
     $('#NewService').html(montreFormService('N'));
     $('#idAdrFournisseur').val('');
     $('#idService').val('');
@@ -785,7 +798,7 @@ function vueServiceBlank(){
     $('#desShortService').val('');
     $('#desService').val('');
     $('#idCategorie').val('0.0');
-    $('#actService').val('0.0');;
+    $('#actService').val('0');;
     $('#prixService').val('0.0');
     $('#promService').val('0.0');
     $('#refeService').val('0.0');

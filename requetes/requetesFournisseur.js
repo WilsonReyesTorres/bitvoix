@@ -84,7 +84,7 @@ $.ajax({
     },
     dataType: 'json',
     success: function (donneFuornisseur) {
-        alert('Services du Fournisseur');
+        // alert('Services du Fournisseur'); 
         $('#map').modal('hide');
          vueFournisseur('montreServicesFour', donneFuornisseur);
     },
@@ -240,11 +240,12 @@ function ModifierService(){
        data: donneesForm,
        dataType: 'text',
        success: function (message) {
-           alert('Dibujar Acceuil');
+           // alert('Dibujar Acceuil');
            // $('#modalLRForm').modal('hide');
-        //    $('#FormService').modal('hide');
-        //    $('#FormService').removeClass('show'); 
-        //    ServicesFournisseur();
+            $('#FormService').modal('hide');
+            $('#FormService').removeClass('show'); 
+            $('#FormService').modal('toggle');
+            ServicesFournisseur();
        },
        fail: function () {
            alert("Vous avez un GROS problème");
@@ -281,6 +282,8 @@ function ServiceBlank(){
                   if (parseInt(ligne.jouract) <= 0 ){
                     $('#AddServiceFuornisseur').html("");
                     $('#AddServiceFuornisseur').html(" Nous invitons à renouveler le forfait, la période du service à d'échéance ");
+                  }else{
+                    vueFournisseur('vueServiceBlank',{});
                   }
                   break;
                 default:

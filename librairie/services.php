@@ -88,10 +88,10 @@ class Services
         }
     public function setActService($actService)
         {
-            $actService = (int) $actService;
-            if ($actService > 0){
+            // $actService = (int) $actService;
+            // if ($actService > 0){
                 $this->_actService = $actService;
-            }
+            // }
         }
          public function setPrixService($prixService)
         {
