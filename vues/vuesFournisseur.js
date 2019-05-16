@@ -888,7 +888,7 @@ function voirHistoireFact(listeFac) {
 												<div>Téléphone : ` + (ligne.cellFournisseur) + `</div>
 											</div>
 											<div class="col-sm-6">
-												<h6 class="mb-3">Ref. PayPal : <b>125R2554W</b></h6>
+												<h6 class="mb-3">Ref. PayPal : <b>`+(ligne.nomRefFacture)+`</b></h6>
 												<div><strong>BitVoix</strong></div>
 												<div>9155 Rue Saint-Hubert</div>
 												<div>Montréal, H2M1Y8</div>
