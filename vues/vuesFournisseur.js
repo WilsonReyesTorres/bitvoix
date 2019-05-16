@@ -495,7 +495,121 @@ return rep1;
 
 }
 
+function montreServiceNew(){
+    rep1 = /*html*/` 
+    <form id="AddServiceFuornisseur" >
+    <div class="form-group row">
+        <label for="titreService" class="col-sm-4 col-form-label">Titre
+            Service</label>
 
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="titreService"
+                name="titreService" title="Titre Service" required>
+            <input type="hidden" class="form-control" id="idService"
+                name="idService">    
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="desShortService" class="col-sm-4 col-form-label">Description
+            courte</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="desShortService"
+                name="desShortService" title="Description courte" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="desService"
+            class="col-sm-4 col-form-label">Déscription</label>
+        <div class="col-sm-8">
+            <textarea class="form-control" id="desService" name="desService"
+                rows="3" title="Déscription du Service" required></textarea>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <label for="">Catégorie</label>
+        </div>
+        <div class="col-sm-8">
+            <select id="idCategorie" name="idCategorie" class="form-control" onchange="ImageArray(this.value,'X')"
+                required>
+                <option value="">Sélectionnez une option</option>
+                <option value="1">Autos</option>
+                <option value="2">Sante</option>
+                <option value="3">Gastronomie</option>
+                <option value="4">Beauté</option>
+                <option value="5">Produits</option>
+                <option value="6">Voyages</option>
+                <option value="7">Maison</option>
+                <option value="8">Education</option>
+                <option  selected  value="9">Services</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="prixService" class="col-sm-4 col-form-label">Prix
+            Service</label>
+        <div class="col-sm-8">
+            <input type="number" class="form-control" 
+                id="prixService" name="prixService" step="0.1"
+                title="Prix Service" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="promService" class="col-sm-4 col-form-label">Prix
+            Promotion</label>
+        <div class="col-sm-8">
+            <input type="number" class="form-control" 
+                id="promService" name="promService" step="0.1"
+                title="Prix Promotion" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="refeService" class="col-sm-4 col-form-label">Prix Référe</label>
+        <div class="col-sm-8">
+            <input type="number" class="form-control" 
+                id="refeService" name="refeService" step="0.1"
+                title="Prix Référe" required>
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label for="refeEfeService" class="col-sm-4 col-form-label">Nombre de références</label>
+        <div class="col-sm-8">
+            <input type="number" class="form-control" 
+                id="refeEfeService" name="refeEfeService" step="1"
+                title="Nombre de références" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="datLimService" class="col-sm-4 col-form-label">Date
+            limite</label>
+        <div class="col-sm-8">
+            <input type="date" class="form-control" id="datLimService"
+                name="datLimService" title="Date limite" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Image</label>
+        <div class="col-sm-8 p-3" id="div-images">
+            <!--imagenes-->
+        </div>
+    </div>
+     <div class="form-check row">
+        <input hiden class="form-check-input" type="checkbox" value="1" id="actService"
+            name="actService">
+        <label hiden class="form-check-label" for="actService">
+            Service active
+        </label>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">`;
+         rep1 += /*html*/` <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('EnregistrerService'); elimineModal()">Enregistrer</button> `;
+         rep1+= /*html*/`  
+
+    </div>
+    </form>`;
+return rep1;
+
+}
 
 
 function formServicesFour_modal(fiche){
@@ -790,7 +904,8 @@ function montreGetServicesFour(donnees){
 
 function vueServiceBlank(){
     // alert("Nuevo");
-    $('#NewService').html(montreFormService('N'));
+    
+    $('#NewService').html(montreServiceNew());
     $('#idAdrFournisseur').val('');
     $('#idService').val('');
     $('#idFournisseur').val('');
