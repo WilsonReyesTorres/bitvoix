@@ -66,7 +66,7 @@ function enregistrer(){
     'desShortService' => $_POST['desShortService'],
     'desService' => $_POST['desService'],
     'idCategorie' => $_POST['idCategorie'], 
-    'actService' =>  1,
+    'actService' =>  $actService,
     'prixService' => $prixService,
     'promService' => $promService ,
     'refeService' => $refeService,

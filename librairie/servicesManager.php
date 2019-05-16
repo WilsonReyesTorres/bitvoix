@@ -18,7 +18,7 @@ class ServicesManager
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($servi->idFournisseur(), $servi->titreService(), $servi->desShortService(),
             $servi->desService(), $servi->idCategorie(),
-            $servi->actService(), $servi->prixService(),
+            '1', $servi->prixService(),
             $servi->promService(), $servi->refeService(),
             $servi->refeEfeService(), $servi->datLimService(),
             $servi->pochetteService(), '0'));
@@ -179,7 +179,7 @@ class ServicesManager
             $servi->prixService(), $servi->promService(),
             $servi->refeService(), $servi->refeEfeService(),
             $servi->datLimService(), $servi->pochetteService(),
-            $servi->idService()));
+            $servi->autService(),$servi->idService()));
     }
     public function updActivation($idService)
     {
