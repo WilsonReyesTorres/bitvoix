@@ -186,7 +186,8 @@ class ServicesManager
 
     public function forfaitServic($idFournisseur){
         // $idFournisseur = (int) $idFournisseur;
-        $requete = " SELECT idForfaitFournisseur, (SELECT count(idservice)  FROM bitvoix_db.services WHERE idFournisseur = ?) AS nroServ
+        $requete = " SELECT idForfaitFournisseur, (SELECT count(idservice)  FROM bitvoix_db.services WHERE idFournisseur = ?) AS nroServ,
+                     DATEDIFF(now(),Fournisseur.datInsFournisseur) as jours, DATEDIFF(datEcheFournisseur,now()) as jouract 
                      FROM Fournisseur  WHERE  idFournisseur = ?";
         // var_dump($requete);
         $stmt = $this->_pdo->prepare($requete);

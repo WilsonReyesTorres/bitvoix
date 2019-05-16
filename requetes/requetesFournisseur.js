@@ -264,15 +264,28 @@ function ServiceBlank(){
         success: function (donnees) {
             // alert(JSON.stringify(donnees));
             ligne=donnees[0];
-            if (( parseInt(ligne.idForfaitFournisseur) == 1) &&  ( parseInt(ligne.nroServ) < 3 )){
-                // alert("Crear");
-                vueFournisseur('vueServiceBlank',{});
-            } else {
-                $('#AddServiceFuornisseur').html("");
-                $('#AddServiceFuornisseur').html(" Nous invitons à changer de Forfait ")
-                // setTimeout(function(){ $('#AddServiceFuornisseur').html(" Nous invitons à changer de Forfait "); }, 1000); 
-                // $('#FormService').modal('hide');
-            }
+            forfait = parseInt(ligne.idForfaitFournisseur);
+            switch(forfait) {
+                case 1:
+                  if  ((parseInt(ligne.nroServ) < 3 ) && (ligne.jours<90)){
+                      vueFournisseur('vueServiceBlank',{});
+                  } else if(ligne.jours<90){
+                    $('#AddServiceFuornisseur').html("");
+                    $('#AddServiceFuornisseur').html("Nous invitons à changer de Forfait, pour ajouter un nouveau service ");
+                  } else{
+                    $('#AddServiceFuornisseur').html("");
+                    $('#AddServiceFuornisseur').html(" Nous invitons à changer de Forfait,la période gratuite a fini ");
+                  }
+                  break;
+                case 2:
+                  if (parseInt(ligne.jouract) <= 0 ){
+                    $('#AddServiceFuornisseur').html("");
+                    $('#AddServiceFuornisseur').html(" Nous invitons à renouveler le forfait, la période du service à d'échéance ");
+                  }
+                  break;
+                default:
+                  // code block
+              }
         },
         fail: function () {
             alert("Vous avez un GROS problème");

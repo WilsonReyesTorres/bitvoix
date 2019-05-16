@@ -8,7 +8,9 @@ class FacturesManager
         }
     public function add(Factures $factu)
         {
-          $requete = "UPDATE  fournisseur  SET   idForfaitFournisseur = '2' WHERE idFournisseur = ?";
+          $requete = "UPDATE  fournisseur  SET   idForfaitFournisseur = '2',
+                             datInsFournisseur = now(), datEcheFournisseur = ADDDATE(NOW(), INTERVAL 365 DAY)
+                             WHERE idFournisseur = ?";
           $stmt = $this->_pdo->prepare($requete);
           $stmt->execute(array($factu->idFournisseur()));
 
