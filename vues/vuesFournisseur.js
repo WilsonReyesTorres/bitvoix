@@ -134,7 +134,7 @@ function  formFournisseur(ModiNew){
     var rep1 = /*html*/ ` 
     
     <div class="container objformFournisseur border pt-2 shadow rounded font-weight-bold" >
-    <h2> Devenir en fournisseur</h2> <hr>
+    <h2> Devenir fournisseur</h2> <hr>
     <form id="enregFormFournisseur">
     <div class="form-group row">
         <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom
