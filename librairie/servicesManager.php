@@ -88,11 +88,11 @@ class ServicesManager
             $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr,
             ( 6371 * acos( cos( radians(" . $latitude . ") ) * cos( radians( latiFournisseur ) ) * cos( radians( longFournisseur ) - radians(" . $longitude . ") ) + sin( radians(" . $latitude . ") ) * sin( radians( latiFournisseur ) ) ) ) AS distance
             FROM services, fournisseur, adresse
-            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 HAVING distance < 10 ORDER BY services.idService;";
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 AND autService=1 HAVING distance < 10 ORDER BY services.idService;";
         } else {
             $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
             FROM services, fournisseur, adresse
-            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 ORDER BY services.idService;";
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1  AND autService=1 ORDER BY services.idService;";
         }
 
         $stmt = $this->_pdo->prepare($requete);
@@ -101,7 +101,7 @@ class ServicesManager
         if($result==NULL){
             $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
             FROM services, fournisseur, adresse
-            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 ORDER BY services.idService;";
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1  AND autService=1 ORDER BY services.idService;";
             $stmt = $this->_pdo->prepare($requete);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -122,7 +122,7 @@ class ServicesManager
         } else {
             $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
             FROM services, fournisseur, adresse
-            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 AND services.idCategorie=? ORDER BY services.idService;";
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1  AND autService=1 AND services.idCategorie=? ORDER BY services.idService;";
         }
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($idCategorie));
@@ -130,7 +130,7 @@ class ServicesManager
         if($result==NULL){
             $requete = "SELECT services.idService, titreService, desShortService, desService,  prixService, promService, refeService, datLimService, pochetteService, nomFournisseur, nroAdr, rueAdr, desVilAdr, codPosAdr
             FROM services, fournisseur, adresse
-            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1 AND services.idCategorie=? ORDER BY services.idService;";
+            WHERE services.idFournisseur=fournisseur.idFournisseur AND idAdrFournisseur=idAdr AND actService=1  AND autService=1 AND services.idCategorie=? ORDER BY services.idService;";
             $stmt = $this->_pdo->prepare($requete);
             $stmt->execute(array($idCategorie));
             $result = $stmt->fetchAll(PDO::FETCH_OBJ);
