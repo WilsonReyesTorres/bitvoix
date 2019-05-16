@@ -49,21 +49,25 @@
           },
           dataType: 'json',
           success: function (donnees) {
-            code_html += "Facture <b> BitVoix:</br>".donnees.idFacture;
+            code_html += "Facture <b> BitVoix:</br>"+ donnees.idFacture;
             document.getElementById('paypal-button-container').innerHTML = code_html;
-               
           },
           fail: function () {
               alert("Vous avez un GROS problème");
           }
       });
 
-
-
-       
-        // Ajouter dans la BD la confirmation du paiement
-        
-        // ajouterInfoPaypal();
+       imgLogoForfait=/*html*/`<div class="view overlay">
+                        <img class="card-img-top" src="images/standardbv.png" alt="Card image cap">
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <div id="graphique" class="card-body">
+                        <h5 class="card-title font-weight-bold"><a>STANDARD BITVOIX</a></h5>
+                        <p class="card-text">Date d'échéance : Confirmer</p>
+                    </div>`;
+        $('#imgForfait').html(imgLogoForfait);
       });
     }
   

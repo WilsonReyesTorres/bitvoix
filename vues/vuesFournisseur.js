@@ -3,26 +3,21 @@ function  ImageArray(SelecValue,pochetteSelec){
     var catephysique  = new Array("","auto","beaute","education","gastronomie","maison","produits","sante","services","voyages")
     ins_image = "";
     SelecValue = parseInt(SelecValue);
-    for(i=1;i<=3;i++){
-        imgout = catephysique[SelecValue]+i+".jpg";
-        if (imgout == pochetteSelec){
-            img_sel = "checked";
-        } else{
-            img_sel = "" ;
+    if (SelecValue > 0){
+        for(i=1;i<=3;i++){
+            imgout = catephysique[SelecValue]+i+".jpg";
+            if (imgout == pochetteSelec){
+                img_sel = "checked";
+            } else{
+                img_sel = "" ;
+            }
+            ins_image  +=  '<label>  <input type="radio" name="pochetteService" value="'+catephysique[SelecValue]+i+'.jpg" '+ img_sel+'> <img  title="'+categories[SelecValue]+'" src="pochettes/'+catephysique[SelecValue]+i+'.jpg">  </label>'
         }
-        ins_image  +=  '<label>  <input type="radio" name="pochetteService" value="'+catephysique[SelecValue]+i+'.jpg" '+ img_sel+'> <img  title="'+categories[SelecValue]+'" src="pochettes/'+catephysique[SelecValue]+i+'.jpg">  </label>'
-       
-        }
-        alert(ins_image);
+    }else{
+        ins_image="";
+    }   
     $('#div-images').html(""); 
     $('#div-images').html(ins_image);
-
-    //'<label>'+
-    // '<input type="radio" name="test" value="lavevitres.jpg" checked >'+
-    // '<img src="pochettes/lavevitres.jpg">'+
-    // '</label>'+
-
-
 }
 
 function commmandesFour(listCommand) {
@@ -74,7 +69,7 @@ function commmandesFour(listCommand) {
 function disegne() {
     $('#tableau_analytique').highcharts({
         title: {
-            text: 'Flux de caisse'
+            text: 'SIMULATION: Flux de caisse'
         },
         xAxis: {
             categories: ['JAN', 'FEV', 'MAR', 'AVR', 'MAI', 'JUIN', 'JUI', 'AOUT', 'SEP', 'OCT', 'NOV', 'DEC']
@@ -566,7 +561,7 @@ function formServicesFour_modal(fiche){
   
     <div class="col-lg-3 bg-light">
     <h4>Votre forfait:</h4>
-    <div class="card booking-card shadow">
+    <div class="card booking-card shadow" id="imgForfait">
 
         <!-- Card image -->
         <div class="view overlay">`;
