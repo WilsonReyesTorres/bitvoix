@@ -131,16 +131,17 @@ function disegne() {
 }
 
 function  formFournisseur(ModiNew){
-    var rep1 = /*html*/ `
-    <div class="container objformFournisseur" >
+    var rep1 = /*html*/ ` 
     
+    <div class="container objformFournisseur border pt-2 shadow rounded font-weight-bold" >
+    <h2> Devenir fournisseur</h2> <hr>
     <form id="enregFormFournisseur">
     <div class="form-group row">
         <label for="nomFournisseur" class="col-sm-4 col-form-label">Nom
             fournisseur</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" id="nomFournisseur"
-                name="nomFournisseur" title="Nom Fournisseur" required>
+                name="nomFournisseur" title="Nom Fournisseur" placeholder="Nom Fournisseur" required>
         </div>
     </div>
     <hr>
@@ -152,14 +153,14 @@ function  formFournisseur(ModiNew){
         <div class="col-sm-8">
             <input type="hidden" id="idAdrFournisseur" name="idAdrFournisseur">
             <input type="number" class="form-control" id="nroAdr" name="nroAdr"
-                step="1" title="Numéro Civique" pattern="[0-9]{5}" max="99999" required>
+                step="1" title="Numéro Civique" pattern="[0-9]{5}" max="99999" placeholder="Numéro Civique" required>
         </div>
     </div>
     <div class="form-group row">
         <label for="rueAdr" class="col-sm-4 col-form-label">Rue</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" id="rueAdr" name="rueAdr"
-                title="Rue" required>
+                title="Rue" placeholder="Rue"  required>
         </div>
     </div>
     <div class="form-group row">
@@ -178,7 +179,8 @@ function  formFournisseur(ModiNew){
             postal</label>
         <div class="col-sm-8">
             <input type="text" class="form-control" id="codPosAdr"
-                name="codPosAdr" title="A9A9A9" pattern="[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]" required>
+                name="codPosAdr" title="A9A9A9" pattern="[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]"
+                placeholder="Code postal"  required>
         </div>
     </div>
     <div class="form-group row">
@@ -187,14 +189,15 @@ function  formFournisseur(ModiNew){
         <div class="col-sm-8">
             <input type="tel" class="form-control" 
                 id="cellFournisseur" name="cellFournisseur"
-                pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required>
+                pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+                placeholder="Téléphone" required>
         </div>
     </div>
     <hr>
     <h5>Service</h5>
     <div class="form-group row">
         <div class="col-sm-4">
-            <label for="typeSerFournisseur">Type</label>
+            <label for="typeSerFournisseur">Additionnelles</label>
         </div>
         <div class="col-sm-8">
             <select id="typeSerFournisseur" name="typeSerFournisseur" class="form-control"
@@ -207,7 +210,7 @@ function  formFournisseur(ModiNew){
     </div>
     <div class="form-group row">
         <div class="col-sm-4">
-            <label for="idForfaitFournisseur">Forfait</label>
+            <label for="idForfaitFournisseur">Forfait Bitvoix</label>
         </div>
         <div class="col-sm-8">
             <select id="idForfaitFournisseur" name="idForfaitFournisseur" class="form-control"
