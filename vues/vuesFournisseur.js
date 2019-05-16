@@ -17,7 +17,7 @@ function  ImageArray(SelecValue,pochetteSelec){
         ins_image="";
     }   
     $('#div-images').html(""); 
-    $('#div-images').html(ins_image);
+    $('#div-images').html(ins_image); 
 }
 
 function commmandesFour(listCommand) {
