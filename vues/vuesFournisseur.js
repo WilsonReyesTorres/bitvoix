@@ -482,11 +482,8 @@ function montreFormService(TypeTrasaction){
         </label>
     </div>
     <div class="modal-footer d-flex justify-content-center">`;
-      if (TypeTrasaction === 'M'){
-        rep1 += /*html*/`<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('ModifierService'); elimineModal()">Modifier</button> `;
-      } else{
-         rep1 += /*html*/` <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('EnregistrerService'); elimineModal()">Enregistrer</button> `;
-      }
+      
+       rep1 += /*html*/`<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="requetesFour('ModifierService'); elimineModal()">Modifier</button> `;
         rep1+= /*html*/`  
 
     </div>
