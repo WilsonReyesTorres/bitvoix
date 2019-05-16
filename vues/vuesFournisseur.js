@@ -65,7 +65,6 @@ function commmandesFour(listCommand) {
 }
 
 
-
 function disegne() {
     $('#tableau_analytique').highcharts({
         title: {
