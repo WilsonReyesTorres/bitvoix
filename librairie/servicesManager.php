@@ -21,7 +21,7 @@ class ServicesManager
             $servi->actService(), $servi->prixService(),
             $servi->promService(), $servi->refeService(),
             $servi->refeEfeService(), $servi->datLimService(),
-            $servi->pochetteService(), $servi->autService()));
+            $servi->pochetteService(), '0'));
     }
     public function delete(Services $servi)
     {
