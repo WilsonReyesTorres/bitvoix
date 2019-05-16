@@ -144,7 +144,7 @@ class ServicesManager
       $idFournisseur = (int) $idFournisseur;
       // $requete = 'SELECT * FROM services WHERE idFournisseur = ? ';
       $requete = '   SELECT services.*, TRUNCATE(AVG( IF(requests.statRequest <> 3,qualRequest,0)),1)  AS Quality,
-             COUNT(qualRequest) AS kcount, fournisseur.idForfaitFournisseur,fournisseur.datEcheFournisseur
+             COUNT(qualRequest) AS kcount, fournisseur.idForfaitFournisseur,fournisseur.datEcheFournisseur, fournisseur.idForfaitFournisseur
              FROM services
        LEFT JOIN requests  ON services.idService =  requests.idService
        INNER JOIN fournisseur ON services.idFournisseur  = fournisseur.idFournisseur
@@ -154,7 +154,13 @@ class ServicesManager
       $stmt->execute(array($idFournisseur));
       $result = $stmt->fetchAll(PDO::FETCH_OBJ);
       if (!$result){
-        $result = [ 'idService' => ''];
+        $requete = " SELECT '' AS idService, idForfaitFournisseur,datEcheFournisseur, idForfaitFournisseur
+                     FROM fournisseur
+                     WHERE idFournisseur = ? ";
+        // var_dump($requete);
+        $stmt = $this->_pdo->prepare($requete);
+        $stmt->execute(array($idFournisseur));
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
       }
       return $result;
     }
