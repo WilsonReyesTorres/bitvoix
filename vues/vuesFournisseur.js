@@ -1,3 +1,5 @@
+// BitVoix
+
 function  ImageArray(SelecValue,pochetteSelec){
     var categories = new Array("","Autos","Santé","Gastronomie","Beauté","Produits","Voyages","Maison","Education","Services");
     var catephysique  = new Array("","auto","sante","gastronomie","beaute","produits","voyages","maison","education","services")

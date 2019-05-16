@@ -1,20 +1,4 @@
-/*function montrerServices(){
-	$.ajax({
-		url: 'serveur/controleurServices.php',
-		type: 'POST',
-		data: 'action=listerServCards',
-		dataType: 'json',
-		success: function (donnes) {
-		
-				vue('servicesAccueil',donnes);
-			
-		},
-		fail: function () {
-			alert("Vous avez un GROS problème");
-		}
-	});
-
-}*/
+// BitVoix
 
 function envoyerRequest(formRequete) {
 	var formRequest = new FormData(document.getElementById(formRequete));

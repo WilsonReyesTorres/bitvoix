@@ -1,30 +1,4 @@
-// $(document).ready(function(){
-
-
-//     $("#enregFormFournisseur").submit(function(event) {
-//         /* stop form from submitting normally */
-//         alert("Proceso Grabar");
-//         event.preventDefault();
-    
-//         // onClick="requetesFour(\'enregistrer\');"
-//         /* get the action attribute from the <form action=""> element */
-//         // var url = $(this).attr('action');
-    
-//         //     $.ajax({
-//         //     url : url,
-//         //     type : 'GET',
-//         //     success : function(code_html, statut){
-//         //     $("#article").html(code_html);
-//         //     }
-//         //     });
-//         });
-    
-    
-// });         
-
-
-
-
+// BitVoix
 
 function envoyerEnregistrerFour(){
     var enregForm = new FormData(document.getElementById('enregFormFournisseur'));
