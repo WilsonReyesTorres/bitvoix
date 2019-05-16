@@ -241,14 +241,15 @@ INSERT INTO `adresse` (`idAdr`, `nroAdr`, `rueAdr`, `desVilAdr`, `codPosAdr`) VA
 -- insert membres
 
 INSERT INTO `membres` (`idMembre`, `nomMembre`, `preNomMembre`, `courrielMembre`, `oauthProviderMembre`, `oauthUidMembre`,`createdMembre`, `modifiedMembre`, `motPasseMembre` ) VALUES
-(1, 'Membre1', 'Prenom1', 'membre1@exemple.com', 'bitvoix', '123456789', NOW(), NOW(), SHA1('123')),
-(2, 'Membre2', 'Prenom2', 'membre2@exemple.com', 'bitvoix', '223456789', NOW(), NOW(), SHA1('123')),
-(3, 'Membre3', 'Prenom3', 'membre3@exemple.com', 'bitvoix', '323456789', NOW(), NOW(), SHA1('123')),
-(4, 'Membre4', 'Prenom4', 'membre4@exemple.com', 'bitvoix', '423456789', NOW(), NOW(), SHA1('123')),
-(5, 'Membre5', 'Prenom5', 'membre5@exemple.com', 'bitvoix', '523456789', NOW(), NOW(), SHA1('123')),
-(6, 'Membre6', 'Prenom6', 'membre6@exemple.com', 'bitvoix', '623456789', NOW(), NOW(), SHA1('123')),
-(7, 'Membre7', 'Prenom7', 'membre7@exemple.com', 'bitvoix', '723456789', NOW(), NOW(), SHA1('123')),
-(8, 'Membre8', 'Prenom8', 'membre8@exemple.com', 'bitvoix', '823456789', NOW(), NOW(), SHA1('123'));
+(1, 'Bitvoix', 'AdminBitvoix', 'admin@bitvoix.com', 'bitvoix', '772312485', '2019-05-10 17:15:59', NOW(), '931fa3e6e1170bbb7e90cf60b515c899903566c3'),
+(2, 'Gagnon', 'William', 'wgagnon@bell.ca', 'bitvoix', '223456789', NOW(), NOW(), SHA1('123')),
+(3, 'Roy', 'Alice', 'alice2347@gmail.com', 'bitvoix', '323456789', NOW(), NOW(), SHA1('123')),
+(4, 'Côté', 'Logan', 'lc8906@gmail.com', 'bitvoix', '423456789', NOW(), NOW(), SHA1('123')),
+(5, 'Gauthier', 'Olivia', 'olgauthier@outlook.com', 'bitvoix', '523456789', NOW(), NOW(), SHA1('123')),
+(6, 'Morin', 'Liam', 'liamm5@videotron.ca', 'bitvoix', '623456789', NOW(), NOW(), SHA1('123')),
+(7, 'Lavoie', 'Léa', 'lealea67@rinochet.com', 'bitvoix', '723456789', NOW(), NOW(), SHA1('123')),
+(8, 'Fortin', 'Thomas', 'fortinthomas@proving.com', 'bitvoix', '823456789', NOW(), NOW(), SHA1('123')),
+(9, 'Tremblay', 'Emma', 'emmatrem@yahoo.com', 'bitvoix', '123456789', NOW(), NOW(), SHA1('123'));
 
 
 INSERT INTO `fournisseur` (`idFournisseur`, `nomFournisseur`, `idAdrFournisseur`, `cellFournisseur`, `typeSerFournisseur`, `idForfaitFournisseur`, `datInsFournisseur`, `datEcheFournisseur`, `statuFournisseur`, `longFournisseur`, `latiFournisseur`) VALUES
@@ -257,16 +258,42 @@ INSERT INTO `fournisseur` (`idFournisseur`, `nomFournisseur`, `idAdrFournisseur`
 (3, 'Clinique médicale', 3, '5142743561', '1', '2', '2019-02-28', '2020-02-28', '1', '-73.628843', '45.543587'),
 (4, 'Restaurant Da Remo', 4, '5143887117', '3', '1', '2019-01-29', '2020-01-29', '1', '-73.639209', '45.546668'),
 (5, 'Marché Tradition', 5, '5143816511', '3', '1', '2019-04-30', '2020-04-30', '1', '-73.645996', '45.548747'),
-(6, 'Vacances Tourbec', 6, '5143817082', '3', '1', '2019-05-01', '2020-05-01', '1', '-73.63851', '45.546374'),
+(6, 'Vacances Tourbec', 6, '5143817082', '3', '2', '2019-05-01', '2020-05-01', '1', '-73.63851', '45.546374'),
 (7, 'Lanaudière Plus', 7, '5142480889', '1', '2', '2019-03-02', '2020-03-02', '1', '-73.644007', '45.557504'),
 (8, 'Mindfulness Educators', 8, '5142563845', '1', '2', '2019-02-03', '2020-02-03', '1', '-73.652314', '45.555895');
 
 INSERT INTO `services` (`idService`, `idFournisseur`, `titreService`, `desShortService`, `desService`, `idCategorie`, `actService`, `prixService`, `promService`, `refeService`, `refeEfeService`, `datLimService`, `pochetteService`, `autService`) VALUES
-(1, 1, 'Coloration Cheveux', 'Votre palette personnalisée', 'Vous vous êtes toujours demandé si les blondes ont plus de plaisir? Et que dire de tous les mystères entourant les rousses? Que vous envisagiez une nuance subtile ou une nouvelle couleur, vibrante laissez-nous créer votre couleur personnalisée!', 4, 1, '105.00', '85.00', '69.00', 114, '2019-12-26', 'coloration_cheveux.jpg', '1'),
-(2, 2, 'Permis Up', '5h, 10h ou 20h de location de voiture', 'Jusqu’à 20h de location de voiture à double commandes afin d’apprendre à conduire en toute confiance', 1, 1, '180.00', '160.00', '120.00', 221, '2019-12-27', 'locationvoiture.jpg', '1'),
-(3, 3, 'Séance d\'ostéopathie', 'Une séance propice au lâcher-prise dans un cadre chaleureux', 'L’ostéopathie est une technique de médecine douce qui utilise les manipulations manuelles visant à apaiser les douleurs physiques ou psychiques. Traitement non thérapeutique, ne remplace pas une consultation médicale. Actes non remboursés par la Sécurité Sociale', 2, 1, '90.00', '50.00', '30.00', 332, '2019-12-28', 'seancedosteopathie.jpg', '1'),
-(4, 4, 'Pizzas pizzas', 'Pizzas au choix à la coupe en illimité pour 1 personne', 'Un large choix de pizzas préparées à base de produits frais et de qualité, à déguster dans un cadre convivial et agréable à souhait', 3, 1, '30.00', '20.00', '14.00', 443, '2019-12-29', 'pizzapizza.jpg', '1'),
-(5, 5, 'Ballotin de chocolats', 'Ballotin de chocolats (100% pur beurre de cacao) chez Marché Tradition', 'Chocolat garantit à 100% beurre de cacao, 100% saveur, 100% qualité, 100% fraîcheur', 5, 1, '45.00', '27.00', '19.00', 555, '2019-12-30', 'ballotindechocolats.jpg', '1'),
-(6, 6, 'Ramada Niagara Falls', '1 nuitée avec bons activités et repas au Ramada Niagara Falls', 'Les chutes du Niagara sont les plus puissantes d’Amérique du Nord. Les visiteurs peuvent explorer les imposantes chutes avec la croisière The Hornblower, avec l’attraction Journey behind the Falls ou tout simplement en les observant sur la promenade.', 6, 1, '199.00', '159.00', '99.00', 666, '2019-12-31', 'niagarafallscanadian.jpg', '1'),
-(7, 7, 'Lavage De Vitres', 'Lavage de fenêtres pour une maison à 1 ou 2 étages', 'Nettoyage de l’extérieur des fenêtres, ou des vitres, rebords, rails et moustiquaires sur la Rive-Nord', 7, 1, '160.00', '120.00', '104.00', 777, '2020-01-01', 'lavevitres.jpg', '1'),
-(8, 8, 'PNL', 'Gagner en confiance et améliorer sa vie grâce aux outils de la PNL', 'Technique d’utilisation des connaissances de la psychologie et des neurosciences pour apprendre à communiquer de façon constructive', 8, 1, '300.00', '199.00', '99.00', 888, '2020-01-02', 'propnl.jpg', '1');
+(1, 1, 'Coloration Cheveux', 'Votre palette personnalisée', 'Vous vous êtes toujours demandé si les blondes ont plus de plaisir? Et que dire de tous les mystères entourant les rousses? Que vous envisagiez une nuance subtile ou une nouvelle couleur, vibrante laissez-nous créer votre couleur personnalisée!', 4, 1, '105.00', '85.00', '69.00', 114, '2019-12-26', 'beaute1.jpg', '0'),
+(2, 2, 'Permis Up', '5h, 10h ou 20h de location de voiture', 'Jusqu’à 20h de location de voiture à double commandes afin d’apprendre à conduire en toute confiance', 1, 1, '180.00', '160.00', '120.00', 221, '2019-12-27', 'auto2.jpg', '1'),
+(3, 3, 'Séance d\'ostéopathie', 'Une séance propice au lâcher-prise dans un cadre chaleureux', 'L’ostéopathie est une technique de médecine douce qui utilise les manipulations manuelles visant à apaiser les douleurs physiques ou psychiques. Traitement non thérapeutique, ne remplace pas une consultation médicale. Actes non remboursés par la Sécurité Sociale', 2, 1, '90.00', '50.00', '30.00', 332, '2019-12-28', 'sante2.jpg', '0'),
+(4, 4, 'Pizzas pizzas', 'Pizzas au choix à la coupe en illimité pour 1 personne', 'Un large choix de pizzas préparées à base de produits frais et de qualité, à déguster dans un cadre convivial et agréable à souhait', 3, 1, '30.00', '20.00', '14.00', 443, '2019-12-29', 'gastronomie1.jpg', '1'),
+(5, 5, 'Ballotin de chocolats', 'Ballotin de chocolats (100% pur beurre de cacao) chez Marché Tradition', 'Chocolat garantit à 100% beurre de cacao, 100% saveur, 100% qualité, 100% fraîcheur', 5, 1, '45.00', '27.00', '19.00', 555, '2019-12-30', 'produits1.jpg', '1'),
+(6, 6, 'Ramada Niagara Falls', '1 nuitée avec bons activités et repas au Ramada Niagara Falls', 'Les chutes du Niagara sont les plus puissantes d’Amérique du Nord. Les visiteurs peuvent explorer les imposantes chutes avec la croisière The Hornblower, avec l’attraction Journey behind the Falls ou tout simplement en les observant sur la promenade.', 6, 1, '199.00', '159.00', '99.00', 666, '2019-12-31', 'voyages1.jpg', '0'),
+(7, 7, 'Lavage De Vitres', 'Lavage de fenêtres pour une maison à 1 ou 2 étages', 'Nettoyage de l’extérieur des fenêtres, ou des vitres, rebords, rails et moustiquaires sur la Rive-Nord', 7, 1, '160.00', '120.00', '104.00', 777, '2020-01-01', 'maison2.jpg', '1'),
+(8, 8, 'PNL', 'Gagner en confiance et améliorer sa vie grâce aux outils de la PNL', 'Technique d’utilisation des connaissances de la psychologie et des neurosciences pour apprendre à communiquer de façon constructive', 8, 1, '300.00', '199.00', '99.00', 888, '2020-01-02', 'education3.jpg', '0');
+
+-- insert adresses
+
+INSERT INTO `requests` (`idRequest`, `idMembre`, `idService`, `qualRequest`, `commRequest`, `statRequest`, `dateRequest`, `cleSerRequest`) VALUES
+(1, 1, 8, '4.5', 'Excellent', 1, '2019-04-28', '46789'),
+(2, 2, 7, '3.0', 'Bon service', 1, '2019-02-20', '46789'),
+(3, 3, 6, '4.0', 'Bon...', 1, '2019-01-28', '46789'),
+(4, 4, 5, '2.5', 'Excellent...', 1, '2019-03-08', '46789'),
+(5, 5, 4, '4.5', 'Merveilleuse équipe', 1, '2019-04-15', '46789'),
+(6, 6, 3, '4.0', 'Professional service', 1, '2019-01-28', '46789'),
+(7, 7, 2, '3.5', 'Très agréable', 1, '2019-04-23', '46789'),
+(8, 8, 1, '4.5', 'Superbe', 1, '2019-02-11', '46789'),
+(9, 1, 8, '5.0', 'Très belle', 1, '2019-01-03', '46789'),
+(10, 2, 7, '5.0', 'Ils osnt très professionnel', 1, '2019-02-21', '46789'),
+(11, 3, 6, '3.0', 'Nice', 1, '2019-04-12', '46789'),
+(12, 4, 5, '2.5', 'Mal', 1, '2019-03-30', '46789'),
+(13, 5, 4, '1.0', ':(', 1, '2019-02-22', '46789'),
+(14, 6, 3, '5.0', 'Very satisfied', 1, '2019-03-03', '46789'),
+(15, 7, 2, '4.0', 'Very professional', 1, '2019-04-07', '46789'),
+(16, 8, 1, '4.5', 'Excelent...', 1, '2019-04-28', '46789');
+
+INSERT INTO `facture` (`idFournisseur`, `idForfaitFacture`, `typeSerFacture`, `dateInsFacture`, `dateEcheFacture`, `nomRefFacture`, `statusFacture`, `prixFacture`) VALUES
+(3, 2, 1, '2019-05-01', '2020-05-01', '125R2554W3E6', '1', '11.48'),
+(6, 2, 1, '2019-05-04', '2020-05-04', '1APR2FR4W6TI', '1', '11.48'),
+(7, 2, 1, '2019-05-10', '2020-05-10', '125R2554W45T', '1', '11.48'),
+(8, 2, 1, '2019-05-13', '2020-05-13', '125R2ED4W98O', '1', '11.48');
