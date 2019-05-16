@@ -236,14 +236,13 @@ function  formFournisseur(ModiNew){
     <div class="modal-footer d-flex justify-content-center"> `;
        if (ModiNew == "N"){
         rep1+= /*html*/ `
-        <button type="button" class="btn btn-primary" onclick = "requetesFour(\'enregistrer\')" >enregistrer</button> 
+        <button type="button" class="btn btn-primary" onclick = "requetesFour(\'enregistrer\')" >Enregistrer</button> 
         <button type="reset" class="btn btn-danger">Effacer</button>`;
        }else if (ModiNew == "M") {
         rep1+= /*html*/ `
         <button type="button" class="btn btn-primary" onclick = "requetesFour(\'modifier\')" >Modifier</button> `;           
        }
     rep1+= /*html*/`
-        
 
     </div>
 </form>
