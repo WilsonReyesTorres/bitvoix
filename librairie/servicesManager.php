@@ -199,7 +199,18 @@ class ServicesManager
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($idFournisseur,$idFournisseur));
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        if (!$result){
+            $requete = " SELECT '' AS idService, 0 AS nroServ, idForfaitFournisseur,datEcheFournisseur, idForfaitFournisseur,
+            DATEDIFF(now(),Fournisseur.datInsFournisseur) as jours, DATEDIFF(datEcheFournisseur,now()) as jouract 
+            FROM fournisseur
+            WHERE idFournisseur =  ? ";
+            // var_dump($requete);
+            $stmt = $this->_pdo->prepare($requete);
+            $stmt->execute(array($idFournisseur));
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
         return $result;
+
     }
 
     public function listServRequetes($idFournisseur){
