@@ -317,7 +317,6 @@ function FourRequetsActif(){
 
 //controleur  Services
 $action=$_POST['action'];
-// $action= 'listSerFour';
 
 switch($action){
     case 'enregistrer':

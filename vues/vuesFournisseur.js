@@ -918,7 +918,7 @@ function vueServiceBlank(){
     $('#datLimService').val('');
     $('#pochetteService').val('');
     $('#autService').val('');
-    $('#div-images').html(ImageArray(donnees.idCategorie,donnees.pochetteService));
+    $('#div-images').html('');
 }
 
 
