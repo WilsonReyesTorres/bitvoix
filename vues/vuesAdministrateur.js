@@ -215,7 +215,7 @@ function listerJSONFac(listeFac) {
 				rep += `<td>` + forfait + `</td>
 				<td>` + (ligne.dateInsFacture) + `</td>
 				<td>` + (ligne.nomRefFacture) + `</td>
-				<td>` + (ligne.prixFacture) + `$</td>
+				<td>11,48$</td>
 				<td>
 					<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalFacture` + (ligne.idFacture) + `" title="Voir facture"><i class="fas fa-eye"></i></button>
 				</td>
