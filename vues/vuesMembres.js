@@ -461,7 +461,7 @@ function servicesAccueil(donnees) {
 			'<div class="modal-body">' +
 			'<form id="formRequest' + j + '">' +
 			'' +
-			'<input type="hidden" name="idService" id="idService" value="' + j + '" >' +
+			'<input type="hidden" name="idService" id="idService" value="' + donnees[j].idService + '" >' +
 			'' +
 			'' +
 			'<div class="input-group mb-3">' +
@@ -475,7 +475,7 @@ function servicesAccueil(donnees) {
 			'<div class="input-group-prepend">' +
 			'<span class="input-group-text"><i class="fab fa-slack-hash"></i></span>' +
 			'</div>' +
-			'<input type="text" class="form-control" id="cleSerRequest' + j + '"  name="cleSerRequest' + j + '" readonly>' +
+			'<input type="text" class="form-control" id="cleSerRequest' + j + '"  name="cleSerRequest' + donnees[j].idService + '" readonly>' +
 			'</div>' +
 			'<small id="emailHelp" class="form-text text-muted">Gardez ce numéro pour avoir accès à un meilleur prix de votre service</small>' +
 			'' +
@@ -511,7 +511,7 @@ function servicesAccueil(donnees) {
 			'<div class="modal-body">' +
 			'<form id="formReferer' + j + '">' +
 			'' +
-			'<input type="hidden" name="idService" id="idService" value="' + j + '" >' +
+			'<input type="hidden" name="idService" id="idService" value="' + donnees[j].idService + '" >' +
 			'' +
 			'' +
 			'<div class="input-group mb-3">' +
