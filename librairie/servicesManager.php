@@ -193,15 +193,15 @@ class ServicesManager
     public function forfaitServic($idFournisseur){
         // $idFournisseur = (int) $idFournisseur;
         $requete = " SELECT idForfaitFournisseur, (SELECT count(idservice)  FROM bitvoix_db.services WHERE idFournisseur = ?) AS nroServ,
-                     DATEDIFF(now(),Fournisseur.datInsFournisseur) as jours, DATEDIFF(datEcheFournisseur,now()) as jouract 
-                     FROM Fournisseur  WHERE  idFournisseur = ?";
+                     DATEDIFF(now(),fournisseur.datInsFournisseur) as jours, DATEDIFF(datEcheFournisseur,now()) as jouract 
+                     FROM fournisseur  WHERE  idFournisseur = ?";
         // var_dump($requete);
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($idFournisseur,$idFournisseur));
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         if (!$result){
             $requete = " SELECT '' AS idService, 0 AS nroServ, idForfaitFournisseur,datEcheFournisseur, idForfaitFournisseur,
-            DATEDIFF(now(),Fournisseur.datInsFournisseur) as jours, DATEDIFF(datEcheFournisseur,now()) as jouract 
+            DATEDIFF(now(),fournisseur.datInsFournisseur) as jours, DATEDIFF(datEcheFournisseur,now()) as jouract 
             FROM fournisseur
             WHERE idFournisseur =  ? ";
             // var_dump($requete);
@@ -216,7 +216,7 @@ class ServicesManager
     public function listServRequetes($idFournisseur){
         // $idFournisseur = (int) $idFournisseur;
         $requete = " SELECT idForfaitFournisseur, (SELECT count(idservice)  FROM bitvoix_db.services WHERE idFournisseur = ?) AS nroServ
-                     FROM Fournisseur  WHERE  idFournisseur = ?";
+                     FROM fournisseur  WHERE  idFournisseur = ?";
         // var_dump($requete);
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($idFournisseur,$idFournisseur));
