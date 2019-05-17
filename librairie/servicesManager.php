@@ -160,7 +160,7 @@ class ServicesManager
         // var_dump($requete);
         $stmt = $this->_pdo->prepare($requete);
         $stmt->execute(array($idFournisseur));
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ); 
       }
       return $result;
     }
