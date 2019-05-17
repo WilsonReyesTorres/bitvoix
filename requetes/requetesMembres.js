@@ -149,12 +149,15 @@ function montrerServices2() {
 			vue('servicesAccueil', donnes);
 			//Activer le button modal3 ei 2
 			var y = document.getElementsByClassName("imgLien");
+			var long=y.length;
 			//var k;
-			for (k = 0; k < y.length; k++) {
-				y[k].setAttribute("data-target", "#refModal" + (k + 1));
+			for (k = 0; k < long; k++) {
+				y[k].setAttribute("data-target", "#refModal" + k);
 				y[k].setAttribute("title", "Référer le service");
-				document.getElementById("buttonReq" + (k + 1)).disabled = false;
-				document.getElementById("buttonReq" + (k + 1)).setAttribute("title", "Demande de service");
+				//document.getElementById("buttonRef" + (k + 1)).disabled = false;
+				//document.getElementById("buttonRef" + (k + 1)).setAttribute("title", "Référer le service");
+				document.getElementById("buttonReq" + k ).disabled = false;
+				document.getElementById("buttonReq" + k ).setAttribute("title", "Demande de service");
 			}
 
 		},

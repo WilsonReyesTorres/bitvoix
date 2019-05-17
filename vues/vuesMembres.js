@@ -315,7 +315,7 @@ function servicesAccueil(donnees) {
 
 		rep += '<div class="col-lg-3 col-md-4 col-sm-6 mb-2">' +
 			'<!-- Card -->' +
-			'<div class="card booking-card shadow" data-toggle="modal" data-target="#serviceModal' + donnees[j].idService + '" id="card-services">' +
+			'<div class="card booking-card shadow" data-toggle="modal" data-target="#serviceModal' + j + '" id="card-services">' +
 			'' +
 			'<!-- Card image -->' +
 			'<div class="view overlay">' +
@@ -379,7 +379,7 @@ function servicesAccueil(donnees) {
 			'' +
 			'</div>' +
 			'<!-- Card --></div>' +
-			'<div class="modal fade bd-example-modal-lg" id="serviceModal' + donnees[j].idService + '"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"' +
+			'<div class="modal fade bd-example-modal-lg" id="serviceModal' + j + '"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"' +
 			'aria-hidden="true">' +
 			'<div class="modal-dialog modal-lg">' +
 			'<div class="modal-content">' +
@@ -421,11 +421,11 @@ function servicesAccueil(donnees) {
 			'</li>' +
 			'</ul>' +
 			'<button class="btn btn-info font-weight-bold shadow" disabled><del>' + parseFloat(donnees[j].prixService).toFixed(0) + '$</del></button>' +
-			'<button class="btn btn-outline-info font-weight-bold shadow" data-toggle="modal"' + ' data-target="#reqModal' + donnees[j].idService + '"' +
-			'onclick="document.getElementById(\'cleSerRequest' + donnees[j].idService + '\').setAttribute(\'value\', getRndInteger(10000,99999));" id="buttonReq' + donnees[j].idService + 
+			'<button class="btn btn-outline-info font-weight-bold shadow" data-toggle="modal"' + ' data-target="#reqModal' + j + '"' +
+			'onclick="document.getElementById(\'cleSerRequest' + j + '\').setAttribute(\'value\', getRndInteger(10000,99999));" id="buttonReq' + j + 
 			'" disabled >' +
 			parseFloat(donnees[j].promService).toFixed(0) + '$</button>' +
-			'<button class="btn btn-info font-weight-bold shadow" id="buttonRef' + donnees[j].idService + '" disabled>' + parseFloat(donnees[j].refeService).toFixed(0) + '$</button>' +
+			'<button class="btn btn-info font-weight-bold shadow" id="buttonRef' + j + '" disabled>' + parseFloat(donnees[j].refeService).toFixed(0) + '$</button>' +
 			'<img id="bitvoixButton" class="imgLien" src="images/bitVoix.png" alt=""  data-toggle="modal"' +
 			' width="37px"></img>' +
 			'<p class="card-text mt-4">Date Limite : <b>' + donnees[j].datLimService + '</b></p>' +
@@ -443,7 +443,7 @@ function servicesAccueil(donnees) {
 		///////
 
 		rep += '<!-- Modal2 -->' +
-			'<div class="modal fade bd-example-modal-sm" role="dialog" id="reqModal' + donnees[j].idService + '">' +
+			'<div class="modal fade bd-example-modal-sm" role="dialog" id="reqModal' + j + '">' +
 			'<div class="modal-dialog bd-example-modal-sm">' +
 			'<div class="modal-content">' +
 			'<div class="modal-header bg-primary py-4 shadow">' +
@@ -459,9 +459,9 @@ function servicesAccueil(donnees) {
 			'<hr>' +
 			'</div>' +
 			'<div class="modal-body">' +
-			'<form id="formRequest' + donnees[j].idService + '">' +
+			'<form id="formRequest' + j + '">' +
 			'' +
-			'<input type="hidden" name="idService" id="idService" value="' + donnees[j].idService + '" >' +
+			'<input type="hidden" name="idService" id="idService" value="' + j + '" >' +
 			'' +
 			'' +
 			'<div class="input-group mb-3">' +
@@ -475,14 +475,14 @@ function servicesAccueil(donnees) {
 			'<div class="input-group-prepend">' +
 			'<span class="input-group-text"><i class="fab fa-slack-hash"></i></span>' +
 			'</div>' +
-			'<input type="text" class="form-control" id="cleSerRequest' + donnees[j].idService + '"  name="cleSerRequest' + donnees[j].idService + '" readonly>' +
+			'<input type="text" class="form-control" id="cleSerRequest' + j + '"  name="cleSerRequest' + j + '" readonly>' +
 			'</div>' +
 			'<small id="emailHelp" class="form-text text-muted">Gardez ce numéro pour avoir accès à un meilleur prix de votre service</small>' +
 			'' +
 			'' +
 			'' +
 			'<div class="text-center form-sm mt-2">' +
-			'<button class="btn btn-primary shadow" data-dismiss="modal" onClick="envoyerForm(\'formRequest'+donnees[j].idService+'\');">Confirmer</button>' +
+			'<button class="btn btn-primary shadow" data-dismiss="modal" onClick="envoyerForm(\'formRequest'+j+'\');">Confirmer</button>' +
 			'</div>' +
 			'</form>' +
 			'</div>' +
@@ -492,7 +492,7 @@ function servicesAccueil(donnees) {
 			'<!-- Fin Modal2 -->';
 
 		rep += '<!-- Modal3 -->' +
-			'<div class="modal fade bd-example-modal-sm" role="dialog" id="refModal' + donnees[j].idService + '">' +
+			'<div class="modal fade bd-example-modal-sm" role="dialog" id="refModal' + j + '">' +
 			'<div class="modal-dialog bd-example-modal-sm">' +
 			'<div class="modal-content">' +
 			'<div class="modal-header bg-primary py-4 shadow">' +
@@ -509,9 +509,9 @@ function servicesAccueil(donnees) {
 			'<hr>' +
 			'</div>' +
 			'<div class="modal-body">' +
-			'<form id="formReferer' + donnees[j].idService + '">' +
+			'<form id="formReferer' + j + '">' +
 			'' +
-			'<input type="hidden" name="idService" id="idService" value="' + donnees[j].idService + '" >' +
+			'<input type="hidden" name="idService" id="idService" value="' + j + '" >' +
 			'' +
 			'' +
 			'<div class="input-group mb-3">' +
@@ -532,7 +532,7 @@ function servicesAccueil(donnees) {
 			'' +
 			'' +
 			'<div class="text-center form-sm mt-2">' +
-			'<button class="btn btn-primary shadow" data-dismiss="modal" onClick="envoyerRef(\'formReferer'+donnees[j].idService+'\');">Confirmer</button>' +
+			'<button class="btn btn-primary shadow" data-dismiss="modal" onClick="envoyerRef(\'formReferer'+j+'\');">Confirmer</button>' +
 			'</div>' +
 			'</form>' +
 			'</div>' +
